@@ -1,0 +1,7 @@
+:HL["/tomioka/_next/static/chunks/131c2hcmwszo8.css","style"]
+:HL["/tomioka/_next/static/chunks/1_vsj24syvi42.css","style"]
+:HL["/tomioka/_next/static/chunks/307b9yh3rh018.css","style"]
+:HL["/tomioka/_next/static/media/68d0ad77fd2c49e3-s.p.2th5n88-8_65v.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/tomioka/_next/static/media/ad9c66e761fed85a-s.p.17y412u0mab7-.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/tomioka/_next/static/chunks/2pe95jbxtvdyk.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"checkpoints","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"otomi-chan-ie","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"OEXBivV_LuHNDGKoHBz_H"}

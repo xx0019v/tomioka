@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://xx0019v.github.io/tomioka/sitemap.xml
