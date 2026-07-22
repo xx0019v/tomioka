@@ -61,8 +61,17 @@
 .nav .gameLink {
   min-height: 42px;
   padding: 8px 15px;
-  border: 1px solid rgba(231, 222, 205, 0.5);
-  border-radius: var(--radius-control);
+  border: 1px solid #d8ef6b;
+  border-radius: 4px;
+  background: #d8ef6b;
+  color: #0b1713;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms ease;
+}
+
+.nav .gameLink:hover {
+  transform: translateY(-2px);
+  background: #e4f78f;
+  color: #0b1713;
 }
 
 @media (max-width: 680px) {

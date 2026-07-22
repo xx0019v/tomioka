@@ -12,14 +12,15 @@
   padding: 12px 20px;
   border: 1px solid currentColor;
   border-radius: var(--radius-control);
-  color: var(--color-ink-green);
+  color: inherit;
   font-weight: 700;
   line-height: 1;
   transition: transform 160ms ease, background-color 160ms ease;
 }
 
 .actions a:hover {
-  background: var(--color-gold-wash);
+  transform: translateY(-2px);
+  background: color-mix(in srgb, currentColor 9%, transparent);
 }
 
 .actions a:active {
