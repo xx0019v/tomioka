@@ -16,15 +16,20 @@ export function GameProgressSummary() {
     getProgressSnapshot,
     getProgressServerSnapshot,
   );
-  const completed = useMemo(() => {
-    if (!snapshot) return [] as string[];
+  const progress = useMemo(() => {
+    if (!snapshot) return { completed: [] as string[], persistence: "device" as const };
     try {
-      const parsed = JSON.parse(snapshot) as { completed?: string[] };
-      return Array.isArray(parsed.completed) ? parsed.completed : [];
+      const parsed = JSON.parse(snapshot) as { completed?: string[]; persistence?: "device" | "memory" };
+      return {
+        completed: Array.isArray(parsed.completed) ? parsed.completed : [],
+        persistence: parsed.persistence ?? "device",
+      };
     } catch {
-      return [] as string[];
+      return { completed: [] as string[], persistence: "device" as const };
     }
   }, [snapshot]);
+
+  const completed = progress.completed;
 
   const count = checkpointIds.filter((id) => completed.includes(id)).length;
 
@@ -37,6 +42,9 @@ export function GameProgressSummary() {
           <i key={id} className={completed.includes(id) ? styles.done : ""} />
         ))}
       </div>
+      {progress.persistence === "memory" && (
+        <small className={styles.storageWarning}>端末へ保存できません。配布キットにも進捗を記録してください。</small>
+      )}
     </div>
   );
 }

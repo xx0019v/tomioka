@@ -12,7 +12,7 @@ interface PuzzleExperienceProps {
   puzzle: PuzzleDefinition | null;
 }
 
-type Result = "idle" | "checking" | "correct" | "incorrect";
+type Result = "idle" | "checking" | "correct" | "incorrect" | "error";
 
 export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps) {
   const [answer, setAnswer] = useState("");
@@ -32,6 +32,7 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
   const statusMessage = useMemo(() => {
     if (result === "correct") return "正解。キットに得られた言葉を記録せよ。";
     if (result === "incorrect") return "記録と現地の様子を、もう一度見直してください。";
+    if (result === "error") return "判定処理を完了できませんでした。入力は残っています。通信状態を確認して、もう一度お試しください。";
     return "";
   }, [result]);
 
@@ -41,19 +42,23 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
 
     setResult("checking");
     trackEvent(AnalyticsEvent.AnswerSubmit, { checkpoint_id: checkpointId });
-    const digest = await hashAnswer(answer);
-    const correct = puzzle.answerHashes.includes(digest);
-    setResult(correct ? "correct" : "incorrect");
-    trackEvent(AnalyticsEvent.AnswerResult, {
-      checkpoint_id: checkpointId,
-      result: correct ? "correct" : "incorrect",
-    });
-
-    if (correct) {
-      completeCheckpoint(checkpointId);
-      trackEvent(AnalyticsEvent.CheckpointComplete, {
+    try {
+      const digest = await hashAnswer(answer);
+      const correct = puzzle.answerHashes.includes(digest);
+      setResult(correct ? "correct" : "incorrect");
+      trackEvent(AnalyticsEvent.AnswerResult, {
         checkpoint_id: checkpointId,
+        result: correct ? "correct" : "incorrect",
       });
+
+      if (correct) {
+        completeCheckpoint(checkpointId);
+        trackEvent(AnalyticsEvent.CheckpointComplete, {
+          checkpoint_id: checkpointId,
+        });
+      }
+    } catch {
+      setResult("error");
     }
   }
 

@@ -31,9 +31,7 @@ const howToPlaySteps = [
 ];
 
 export default function Home() {
-  const checkpoints = getOrderedCheckpoints().filter(
-    (checkpoint) => checkpoint.role !== "solve-annex",
-  );
+  const checkpoints = getOrderedCheckpoints();
 
   const routePoints = checkpoints.map((checkpoint) => ({
     id: checkpoint.id,
@@ -41,6 +39,9 @@ export default function Home() {
     shortName: checkpoint.shortName,
     name: checkpoint.name,
     tags: checkpoint.tags,
+    latitude: checkpoint.latitude,
+    longitude: checkpoint.longitude,
+    role: checkpoint.role,
   }));
 
   return (
@@ -57,7 +58,7 @@ export default function Home() {
 
         <section id="discover" className={styles.signal} aria-labelledby="signal-heading">
           <div className={styles.signalCopy}>
-            <p className={styles.eyebrow}>THE SIGNAL REMAINS</p>
+            <p className={styles.eyebrow}>調査記録 / 序</p>
             <h2 id="signal-heading">百五十年前の記録は、街の中でまだ息をしている。</h2>
             <p>永山 繭が遺したのは、紙の地図だけではない。店の記憶、路地の形、建物に刻まれた小さな違和感。そのすべてが、あなたを次の地点へ導く。</p>
             <Link href="/information/">調査前の注意事項 <span aria-hidden="true">↗</span></Link>
@@ -104,7 +105,7 @@ export default function Home() {
 
         <section id="how-to-play" className={styles.howTo} aria-labelledby="howto-heading">
           <header className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>YOUR INVESTIGATION</p>
+            <p className={styles.eyebrow}>調査手順 / 三段階</p>
             <h2 id="howto-heading">街を歩くことが、物語を進める。</h2>
             <p>必要なのは配布キットとスマートフォン。画面の中だけでは完結しない、約60〜90分の調査です。</p>
           </header>
@@ -123,9 +124,9 @@ export default function Home() {
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
           <header className={styles.routeHeader}>
-            <p className={styles.eyebrow}>TRACE THE THREAD</p>
-            <h2 id="route-heading">5つの地点を、一本の糸で結べ。</h2>
-            <p>地点を選ぶと調査線が伸びます。実際の街では順路に縛られず、混雑を避けながら安全に巡ってください。</p>
+            <p className={styles.eyebrow}>巡回記録 / 実座標概念図</p>
+            <h2 id="route-heading">巡回5地点と、ひとつの補助地点。</h2>
+            <p>集める言葉は4つ。岡重で手掛かりを読み、銀座まちなか交流館で解くCP02を含む6地点の調査記録です。</p>
           </header>
           <InteractiveRoute points={routePoints} />
           <Link href="/map/" className={styles.routeCta}>全体マップと住所を見る <span aria-hidden="true">↗</span></Link>
@@ -133,7 +134,7 @@ export default function Home() {
 
         <section className={`${styles.access} ${styles.viewReveal}`} aria-labelledby="access-heading">
           <div className={styles.accessIntro}>
-            <p className={styles.eyebrow}>START &amp; GOAL</p>
+            <p className={styles.eyebrow}>始点・帰着点</p>
             <h2 id="access-heading">すべては、<br />お富ちゃん家から。</h2>
             <p>富岡市観光案内所でキットを受け取り、調査を始めてください。</p>
           </div>
@@ -151,7 +152,7 @@ export default function Home() {
 
         <section className={styles.share} aria-labelledby="share-heading">
           <div>
-            <p className={styles.eyebrow}>SEND THE INVITATION</p>
+            <p className={styles.eyebrow}>同行者への連絡</p>
             <h2 id="share-heading">この調査を、<br />誰と始める？</h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
           </div>

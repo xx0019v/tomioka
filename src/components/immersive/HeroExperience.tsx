@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { ArchivePrelude } from "./ArchivePrelude";
 import styles from "./HeroExperience.module.css";
 
 interface HeroExperienceProps {
@@ -28,6 +29,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     let width = 0;
     let height = 0;
     let raf = 0;
+    let running = false;
     let visible = true;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -82,7 +84,19 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     };
 
     const animate = (time: number) => {
-      if (visible) draw(time);
+      if (!running) return;
+      draw(time);
+      raf = window.requestAnimationFrame(animate);
+    };
+
+    const stopAnimation = () => {
+      running = false;
+      window.cancelAnimationFrame(raf);
+    };
+
+    const startAnimation = () => {
+      if (running || !visible || reducedMotion) return;
+      running = true;
       raf = window.requestAnimationFrame(animate);
     };
 
@@ -109,23 +123,31 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
+      if (visible) startAnimation();
+      else stopAnimation();
     });
     observer.observe(section);
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const handleMotionPreference = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches;
+      if (reducedMotion) {
+        stopAnimation();
+        draw(performance.now());
+      } else {
+        startAnimation();
+      }
     };
 
     resize();
-    if (!reducedMotion) raf = window.requestAnimationFrame(animate);
+    startAnimation();
     section.addEventListener("pointermove", handlePointer, { passive: true });
     window.addEventListener("resize", resize, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     motionQuery.addEventListener("change", handleMotionPreference);
 
     return () => {
-      window.cancelAnimationFrame(raf);
+      stopAnimation();
       observer.disconnect();
       section.removeEventListener("pointermove", handlePointer);
       window.removeEventListener("resize", resize);
@@ -171,6 +193,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           </h1>
           <p className={styles.title}>繭が遺した地図</p>
           <p className={styles.lead}>富岡の街に散らばった4つの言葉。歩き、観察し、百五十年前の記録を完成させよ。</p>
+          <ArchivePrelude />
           <div className={styles.actions}>
             <Link href="/game/" className={styles.primary}>調査を始める <span aria-hidden="true">↗</span></Link>
             <Link href="/map/" className={styles.secondary}>全体マップを見る <span aria-hidden="true">→</span></Link>

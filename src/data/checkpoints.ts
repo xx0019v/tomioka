@@ -23,6 +23,8 @@ export interface Checkpoint {
   latitude: number;
   longitude: number;
   sourceStatus: CheckpointSourceStatus;
+  visualSrc: string;
+  visualAlt: string;
   notice: string | null;
   sourceLabel: string;
 }
@@ -50,6 +52,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.25845,
     longitude: 138.892532,
     sourceStatus: "confirmed",
+    visualSrc: "/checkpoints/start.svg",
+    visualAlt: "お富ちゃん家の地点記号。現地写真は準備中です。",
     notice: "上州富岡駅から徒歩約5分。周辺の有料駐車場をご利用ください。",
     sourceLabel: "Webサイト制作仕様書 v2",
   },
@@ -70,6 +74,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.256855,
     longitude: 138.890991,
     sourceStatus: "needs_review",
+    visualSrc: "/checkpoints/atelier.svg",
+    visualAlt: "アトリエの地点記号。現地写真は準備中です。",
     notice: "イベント当日の営業状況は運営からの最終案内をご確認ください。",
     sourceLabel: "富岡市観光公式サイト（公開情報・要当日確認）",
   },
@@ -91,6 +97,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.2572204,
     longitude: 138.8909415,
     sourceStatus: "needs_review",
+    visualSrc: "/checkpoints/okashige.svg",
+    visualAlt: "岡重の地点記号。現地写真は準備中です。",
     notice: "ここでは問題を確認し、銀座まちなか交流館へ移動してから解いてください。店先に長く立ち止まらないでください。",
     sourceLabel: "謎制作ガイド・公開店舗情報（要当日確認）",
   },
@@ -111,6 +119,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.256874,
     longitude: 138.889328,
     sourceStatus: "needs_review",
+    visualSrc: "/checkpoints/koryukan.svg",
+    visualAlt: "銀座まちなか交流館の地点記号。現地写真は準備中です。",
     notice: "CP02の問題を落ち着いて解くための休憩地点です。施設利用者への配慮をお願いします。",
     sourceLabel: "富岡市観光公式サイト（独立ページ化は運営確認事項）",
   },
@@ -132,6 +142,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.257519,
     longitude: 138.888199,
     sourceStatus: "needs_review",
+    visualSrc: "/checkpoints/kirinya.svg",
+    visualAlt: "キリンヤの地点記号。現地写真は準備中です。",
     notice: "歩行者と店舗利用者の通行を妨げない場所で確認してください。",
     sourceLabel: "公開電話帳情報（営業時間・当日利用は要確認）",
   },
@@ -153,6 +165,8 @@ export const checkpoints: Checkpoint[] = [
     latitude: 36.254192,
     longitude: 138.889709,
     sourceStatus: "needs_review",
+    visualSrc: "/checkpoints/cafedelorme.svg",
+    visualAlt: "カフェドロームの地点記号。現地写真は準備中です。",
     notice: "最新の営業日は店舗公式案内と当日運営情報をご確認ください。",
     sourceLabel: "店舗公式サイト（公開情報・要当日確認）",
   },

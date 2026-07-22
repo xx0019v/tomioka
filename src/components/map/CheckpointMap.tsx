@@ -24,8 +24,10 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   const listButtonsRef = useRef(new Map<string, HTMLButtonElement>());
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<string | null>(null);
+  const hasSyncedUrlRef = useRef(false);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "limited" | "failed">("loading");
+  const [announcement, setAnnouncement] = useState("");
   const selected = checkpoints.find((checkpoint) => checkpoint.slug === selectedSlug) ?? null;
 
   const focusTrigger = useCallback((slug: string) => {
@@ -41,7 +43,11 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
 
   const syncSelectionFromUrl = useCallback(() => {
     const slug = new URL(window.location.href).searchParams.get("checkpoint");
-    setSelectedSlug(checkpoints.some((checkpoint) => checkpoint.slug === slug) ? slug : null);
+    const checkpoint = checkpoints.find((item) => item.slug === slug);
+    setSelectedSlug(checkpoint?.slug ?? null);
+    if (checkpoint) setAnnouncement(`${checkpoint.name}の地点詳細を開きました。`);
+    else if (hasSyncedUrlRef.current) setAnnouncement("地点詳細を閉じました。");
+    hasSyncedUrlRef.current = true;
   }, [checkpoints]);
 
   useEffect(() => {
@@ -122,7 +128,8 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     if (!selectedSlug) return;
     const marker = markersRef.current.get(selectedSlug);
     if (marker && mapRef.current) {
-      mapRef.current.panTo(marker.getLatLng(), { animate: true, duration: 0.45 });
+      const animate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      mapRef.current.panTo(marker.getLatLng(), { animate, duration: animate ? 0.45 : 0 });
     }
     window.requestAnimationFrame(() => closeButtonRef.current?.focus());
   }, [selectedSlug]);
@@ -142,6 +149,8 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     url.searchParams.set("checkpoint", slug);
     window.history.pushState({ ...window.history.state, mayuMapPanel: true, source }, "", url);
     setSelectedSlug(slug);
+    const checkpoint = checkpoints.find((item) => item.slug === slug);
+    if (checkpoint) setAnnouncement(`${checkpoint.name}の地点詳細を開きました。`);
   }
 
   function closeCheckpoint() {
@@ -154,6 +163,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
       url.searchParams.delete("checkpoint");
       window.history.replaceState(window.history.state, "", url);
       setSelectedSlug(null);
+      setAnnouncement("地点詳細を閉じました。");
     }
     focusTrigger(slugToFocus);
   }
@@ -162,8 +172,8 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     <section className={styles.section} aria-labelledby="map-heading">
       <div className={styles.headingRow}>
         <div>
-          <p className={styles.eyebrow}>調査地点・全6記録</p>
-          <h2 id="map-heading">絹糸が結ぶ、富岡の調査路</h2>
+          <p className={styles.eyebrow}>巡回5地点＋解答・休憩1地点</p>
+          <h2 id="map-heading">絹糸が結ぶ、<br />富岡の調査路</h2>
         </div>
         <p>地図上の記号か右側の地点一覧を選ぶと、詳しい記録が開きます。</p>
       </div>
@@ -180,7 +190,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
           {(mapState === "limited" || mapState === "failed") && (
             <div className={styles.mapMessage} role="status">
               <strong>地図画像を十分に読み込めませんでした。</strong>
-              <span>右側の地点一覧とGoogleマップのリンクは引き続き利用できます。</span>
+              <span>地点一覧とGoogleマップのリンクは引き続き利用できます。</span>
             </div>
           )}
           <div className={styles.legend} aria-label="地図記号の説明">
@@ -200,7 +210,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
                 </button>
               </div>
               <div className={styles.detailVisual}>
-                <Image src="/images/route-thread.webp" alt="古地図を思わせる調査ルートのイメージ" fill sizes="(max-width: 899px) 100vw, 390px" />
+                <Image src={selected.visualSrc} alt={selected.visualAlt} fill sizes="(max-width: 899px) 100vw, 390px" />
               </div>
               <p className={styles.detailKicker}>FIELD RECORD / {selected.id.toUpperCase()}</p>
               <h3>{selected.formalName ?? selected.name}</h3>
@@ -250,7 +260,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
           )}
         </aside>
       </div>
-      <p className="visually-hidden" aria-live="polite">{selected ? `${selected.name}の地点詳細を開きました。` : "地点詳細を閉じました。"}</p>
+      <p className="visually-hidden" aria-live="polite">{announcement}</p>
     </section>
   );
 }

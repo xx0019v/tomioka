@@ -29,7 +29,7 @@ export default function MapPage() {
           />
           <div className={styles.heroInner}>
             <p className={styles.kicker}>巡回案内</p>
-            <h1>チェックポイントマップ</h1>
+            <h1><span>チェックポイント</span><span>マップ</span></h1>
             <p className={styles.lead}>スタートからゴールまでの順番と、各地点の住所を確認できます。</p>
           </div>
         </section>

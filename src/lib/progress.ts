@@ -4,9 +4,11 @@ const PROGRESS_EVENT = "mayu-progress-change";
 export interface GameProgress {
   completed: string[];
   startedAt: string | null;
+  persistence?: "device" | "memory";
 }
 
-const initialProgress: GameProgress = { completed: [], startedAt: null };
+const initialProgress: GameProgress = { completed: [], startedAt: null, persistence: "device" };
+let memoryProgress: GameProgress = initialProgress;
 
 export function readProgress(): GameProgress {
   if (typeof window === "undefined") return initialProgress;
@@ -14,11 +16,24 @@ export function readProgress(): GameProgress {
     const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") as
       | GameProgress
       | null;
-    if (!parsed || !Array.isArray(parsed.completed)) return initialProgress;
-    return parsed;
+    if (!parsed || !Array.isArray(parsed.completed)) return memoryProgress;
+    memoryProgress = { ...parsed, persistence: "device" };
+    return memoryProgress;
   } catch {
-    return initialProgress;
+    return memoryProgress;
   }
+}
+
+function saveProgress(progress: GameProgress): GameProgress {
+  memoryProgress = progress;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...progress, persistence: "device" }));
+    memoryProgress = { ...progress, persistence: "device" };
+  } catch {
+    memoryProgress = { ...progress, persistence: "memory" };
+  }
+  window.dispatchEvent(new Event(PROGRESS_EVENT));
+  return memoryProgress;
 }
 
 export function startGame(): GameProgress {
@@ -27,9 +42,7 @@ export function startGame(): GameProgress {
     ...current,
     startedAt: current.startedAt ?? new Date().toISOString(),
   };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-  window.dispatchEvent(new Event(PROGRESS_EVENT));
-  return next;
+  return saveProgress(next);
 }
 
 export function completeCheckpoint(checkpointId: string): GameProgress {
@@ -38,14 +51,16 @@ export function completeCheckpoint(checkpointId: string): GameProgress {
     ...current,
     completed: Array.from(new Set([...current.completed, checkpointId])),
   };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-  window.dispatchEvent(new Event(PROGRESS_EVENT));
-  return next;
+  return saveProgress(next);
 }
 
 export function getProgressSnapshot(): string {
   if (typeof window === "undefined") return "";
-  return localStorage.getItem(STORAGE_KEY) ?? "";
+  try {
+    return localStorage.getItem(STORAGE_KEY) ?? (memoryProgress.startedAt ? JSON.stringify(memoryProgress) : "");
+  } catch {
+    return memoryProgress.startedAt ? JSON.stringify({ ...memoryProgress, persistence: "memory" }) : "";
+  }
 }
 
 export function getProgressServerSnapshot(): string {

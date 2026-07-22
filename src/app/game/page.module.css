@@ -1,0 +1,157 @@
+.gameMain {
+  background:
+    linear-gradient(rgba(67, 72, 56, 0.045) 1px, transparent 1px) 0 0 / 100% 32px,
+    #eee7d9;
+}
+
+.gameHero::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 76% 32%, rgba(185, 154, 85, 0.16), transparent 24%),
+    repeating-linear-gradient(102deg, transparent 0 42px, rgba(232, 222, 196, 0.025) 43px 44px);
+  content: "";
+}
+
+.ledger {
+  position: relative;
+}
+
+.ledger::before {
+  position: absolute;
+  top: 45px;
+  bottom: 60px;
+  left: -26px;
+  width: 1px;
+  background: rgba(155, 122, 63, 0.34);
+  content: "";
+}
+
+.archiveSection {
+  position: relative;
+  padding: 30px 0 18px;
+  border-top: 1px solid rgba(78, 74, 55, 0.28);
+}
+
+.archiveSection::before {
+  position: absolute;
+  top: 34px;
+  left: -31px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #9b7a3f;
+  border-radius: 50%;
+  background: #eee7d9;
+  content: "";
+}
+
+.pickupLink {
+  width: fit-content;
+  color: var(--color-ink-green);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.folio,
+.stepLabel {
+  color: #8b6a34;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.chapterLegend {
+  max-width: 58ch;
+  margin-top: 8px;
+  color: var(--color-muted);
+}
+
+.recordList {
+  margin-top: 28px;
+}
+
+.recordList li {
+  position: relative;
+}
+
+.recordCard {
+  min-height: 122px;
+  padding: 20px 10px;
+  background: linear-gradient(90deg, rgba(251, 248, 240, 0.5), transparent 80%);
+}
+
+.recordCard::after {
+  align-self: center;
+  color: #9b7a3f;
+  content: "開く →";
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.recordCard strong {
+  margin-top: 2px;
+}
+
+.recordCard > div > small:last-child {
+  max-width: 48ch;
+}
+
+.annexRecord {
+  margin-left: 48px;
+  border-left: 2px solid #9b7a3f;
+}
+
+.annexRecord::before {
+  position: absolute;
+  top: -1px;
+  left: -50px;
+  width: 48px;
+  height: 1px;
+  background: #9b7a3f;
+  content: "";
+}
+
+.finalNote {
+  margin-top: 14px;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 680px) {
+  .ledger::before,
+  .archiveSection::before {
+    display: none;
+  }
+
+  .archiveSection {
+    padding-top: 24px;
+  }
+
+  .folio,
+  .stepLabel {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+
+  .recordCard {
+    grid-template-columns: 48px minmax(0, 1fr);
+    min-height: 112px;
+    padding-inline: 4px;
+  }
+
+  .recordCard::after {
+    display: none;
+  }
+
+  .annexRecord {
+    margin-left: 20px;
+  }
+
+  .annexRecord::before {
+    left: -22px;
+    width: 20px;
+  }
+}

@@ -422,6 +422,16 @@
     padding: 0 20px;
   }
 
+  .headingRow h2,
+  .headingRow > p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .headingRow h2 {
+    font-size: clamp(2rem, 10.5vw, 3rem);
+  }
+
   .mapShell {
     border-right: 0;
     border-left: 0;

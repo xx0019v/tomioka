@@ -53,6 +53,10 @@
   line-height: 1.2;
 }
 
+.hero h1 span {
+  display: block;
+}
+
 .lead {
   max-width: 62ch;
   margin-top: 13px;
@@ -67,5 +71,16 @@
   .heroInner {
     width: calc(100% - 40px);
     padding: 52px 0;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.15rem, 11vw, 3.2rem);
+    overflow-wrap: anywhere;
+  }
+
+  .lead {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 }
