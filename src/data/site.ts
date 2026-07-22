@@ -2,7 +2,7 @@ export type EventState = "scheduled" | "open" | "cancelled" | "ended";
 
 export const siteConfig = {
   title: "繭が遺した地図",
-  siteUrl: "https://mayu-no-chizu.cid-ac.com",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://mayu-no-chizu.cid-ac.com",
   eventState: "scheduled" as EventState,
   eventDate: "2026年8月8日（土）",
   reception: "9:00-15:00",

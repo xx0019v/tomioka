@@ -4,6 +4,7 @@ import { CheckpointMap } from "@/components/map/CheckpointMap";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { getOrderedCheckpoints } from "@/data/checkpoints";
+import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function MapPage() {
         <section className={styles.hero}>
           <Image
             className={styles.heroImage}
-            src="/images/route-thread.webp"
+            src={withBasePath("/images/route-thread.webp")}
             alt="4つの手がかりを絹糸で結んだ巡回記録"
             fill
             priority

@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { getOrderedCheckpoints } from "@/data/checkpoints";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
 const howToPlaySteps = [
@@ -83,7 +84,7 @@ export default function Home() {
         <section className={`${styles.story} ${styles.viewReveal}`} aria-labelledby="story-heading">
           <figure className={styles.storyVisual}>
             <Image
-              src="/images/story-silk.webp"
+              src={withBasePath("/images/story-silk.webp")}
               alt="繭から細い生糸が引き出された研究資料の情景"
               fill
               sizes="(max-width: 760px) 100vw, 48vw"

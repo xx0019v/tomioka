@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { withBasePath } from "@/lib/base-path";
 import { ArchivePrelude } from "./ArchivePrelude";
 import styles from "./HeroExperience.module.css";
 
@@ -171,7 +172,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <div className={styles.evidenceGlow} />
           <div className={styles.evidenceCard}>
             <Image
-              src="/images/hero-archive.webp"
+              src={withBasePath("/images/hero-archive.webp")}
               alt=""
               fill
               priority

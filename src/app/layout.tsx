@@ -4,6 +4,7 @@ import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     description: "富岡の街を歩き、4つの手がかりを集めるリアル謎解きイベント。",
   },
   alternates: { canonical: siteConfig.siteUrl },
-  manifest: "/manifest.webmanifest",
+  manifest: withBasePath("/manifest.webmanifest"),
 };
 
 export const viewport: Viewport = {
