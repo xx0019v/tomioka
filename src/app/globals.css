@@ -139,10 +139,34 @@ a {
 .map-marker--start { background: var(--color-vermilion); }
 .map-marker--annex { background: var(--color-gold); }
 
+/* 現在地に最も近い地点 */
+.map-marker--near {
+  box-shadow:
+    0 6px 18px rgba(12, 36, 31, 0.32),
+    0 0 0 3px #fff8e8,
+    0 0 0 7px rgba(168, 64, 42, 0.55);
+}
+
 .map-marker-shell:focus .map-marker,
 .map-marker-shell:hover .map-marker {
   transform: translateY(-3px) scale(1.06);
   box-shadow: 0 10px 24px rgba(12, 36, 31, 0.36), 0 0 0 3px #fff8e8;
+}
+
+/* 現在地マーカー（絹糸のような細い輪で囲まれた点） */
+.map-user-shell {
+  background: transparent;
+  border: 0;
+}
+
+.map-user-dot {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid #fff8e8;
+  border-radius: 50%;
+  background: #2f6df0;
+  box-shadow: 0 0 0 6px rgba(47, 109, 240, 0.22), 0 3px 10px rgba(12, 36, 31, 0.35);
 }
 
 .leaflet-control-zoom a {

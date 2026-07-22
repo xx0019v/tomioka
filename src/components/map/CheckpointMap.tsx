@@ -5,7 +5,11 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
 import type { Checkpoint, CheckpointSourceStatus } from "@/data/checkpoints";
+import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
+import { NEAR_THRESHOLD_METERS, distanceInMeters } from "@/lib/geo";
 import styles from "./CheckpointMap.module.css";
+
+type GeoState = "idle" | "locating" | "granted" | "denied" | "unavailable";
 
 interface CheckpointMapProps {
   checkpoints: Checkpoint[];
@@ -20,13 +24,16 @@ const statusCopy: Record<CheckpointSourceStatus, { label: string; detail: string
 export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   const mapNodeRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
+  const leafletRef = useRef<typeof import("leaflet") | null>(null);
   const markersRef = useRef(new Map<string, LeafletMarker>());
+  const userMarkerRef = useRef<LeafletMarker | null>(null);
   const listButtonsRef = useRef(new Map<string, HTMLButtonElement>());
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<string | null>(null);
   const hasSyncedUrlRef = useRef(false);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "limited" | "failed">("loading");
+  const [geoState, setGeoState] = useState<GeoState>("idle");
   const [announcement, setAnnouncement] = useState("");
   const selected = checkpoints.find((checkpoint) => checkpoint.slug === selectedSlug) ?? null;
 
@@ -65,9 +72,12 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     let tileErrors = 0;
     const markerStore = markersRef.current;
 
+    trackEvent(AnalyticsEvent.MapView, { checkpoint_count: checkpoints.length });
+
     void import("leaflet")
       .then((L) => {
         if (disposed || !mapNodeRef.current) return;
+        leafletRef.current = L;
         const map = L.map(mapNodeRef.current, {
           zoomControl: true,
           scrollWheelZoom: false,
@@ -118,6 +128,8 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
       disposed = true;
       mapRef.current?.remove();
       mapRef.current = null;
+      userMarkerRef.current = null;
+      leafletRef.current = null;
       markerStore.clear();
     };
     // The checkpoint dataset is static for the lifetime of this page.
@@ -151,6 +163,86 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     setSelectedSlug(slug);
     const checkpoint = checkpoints.find((item) => item.slug === slug);
     if (checkpoint) setAnnouncement(`${checkpoint.name}の地点詳細を開きました。`);
+    trackEvent(AnalyticsEvent.CheckpointSelect, { checkpoint: slug, source });
+  }
+
+  function markNearest(userLat: number, userLng: number) {
+    let nearestSlug: string | null = null;
+    let nearestDistance = Number.POSITIVE_INFINITY;
+    checkpoints.forEach((checkpoint) => {
+      const distance = distanceInMeters(
+        { lat: userLat, lng: userLng },
+        { lat: checkpoint.latitude, lng: checkpoint.longitude },
+      );
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestSlug = checkpoint.slug;
+      }
+    });
+    markersRef.current.forEach((marker, slug) => {
+      const inner = marker.getElement()?.querySelector(".map-marker");
+      if (!inner) return;
+      const isNear = slug === nearestSlug && nearestDistance <= NEAR_THRESHOLD_METERS;
+      inner.classList.toggle("map-marker--near", isNear);
+    });
+    if (nearestSlug && nearestDistance <= NEAR_THRESHOLD_METERS) {
+      const near = checkpoints.find((item) => item.slug === nearestSlug);
+      if (near) setAnnouncement(`現在地に最も近い地点は${near.name}です。`);
+    }
+  }
+
+  function locate() {
+    trackEvent(AnalyticsEvent.LocateClick, {});
+    const L = leafletRef.current;
+    const map = mapRef.current;
+    if (!L || !map) return;
+    if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
+      setGeoState("unavailable");
+      setAnnouncement("この端末では現在地を取得できません。地点一覧をご利用ください。");
+      trackEvent(AnalyticsEvent.GeoPermission, { result: "unavailable" });
+      return;
+    }
+    setGeoState("locating");
+    setAnnouncement("現在地を取得しています。");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setGeoState("granted");
+        trackEvent(AnalyticsEvent.GeoPermission, { result: "granted" });
+        const latlng: [number, number] = [latitude, longitude];
+        if (userMarkerRef.current) {
+          userMarkerRef.current.setLatLng(latlng);
+        } else {
+          userMarkerRef.current = L.marker(latlng, {
+            keyboard: false,
+            interactive: false,
+            icon: L.divIcon({
+              className: "map-user-shell",
+              html: '<span class="map-user-dot" aria-hidden="true"></span>',
+              iconSize: [22, 22],
+              iconAnchor: [11, 11],
+            }),
+          }).addTo(map);
+          userMarkerRef.current.getElement()?.setAttribute("aria-hidden", "true");
+        }
+        const animate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        map.panTo(latlng, { animate, duration: animate ? 0.45 : 0 });
+        markNearest(latitude, longitude);
+      },
+      (error) => {
+        const denied = error.code === error.PERMISSION_DENIED;
+        setGeoState(denied ? "denied" : "unavailable");
+        setAnnouncement(
+          denied
+            ? "現在地の利用が許可されませんでした。地点一覧から選べます。"
+            : "現在地を取得できませんでした。地点一覧から選べます。",
+        );
+        trackEvent(AnalyticsEvent.GeoPermission, {
+          result: denied ? "denied" : "unavailable",
+        });
+      },
+      { enableHighAccuracy: true, timeout: 8000, maximumAge: 30000 },
+    );
   }
 
   function closeCheckpoint() {
@@ -198,6 +290,23 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
             <span><i className={styles.pointKey} />チェックポイント</span>
             <span><i className={styles.annexKey} />解答・休憩地点</span>
           </div>
+          <div className={styles.locateWrap}>
+            <button
+              type="button"
+              className={styles.locateButton}
+              onClick={locate}
+              disabled={geoState === "locating"}
+              aria-label="現在地を地図に表示する"
+            >
+              <span aria-hidden="true">◎</span>
+              {geoState === "locating" ? "取得中…" : "現在地"}
+            </button>
+            {(geoState === "denied" || geoState === "unavailable") && (
+              <p className={styles.locateHint} role="status">
+                現在地を利用できません。地点一覧から選べます。
+              </p>
+            )}
+          </div>
         </div>
 
         <aside className={`${styles.sidePanel} ${selected ? styles.sidePanelOpen : ""}`} aria-label={selected ? `${selected.name}の地点詳細` : "チェックポイント一覧"}>
@@ -229,8 +338,20 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
               </div>
               <p className={styles.source}>情報源：{selected.sourceLabel}</p>
               <div className={styles.actions}>
-                <a href={selected.googleMapsUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く</a>
-                <Link href={`/checkpoints/${selected.slug}/`}>地点詳細へ</Link>
+                <a
+                  href={selected.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent(AnalyticsEvent.GoogleMapsClick, { checkpoint: selected.slug })}
+                >
+                  Googleマップで開く
+                </a>
+                <Link
+                  href={`/checkpoints/${selected.slug}/`}
+                  onClick={() => trackEvent(AnalyticsEvent.CheckpointPageClick, { checkpoint: selected.slug })}
+                >
+                  地点詳細へ
+                </Link>
               </div>
             </article>
           ) : (
