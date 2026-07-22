@@ -123,6 +123,52 @@
 .pointKey { background: var(--color-ink-green); }
 .annexKey { background: var(--color-gold); }
 
+.locateWrap {
+  position: absolute;
+  right: 16px;
+  bottom: 20px;
+  z-index: 700;
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+}
+
+.locateButton {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 48px;
+  padding: 11px 18px;
+  border: 1px solid var(--color-ink-green-deep);
+  border-radius: 999px;
+  background: var(--color-ink-green-deep);
+  color: #fff8e8;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(12, 36, 31, 0.28);
+}
+
+.locateButton:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.locateButton span {
+  font-size: 1rem;
+}
+
+.locateHint {
+  max-width: 220px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-hairline-strong);
+  background: rgba(251, 248, 240, 0.95);
+  color: var(--color-ink-green-deep);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
 .sidePanel {
   position: relative;
   z-index: 800;
@@ -409,7 +455,16 @@
   .legend {
     bottom: 340px;
     left: 12px;
-    max-width: calc(100% - 24px);
+    max-width: calc(60% - 12px);
+  }
+
+  .locateWrap {
+    right: 12px;
+    bottom: 340px;
+  }
+
+  .locateHint {
+    max-width: 180px;
   }
 }
 
