@@ -1,0 +1,27 @@
+.banner {
+  display: flex;
+  justify-content: center;
+  gap: 10px 18px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  background: var(--color-gold-wash);
+  color: var(--color-ink-green-deep);
+  border-bottom: 1px solid var(--color-gold);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.warning {
+  background: #f4dfbd;
+  color: #5d351a;
+}
+
+.cancelled {
+  background: var(--color-vermilion);
+  color: var(--color-paper);
+  border-color: transparent;
+}
+
+.notice {
+  background: var(--color-gold-wash);
+}

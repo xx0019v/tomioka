@@ -1,0 +1,116 @@
+.panel,
+.clear {
+  padding: clamp(26px, 6vw, 48px);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-panel);
+  background: var(--color-paper-raised);
+  box-shadow: var(--shadow-paper);
+}
+
+.progressNote {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-hairline);
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.progressNote strong {
+  color: var(--color-vermilion);
+  font-size: 1.05rem;
+}
+
+.panel form,
+.pending {
+  display: grid;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.panel h2,
+.clear h2 {
+  color: var(--color-ink-green);
+  font-size: clamp(1.55rem, 5vw, 2.2rem);
+}
+
+.helper,
+.pending p {
+  color: var(--color-muted);
+}
+
+.panel label {
+  margin-top: 12px;
+  color: var(--color-ink-green);
+  font-weight: 700;
+}
+
+.panel input {
+  min-height: 54px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-ink-green);
+  border-radius: var(--radius-control);
+  background: var(--color-paper);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.panel button {
+  min-height: 54px;
+  margin-top: 4px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--color-vermilion);
+  color: var(--color-paper);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.result {
+  min-height: 3em;
+  color: var(--color-vermilion);
+  font-weight: 700;
+}
+
+.kicker {
+  color: var(--color-vermilion);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.clear {
+  display: grid;
+  gap: 20px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.8), transparent 52%),
+    var(--color-paper-raised);
+}
+
+.clearMeta {
+  display: grid;
+  gap: 2px;
+  padding: 16px 0;
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.clearMeta span {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.clearMeta strong {
+  color: var(--color-ink-green);
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+}
