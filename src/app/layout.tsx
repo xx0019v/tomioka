@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
-import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
@@ -8,20 +7,6 @@ import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
-
-const notoSerifJP = Noto_Serif_JP({
-  variable: "--font-noto-serif-jp",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const notoSansJP = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -61,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoSerifJP.variable} ${notoSansJP.variable}`}>
+    <html lang="ja">
       <body>
         <a className="skip-link" href="#main-content">本文へ移動</a>
         <EventBanner />

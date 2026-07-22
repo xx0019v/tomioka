@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
 import { ArchivePrelude } from "./ArchivePrelude";
 import styles from "./HeroExperience.module.css";
@@ -30,8 +31,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     let width = 0;
     let height = 0;
     let raf = 0;
-    let running = false;
-    let visible = true;
     let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const resize = () => {
@@ -44,7 +43,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      draw(performance.now());
+      requestDraw();
     };
 
     const draw = (time: number) => {
@@ -84,21 +83,9 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       context.fillRect(0, 0, width, height);
     };
 
-    const animate = (time: number) => {
-      if (!running) return;
-      draw(time);
-      raf = window.requestAnimationFrame(animate);
-    };
-
-    const stopAnimation = () => {
-      running = false;
+    const requestDraw = () => {
       window.cancelAnimationFrame(raf);
-    };
-
-    const startAnimation = () => {
-      if (running || !visible || reducedMotion) return;
-      running = true;
-      raf = window.requestAnimationFrame(animate);
+      raf = window.requestAnimationFrame(draw);
     };
 
     const handlePointer = (event: PointerEvent) => {
@@ -107,7 +94,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       pointer.y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
       section.style.setProperty("--pointer-x", `${pointer.x - 0.5}`);
       section.style.setProperty("--pointer-y", `${pointer.y - 0.5}`);
-      if (reducedMotion) draw(performance.now());
+      requestDraw();
     };
 
     let scrollTicking = false;
@@ -122,34 +109,20 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       });
     };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) startAnimation();
-      else stopAnimation();
-    });
-    observer.observe(section);
-
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const handleMotionPreference = (event: MediaQueryListEvent) => {
       reducedMotion = event.matches;
-      if (reducedMotion) {
-        stopAnimation();
-        draw(performance.now());
-      } else {
-        startAnimation();
-      }
+      requestDraw();
     };
 
     resize();
-    startAnimation();
     section.addEventListener("pointermove", handlePointer, { passive: true });
     window.addEventListener("resize", resize, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
     motionQuery.addEventListener("change", handleMotionPreference);
 
     return () => {
-      stopAnimation();
-      observer.disconnect();
+      window.cancelAnimationFrame(raf);
       section.removeEventListener("pointermove", handlePointer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
@@ -172,10 +145,11 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <div className={styles.evidenceGlow} />
           <div className={styles.evidenceCard}>
             <Image
-              src={withBasePath("/images/hero-archive.webp")}
+              src={withBasePath("/images/hero-archive-800.jpg")}
               alt=""
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 700px) 48vw, 28vw"
             />
             <span>ARCHIVE / 1872</span>
@@ -195,6 +169,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <p className={styles.title}>繭が遺した地図</p>
           <p className={styles.lead}>富岡の街に散らばった4つの言葉。歩き、観察し、百五十年前の記録を完成させよ。</p>
           <ArchivePrelude />
+          <GuideCharacter placement="archive-inline" />
           <div className={styles.actions}>
             <Link href="/game/" className={styles.primary}>調査を始める <span aria-hidden="true">↗</span></Link>
             <Link href="/map/" className={styles.secondary}>全体マップを見る <span aria-hidden="true">→</span></Link>

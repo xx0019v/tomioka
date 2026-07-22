@@ -36,7 +36,7 @@ interface ManualMessage {
 }
 
 interface GuideCharacterProps {
-  placement?: "global" | "map-hero";
+  placement?: "global" | "map-hero" | "archive-inline";
 }
 
 function readFrequency(): GuideFrequency {
@@ -252,6 +252,7 @@ export function GuideCharacter({ placement = "global" }: GuideCharacterProps) {
   }
 
   if (!mounted || (pathname === "/" && !archiveReady)) return null;
+  if (pathname === "/" && placement === "global") return null;
   if (pathname.includes("/map") && placement === "global") return null;
 
   return (

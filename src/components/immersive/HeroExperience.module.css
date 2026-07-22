@@ -23,7 +23,6 @@
 .canvas {
   z-index: -1;
   transform: translateZ(0);
-  will-change: contents;
 }
 
 .noise {
@@ -90,9 +89,9 @@
   margin-top: 16px;
   color: #f8f3e8;
   font-family: var(--font-sans);
-  font-size: clamp(3.5rem, 5.9vw, 6.8rem);
+  font-size: clamp(3.5rem, 5.9vw, 6rem);
   font-weight: 500;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.04em;
   line-height: 0.98;
 }
 
@@ -185,7 +184,6 @@
     0 0 0 38px rgba(220, 187, 107, 0.025),
     0 0 0 78px rgba(220, 187, 107, 0.018),
     0 0 100px rgba(220, 187, 107, 0.12);
-  animation: haloPulse 5s ease-in-out infinite;
 }
 
 .evidenceCard {
@@ -198,7 +196,6 @@
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.58);
   transform: rotateX(calc(-7deg + var(--pointer-y) * -9deg)) rotateY(calc(-13deg + var(--pointer-x) * 14deg)) rotateZ(5deg);
   transform-style: preserve-3d;
-  animation: evidenceFloat 6s ease-in-out infinite;
 }
 
 .evidenceCard::after {
@@ -207,7 +204,6 @@
   content: "";
   background: linear-gradient(115deg, transparent 30%, rgba(255, 242, 201, 0.18) 49%, transparent 67%);
   transform: translateX(-120%);
-  animation: evidenceSheen 6s ease-in-out infinite;
 }
 
 .evidenceCard img {
@@ -250,10 +246,10 @@
   content: "";
 }
 
-.clueA { top: 4%; left: 18%; animation: nodeFloat 5s -1s ease-in-out infinite; }
-.clueB { top: 25%; right: -2%; animation: nodeFloat 6s -2.5s ease-in-out infinite; }
-.clueC { right: 10%; bottom: 4%; animation: nodeFloat 5.5s -4s ease-in-out infinite; }
-.clueD { bottom: 9%; left: 2%; animation: nodeFloat 6.5s -3s ease-in-out infinite; }
+.clueA { top: 4%; left: 18%; }
+.clueB { top: 25%; right: -2%; }
+.clueC { right: 10%; bottom: 4%; }
+.clueD { bottom: 9%; left: 2%; }
 
 .scrollCue {
   position: absolute;
@@ -280,8 +276,8 @@
   inset: 0;
   background: #d8ef6b;
   content: "";
-  transform: translateX(-100%);
-  animation: scrollLine 2.2s ease-in-out infinite;
+  transform: scaleX(0.38);
+  transform-origin: left;
 }
 
 .facts {
@@ -315,28 +311,6 @@
   color: #efe8d8;
   font-size: 0.78rem;
   font-weight: 700;
-}
-
-@keyframes haloPulse {
-  50% { transform: scale(1.06); opacity: 0.72; }
-}
-
-@keyframes evidenceFloat {
-  50% { translate: 0 -10px; }
-}
-
-@keyframes evidenceSheen {
-  0%, 60% { transform: translateX(-120%); }
-  82%, 100% { transform: translateX(120%); }
-}
-
-@keyframes nodeFloat {
-  50% { transform: translateY(-12px) rotate(6deg); }
-}
-
-@keyframes scrollLine {
-  45%, 55% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
 }
 
 @media (max-width: 900px) {
@@ -390,9 +364,12 @@
 
   .copy h1 {
     max-width: 100%;
-    font-size: clamp(3rem, 14.5vw, 4.2rem);
-    line-height: 0.94;
-    overflow-wrap: anywhere;
+    font-size: clamp(2.55rem, 12.7vw, 3.15rem);
+    line-height: 0.98;
+  }
+
+  .copy h1 span {
+    white-space: nowrap;
   }
 
   .copy h1 span:last-child {
@@ -443,6 +420,11 @@
     width: 36px;
     height: 36px;
     font-size: 0.7rem;
+  }
+
+  .clueD {
+    bottom: 7%;
+    left: 28%;
   }
 
   .scrollCue {

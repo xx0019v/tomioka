@@ -1,0 +1,100 @@
+.trace {
+  position: sticky;
+  top: 68px;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 34px;
+  align-items: center;
+  min-height: 54px;
+  padding: 8px max(24px, calc((100vw - 1280px) / 2));
+  border-top: 1px solid rgba(217, 201, 161, 0.14);
+  border-bottom: 1px solid rgba(217, 201, 161, 0.16);
+  background: rgba(7, 18, 15, 0.95);
+  color: #b8b3a6;
+}
+
+.trace > p {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  min-width: 92px;
+}
+
+.trace > p span {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+}
+
+.trace > p strong {
+  color: #d6b86d;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.trace ol {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(56px, 1fr));
+  padding: 0;
+  list-style: none;
+}
+
+.trace ol::before {
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  left: 6%;
+  height: 1px;
+  background: rgba(217, 201, 161, 0.18);
+  content: "";
+}
+
+.trace a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #7f8278;
+  font-size: 0.66rem;
+  font-weight: 700;
+}
+
+.trace a > span:first-child {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #777568;
+  border-radius: 50%;
+  background: #07120f;
+}
+
+.reached a { color: #e9dfc7; }
+.reached a > span:first-child { border-color: #b44a38; background: #b44a38; }
+.trace a[aria-current="location"] { color: #d8ef6b; }
+.trace a[aria-current="location"] > span:first-child {
+  width: 11px;
+  height: 11px;
+  border-color: #d8ef6b;
+  background: #07120f;
+  box-shadow: inset 0 0 0 2px #d8ef6b;
+}
+
+@media (max-width: 680px) {
+  .trace {
+    top: 62px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 4px;
+    min-height: 46px;
+    padding: 4px 10px;
+  }
+  .trace > p { min-width: 0; gap: 5px; }
+  .trace > p span { display: none; }
+  .trace > p strong { font-size: 0.9rem; }
+  .trace ol { grid-template-columns: repeat(6, 1fr); }
+  .trace a { min-height: 38px; }
+  .trace a > span:last-child { display: none; }
+}

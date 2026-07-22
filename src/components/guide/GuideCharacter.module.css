@@ -321,6 +321,100 @@
   z-index: 3;
 }
 
+.guide[data-placement="archive-inline"] {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: 5;
+  grid-template-columns: minmax(0, 1fr) 74px;
+  width: min(100%, 620px);
+  margin-top: 14px;
+  filter: none;
+}
+
+.guide[data-placement="archive-inline"] .bubble {
+  margin: 0 -1px 0 0;
+  padding: 12px 14px 10px;
+  border-color: rgba(219, 189, 117, 0.3);
+  background:
+    linear-gradient(90deg, rgba(205, 178, 111, 0.055) 1px, transparent 1px) 0 0 / 31px 100%,
+    rgba(12, 27, 23, 0.9);
+  color: #f4ecd9;
+  box-shadow: none;
+  animation-duration: 240ms;
+}
+
+.guide[data-placement="archive-inline"] .bubble::after { display: none; }
+.guide[data-placement="archive-inline"] .bubbleHeader { border-color: rgba(219, 189, 117, 0.18); }
+.guide[data-placement="archive-inline"] .bubbleHeader p,
+.guide[data-placement="archive-inline"] .message { color: #f4ecd9; }
+.guide[data-placement="archive-inline"] .bubbleHeader p span { color: #c5a75f; }
+.guide[data-placement="archive-inline"] .bubbleFooter { color: #9d9d90; }
+.guide[data-placement="archive-inline"] .bubbleActions button { color: #d8ef6b; }
+.guide[data-placement="archive-inline"] .closeButton {
+  border-color: rgba(219, 189, 117, 0.2);
+  color: #f4ecd9;
+}
+.guide[data-placement="archive-inline"] .characterButton {
+  align-self: stretch;
+  width: 74px;
+  height: 100%;
+  min-height: 92px;
+  border: 1px solid rgba(219, 189, 117, 0.3);
+  border-radius: 0;
+  background: #0c1b17;
+}
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] {
+  align-self: stretch;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 70px;
+  justify-self: stretch;
+  border-right: 0;
+  border-left: 0;
+  text-align: left;
+}
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"]::before {
+  position: absolute;
+  top: 50%;
+  left: 90px;
+  color: #d7cba9;
+  content: "調査記録の案内を読む";
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transform: translateY(-50%);
+}
+.guide[data-placement="archive-inline"] .characterFrame,
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] .characterFrame {
+  inset: 2px 2px 14px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.guide[data-placement="archive-inline"] .characterFrame img,
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] .characterFrame img {
+  height: 82px;
+  transform: translateY(8px);
+}
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] .characterFrame {
+  right: auto;
+  width: 74px;
+  border-right: 1px solid rgba(219, 189, 117, 0.16);
+}
+.guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] .callout {
+  right: 12px;
+  bottom: 50%;
+  transform: translateY(50%);
+}
+.guide[data-placement="archive-inline"] .thread {
+  right: 58px;
+  bottom: 20px;
+  width: 88px;
+}
+
 @keyframes guide-bubble-in {
   from {
     opacity: 0;
@@ -426,6 +520,27 @@
     top: 10px;
     right: 8px;
     bottom: auto;
+  }
+
+  .guide[data-placement="archive-inline"] {
+    top: auto;
+    right: auto;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .guide[data-placement="archive-inline"] .bubble {
+    width: auto;
+    margin: 0 -1px 0 0;
+  }
+
+  .guide[data-placement="archive-inline"] .characterButton {
+    width: 64px;
+  }
+
+  .guide[data-placement="archive-inline"] .characterButton[aria-expanded="false"] {
+    width: 100%;
   }
 }
 
