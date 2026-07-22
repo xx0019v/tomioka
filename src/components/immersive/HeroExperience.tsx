@@ -173,7 +173,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <p className={styles.lead}>富岡の街に散らばった4つの言葉。歩き、観察し、百五十年前の記録を完成させよ。</p>
           <div className={styles.actions}>
             <Link href="/game/" className={styles.primary}>調査を始める <span aria-hidden="true">↗</span></Link>
-            <Link href="#discover" className={styles.secondary}>物語をたどる <span aria-hidden="true">↓</span></Link>
+            <Link href="/map/" className={styles.secondary}>全体マップを見る <span aria-hidden="true">→</span></Link>
           </div>
         </div>
 

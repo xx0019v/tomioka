@@ -3,7 +3,7 @@
  * 謎本文・答え・キーワードの実値は、謎制作担当の確定データを受領するまで入れない。
  */
 
-export type CheckpointStatus = "open" | "confirming" | "preparing";
+export type CheckpointSourceStatus = "confirmed" | "needs_review" | "pending";
 
 export interface Checkpoint {
   id: string;
@@ -20,7 +20,9 @@ export interface Checkpoint {
   openingHours: string | null;
   closedDays: string | null;
   googleMapsUrl: string;
-  status: CheckpointStatus;
+  latitude: number;
+  longitude: number;
+  sourceStatus: CheckpointSourceStatus;
   notice: string | null;
   sourceLabel: string;
 }
@@ -45,7 +47,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: "8:30-17:00",
     closedDays: "年中無休",
     googleMapsUrl: googleMapsSearchUrl("お富ちゃん家 群馬県富岡市富岡1430-1"),
-    status: "open",
+    latitude: 36.25845,
+    longitude: 138.892532,
+    sourceStatus: "confirmed",
     notice: "上州富岡駅から徒歩約5分。周辺の有料駐車場をご利用ください。",
     sourceLabel: "Webサイト制作仕様書 v2",
   },
@@ -63,7 +67,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: "11:00-18:00（夏季営業）",
     closedDays: "水曜日",
     googleMapsUrl: googleMapsSearchUrl("アトリエ 群馬県富岡市富岡1045"),
-    status: "confirming",
+    latitude: 36.256855,
+    longitude: 138.890991,
+    sourceStatus: "needs_review",
     notice: "イベント当日の営業状況は運営からの最終案内をご確認ください。",
     sourceLabel: "富岡市観光公式サイト（公開情報・要当日確認）",
   },
@@ -82,7 +88,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: "公開情報あり（当日運営確認）",
     closedDays: "水曜日",
     googleMapsUrl: googleMapsSearchUrl("岡重肉店 群馬県富岡市富岡1051-3"),
-    status: "confirming",
+    latitude: 36.2572204,
+    longitude: 138.8909415,
+    sourceStatus: "needs_review",
     notice: "ここでは問題を確認し、銀座まちなか交流館へ移動してから解いてください。店先に長く立ち止まらないでください。",
     sourceLabel: "謎制作ガイド・公開店舗情報（要当日確認）",
   },
@@ -100,7 +108,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: "9:00-17:00",
     closedDays: "年末",
     googleMapsUrl: googleMapsSearchUrl("銀座まちなか交流館 群馬県富岡市富岡19-1"),
-    status: "confirming",
+    latitude: 36.256874,
+    longitude: 138.889328,
+    sourceStatus: "needs_review",
     notice: "CP02の問題を落ち着いて解くための休憩地点です。施設利用者への配慮をお願いします。",
     sourceLabel: "富岡市観光公式サイト（独立ページ化は運営確認事項）",
   },
@@ -119,7 +129,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: null,
     closedDays: null,
     googleMapsUrl: googleMapsSearchUrl("キリンヤ洋品店 群馬県富岡市富岡1072"),
-    status: "confirming",
+    latitude: 36.257519,
+    longitude: 138.888199,
+    sourceStatus: "needs_review",
     notice: "歩行者と店舗利用者の通行を妨げない場所で確認してください。",
     sourceLabel: "公開電話帳情報（営業時間・当日利用は要確認）",
   },
@@ -138,7 +150,9 @@ export const checkpoints: Checkpoint[] = [
     openingHours: "平日11:00-15:00 / 土日祝11:00-17:00（L.O.）",
     closedDays: "木曜日＋店舗カレンダー",
     googleMapsUrl: googleMapsSearchUrl("CAFE DROME 群馬県富岡市富岡51-4"),
-    status: "confirming",
+    latitude: 36.254192,
+    longitude: 138.889709,
+    sourceStatus: "needs_review",
     notice: "最新の営業日は店舗公式案内と当日運営情報をご確認ください。",
     sourceLabel: "店舗公式サイト（公開情報・要当日確認）",
   },

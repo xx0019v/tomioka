@@ -4,6 +4,7 @@ import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
 import { siteConfig } from "@/data/site";
+import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
 const notoSerifJP = Noto_Serif_JP({
