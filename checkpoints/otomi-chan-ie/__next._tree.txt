@@ -1,4 +1,4 @@
-:HL["/tomioka/_next/static/chunks/2zqwrjgibx4p3.css","style"]
-:HL["/tomioka/_next/static/chunks/1y_iz9n8kp4jk.css","style"]
+:HL["/tomioka/_next/static/chunks/3ul125zy4g712.css","style"]
+:HL["/tomioka/_next/static/chunks/193yzxw63jj1g.css","style"]
 :HL["/tomioka/_next/static/chunks/2nb1odnzgdac-.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"checkpoints","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"otomi-chan-ie","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"THGo6j4D3CHwIPK4weZ3o"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"checkpoints","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"otomi-chan-ie","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ABQDkxRe1N8i5lTe3vNjW"}
