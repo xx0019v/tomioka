@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Noto_Serif_JP, Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
@@ -65,6 +66,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">本文へ移動</a>
         <EventBanner />
         {children}
+        <GuideCharacter />
         <Suspense fallback={null}>
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         </Suspense>

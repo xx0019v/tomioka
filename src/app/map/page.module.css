@@ -65,7 +65,7 @@
 
 @media (max-width: 520px) {
   .hero {
-    min-height: 360px;
+    min-height: 500px;
   }
 
   .heroInner {
@@ -75,8 +75,12 @@
 
   .hero h1 {
     max-width: 100%;
-    font-size: clamp(2.15rem, 11vw, 3.2rem);
-    overflow-wrap: anywhere;
+    font-size: clamp(1.8rem, 9vw, 2.7rem);
+    overflow-wrap: normal;
+  }
+
+  .hero h1 span {
+    white-space: nowrap;
   }
 
   .lead {
