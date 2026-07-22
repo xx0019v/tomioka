@@ -12,8 +12,8 @@
   --color-muted: #62665e;
   --color-hairline: rgba(78, 74, 55, 0.2);
   --color-hairline-strong: rgba(78, 74, 55, 0.4);
-  --font-serif: var(--font-noto-serif-jp), "Yu Mincho", "Hiragino Mincho ProN", serif;
-  --font-sans: var(--font-noto-sans-jp), "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  --font-sans: "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
   --shadow-paper: 0 22px 60px rgba(23, 55, 47, 0.1);
   --radius-panel: 14px;
   --radius-control: 8px;

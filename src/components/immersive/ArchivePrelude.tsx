@@ -40,7 +40,7 @@ function wasCompleted(): boolean {
 
 export function ArchivePrelude({ onComplete }: ArchivePreludeProps) {
   const headingId = useId();
-  const [state, setState] = useState<PreludeState>("checking");
+  const [state, setState] = useState<PreludeState>("sealed");
   const statusRef = useRef<HTMLParagraphElement>(null);
   const timerRef = useRef<number | null>(null);
   const onCompleteRef = useRef(onComplete);
@@ -56,7 +56,6 @@ export function ArchivePrelude({ onComplete }: ArchivePreludeProps) {
         onCompleteRef.current?.("returning");
         return;
       }
-      setState("sealed");
     }, 0);
     return () => window.clearTimeout(syncTimer);
   }, []);
