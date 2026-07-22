@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import {
   getGuideLine,
   guideCharacter,
-  type GuideExpression,
   type GuideFrequency,
   type GuideMoment,
 } from "@/data/guide-character";
@@ -17,7 +15,7 @@ import {
   getProgressSnapshot,
   subscribeProgress,
 } from "@/lib/progress";
-import { withBasePath } from "@/lib/base-path";
+import { SilkwormMascot } from "./SilkwormMascot";
 import styles from "./GuideCharacter.module.css";
 
 const SESSION_KEY = "mayu-no-chizu-guide-session-v1";
@@ -142,16 +140,6 @@ function formatLine(text: string, pathname: string, completed: string[]) {
     .replace("{remainingCount}", String(Math.max(0, TOTAL_RECORDS - completedCount)));
 }
 
-function getGuideImage(expression: GuideExpression) {
-  if (["discovery", "pleased", "clear"].includes(expression)) {
-    return "/images/guide/kinu-guide-discovery.png";
-  }
-  if (["thinking", "map-reading", "concerned", "caution", "loading"].includes(expression)) {
-    return "/images/guide/kinu-guide-thinking.png";
-  }
-  return "/images/guide/kinu-guide.png";
-}
-
 export function GuideCharacter({ placement = "global" }: GuideCharacterProps) {
   const pathname = usePathname();
   const progressSnapshot = useSyncExternalStore(
@@ -164,7 +152,6 @@ export function GuideCharacter({ placement = "global" }: GuideCharacterProps) {
   const [frequency, setFrequency] = useState<GuideFrequency>(readFrequency);
   const [hiddenKeys, setHiddenKeys] = useState<string[]>(() => readSession().shown);
   const [manualMessage, setManualMessage] = useState<ManualMessage | null>(null);
-  const [imageFailed, setImageFailed] = useState(false);
   const [archiveReady, setArchiveReady] = useState(readArchiveReady);
   const [staticGuide] = useState(prefersStaticGuide);
   const characterButtonRef = useRef<HTMLButtonElement>(null);
@@ -175,9 +162,6 @@ export function GuideCharacter({ placement = "global" }: GuideCharacterProps) {
 
   const line = getGuideLine(moment);
   const message = formatLine(line.text, pathname, completed);
-  const guideImageSrc = staticGuide
-    ? "/images/guide/kinu-guide.png"
-    : getGuideImage(line.expression);
   const expressionClass = styles[`expression-${line.expression}`] ?? "";
   const messageKey = `${line.dismissKey}:${getCheckpointName(pathname) ?? "global"}:${completed.length}`;
   const canAutoOpen = [
@@ -316,21 +300,8 @@ export function GuideCharacter({ placement = "global" }: GuideCharacterProps) {
         aria-controls={isOpen ? MESSAGE_ID : undefined}
         aria-label={isOpen ? guideCharacter.controls.closeLabel : guideCharacter.controls.manualLabel}
       >
-        <span className={styles.thread} aria-hidden="true" />
         <span className={styles.characterFrame} aria-hidden="true">
-          {imageFailed ? (
-            <span className={styles.fallbackMark} />
-          ) : (
-            <Image
-              src={withBasePath(guideImageSrc)}
-              alt=""
-              width="320"
-              height="320"
-              draggable="false"
-              loading="eager"
-              onError={() => setImageFailed(true)}
-            />
-          )}
+          <SilkwormMascot expression={line.expression} />
         </span>
         <span className={styles.callout} aria-hidden="true">
           {isOpen ? "記録中" : "案内"}
