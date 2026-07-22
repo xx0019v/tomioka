@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import styles from "./ArchivePrelude.module.css";
 
 const STORAGE_KEY = "mayu-no-chizu-archive-prelude-v1";
+const COMPLETE_EVENT = "mayu-archive-prelude-complete";
 const OPENING_DURATION_MS = 360;
 
 type PreludeState = "checking" | "sealed" | "opening" | "opened" | "skipped" | "returning";
@@ -22,6 +23,10 @@ function rememberCompletion(): void {
   } catch {
     // Storage can be unavailable in privacy modes. The experience must still continue.
   }
+}
+
+function notifyCompletion(): void {
+  window.dispatchEvent(new Event(COMPLETE_EVENT));
 }
 
 function wasCompleted(): boolean {
@@ -73,6 +78,7 @@ export function ArchivePrelude({ onComplete }: ArchivePreludeProps) {
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setState("opened");
+      notifyCompletion();
       onCompleteRef.current?.("opened");
       return;
     }
@@ -81,6 +87,7 @@ export function ArchivePrelude({ onComplete }: ArchivePreludeProps) {
     timerRef.current = window.setTimeout(() => {
       timerRef.current = null;
       setState("opened");
+      notifyCompletion();
       onCompleteRef.current?.("opened");
     }, OPENING_DURATION_MS);
   }
@@ -89,6 +96,7 @@ export function ArchivePrelude({ onComplete }: ArchivePreludeProps) {
     if (state !== "sealed") return;
     rememberCompletion();
     setState("skipped");
+    notifyCompletion();
     onCompleteRef.current?.("skipped");
   }
 

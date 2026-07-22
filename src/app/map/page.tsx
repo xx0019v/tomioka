@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { CheckpointMap } from "@/components/map/CheckpointMap";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -33,6 +34,7 @@ export default function MapPage() {
             <h1><span>チェックポイント</span><span>マップ</span></h1>
             <p className={styles.lead}>スタートからゴールまでの順番と、各地点の住所を確認できます。</p>
           </div>
+          <GuideCharacter placement="map-hero" />
         </section>
 
         <CheckpointMap checkpoints={checkpoints} />
