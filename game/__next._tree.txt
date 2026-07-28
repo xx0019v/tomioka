@@ -1,4 +1,4 @@
-:HL["/tomioka/_next/static/chunks/3ul125zy4g712.css","style"]
-:HL["/tomioka/_next/static/chunks/193yzxw63jj1g.css","style"]
-:HL["/tomioka/_next/static/chunks/2nb1odnzgdac-.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"game","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"ABQDkxRe1N8i5lTe3vNjW"}
+:HL["/tomioka/_next/static/chunks/31gy8m9um0ysz.css","style"]
+:HL["/tomioka/_next/static/chunks/3w2h7eza21jsn.css","style"]
+:HL["/tomioka/_next/static/chunks/1_5dmasd-i8a0.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"game","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"NMESEWo2jqYtyJn7hrUn2"}
