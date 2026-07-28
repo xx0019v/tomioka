@@ -29,7 +29,9 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   const userMarkerRef = useRef<LeafletMarker | null>(null);
   const listButtonsRef = useRef(new Map<string, HTMLButtonElement>());
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const lastTriggerRef = useRef<string | null>(null);
+  const lastTriggerRef = useRef<{ slug: string; source: "marker" | "list" } | null>(null);
+  const pendingFocusRef = useRef<{ slug: string; source: "marker" | "list" } | null>(null);
+  const locatingRef = useRef(false);
   const hasSyncedUrlRef = useRef(false);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "limited" | "failed">("loading");
@@ -37,14 +39,19 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   const [announcement, setAnnouncement] = useState("");
   const selected = checkpoints.find((checkpoint) => checkpoint.slug === selectedSlug) ?? null;
 
-  const focusTrigger = useCallback((slug: string) => {
+  const focusTrigger = useCallback((slug: string, source: "marker" | "list") => {
     window.requestAnimationFrame(() => {
       const markerElement = markersRef.current.get(slug)?.getElement();
+      const listButton = listButtonsRef.current.get(slug);
+      if (source === "list" && listButton) {
+        listButton.focus();
+        return;
+      }
       if (markerElement) {
         markerElement.focus();
         return;
       }
-      listButtonsRef.current.get(slug)?.focus();
+      listButton?.focus();
     });
   }, []);
 
@@ -97,22 +104,26 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
         tiles.addTo(map);
 
         const bounds = L.latLngBounds([]);
+        const useInteractiveMarkers = !window.matchMedia("(max-width: 520px)").matches;
         checkpoints.forEach((checkpoint) => {
           const roleClass = checkpoint.role === "start-goal" ? " map-marker--start" : checkpoint.role === "solve-annex" ? " map-marker--annex" : "";
           const marker = L.marker([checkpoint.latitude, checkpoint.longitude], {
-            keyboard: true,
+            keyboard: useInteractiveMarkers,
+            interactive: useInteractiveMarkers,
             title: `${checkpoint.shortName} ${checkpoint.name}`,
             alt: `${checkpoint.shortName} ${checkpoint.name}の地点を開く`,
             icon: L.divIcon({
               className: "map-marker-shell",
               html: `<span class="map-marker${roleClass}"><span>${checkpoint.shortName}</span></span>`,
-              iconSize: [48, 48],
-              iconAnchor: [24, 24],
+              iconSize: [56, 56],
+              iconAnchor: [28, 28],
             }),
           });
           marker.on("click", () => openCheckpoint(checkpoint.slug, "marker"));
           marker.on("add", () => {
-            marker.getElement()?.setAttribute("aria-label", `${checkpoint.shortName} ${checkpoint.name}の地点詳細を開く`);
+            if (useInteractiveMarkers) {
+              marker.getElement()?.setAttribute("aria-label", `${checkpoint.shortName} ${checkpoint.name}の地点詳細を開く`);
+            }
           });
           marker.bindTooltip(checkpoint.name, { direction: "top", offset: [0, -20] });
           marker.addTo(map);
@@ -147,6 +158,13 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   }, [selectedSlug]);
 
   useEffect(() => {
+    if (selectedSlug || !pendingFocusRef.current) return;
+    const trigger = pendingFocusRef.current;
+    pendingFocusRef.current = null;
+    focusTrigger(trigger.slug, trigger.source);
+  }, [focusTrigger, selectedSlug]);
+
+  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && selectedSlug) closeCheckpoint();
     };
@@ -156,7 +174,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
 
   function openCheckpoint(slug: string, source: "marker" | "list") {
     if (new URL(window.location.href).searchParams.get("checkpoint") === slug) return;
-    lastTriggerRef.current = slug;
+    lastTriggerRef.current = { slug, source };
     const url = new URL(window.location.href);
     url.searchParams.set("checkpoint", slug);
     window.history.pushState({ ...window.history.state, mayuMapPanel: true, source }, "", url);
@@ -192,11 +210,14 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
   }
 
   function locate() {
-    trackEvent(AnalyticsEvent.LocateClick, {});
+    if (locatingRef.current) return;
     const L = leafletRef.current;
     const map = mapRef.current;
     if (!L || !map) return;
+    locatingRef.current = true;
+    trackEvent(AnalyticsEvent.LocateClick, {});
     if (typeof navigator === "undefined" || !("geolocation" in navigator)) {
+      locatingRef.current = false;
       setGeoState("unavailable");
       setAnnouncement("この端末では現在地を取得できません。地点一覧をご利用ください。");
       trackEvent(AnalyticsEvent.GeoPermission, { result: "unavailable" });
@@ -206,6 +227,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
     setAnnouncement("現在地を取得しています。");
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        locatingRef.current = false;
         const { latitude, longitude } = position.coords;
         setGeoState("granted");
         trackEvent(AnalyticsEvent.GeoPermission, { result: "granted" });
@@ -230,6 +252,7 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
         markNearest(latitude, longitude);
       },
       (error) => {
+        locatingRef.current = false;
         const denied = error.code === error.PERMISSION_DENIED;
         setGeoState(denied ? "denied" : "unavailable");
         setAnnouncement(
@@ -247,7 +270,8 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
 
   function closeCheckpoint() {
     if (!selectedSlug) return;
-    const slugToFocus = lastTriggerRef.current ?? selectedSlug;
+    const triggerToFocus = lastTriggerRef.current ?? { slug: selectedSlug, source: "marker" as const };
+    pendingFocusRef.current = triggerToFocus;
     if (window.history.state?.mayuMapPanel) {
       window.history.back();
     } else {
@@ -257,7 +281,6 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
       setSelectedSlug(null);
       setAnnouncement("地点詳細を閉じました。");
     }
-    focusTrigger(slugToFocus);
   }
 
   return (

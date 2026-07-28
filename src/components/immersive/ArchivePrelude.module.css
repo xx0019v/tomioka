@@ -75,11 +75,11 @@
   grid-column: 2;
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 12px;
 }
 
 .actions button {
-  min-height: 48px;
+  min-height: var(--touch-control);
   border-radius: 3px;
   font-size: 0.78rem;
   font-weight: 700;
@@ -91,20 +91,25 @@
   opacity: 0.78;
 }
 
+.actions button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
 .openButton {
   display: inline-flex;
   min-width: 184px;
+  min-height: var(--touch-primary);
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 10px 15px;
+  padding: 14px 24px;
   border: 1px solid #c8a85f;
   background: #c8a85f;
   color: #10231e;
 }
 
 .skipButton {
-  padding: 10px 14px;
+  padding: 12px 24px;
   border: 1px solid rgba(244, 237, 219, 0.26);
   background: transparent;
   color: #e7dfcb;

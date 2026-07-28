@@ -69,9 +69,9 @@
 
 .closeButton {
   display: grid;
-  flex: 0 0 44px;
-  width: 44px;
-  height: 44px;
+  flex: 0 0 var(--touch-control);
+  width: var(--touch-control);
+  height: var(--touch-control);
   padding: 0;
   place-items: center;
   border: 1px solid var(--color-hairline);
@@ -112,9 +112,9 @@
 }
 
 .bubbleActions button {
-  min-width: 44px;
-  min-height: 44px;
-  padding: 8px 0 5px;
+  min-width: var(--touch-target);
+  min-height: 58px;
+  padding: 10px 6px 7px;
   border: 0;
   border-bottom: 1px solid currentColor;
   background: transparent;
@@ -122,6 +122,11 @@
   cursor: pointer;
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+.closeButton:active,
+.bubbleActions button:active {
+  transform: translateY(1px);
 }
 
 .characterButton {
@@ -471,9 +476,9 @@
   }
 
   .closeButton {
-    flex-basis: 48px;
-    width: 48px;
-    height: 48px;
+    flex-basis: var(--touch-control);
+    width: var(--touch-control);
+    height: var(--touch-control);
   }
 
   .bubbleFooter {
@@ -482,12 +487,12 @@
   }
 
   .bubbleActions {
-    gap: 10px;
+    gap: 12px;
   }
 
   .bubbleActions button {
-    min-width: 48px;
-    min-height: 48px;
+    min-width: var(--touch-target);
+    min-height: 58px;
     padding-block: 10px 6px;
   }
 
@@ -497,8 +502,8 @@
   }
 
   .characterButton[aria-expanded="false"] {
-    width: 54px;
-    height: 58px;
+    width: var(--touch-target);
+    height: var(--touch-target);
   }
 
   .characterButton[aria-expanded="false"] .characterFrame :is(img, svg) {

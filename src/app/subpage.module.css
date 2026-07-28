@@ -167,7 +167,7 @@
 
 .routeActions {
   display: flex;
-  gap: 8px;
+  gap: var(--touch-gap);
 }
 
 .routeActions a,
@@ -176,8 +176,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 46px;
-  padding: 10px 16px;
+  min-height: var(--touch-control);
+  padding: 12px 24px;
   border: 1px solid transparent;
   border-radius: var(--radius-control);
   background: var(--color-ink-green);
@@ -289,6 +289,9 @@
 }
 
 .pageNav a {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
   color: var(--color-ink-green);
   font-weight: 700;
   text-decoration: underline;
@@ -393,7 +396,7 @@
   }
 
   .routeActions a {
-    padding-inline: 11px;
+    padding-inline: 16px;
     font-size: 0.78rem;
   }
 

@@ -20,6 +20,10 @@
   --content-wide: 1180px;
   --content-reading: 760px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --touch-target: 56px;
+  --touch-control: 64px;
+  --touch-primary: 72px;
+  --touch-gap: 16px;
 }
 
 * {
@@ -86,6 +90,17 @@ textarea {
   font-family: inherit;
 }
 
+button,
+input,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button:disabled {
+  pointer-events: none;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -106,6 +121,10 @@ a {
 }
 
 .map-marker-shell {
+  display: grid !important;
+  width: var(--touch-target) !important;
+  height: var(--touch-target) !important;
+  place-items: center;
   background: transparent;
   border: 0;
 }
@@ -170,7 +189,40 @@ a {
 }
 
 .leaflet-control-zoom a {
+  display: grid;
+  width: var(--touch-target) !important;
+  height: var(--touch-target) !important;
+  place-items: center;
+  line-height: 1 !important;
   color: var(--color-ink-green-deep);
+}
+
+.leaflet-control-attribution {
+  display: flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  gap: 4px;
+}
+
+.leaflet-control-attribution a {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  padding-inline: 4px;
+}
+
+@media (max-width: 899px) {
+  .leaflet-bottom.leaflet-right {
+    top: 90px;
+    right: 0;
+    bottom: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .leaflet-control-attribution {
+    margin-bottom: 88px !important;
+  }
 }
 
 .leaflet-tooltip {
@@ -188,7 +240,10 @@ a {
   top: 8px;
   left: 8px;
   z-index: 100;
-  padding: 10px 14px;
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
+  padding: 10px 24px;
   transform: translateY(-160%);
   border-radius: var(--radius-control);
   background: var(--color-paper-raised);

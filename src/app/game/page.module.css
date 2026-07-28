@@ -47,6 +47,9 @@
 }
 
 .pickupLink {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
   width: fit-content;
   color: var(--color-ink-green);
   font-size: 0.84rem;

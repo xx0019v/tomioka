@@ -137,8 +137,8 @@
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  min-height: 48px;
-  padding: 11px 18px;
+  min-height: var(--touch-control);
+  padding: 12px 24px;
   border: 1px solid var(--color-ink-green-deep);
   border-radius: 999px;
   background: var(--color-ink-green-deep);
@@ -273,8 +273,8 @@
 
 .closeButton {
   display: inline-grid;
-  width: 48px;
-  height: 48px;
+  width: var(--touch-control);
+  height: var(--touch-control);
   place-items: center;
   border: 1px solid var(--color-hairline-strong);
   border-radius: 50%;
@@ -372,22 +372,29 @@
 .actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 12px;
   margin-top: 20px;
 }
 
 .actions a {
   display: inline-flex;
-  min-height: 48px;
+  min-height: var(--touch-control);
   align-items: center;
   justify-content: center;
-  padding: 9px 10px;
+  padding: 12px 24px;
   border: 1px solid var(--color-ink-green);
   background: var(--color-ink-green);
   color: var(--color-paper);
   font-size: 0.75rem;
   font-weight: 700;
   text-align: center;
+}
+
+.locateButton:active:not(:disabled),
+.closeButton:active,
+.indexPanel button:active,
+.actions a:active {
+  transform: translateY(1px);
 }
 
 .actions a:last-child {
@@ -494,6 +501,15 @@
 
   .actions {
     grid-template-columns: 1fr;
+  }
+
+  .locateButton {
+    grid-row: 2;
+  }
+
+  .locateHint {
+    grid-row: 1;
+    max-width: 190px;
   }
 }
 

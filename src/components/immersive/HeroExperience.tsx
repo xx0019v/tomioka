@@ -27,11 +27,12 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     const context = canvas.getContext("2d");
     if (!context) return;
 
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const pointer = { x: 0.58, y: 0.42 };
     let width = 0;
     let height = 0;
     let raf = 0;
-    let reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let motionEnabled = false;
 
     const resize = () => {
       const bounds = section.getBoundingClientRect();
@@ -46,41 +47,33 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       requestDraw();
     };
 
-    const draw = (time: number) => {
+    const draw = () => {
       context.clearRect(0, 0, width, height);
       const cx = pointer.x * width;
       const cy = pointer.y * height;
-      const motion = reducedMotion ? 0 : time * 0.00028;
-
-      for (let index = 0; index < 38; index += 1) {
-        const ratio = index / 37;
+      // 静かな絹糸のレイヤー。常時ループはせず、視線位置に応じて一度描き直すだけ。
+      for (let index = 0; index < 26; index += 1) {
+        const ratio = index / 25;
         const baseY = height * (0.08 + ratio * 0.88);
-        const wave = Math.sin(index * 0.72 + motion * 8) * (18 + ratio * 18);
-        const pull = (cy - baseY) * (0.08 + Math.sin(ratio * Math.PI) * 0.15);
-        const alpha = 0.035 + Math.sin(ratio * Math.PI) * 0.075;
-        const palette = index % 11 === 0 ? "205, 68, 44" : index % 4 === 0 ? "198, 162, 89" : "232, 223, 198";
+        const wave = Math.sin(index * 0.72) * (16 + ratio * 14);
+        const pull = (cy - baseY) * (0.06 + Math.sin(ratio * Math.PI) * 0.12);
+        const alpha = 0.03 + Math.sin(ratio * Math.PI) * 0.05;
+        const palette = index % 6 === 0 ? "198, 162, 89" : "232, 223, 198";
 
         context.beginPath();
         context.moveTo(-40, baseY + wave);
         context.bezierCurveTo(
           width * 0.28,
           baseY - wave * 0.7,
-          cx + Math.cos(index * 0.47 + motion) * width * 0.16,
-          cy + pull + Math.sin(index) * 34,
+          cx + Math.cos(index * 0.47) * width * 0.14,
+          cy + pull + Math.sin(index) * 30,
           width + 40,
           baseY - wave * 0.45,
         );
         context.strokeStyle = `rgba(${palette}, ${alpha})`;
-        context.lineWidth = index % 9 === 0 ? 1.25 : 0.7;
+        context.lineWidth = index % 9 === 0 ? 1.1 : 0.65;
         context.stroke();
       }
-
-      const halo = context.createRadialGradient(cx, cy, 0, cx, cy, Math.min(width, height) * 0.34);
-      halo.addColorStop(0, "rgba(205, 172, 95, 0.11)");
-      halo.addColorStop(0.46, "rgba(205, 172, 95, 0.035)");
-      halo.addColorStop(1, "rgba(205, 172, 95, 0)");
-      context.fillStyle = halo;
-      context.fillRect(0, 0, width, height);
     };
 
     const requestDraw = () => {
@@ -109,24 +102,41 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       });
     };
 
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleMotionPreference = (event: MediaQueryListEvent) => {
-      reducedMotion = event.matches;
-      requestDraw();
+    const syncMotionPreference = () => {
+      if (motionQuery.matches) {
+        if (motionEnabled) {
+          section.removeEventListener("pointermove", handlePointer);
+          window.removeEventListener("scroll", handleScroll);
+        }
+        motionEnabled = false;
+        pointer.x = 0.58;
+        pointer.y = 0.42;
+        section.style.setProperty("--pointer-x", "0");
+        section.style.setProperty("--pointer-y", "0");
+        section.style.setProperty("--hero-progress", "0");
+        requestDraw();
+        return;
+      }
+
+      if (!motionEnabled) {
+        section.addEventListener("pointermove", handlePointer, { passive: true });
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        motionEnabled = true;
+      }
+      handleScroll();
     };
 
     resize();
-    section.addEventListener("pointermove", handlePointer, { passive: true });
     window.addEventListener("resize", resize, { passive: true });
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    motionQuery.addEventListener("change", handleMotionPreference);
+    motionQuery.addEventListener("change", syncMotionPreference);
+    syncMotionPreference();
 
     return () => {
       window.cancelAnimationFrame(raf);
       section.removeEventListener("pointermove", handlePointer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
-      motionQuery.removeEventListener("change", handleMotionPreference);
+      motionQuery.removeEventListener("change", syncMotionPreference);
     };
   }, []);
 
@@ -134,6 +144,15 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     <section ref={sectionRef} className={styles.hero} aria-labelledby="hero-title">
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
+      <Image
+        className={styles.mulberry}
+        src={withBasePath("/images/environment/mulberry-branch.webp")}
+        alt=""
+        width={1200}
+        height={800}
+        sizes="(max-width: 680px) 78vw, 38vw"
+        aria-hidden="true"
+      />
 
       <div className={styles.stage}>
         <div className={styles.dateBadge}>
@@ -142,7 +161,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         </div>
 
         <div className={styles.evidence} aria-hidden="true">
-          <div className={styles.evidenceGlow} />
           <div className={styles.evidenceCard}>
             <Image
               src={withBasePath("/images/hero-archive-800.jpg")}
@@ -152,12 +170,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
               fetchPriority="high"
               sizes="(max-width: 700px) 48vw, 28vw"
             />
-            <span>ARCHIVE / 1872</span>
+            <span>再構成 / MEIJI</span>
           </div>
-          <i className={`${styles.clue} ${styles.clueA}`}>A</i>
-          <i className={`${styles.clue} ${styles.clueB}`}>B</i>
-          <i className={`${styles.clue} ${styles.clueC}`}>C</i>
-          <i className={`${styles.clue} ${styles.clueD}`}>D</i>
         </div>
 
         <div className={styles.copy}>
@@ -172,7 +186,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <GuideCharacter placement="archive-inline" />
           <div className={styles.actions}>
             <Link href="/game/" className={styles.primary}>調査を始める <span aria-hidden="true">↗</span></Link>
-            <Link href="/map/" className={styles.secondary}>全体マップを見る <span aria-hidden="true">→</span></Link>
           </div>
         </div>
 
