@@ -6,7 +6,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 34px;
   align-items: center;
-  min-height: 54px;
+  min-height: var(--touch-control);
   padding: 8px max(24px, calc((100vw - 1280px) / 2));
   border-top: 1px solid rgba(217, 201, 161, 0.14);
   border-bottom: 1px solid rgba(217, 201, 161, 0.16);
@@ -55,7 +55,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  min-height: 38px;
+  min-height: var(--touch-target);
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -86,15 +86,26 @@
 @media (max-width: 680px) {
   .trace {
     top: 62px;
-    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-columns: 42px minmax(0, 1fr);
     gap: 4px;
-    min-height: 46px;
-    padding: 4px 10px;
+    min-height: var(--touch-control);
+    padding: 4px;
   }
   .trace > p { min-width: 0; gap: 5px; }
   .trace > p span { display: none; }
   .trace > p strong { font-size: 0.9rem; }
   .trace ol { grid-template-columns: repeat(6, 1fr); }
-  .trace a { min-height: 38px; }
+  .trace a { min-height: var(--touch-target); }
   .trace a > span:last-child { display: none; }
+}
+
+@media (max-width: 375px) {
+  .trace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .trace > p {
+    display: none;
+  }
 }

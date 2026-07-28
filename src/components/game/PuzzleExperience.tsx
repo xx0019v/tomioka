@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { PuzzleDefinition } from "@/data/puzzles";
 import { hashAnswer } from "@/lib/answer";
 import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
@@ -18,6 +18,7 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<Result>("idle");
   const [openedHints, setOpenedHints] = useState<number[]>([]);
+  const submittingRef = useRef(false);
   const isReady = Boolean(
     puzzle?.problemTitle &&
       puzzle.problemBody &&
@@ -38,8 +39,9 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!puzzle || !isReady || !answer.trim()) return;
+    if (submittingRef.current || !puzzle || !isReady || !answer.trim()) return;
 
+    submittingRef.current = true;
     setResult("checking");
     trackEvent(AnalyticsEvent.AnswerSubmit, { checkpoint_id: checkpointId });
     try {
@@ -59,6 +61,8 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
       }
     } catch {
       setResult("error");
+    } finally {
+      submittingRef.current = false;
     }
   }
 
@@ -99,7 +103,7 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
             <p className={styles.kicker}>問題</p>
             <h2 id="problem-heading">{puzzle.problemTitle}</h2>
             <p className={styles.problemBody}>{puzzle.problemBody}</p>
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit} aria-busy={result === "checking"}>
               <label htmlFor={`${checkpointId}-answer`}>答え</label>
               <p className={styles.helper}>ひらがな・カタカナ・全角半角の違いは自動で整えます。</p>
               <div className={styles.answerRow}>
@@ -112,6 +116,7 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
                     if (result !== "idle") setResult("idle");
                   }}
                   aria-describedby={resultId}
+                  aria-invalid={result === "incorrect" || result === "error"}
                   autoComplete="off"
                   inputMode="text"
                   disabled={result === "checking" || result === "correct"}
@@ -147,16 +152,18 @@ export function PuzzleExperience({ checkpointId, puzzle }: PuzzleExperienceProps
           <ol>
             {puzzle.hints.map((hint, index) => {
               const open = openedHints.includes(index);
+              const hintId = `${checkpointId}-hint-${index + 1}`;
               return (
-                <li key={`${checkpointId}-hint-${index + 1}`}>
+                <li key={hintId}>
                   <button
                     type="button"
                     aria-expanded={open}
+                    aria-controls={hintId}
                     onClick={() => toggleHint(index)}
                   >
                     ヒント{index + 1}を{open ? "閉じる" : "見る"}
                   </button>
-                  {open && <p>{hint}</p>}
+                  {open && <p id={hintId}>{hint}</p>}
                 </li>
               );
             })}

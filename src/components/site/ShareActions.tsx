@@ -13,7 +13,7 @@ export function ShareActions({ text, url }: ShareActionsProps) {
   const encodedUrl = encodeURIComponent(url);
 
   return (
-    <div className={styles.actions} aria-label="SNSで共有">
+    <div className={styles.actions} role="group" aria-label="SNSで共有">
       <a
         href={`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`}
         target="_blank"

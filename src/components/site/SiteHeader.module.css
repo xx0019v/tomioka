@@ -20,6 +20,8 @@
 
 .brand {
   display: inline-flex;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   align-items: center;
   gap: 10px;
   color: var(--color-paper);
@@ -51,6 +53,12 @@
 }
 
 .nav a {
+  display: inline-flex;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  align-items: center;
+  justify-content: center;
+  padding-inline: 8px;
   color: #e5dfd2;
 }
 
@@ -59,8 +67,8 @@
 }
 
 .nav .gameLink {
-  min-height: 42px;
-  padding: 8px 15px;
+  min-height: var(--touch-control);
+  padding: 12px 24px;
   border: 1px solid #d8ef6b;
   border-radius: 4px;
   background: #d8ef6b;
@@ -72,6 +80,10 @@
   transform: translateY(-2px);
   background: #e4f78f;
   color: #0b1713;
+}
+
+.nav a:active {
+  transform: translateY(1px);
 }
 
 @media (max-width: 680px) {
@@ -90,7 +102,7 @@
   }
 
   .nav .gameLink {
-    padding-inline: 10px;
+    padding-inline: 18px;
   }
 }
 

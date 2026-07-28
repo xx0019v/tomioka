@@ -8,8 +8,10 @@ import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
+const metadataOrigin = new URL(new URL(siteConfig.siteUrl).origin);
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl),
+  metadataBase: metadataOrigin,
   title: {
     default: "繭が遺した地図｜富岡まち歩き謎解き",
     template: "%s｜繭が遺した地図",

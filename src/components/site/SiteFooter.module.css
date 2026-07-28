@@ -34,13 +34,23 @@
 .links {
   display: grid;
   align-content: start;
-  gap: 7px;
+  gap: 0;
+}
+
+.links a {
+  display: flex;
+  min-height: var(--touch-target);
+  align-items: center;
 }
 
 .links a:hover {
   color: #fff8e8;
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.links a:active {
+  opacity: 0.72;
 }
 
 .org {

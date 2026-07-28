@@ -114,12 +114,30 @@ export default function Home() {
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
+          <Image
+            className={styles.routeGround}
+            src={withBasePath("/images/environment/field-archive-ground.webp")}
+            alt=""
+            fill
+            sizes="100vw"
+            aria-hidden="true"
+          />
+          <div className={styles.routeVeil} aria-hidden="true" />
           <header className={styles.routeHeader}>
             <p className={styles.eyebrow}>巡回図面 / 実座標から作成</p>
             <h2 id="route-heading">巡回5地点と、ひとつの補助地点。</h2>
             <p>集める言葉は4つ。岡重で手掛かりを読み、銀座まちなか交流館で解くCP02を含む6地点の調査記録です。</p>
           </header>
           <InteractiveRoute points={routePoints} />
+          <Image
+            className={styles.routeStrata}
+            src={withBasePath("/images/environment/silk-strata.webp")}
+            alt=""
+            width={1440}
+            height={576}
+            sizes="(max-width: 680px) 120vw, 88vw"
+            aria-hidden="true"
+          />
           <Link href="/map/" className={styles.routeCta}>全体マップと住所を見る <span aria-hidden="true">↗</span></Link>
         </section>
 

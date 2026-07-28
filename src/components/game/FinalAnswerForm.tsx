@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { siteConfig } from "@/data/site";
 import { hashAnswer } from "@/lib/answer";
 import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
@@ -20,6 +20,7 @@ interface FinalAnswerFormProps {
 export function FinalAnswerForm({ answerHashes, clearMessage }: FinalAnswerFormProps) {
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<"idle" | "checking" | "incorrect" | "correct">("idle");
+  const submittingRef = useRef(false);
   const ready = answerHashes.length > 0;
   const progressSnapshot = useSyncExternalStore(
     subscribeProgress,
@@ -43,17 +44,24 @@ export function FinalAnswerForm({ answerHashes, clearMessage }: FinalAnswerFormP
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!ready || !answer.trim()) return;
+    if (submittingRef.current || !ready || !answer.trim()) return;
+    submittingRef.current = true;
     setResult("checking");
     trackEvent(AnalyticsEvent.AnswerSubmit, { checkpoint_id: "final" });
-    const digest = await hashAnswer(answer);
-    const correct = answerHashes.includes(digest);
-    setResult(correct ? "correct" : "incorrect");
-    trackEvent(AnalyticsEvent.AnswerResult, {
-      checkpoint_id: "final",
-      result: correct ? "correct" : "incorrect",
-    });
-    if (correct) trackEvent(AnalyticsEvent.ClearView);
+    try {
+      const digest = await hashAnswer(answer);
+      const correct = answerHashes.includes(digest);
+      setResult(correct ? "correct" : "incorrect");
+      trackEvent(AnalyticsEvent.AnswerResult, {
+        checkpoint_id: "final",
+        result: correct ? "correct" : "incorrect",
+      });
+      if (correct) trackEvent(AnalyticsEvent.ClearView);
+    } catch {
+      setResult("idle");
+    } finally {
+      submittingRef.current = false;
+    }
   }
 
   if (result === "correct") {
@@ -85,7 +93,7 @@ export function FinalAnswerForm({ answerHashes, clearMessage }: FinalAnswerFormP
       </div>
 
       {ready ? (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} aria-busy={result === "checking"}>
           <h2 id="final-answer-heading">最終回答を入力</h2>
           <p className={styles.helper}>キーワードA-Dをすべて使って導いた答えを入力してください。</p>
           <label htmlFor="final-answer">最終回答</label>
@@ -99,6 +107,7 @@ export function FinalAnswerForm({ answerHashes, clearMessage }: FinalAnswerFormP
             }}
             autoComplete="off"
             aria-describedby="final-result"
+            aria-invalid={result === "incorrect"}
           />
           <button type="submit" disabled={!answer.trim() || result === "checking"}>
             {result === "checking" ? "確認中" : "最終回答を送る"}

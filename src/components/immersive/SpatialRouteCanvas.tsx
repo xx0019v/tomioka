@@ -50,6 +50,7 @@ interface MarkerParts {
   group: Group;
   stem: Mesh;
   head: Mesh;
+  hitArea: Mesh;
   point: SpatialPoint;
 }
 
@@ -236,12 +237,22 @@ export function SpatialRouteCanvas({ points, activeSlug, discoveredIds, onSelect
             metalness: 0.38,
           }),
         );
+        const hitArea = new THREE.Mesh(
+          new THREE.SphereGeometry(0.34, 12, 8),
+          new THREE.MeshBasicMaterial({
+            transparent: true,
+            opacity: 0,
+            depthWrite: false,
+          }),
+        );
         head.userData.slug = point.slug;
-        group.add(stem, head);
+        hitArea.userData.slug = point.slug;
+        hitArea.position.z = 0.55;
+        group.add(stem, head, hitArea);
         group.position.set(point.x, point.y, 0);
         scene.add(group);
-        markerParts.set(point.slug, { group, stem, head, point });
-        markerObjects.push(head);
+        markerParts.set(point.slug, { group, stem, head, hitArea, point });
+        markerObjects.push(hitArea);
       });
 
       const raycaster = new THREE.Raycaster();
@@ -272,6 +283,9 @@ export function SpatialRouteCanvas({ points, activeSlug, discoveredIds, onSelect
         if (disposed || contextIsLost) return;
         const bounds = root.getBoundingClientRect();
         compactLayout = bounds.width < 700;
+        markerParts.forEach(({ hitArea }) => {
+          hitArea.scale.setScalar(compactLayout ? 1.8 : 1);
+        });
         renderer.setSize(Math.max(1, bounds.width), Math.max(1, bounds.height), false);
         camera.aspect = Math.max(1, bounds.width) / Math.max(1, bounds.height);
         camera.updateProjectionMatrix();
@@ -415,7 +429,8 @@ export function SpatialRouteCanvas({ points, activeSlug, discoveredIds, onSelect
   }, [enhancementMode, points, retryToken, signals]);
 
   function toggleEnhancement() {
-    if (renderState === "ready" || renderState === "loading") {
+    if (renderState === "loading") return;
+    if (renderState === "ready") {
       setEnhancementMode("off");
       setRenderState("fallback");
       return;
@@ -436,7 +451,12 @@ export function SpatialRouteCanvas({ points, activeSlug, discoveredIds, onSelect
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.controlRow}>
         <span aria-live="polite">{statusMessage}</span>
-        <button type="button" onClick={toggleEnhancement}>
+        <button
+          type="button"
+          onClick={toggleEnhancement}
+          disabled={renderState === "loading"}
+          aria-pressed={renderState === "ready"}
+        >
           {renderState === "ready" || renderState === "loading" ? "立体表示を切る" : renderState === "failed" || renderState === "context_lost" || renderState === "unsupported" ? "立体表示を再試行" : "立体表示を試す"}
         </button>
       </div>

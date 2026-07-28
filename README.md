@@ -11,7 +11,21 @@
 - `/checkpoints/[slug]/` 各チェックポイント
 - `/final/` 最終回答
 
-`next build`で`out/`へ完全な静的ファイルを書き出します。XServerには`out/`の中身をアップロードしてください。Node.jsサーバーは不要です。
+`next build`で`out/`へ完全な静的ファイルを書き出します。公開先は
+[GitHub Pages](https://xx0019v.github.io/tomioka/) で、`gh-pages` branchの
+rootから配信します。Node.jsサーバーは不要です。
+
+GitHub Pages向けの本番exportでは、base pathと公開URLをbuild時に指定します。
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/tomioka \
+NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka \
+npm run build
+```
+
+`out/`へ`.nojekyll`を追加し、内容だけを`gh-pages` branchへ同期します。
+独自サーバーへ移す場合は、base pathと`NEXT_PUBLIC_SITE_URL`をその配信先に
+合わせて再buildしてください。
 
 ## 開発
 

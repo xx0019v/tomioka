@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
+import { withBasePath } from "@/lib/base-path";
 import {
   getProgressServerSnapshot,
   getProgressSnapshot,
@@ -95,6 +97,16 @@ export function ArchiveLedger({ records }: { records: ArchiveRecord[] }) {
           <ul aria-label="地点の特徴">
             {active.tags.slice(0, 2).map((tag) => <li key={tag}>{tag}</li>)}
           </ul>
+        </div>
+        <div className={styles.specimen} data-discovered={activeDiscovered} aria-hidden="true">
+          <Image
+            src={withBasePath("/images/environment/archive-specimen.webp")}
+            alt=""
+            width={720}
+            height={720}
+            sizes="160px"
+          />
+          <span>復元標本 / MATERIAL STUDY</span>
         </div>
         <Link href={`/checkpoints/${active.slug}/`}>
           {activeDiscovered ? "記録票を開く" : "地点の手掛かりを見る"}
