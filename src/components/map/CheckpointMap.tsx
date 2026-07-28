@@ -344,6 +344,11 @@ export function CheckpointMap({ checkpoints }: CheckpointMapProps) {
               <div className={styles.detailVisual}>
                 <Image src={selected.visualSrc} alt={selected.visualAlt} fill sizes="(max-width: 899px) 100vw, 390px" />
               </div>
+              <p className={styles.photoCredit}>
+                <a href={selected.visualSourceUrl} target="_blank" rel="noopener noreferrer">
+                  {selected.visualCredit}
+                </a>
+              </p>
               <p className={styles.detailKicker}>FIELD RECORD / {selected.id.toUpperCase()}</p>
               <h3>{selected.formalName ?? selected.name}</h3>
               <p className={styles.description}>{selected.description}</p>

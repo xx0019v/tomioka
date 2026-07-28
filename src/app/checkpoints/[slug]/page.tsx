@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GameProgressSummary } from "@/components/game/GameProgressSummary";
@@ -55,10 +56,23 @@ export default async function CheckpointPage({
       <SiteHeader />
       <main id="main-content">
         <section className={styles.compactHero}>
+          <Image
+            className={styles.heroImage}
+            src={checkpoint.visualSrc}
+            alt=""
+            fill
+            sizes="100vw"
+            fetchPriority="high"
+          />
           <div className={styles.heroInner}>
             <p className={styles.kicker}>{checkpoint.shortName} / 調査地点</p>
             <h1>{checkpoint.name}</h1>
             <p className={styles.lead}>{checkpoint.description}</p>
+            <p className={styles.photoCredit}>
+              <a href={checkpoint.visualSourceUrl} target="_blank" rel="noopener noreferrer">
+                {checkpoint.visualCredit}
+              </a>
+            </p>
           </div>
         </section>
 
