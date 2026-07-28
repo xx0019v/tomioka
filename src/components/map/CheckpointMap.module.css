@@ -288,7 +288,7 @@
 .detailVisual {
   position: relative;
   height: 170px;
-  margin: 18px 0 24px;
+  margin: 18px 0 8px;
   overflow: hidden;
 }
 
@@ -301,6 +301,19 @@
 
 .detailVisual img {
   object-fit: cover;
+}
+
+.photoCredit {
+  margin-bottom: 20px;
+  color: var(--color-muted);
+  font-size: 0.62rem;
+  line-height: 1.55;
+}
+
+.photoCredit a {
+  text-decoration: underline;
+  text-decoration-color: rgba(78, 74, 55, 0.45);
+  text-underline-offset: 3px;
 }
 
 .description {

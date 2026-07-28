@@ -81,7 +81,7 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 **データの確度**
 
-- チェックポイントの `sourceStatus` は `confirmed`（お富ちゃん家＝仕様書記載のみ）/ `needs_review`（その他すべて）で管理。
+- チェックポイントの `sourceStatus` は `confirmed`（お富ちゃん家＝2026年7月の富岡市・公式観光情報で照合）/ `needs_review`（その他すべて）で管理。
 - **`needs_review` の住所・緯度経度・営業時間・定休日は、公開情報をもとにした暫定値であり未検証です。** `src/data/checkpoints.ts` を運営の最終確認シートで必ず上書きしてください（推測値を確定として公開しない）。
 - 銀座まちなか交流館は謎制作ガイドのフロー図にのみ登場（仕様書のCP一覧には未記載）。独立ページ化の可否は要確認。
 
@@ -99,3 +99,6 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ## ビジュアル素材
 
 `public/images/`のWebPは、本プロジェクト専用に画像生成した資料写真です。実在の建物や歴史資料を写したものではないため、場所の証拠写真としては使用しません。
+
+チェックポイントの現地写真は`public/checkpoints/photos/`へ分離し、出典・利用根拠・クレジットを
+[`docs/checkpoint-photo-provenance.md`](docs/checkpoint-photo-provenance.md)で管理します。

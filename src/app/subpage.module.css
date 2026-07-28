@@ -67,6 +67,19 @@
   color: #d5d3ca;
 }
 
+.photoCredit {
+  margin-top: 16px;
+  color: #e7dfcd;
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.photoCredit a {
+  text-decoration: underline;
+  text-decoration-color: rgba(231, 223, 205, 0.55);
+  text-underline-offset: 3px;
+}
+
 .content,
 .readingContent {
   margin: 0 auto;
