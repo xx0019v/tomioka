@@ -84,13 +84,27 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
     const stage = mapStageRef.current;
     if (!stage) return;
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motionQuery.matches) return;
+    let intersecting = false;
+
+    const updateVisible = () => {
+      setMapVisible(!motionQuery.matches && !document.hidden && intersecting);
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => setMapVisible(Boolean(entry?.isIntersecting)),
+      ([entry]) => {
+        intersecting = Boolean(entry?.isIntersecting);
+        updateVisible();
+      },
       { rootMargin: "10% 0px", threshold: 0.01 },
     );
     observer.observe(stage);
-    return () => observer.disconnect();
+    motionQuery.addEventListener("change", updateVisible);
+    document.addEventListener("visibilitychange", updateVisible);
+    return () => {
+      observer.disconnect();
+      motionQuery.removeEventListener("change", updateVisible);
+      document.removeEventListener("visibilitychange", updateVisible);
+    };
   }, []);
 
   useEffect(() => {

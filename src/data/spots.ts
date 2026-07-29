@@ -1,4 +1,5 @@
 import { withBasePath } from "@/lib/base-path";
+import { siteConfig } from "@/data/site";
 
 export type SpotSourceStatus = "confirmed" | "day_of_event";
 export type SpotCategory = "start" | "story" | "rest";
@@ -38,26 +39,26 @@ export const eventSpots: EventSpot[] = [
     id: "start",
     slug: "otomi-chan-ie",
     marker: "始",
-    name: "お富ちゃん家",
-    formalName: "まちなか観光物産館 お富ちゃん家",
+    name: siteConfig.start.name,
+    formalName: siteConfig.start.formalName,
     category: "start",
     categoryLabel: "スタート地点・観光案内",
     tags: ["スタート地点", "屋内", "観光案内"],
-    description: "参加キットを受け取る、街歩きの入口。観光パンフレットや富岡の物産にも出会える案内拠点です。",
-    relation: "上州富岡駅から徒歩約10分",
-    address: "群馬県富岡市富岡1151-1",
-    openingHours: "無人観光案内所 9:00〜17:00",
+    description: "参加キットを受け取る、街歩きの入口。受付を済ませ、富岡の街へ物語をたどりに出発します。",
+    relation: siteConfig.start.access,
+    address: siteConfig.start.address,
+    openingHours: null,
     closedDays: null,
-    googleMapsUrl: googleMapsSearchUrl("お富ちゃん家 群馬県富岡市富岡1151-1"),
-    latitude: 36.2561709,
-    longitude: 138.8894141,
+    googleMapsUrl: siteConfig.start.googleMapsUrl,
+    latitude: siteConfig.start.latitude,
+    longitude: siteConfig.start.longitude,
     sourceStatus: "confirmed",
     visualSrc: withBasePath("/spots/photos/otomi-chan-ie.webp"),
     visualAlt: "まちなか観光物産館 お富ちゃん家の外観",
     visualCredit: "写真：しるくるとみおか掲載素材（利用許諾確認済み）",
     visualSourceUrl: "https://www.tomioka-silk.jp/_shop/souvenir/detail/Otomi-chan-chi.html",
-    notice: "イベント受付は9:00〜15:00です。施設の開館時間とは異なります。",
-    sourceLabel: "富岡市観光公式サイト（2026年7月確認）",
+    notice: "イベント受付は9:00〜15:00です。",
+    sourceLabel: "イベント正式仕様（2026年7月29日確認）",
   },
   {
     id: "atelier",

@@ -95,7 +95,7 @@
   stroke-width: 0.4;
 }
 
-.reached:last-of-type .pulse {
+.experience[data-motion-active="true"] .reached:last-of-type .pulse {
   stroke: rgba(216, 239, 107, 0.55);
   animation: mapPulse 2s ease-out infinite;
 }
@@ -377,7 +377,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .activeArtifact,
-  .reached:last-of-type .pulse {
+  .experience[data-motion-active="true"] .reached:last-of-type .pulse {
     animation: none;
   }
 

@@ -1,0 +1,218 @@
+[
+  {
+    "route": "home",
+    "viewport": "320x568",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "360x800",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "375x812",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "390x844",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "393x852",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "430x932",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "768x1024",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "home",
+    "viewport": "1440x900",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "320x568",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "360x800",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "375x812",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "390x844",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "393x852",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "430x932",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "768x1024",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "map",
+    "viewport": "1440x900",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "320x568",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "360x800",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "375x812",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "390x844",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "393x852",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "430x932",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "768x1024",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  },
+  {
+    "route": "information",
+    "viewport": "1440x900",
+    "overflow": 0,
+    "smallTargets": [],
+    "punctuatedLabels": [],
+    "consoleErrors": 0,
+    "failedResponses": 0
+  }
+]

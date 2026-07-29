@@ -2,6 +2,11 @@
 
 確認日：2026年7月29日（Asia/Tokyo）
 
+> 追補：公開後の第三者視点監査で、イベント受付住所・徒歩目安・Googleマップ検索と、
+> 画面外／タブ非表示時の常時モーション停止に是正点が見つかった。
+> v0.7.0公開時の検証記録は履歴として残し、是正内容と再検証結果は
+> `docs/post-release-audit-v071-2026-07-29.md`を正とする。
+
 ## デザイン方針
 
 「明治の研究台帳を、現代の文化誌として絹で再製本した画面」。
@@ -14,7 +19,7 @@
 ## 使用した外部Skill・参照
 
 - `premium-product-design`
-  - ローカルSkill：`/Users/exx/.codex/skills/premium-product-design`
+  - ローカルに導入済みのSkillを使用（環境固有の絶対パスは記録しない）
   - 指定リポジトリ：`git@github.com:xx0019v/premium-product-design.git`
   - 確認コミット：`3e88c03 add spatial 3D product design guidance`
   - `SKILL.md` と `ux-system.md`、`visual-direction.md`、`motion-system.md`、`implementation-system.md`、`accessibility-and-qa.md` を適用。
@@ -70,7 +75,8 @@
 ## モーション
 
 - 既存の絹糸の光、浮遊塵、紙・植物・機械の2〜5pxの漂いを維持。
-- `IntersectionObserver` で画面外の常時モーションを停止。
+- `ArtifactField`は`IntersectionObserver`で画面外停止していたが、経路図のパルスと
+  タブ非表示時の停止はv0.7.0時点では不完全だった。v0.7.1で対象を統一した。
 - 主要操作は120〜220ms、地図パネルは220msの範囲。
 - `prefers-reduced-motion: reduce` では常時ループ0件、非表示見出し0件。
 - 地図操作、本文読解、CTAを待たせるイントロや自動再生は追加していない。
@@ -131,7 +137,7 @@
   - iPhone横向き：合格
   - reduced-motion：合格
 
-## 最終評価
+## v0.7.0公開時の自己評価
 
 | 項目 | 点数 | 根拠 |
 |---|---:|---|
@@ -145,6 +151,6 @@
 | モバイルUX | 10 / 10 | 8幅、片手操作、地図閲覧モード、ボトムシート |
 | 性能 | 5 / 5 | 静的出力、画像最適化、3D依存なし |
 | アクセシビリティ | 5 / 5 | 44px以上、キーボード、Esc、フォーカス復帰、代替一覧 |
-| **合計** | **97 / 100** | 実画面、操作、静的本番QAを根拠に評価 |
+| **合計** | **97 / 100** | 公開時の自己評価。公開後監査の是正点を含まない |
 
 物理iPhoneは未確認。WebKitの端末エミュレーションとiOS相当操作までを完了した。
