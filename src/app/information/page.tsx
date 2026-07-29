@@ -31,13 +31,13 @@ export default function InformationPage() {
               <h2 id="event-facts">開催概要</h2>
               <dl className={styles.facts}>
                 <div><dt>イベント名</dt><dd>{siteConfig.title}</dd></div>
-                <div><dt>開催日</dt><dd>{siteConfig.eventDate}</dd></div>
+                <div><dt>開催日</dt><dd><span className="no-break">{siteConfig.eventDate}</span></dd></div>
                 <div><dt>場所</dt><dd>{siteConfig.location}</dd></div>
-                <div><dt>受付</dt><dd>{siteConfig.reception}</dd></div>
-                <div><dt>終了予定</dt><dd>{siteConfig.finish}</dd></div>
-                <div><dt>所要時間</dt><dd>{siteConfig.duration}</dd></div>
-                <div><dt>参加費</dt><dd>{siteConfig.fee}</dd></div>
-                <div><dt>事前申込</dt><dd>{siteConfig.registration}</dd></div>
+                <div><dt>受付</dt><dd><span className="no-break">{siteConfig.reception}</span></dd></div>
+                <div><dt>終了予定</dt><dd><span className="no-break">{siteConfig.finish}</span></dd></div>
+                <div><dt>所要時間</dt><dd><span className="no-break">{siteConfig.duration}</span></dd></div>
+                <div><dt>参加費</dt><dd><span className="no-break">{siteConfig.fee}</span></dd></div>
+                <div><dt>事前申込</dt><dd><span className="no-break">{siteConfig.registration}</span></dd></div>
                 <div><dt>対象</dt><dd>{siteConfig.audience}</dd></div>
                 <div><dt>雨天</dt><dd>{siteConfig.weather}</dd></div>
                 <div><dt>スタート</dt><dd>{siteConfig.start.name}</dd></div>
@@ -48,8 +48,8 @@ export default function InformationPage() {
             <section className={styles.section} aria-labelledby="participation">
               <h2 id="participation">参加方法</h2>
               <ol className={styles.participation}>
-                <li><span>01</span><div><h3>スタート地点へ</h3><p>お富ちゃん家へお越しください</p></div></li>
-                <li><span>02</span><div><h3>参加キットを受け取る</h3><p>受付時間内に無料で受け取れます</p></div></li>
+                <li><span>01</span><div><h3>スタート地点へ</h3><p>お富ちゃん家が受付です</p></div></li>
+                <li><span>02</span><div><h3>参加キットを受け取る</h3><p>受付時間内に無料配布</p></div></li>
                 <li><span>03</span><div><h3>富岡の街を歩く</h3><p>配布キットを手に、街歩き型の物語をお楽しみください</p></div></li>
               </ol>
             </section>

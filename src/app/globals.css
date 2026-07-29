@@ -36,6 +36,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--color-paper);
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
@@ -80,6 +81,14 @@ dd {
   margin: 0;
 }
 
+p,
+li,
+dd,
+blockquote {
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
 ul,
 ol {
   margin: 0;
@@ -99,12 +108,20 @@ textarea {
 button,
 input,
 textarea,
+[role="link"],
+a,
 [role="button"] {
   touch-action: manipulation;
 }
 
 button:disabled {
   pointer-events: none;
+}
+
+img,
+svg {
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 img {
@@ -178,6 +195,25 @@ a {
   box-shadow: 0 10px 24px rgba(12, 36, 31, 0.36), 0 0 0 3px #fff8e8;
 }
 
+[data-map-visible="true"] .map-marker {
+  animation: mapMarkerFloat 13s ease-in-out infinite alternate;
+}
+
+[data-map-visible="true"] .map-marker-shell:nth-child(3n + 2) .map-marker {
+  animation-duration: 17s;
+  animation-delay: -4.8s;
+}
+
+[data-map-visible="true"] .map-marker-shell:nth-child(3n) .map-marker {
+  animation-duration: 19s;
+  animation-delay: -8.2s;
+}
+
+.map-marker-shell:focus .map-marker,
+.map-marker-shell:hover .map-marker {
+  animation-play-state: paused;
+}
+
 /* 現在地マーカー（絹糸のような細い輪で囲まれた点） */
 .map-user-shell {
   background: transparent;
@@ -185,6 +221,7 @@ a {
 }
 
 .map-user-dot {
+  position: relative;
   display: block;
   width: 18px;
   height: 18px;
@@ -192,6 +229,18 @@ a {
   border-radius: 50%;
   background: #2f6df0;
   box-shadow: 0 0 0 6px rgba(47, 109, 240, 0.22), 0 3px 10px rgba(12, 36, 31, 0.35);
+}
+
+.map-user-dot::after {
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(47, 109, 240, 0.48);
+  border-radius: 50%;
+  content: "";
+}
+
+[data-map-visible="true"] .map-user-dot::after {
+  animation: userLocationPulse 4.8s ease-out infinite;
 }
 
 .leaflet-control-zoom a {
@@ -257,7 +306,7 @@ a {
   font-weight: 700;
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
   transform: translateY(0);
 }
 
@@ -273,6 +322,39 @@ a {
   border: 0;
 }
 
+.no-break {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@keyframes mapMarkerFloat {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: 0 -3px;
+  }
+}
+
+@keyframes userLocationPulse {
+  0%,
+  24% {
+    opacity: 0;
+    transform: scale(0.68);
+  }
+
+  34% {
+    opacity: 0.72;
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -285,5 +367,10 @@ a {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  [data-map-visible="true"] .map-marker,
+  [data-map-visible="true"] .map-user-dot::after {
+    animation: none !important;
   }
 }

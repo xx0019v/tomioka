@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SilkwormMascot, type GuideExpression } from "./SilkwormMascot";
 import styles from "./GuideCharacter.module.css";
 
@@ -20,7 +20,22 @@ export function GuideCharacter({
   initiallyOpen = true,
 }: GuideCharacterProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
+  const [isVisible, setIsVisible] = useState(false);
+  const guideRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const guide = guideRef.current;
+    if (!guide) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionQuery.matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(Boolean(entry?.isIntersecting)),
+      { rootMargin: "8% 0px", threshold: 0.01 },
+    );
+    observer.observe(guide);
+    return () => observer.disconnect();
+  }, []);
 
   function closeGuide() {
     setIsOpen(false);
@@ -29,8 +44,10 @@ export function GuideCharacter({
 
   return (
     <aside
+      ref={guideRef}
       className={styles.guide}
       data-placement={placement}
+      data-active={isVisible}
       aria-label="きぬの街歩き案内"
     >
       {isOpen && (

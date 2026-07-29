@@ -22,7 +22,7 @@ const participationSteps = [
   {
     number: "02",
     title: "参加キットを受け取る",
-    body: "受付時間内に無料で受け取れます",
+    body: "受付時間内に無料配布",
     meta: "RECEPTION",
   },
   {
@@ -69,13 +69,14 @@ export default function Home() {
               src={withBasePath("/images/story-silk.webp")}
               alt="繭から細い生糸が引き出された研究資料の情景"
               fill
+              loading="eager"
               sizes="(max-width: 760px) 100vw, 48vw"
             />
             <figcaption>RESEARCH NOTE / MEIJI 5</figcaption>
           </figure>
           <div className={styles.storyContent}>
             <p className={styles.eyebrow}>STORY / 明治五年</p>
-            <h2 id="story-heading">街が守った、繭の記録</h2>
+            <h2 id="story-heading"><span>街が守った、</span><span>繭の記録</span></h2>
             <div className={styles.storyText}>
               <p>明治五年。富岡の街に、一人の研究者がいた。</p>
               <p>カイコの糸に生涯を捧げた女性——永山 繭。</p>
@@ -91,7 +92,7 @@ export default function Home() {
           <ArtifactField variant="howto" />
           <header className={styles.sectionHeader}>
             <p className={styles.eyebrow}>HOW TO JOIN / 三つのステップ</p>
-            <h2 id="howto-heading">富岡の街へ、物語を歩きに行く</h2>
+            <h2 id="howto-heading"><span>富岡の街へ、</span><span>物語を歩きに行く</span></h2>
             <p>当日はお富ちゃん家で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
           </header>
 
@@ -142,7 +143,7 @@ export default function Home() {
           <ArtifactField variant="access" />
           <div className={styles.accessIntro}>
             <p className={styles.eyebrow}>START / お富ちゃん家</p>
-            <h2 id="access-heading">物語の入口は、お富ちゃん家</h2>
+            <h2 id="access-heading"><span>物語の入口は、</span><span>お富ちゃん家</span></h2>
             <p>まちなか観光物産館のお富ちゃん家で、参加キットを受け取れます。</p>
           </div>
           <dl>

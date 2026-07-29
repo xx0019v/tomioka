@@ -56,7 +56,7 @@ function Eyes({ face }: { face: FaceKind }) {
   if (face === "happy") {
     // 穏やかな弧の目（にっこり）
     return (
-      <g fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
+      <g data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
         <path d="M70 55.5c1.6-2.1 4.4-2.1 6 0" />
         <path d="M82 55.5c1.6-2.1 4.4-2.1 6 0" />
       </g>
@@ -65,7 +65,7 @@ function Eyes({ face }: { face: FaceKind }) {
   if (face === "rest") {
     // 休息・読み込み（半分閉じた目）
     return (
-      <g fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
+      <g data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
         <path d="M70 57c1.8 1.4 4.2 1.4 6 0" />
         <path d="M82 57c1.8 1.4 4.2 1.4 6 0" />
       </g>
@@ -74,7 +74,7 @@ function Eyes({ face }: { face: FaceKind }) {
   const dy = face === "down" ? 2.4 : 0;
   const dx = face === "look" ? 1.6 : 0;
   return (
-    <g fill={eye}>
+    <g data-kinu-eyes fill={eye}>
       <ellipse cx={73 + dx} cy={56 + dy} rx="1.9" ry="2.6" />
       <ellipse cx={85 + dx} cy={56 + dy} rx="1.9" ry="2.6" />
       {/* やわらかなハイライト（大きすぎるアニメ目にしない） */}

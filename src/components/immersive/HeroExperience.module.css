@@ -191,6 +191,10 @@
   transform: translateX(-120%);
 }
 
+.hero[data-in-view="true"] .evidenceCard::after {
+  animation: evidenceSheen 18s 2.8s ease-in-out infinite;
+}
+
 .evidenceCard img {
   object-fit: cover;
   filter: sepia(0.18) saturate(0.78) contrast(1.06);
@@ -269,6 +273,29 @@
   color: #efe8d8;
   font-size: 0.78rem;
   font-weight: 700;
+}
+
+@keyframes evidenceSheen {
+  0%,
+  24%,
+  100% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+
+  29% {
+    opacity: 0.68;
+  }
+
+  47% {
+    opacity: 0.34;
+    transform: translateX(125%);
+  }
+
+  52% {
+    opacity: 0;
+    transform: translateX(125%);
+  }
 }
 
 @media (max-width: 900px) {
@@ -406,7 +433,7 @@
   .facts dd {
     overflow-wrap: normal;
     margin-left: 10px;
-    font-size: 0.7rem;
+    font-size: clamp(0.62rem, 2.8vw, 0.7rem);
   }
 }
 

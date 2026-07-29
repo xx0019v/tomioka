@@ -109,7 +109,19 @@
   height: 96px;
   max-width: none;
   transform-origin: 50% 92%;
-  animation: guideBreathe 10s ease-in-out 2;
+}
+
+.guide[data-active="true"] .characterFrame svg {
+  animation: guideBreathe 12s ease-in-out infinite;
+}
+
+.characterFrame svg [data-kinu-eyes] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.guide[data-active="true"] .characterFrame svg [data-kinu-eyes] {
+  animation: kinuBlink 9.7s linear infinite;
 }
 
 .callout {
@@ -148,8 +160,26 @@
 }
 
 @keyframes guideBreathe {
-  0%, 6%, 100% { transform: translateY(0); }
-  3% { transform: translateY(-2px); }
+  0%, 8%, 100% { transform: translateY(0) rotate(0); }
+  4% { transform: translateY(-2px) rotate(-0.35deg); }
+}
+
+@keyframes kinuBlink {
+  0%,
+  44%,
+  47%,
+  73%,
+  76%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  45.2%,
+  46%,
+  74.2%,
+  75% {
+    transform: scaleY(0.08);
+  }
 }
 
 @media (max-width: 680px) {
@@ -186,7 +216,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bubble,
-  .characterFrame svg {
+  .characterFrame svg,
+  .characterFrame svg [data-kinu-eyes] {
     animation: none;
   }
 
