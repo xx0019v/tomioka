@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { EventAreaMap } from "@/components/map/EventAreaMap";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -54,7 +53,6 @@ export default function MapPage() {
               <div><dt>SPOTS</dt><dd>{eventSpots.length}地点</dd></div>
             </dl>
           </div>
-          <GuideCharacter lines={["地図の印を選ぶと", "場所と目印がわかるよ"]} />
         </section>
 
         <EventAreaMap spots={eventSpots} />

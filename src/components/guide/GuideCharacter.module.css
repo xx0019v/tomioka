@@ -165,6 +165,18 @@
   line-height: 1.45;
 }
 
+/* 地図の欄外（右上）。下部の現在地・地図操作ボタンやシートと重ならない位置に置く。 */
+.guide[data-placement="map-stage"] {
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+  z-index: 720;
+}
+
+.guide[data-placement="map-stage"] .characterFrame svg {
+  height: 62px;
+}
+
 .guide[data-placement="information"] {
   position: relative;
   right: auto;

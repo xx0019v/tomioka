@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
+import type { GuideExpression } from "@/components/guide/SilkwormMascot";
 import type { EventSpot } from "@/data/spots";
 import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
 import { withBasePath } from "@/lib/base-path";
@@ -45,6 +47,24 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   const [mapVisible, setMapVisible] = useState(false);
   const [announcement, setAnnouncement] = useState("");
   const selected = spots.find((spot) => spot.slug === selectedSlug) ?? null;
+
+  /**
+   * きぬの案内は地図の状態に追従する。
+   * 現在地の取得状況を最優先し、次に選択中のスポット、最後に地図の操作状態を見る。
+   * 攻略順・ヒント・答えには触れない。
+   */
+  const guide: { lines: readonly [string, string?]; expression: GuideExpression } =
+    geoState === "locating"
+      ? { lines: ["現在地を探しているよ", "少しだけ待ってね"], expression: "thinking" }
+      : geoState === "granted"
+        ? { lines: ["現在地が出たよ", "近い場所から歩けるね"], expression: "pleased" }
+        : geoState === "denied" || geoState === "unavailable"
+          ? { lines: ["現在地は使えないけれど", "スポット一覧から選べるよ"], expression: "concerned" }
+          : selected
+            ? { lines: [`${selected.name}を選んだね`, "場所と行き方を見てみよう"], expression: "pointing" }
+            : mapInteractionEnabled
+              ? { lines: ["地図を動かせるよ", "指でなぞってみて"], expression: "map-reading" }
+              : { lines: ["地図の印を選ぶと", "場所と目印がわかるよ"], expression: "map-reading" };
 
   const focusTrigger = useCallback((slug: string, source: "marker" | "list") => {
     window.requestAnimationFrame(() => {
@@ -558,6 +578,12 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             </div>
           )}
         </aside>
+        <GuideCharacter
+          placement="map-stage"
+          lines={guide.lines}
+          expression={guide.expression}
+          initiallyOpen={false}
+        />
       </div>
       <p className="visually-hidden" aria-live="polite">{announcement}</p>
     </section>

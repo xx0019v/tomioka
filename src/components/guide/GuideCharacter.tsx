@@ -12,7 +12,7 @@ export interface GuideReaction {
 interface GuideCharacterProps {
   lines?: readonly [string, string?];
   expression?: GuideExpression;
-  placement?: "map-hero" | "information";
+  placement?: "map-hero" | "map-stage" | "information";
   initiallyOpen?: boolean;
   /** きぬに触れるたびに順に返す短い反応。答えやヒントは含めない。 */
   reactions?: readonly GuideReaction[];
@@ -47,6 +47,16 @@ export function GuideCharacter({
   const lastTapRef = useRef(0);
   const guideRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // 案内文が状況に応じて差し替わったら、触れて進めた反応を初期位置へ戻す。
+  // レンダー中に前回値と比べて調整する（Reactの推奨パターン）。閉じている場合は勝手に開かない。
+  const contextLine = lines[0];
+  const [prevContextLine, setPrevContextLine] = useState(contextLine);
+  if (contextLine !== prevContextLine) {
+    setPrevContextLine(contextLine);
+    setStep(0);
+    setReactTick((tick) => tick + 1);
+  }
 
   const current = step === 0 || reactions.length === 0 ? null : reactions[(step - 1) % reactions.length];
   const shownLines = current ? current.lines : lines;
