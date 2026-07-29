@@ -95,6 +95,7 @@ const silkPaths: Record<ArtifactFieldVariant, string> = {
 export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
   const fieldRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState(variant === "hero");
+  const [active, setActive] = useState(false);
   const selectedAssets = variantAssets[variant];
 
   useEffect(() => {
@@ -126,6 +127,37 @@ export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
     return () => observer.disconnect();
   }, [variant]);
 
+  useEffect(() => {
+    const field = fieldRef.current;
+    if (!field) return;
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let observer: IntersectionObserver | null = null;
+
+    const sync = () => {
+      observer?.disconnect();
+      observer = null;
+
+      if (motionQuery.matches) {
+        setActive(false);
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        ([entry]) => setActive(Boolean(entry?.isIntersecting)),
+        { rootMargin: "12% 0px 12% 0px", threshold: 0.01 },
+      );
+      observer.observe(field);
+    };
+
+    sync();
+    motionQuery.addEventListener("change", sync);
+    return () => {
+      observer?.disconnect();
+      motionQuery.removeEventListener("change", sync);
+    };
+  }, []);
+
   return (
     <div
       ref={fieldRef}
@@ -133,9 +165,13 @@ export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
       data-variant={variant}
       data-motion-ready="true"
       data-revealed={revealed}
+      data-active={active}
       aria-hidden="true"
     >
       <span className={styles.atmosphere} />
+      <span className={`${styles.mote} ${styles.mote1}`} />
+      <span className={`${styles.mote} ${styles.mote2}`} />
+      <span className={`${styles.mote} ${styles.mote3}`} />
       <svg
         className={styles.silkGuide}
         viewBox="0 0 100 100"
@@ -144,6 +180,7 @@ export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
       >
         <path className={styles.silkShadow} d={silkPaths[variant]} pathLength="1" />
         <path className={styles.silkLine} d={silkPaths[variant]} pathLength="1" />
+        <path className={styles.silkGlint} d={silkPaths[variant]} pathLength="1" />
         <circle className={styles.silkNode} cx="52" cy="48" r="0.7" />
       </svg>
       {selectedAssets.map((assetName, index) => {

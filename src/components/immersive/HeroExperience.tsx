@@ -134,6 +134,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         inView = Boolean(entry?.isIntersecting);
+        section.dataset.inView = String(inView && !motionQuery.matches);
         if (inView) handleScroll();
       },
       { rootMargin: "12% 0px 12% 0px", threshold: 0 },
@@ -154,6 +155,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       motionQuery.removeEventListener("change", syncMotionPreference);
       finePointerQuery.removeEventListener("change", syncMotionPreference);
       visibilityObserver.disconnect();
+      delete section.dataset.inView;
     };
   }, []);
 
@@ -166,7 +168,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       <div className={styles.stage}>
         <div className={styles.dateBadge}>
           <span>一日限定</span>
-          <strong>{eventDate}</strong>
+          <strong className="no-break">{eventDate}</strong>
         </div>
 
         <div className={styles.evidence} aria-hidden="true">
@@ -205,8 +207,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
       <dl className={styles.facts} aria-label="イベント基本情報">
         <div><dt>AREA</dt><dd>{location}</dd></div>
-        <div><dt>TIME</dt><dd>{duration}</dd></div>
-        <div><dt>ENTRY</dt><dd>{fee}</dd></div>
+        <div><dt>TIME</dt><dd><span className="no-break">{duration}</span></dd></div>
+        <div><dt>ENTRY</dt><dd><span className="no-break">{fee}</span></dd></div>
       </dl>
     </section>
   );

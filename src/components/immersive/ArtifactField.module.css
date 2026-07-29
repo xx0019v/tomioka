@@ -9,6 +9,7 @@
 
 .atmosphere,
 .silkGuide,
+.mote,
 .item {
   position: absolute;
 }
@@ -22,6 +23,34 @@
     radial-gradient(circle at 82% 74%, rgba(154, 55, 39, 0.09), transparent 24%),
     linear-gradient(112deg, transparent 34%, rgba(255, 246, 219, 0.04) 50%, transparent 66%);
   mix-blend-mode: screen;
+}
+
+.mote {
+  z-index: 1;
+  width: clamp(2px, 0.22vw, 4px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0;
+  background: rgba(245, 225, 174, 0.62);
+  box-shadow:
+    0 0 9px rgba(245, 225, 174, 0.38),
+    34px 18px 0 -1px rgba(235, 212, 157, 0.34),
+    -22px 52px 0 -1px rgba(235, 212, 157, 0.26);
+}
+
+.mote1 {
+  top: 22%;
+  left: 16%;
+}
+
+.mote2 {
+  top: 54%;
+  left: 67%;
+}
+
+.mote3 {
+  top: 71%;
+  left: 39%;
 }
 
 .silkGuide {
@@ -49,6 +78,18 @@
   stroke-linecap: round;
   stroke-width: 1.1;
   filter: drop-shadow(0 0 5px rgba(205, 168, 86, 0.2));
+}
+
+.silkGlint {
+  fill: none;
+  opacity: 0;
+  stroke: rgba(255, 238, 187, 0.82);
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-dasharray: 0.025 0.975;
+  stroke-dashoffset: 0;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 5px rgba(236, 205, 129, 0.5));
 }
 
 .silkNode {
@@ -105,6 +146,48 @@
 
 .field[data-motion-ready="true"][data-revealed="true"] .silkNode {
   animation: nodeReveal 260ms 720ms ease-out both;
+}
+
+.field[data-active="true"] .atmosphere {
+  animation: atmosphereBreathe 19s ease-in-out infinite alternate;
+}
+
+.field[data-active="true"] .silkGlint {
+  animation: silkGlintTravel 17s 1.2s linear infinite;
+}
+
+.field[data-active="true"] .mote1 {
+  animation: moteDriftA 21s 0.8s ease-in-out infinite;
+}
+
+.field[data-active="true"] .mote2 {
+  animation: moteDriftB 25s 4.2s ease-in-out infinite;
+}
+
+.field[data-active="true"] .mote3 {
+  animation: moteDriftA 23s 8.1s ease-in-out infinite reverse;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"][data-active="true"] .item {
+  --float-x: 3px;
+  --float-y: -5px;
+  animation:
+    artifactReveal 780ms cubic-bezier(0.16, 1, 0.3, 1) both,
+    artifactFloat var(--float-duration, 21s) 1.2s ease-in-out infinite alternate;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"][data-active="true"] .slot2 {
+  --float-duration: 25s;
+  --float-x: -4px;
+  --float-y: 3px;
+  animation-delay: 90ms, 2.4s;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"][data-active="true"] .slot3 {
+  --float-duration: 19s;
+  --float-x: 2px;
+  --float-y: 4px;
+  animation-delay: 170ms, 4.1s;
 }
 
 /* Hero:桑の前景と製糸機械の対角線が、糸をCTAへ送る。 */
@@ -332,6 +415,99 @@
   }
 }
 
+@keyframes atmosphereBreathe {
+  0% {
+    opacity: 0.66;
+    transform: scale(1);
+  }
+
+  52% {
+    opacity: 0.88;
+    transform: scale(1.025);
+  }
+
+  100% {
+    opacity: 0.72;
+    transform: scale(1.012);
+  }
+}
+
+@keyframes silkGlintTravel {
+  0%,
+  18% {
+    opacity: 0;
+    stroke-dashoffset: 0.12;
+  }
+
+  23% {
+    opacity: 0.72;
+  }
+
+  54% {
+    opacity: 0.45;
+  }
+
+  60%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: -1;
+  }
+}
+
+@keyframes artifactFloat {
+  from {
+    translate: 0 0;
+  }
+
+  to {
+    translate: var(--float-x) var(--float-y);
+  }
+}
+
+@keyframes moteDriftA {
+  0%,
+  14%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  25% {
+    opacity: 0.42;
+  }
+
+  72% {
+    opacity: 0.18;
+  }
+
+  84% {
+    opacity: 0;
+    transform: translate3d(24px, -58px, 0);
+  }
+}
+
+@keyframes moteDriftB {
+  0%,
+  18%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  30% {
+    opacity: 0.32;
+  }
+
+  78% {
+    opacity: 0.12;
+  }
+
+  88% {
+    opacity: 0;
+    transform: translate3d(-20px, -50px, 0);
+  }
+}
+
 @media (max-width: 680px) {
   .silkGuide {
     inset: -2% -12%;
@@ -341,6 +517,11 @@
 
   .silkLine {
     stroke-width: 1.35;
+  }
+
+  .field[data-motion-ready="true"][data-revealed="true"][data-active="true"] .item {
+    --float-x: 2px;
+    --float-y: -3px;
   }
 
   .field[data-variant="hero"] .slot1 {
@@ -495,9 +676,17 @@
 
 @media (prefers-reduced-motion: reduce) {
   .item,
+  .atmosphere,
+  .mote,
   .silkLine,
+  .silkGlint,
   .silkNode {
     animation: none !important;
     transition: none !important;
+  }
+
+  .mote,
+  .silkGlint {
+    display: none;
   }
 }

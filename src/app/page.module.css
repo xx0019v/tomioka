@@ -1,4 +1,4 @@
-.page { min-height: 100vh; background: #07120f; }
+.page { min-height: 100vh; min-height: 100svh; background: #07120f; }
 
 .signal,
 .story,
@@ -320,10 +320,19 @@
     font-size: clamp(1.95rem, 9.6vw, 3.2rem);
     text-wrap: balance;
   }
+  .sectionHeader h2 span,
+  .access h2 span {
+    display: block;
+    white-space: nowrap;
+  }
   .story { min-height: 0; }
   .storyVisual { min-height: 112vw; }
   .storyContent { padding: 64px 22px 76px; }
   .storyContent h2, .sectionHeader h2, .access h2 { font-size: clamp(2.45rem, 11.5vw, 4rem); }
+  .storyContent h2 span {
+    display: block;
+    white-space: nowrap;
+  }
   .storyText { margin-top: 28px; font-size: 0.9rem; }
   .howTo, .route, .access, .share { padding-inline: 20px; }
   .howTo, .route { padding-block: 96px; }
@@ -370,4 +379,16 @@
   .access dl { grid-template-columns: 1fr; gap: 26px; }
   .accessActions { flex-direction: column; }
   .share { align-items: stretch; flex-direction: column; padding-block: 86px; }
+}
+
+@media (max-width: 360px) {
+  .storyContent h2,
+  .sectionHeader h2,
+  .access h2 {
+    font-size: 1.88rem;
+  }
+
+  .steps h3 {
+    font-size: 1.1rem;
+  }
 }

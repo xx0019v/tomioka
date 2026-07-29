@@ -32,7 +32,7 @@ export default function MapPage() {
           <div className={styles.heroInner}>
             <p className={styles.kicker}>物語を巡る街</p>
             <h1><span>富岡</span><span>街歩きマップ</span></h1>
-            <p className={styles.lead}>受付場所と、イベントエリアの目印を確認できます。</p>
+            <p className={styles.lead}>受付と、街歩きの目印がわかります。</p>
           </div>
           <GuideCharacter lines={["地図の印を選ぶと", "場所と目印がわかるよ"]} />
         </section>
