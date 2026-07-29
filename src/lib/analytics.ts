@@ -1,20 +1,10 @@
 export const AnalyticsEvent = {
-  GameStart: "game_start",
-  CheckpointView: "checkpoint_view",
-  HintOpen: "hint_open",
-  AnswerSubmit: "answer_submit",
-  AnswerResult: "answer_result",
-  CheckpointComplete: "checkpoint_complete",
   MapView: "map_view",
-  CheckpointSelect: "checkpoint_select",
-  CheckpointPageClick: "checkpoint_page_click",
+  SpotSelect: "spot_select",
   LocateClick: "locate_click",
   GeoPermission: "geo_permission",
   GoogleMapsClick: "google_maps_click",
-  FinalView: "final_view",
-  ClearView: "clear_view",
   ShareClick: "share_click",
-  EmergencyBannerView: "emergency_banner_view",
 } as const;
 
 export type AnalyticsEventName =

@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "繭が遺した地図",
     short_name: "繭の地図",
-    description: "富岡製糸場周辺商店街を巡るリアル謎解きイベント",
+    description: "富岡製糸場周辺商店街で開催する、まち歩き型リアル謎解きイベント",
     start_url: withBasePath("/"),
     display: "standalone",
     background_color: "#f4f0e7",

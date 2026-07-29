@@ -1,31 +1,14 @@
-# 富岡「繭が遺した地図」Webサイト
+# 繭が遺した地図
 
-2026年8月8日に富岡製糸場周辺商店街で開催する、まち歩き型リアル謎解きイベントのモバイルWeb体験です。
+2026年8月8日（土）に富岡製糸場周辺商店街で開催する、まち歩き型リアル謎解きイベントの告知・世界観紹介サイトです。
 
-## 構成
+このリポジトリが担当するのは、イベント告知、ストーリー、開催情報、参加方法、受付アクセス、街歩きマップです。謎の回答入力、正誤判定、攻略進捗は扱いません。
 
-- `/` イベント紹介
-- `/map/` チェックポイントと住所
-- `/information/` 開催情報・注意事項
-- `/game/` 参加者向け進行案内
-- `/checkpoints/[slug]/` 各チェックポイント
-- `/final/` 最終回答
+## 公開ページ
 
-`next build`で`out/`へ完全な静的ファイルを書き出します。公開先は
-[GitHub Pages](https://xx0019v.github.io/tomioka/) で、`gh-pages` branchの
-rootから配信します。Node.jsサーバーは不要です。
-
-GitHub Pages向けの本番exportでは、base pathと公開URLをbuild時に指定します。
-
-```bash
-NEXT_PUBLIC_BASE_PATH=/tomioka \
-NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka \
-npm run build
-```
-
-`out/`へ`.nojekyll`を追加し、内容だけを`gh-pages` branchへ同期します。
-独自サーバーへ移す場合は、base pathと`NEXT_PUBLIC_SITE_URL`をその配信先に
-合わせて再buildしてください。
+- `/` — イベント告知・世界観・参加方法・受付アクセス
+- `/map/` — イベントエリア、街歩きスポット、現在地
+- `/information/` — 開催概要、参加案内、雨天・安全・プライバシー情報
 
 ## 開発
 
@@ -33,72 +16,70 @@ npm run build
 npm install
 npm run dev
 npm run lint
+npm run typecheck
 npm run build
 ```
 
-## 謎データの反映
-
-謎本文・ヒント・答え・クリア文は`src/data/puzzles.ts`へ設定します。答えを平文で保存してはいけません。
-
-正解候補ごとにハッシュを生成します。
+GitHub Pages用の静的出力を検証する場合:
 
 ```bash
-npm run hash-answer -- ここに正解
+NEXT_PUBLIC_BASE_PATH=/tomioka \
+NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka \
+npm run build
 ```
 
-出力されたSHA-256を、対応する`answerHashes`へ追加します。表記揺れがある場合は候補ごとに生成してください。
+生成物は `out/` に出力されます。
 
-静的サイトであるため、ハッシュ判定は「ソースに平文を置かない」ための対策であり、完全な秘匿ではありません。厳密な不正防止が必要な場合は、担当教員の許可を得てPHPまたは外部APIで判定してください。
+## データ
 
-## GA4
+- イベント基本情報: `src/data/site.ts`
+- 街歩きスポット: `src/data/spots.ts`
+- スポット写真: `public/spots/photos/`
+- 写真出典・利用根拠: `docs/checkpoint-photo-provenance.md`
 
-`.env.local`へ次を設定します。
+スポットの所在地、営業時間、休業情報は公開元とイベント当日の案内を照合して更新してください。未確定の問い合わせ先、企業名、ロゴ、ハッシュタグは、値が確定するまで公開画面へ表示しません。
 
-```text
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
+「お富ちゃん家」は富岡市観光公式サイトで確認できる `群馬県富岡市富岡1151-1` を掲載しています。イベント受付時間 `9:00〜15:00` と施設の開館時間は別情報として扱います。
 
-入力された答えやキーワードそのものはGA4へ送りません。
+## マップと現在地
 
-## 開催状態・緊急告知
+- LeafletとOpenStreetMapを使用
+- 地図の記号または一覧からスポット案内を開く
+- 選択状態は `?spot=<slug>` と同期
+- 戻る操作、Esc、閉じる操作で一覧へ復帰
+- 現在地は「現在地を表示」を押した後だけ1回取得
+- 緯度経度をGA4、サーバー、ブラウザ保存領域へ送信・保存しない
+- 位置情報拒否、タイル読込失敗時も一覧とGoogleマップリンクを利用可能
 
-`src/data/site.ts`で次を管理します。
+## デザインとアクセシビリティ
 
-- `eventState`: `scheduled` / `open` / `cancelled` / `ended`
-- `emergency.enabled`: 緊急バナー表示
-- `emergency.tone`: `notice` / `warning` / `cancelled`
-- 連絡先、ハッシュタグ、開催情報
+- `premium-product-design` のUX、モーション、空間表現、QA基準を適用
+- 深緑、生成り、墨、朱、金を基調に、絹糸、桑、繭、赤煉瓦、製糸機械、記録紙をレイヤー化
+- 装飾オブジェクトは操作を妨げない `pointer-events: none`
+- 主要操作は44px以上（本実装の基準値は56px）
+- キーボード、フォーカス表示、Esc、ブラウザの戻る操作に対応
+- `prefers-reduced-motion` ではアニメーションとトランジションを抑制
+- 地図タイルが読めない場合も、2Dの世界観レイヤーとスポット一覧を表示
 
-## チェックポイントの地図・詳細機能（`/map`）
+## 計測
 
-- 地図は Leaflet + OpenStreetMap タイル（APIキー不要・無料）。
-- マーカーは役割別（始点/終点=朱・通常=墨緑・解答休憩=金）。現在地に最も近い地点は `map-marker--near` で強調。
-- マーカー／一覧選択で詳細パネルを表示（スマホ=下部シート、PC=右サイドパネル）。`?checkpoint=<slug>` でURL同期し、ブラウザの戻る・Escで閉じられる。
-- 「現在地」ボタンは位置情報を取得できない/拒否された場合もUIが壊れず、一覧から選べる旨を案内する。
-- GA4イベント（測定ID未設定時は送信しない）: `map_view` / `checkpoint_select` / `google_maps_click` / `checkpoint_page_click` / `locate_click` / `geo_permission`。
+`NEXT_PUBLIC_GA_MEASUREMENT_ID` が設定された場合だけGA4を読み込みます。
 
-## 要確認事項（公開前に必ず確認）
+計測するイベント:
 
-**データの確度**
+- `map_view`
+- `spot_select`
+- `locate_click`
+- `geo_permission`
+- `google_maps_click`
+- `share_click`
 
-- チェックポイントの `sourceStatus` は `confirmed`（お富ちゃん家＝2026年7月の富岡市・公式観光情報で照合）/ `needs_review`（その他すべて）で管理。
-- **`needs_review` の住所・緯度経度・営業時間・定休日は、公開情報をもとにした暫定値であり未検証です。** `src/data/checkpoints.ts` を運営の最終確認シートで必ず上書きしてください（推測値を確定として公開しない）。
-- 銀座まちなか交流館は謎制作ガイドのフロー図にのみ登場（仕様書のCP一覧には未記載）。独立ページ化の可否は要確認。
+位置情報の緯度経度はイベントパラメータへ含めません。
 
-**運用・素材**
+## 公開
 
-- 謎本文、正解ハッシュ、ヒント、クリア文
-- 岡重での商品購入が参加条件かどうか
-- 各店舗の2026年8月8日の営業と利用許可
-- 連携企業、ロゴ、お問い合わせ先、正式ハッシュタグ（現在はプレースホルダー）
-- 正式ドメイン（`cid-ac.com` と `chuo-joho.ac.jp` が資料間で不一致）
-- GA4測定ID
-- 全QRコードの本番URL
-- 荒天時の更新担当者
+本番URL:
 
-## ビジュアル素材
+<https://xx0019v.github.io/tomioka/>
 
-`public/images/`のWebPは、本プロジェクト専用に画像生成した資料写真です。実在の建物や歴史資料を写したものではないため、場所の証拠写真としては使用しません。
-
-チェックポイントの現地写真は`public/checkpoints/photos/`へ分離し、出典・利用根拠・クレジットを
-[`docs/checkpoint-photo-provenance.md`](docs/checkpoint-photo-provenance.md)で管理します。
+静的出力を `gh-pages` ブランチへ同期し、GitHub Pagesから公開します。旧ファイルが残らないよう、公開時は `out/` と公開ブランチを完全同期してください。
