@@ -102,6 +102,32 @@
   inset: 0 0 10px;
   display: grid;
   place-items: end center;
+  transform-origin: 50% 100%;
+}
+
+/* 触れたときの一度きりの反応。同じ内容のキーフレームを2つ用意し、
+   data-react を 0/1 で切り替えることで連打でも確実に再生し直す。
+   呼吸は svg 側に当てているため、ここと競合しない。 */
+.characterFrame[data-react="0"] {
+  animation: kinuReactA 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.characterFrame[data-react="1"] {
+  animation: kinuReactB 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes kinuReactA {
+  0% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(2px) scale(1.03, 0.96); }
+  62% { transform: translateY(-3px) scale(0.99, 1.02); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+
+@keyframes kinuReactB {
+  0% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(2px) scale(1.03, 0.96); }
+  62% { transform: translateY(-3px) scale(0.99, 1.02); }
+  100% { transform: translateY(0) scale(1, 1); }
 }
 
 .characterFrame svg {
@@ -216,6 +242,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .bubble,
+  .characterFrame,
+  .characterFrame[data-react="0"],
+  .characterFrame[data-react="1"],
   .characterFrame svg,
   .characterFrame svg [data-kinu-eyes] {
     animation: none;
