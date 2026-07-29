@@ -148,16 +148,16 @@ export default function Home() {
           <div className={styles.accessIntro}>
             <p className={styles.eyebrow}>START / お富ちゃん家</p>
             <h2 id="access-heading"><span>物語の入口は、</span><span>お富ちゃん家</span></h2>
-            <p>まちなか観光物産館のお富ちゃん家で、参加キットを受け取れます。</p>
+            <p>お富ちゃん家（富岡市観光案内所）で、参加キットを受け取れます。</p>
           </div>
           <dl>
-            <div><dt>ADDRESS</dt><dd>群馬県富岡市富岡1151-1</dd></div>
-            <div><dt>ACCESS</dt><dd>上信電鉄 上州富岡駅から徒歩約10分</dd></div>
+            <div><dt>ADDRESS</dt><dd>{siteConfig.start.address}</dd></div>
+            <div><dt>ACCESS</dt><dd>{siteConfig.start.access}</dd></div>
             <div><dt>RECEPTION</dt><dd>{siteConfig.reception}</dd></div>
             <div><dt>PARKING</dt><dd>周辺の有料駐車場をご利用ください</dd></div>
           </dl>
           <div className={styles.accessActions}>
-            <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E5%AF%8C%E3%81%A1%E3%82%83%E3%82%93%E5%AE%B6%20%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AF%8C%E5%B2%A1%E5%B8%82%E5%AF%8C%E5%B2%A11151-1" target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
+            <a href={siteConfig.start.googleMapsUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
             <Link href="/information/">開催情報を確認</Link>
           </div>
         </section>

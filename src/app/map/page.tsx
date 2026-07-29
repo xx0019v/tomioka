@@ -10,9 +10,21 @@ import { eventSpots } from "@/data/spots";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
+const mapDescription = "受付場所と富岡製糸場周辺のイベントエリア、休憩地点を確認できる街歩きマップ。";
+const mapUrl = `${siteConfig.siteUrl.replace(/\/$/, "")}/map/`;
+
 export const metadata: Metadata = {
   title: "富岡 街歩きマップ",
-  description: "受付場所と富岡製糸場周辺のイベントエリア、休憩地点を確認できる街歩きマップ。",
+  description: mapDescription,
+  alternates: { canonical: mapUrl },
+  openGraph: {
+    title: "富岡 街歩きマップ｜繭が遺した地図",
+    description: mapDescription,
+    url: mapUrl,
+    siteName: "繭が遺した地図",
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function MapPage() {

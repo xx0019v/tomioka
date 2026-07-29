@@ -5,7 +5,7 @@ import path from "node:path";
 const baseUrl = process.env.QA_BASE_URL ?? "http://127.0.0.1:3002";
 const outputDir = path.join(
   process.cwd(),
-  "test-results/ios-qa",
+  "docs/qa/2026-07-29-post-release-audit/final",
 );
 
 test.describe.configure({ mode: "serial" });
@@ -27,18 +27,46 @@ test("iPhone viewport renders remain stable", async ({ browser }) => {
   for (const deviceName of deviceNames) {
     const context = await browser.newContext({ ...devices[deviceName] });
     const page = await context.newPage();
+    const consoleErrors = [];
+    const failedResponses = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+    page.on("response", (response) => {
+      if (response.status() >= 400) {
+        failedResponses.push(`${response.status()} ${response.url()}`);
+      }
+    });
     await page.goto(baseUrl, { waitUntil: "networkidle" });
     await expect(page.locator("h1")).toContainText("繭が遺した地図");
-    const overflow = await page.evaluate(
-      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
-    );
-    expect(overflow).toBe(0);
+    const audit = await page.evaluate(() => {
+      const interactive = [...document.querySelectorAll("a, button")].filter((element) => {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return style.display !== "none" && rect.width > 0 && rect.height > 0;
+      });
+      return {
+        overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+        smallTargets: interactive
+          .filter((element) => {
+            const rect = element.getBoundingClientRect();
+            return rect.width < 44 || rect.height < 44;
+          })
+          .map((element) => element.textContent?.trim() ?? ""),
+      };
+    });
+    expect(audit.overflow).toBe(0);
+    expect(audit.smallTargets).toEqual([]);
+    expect(consoleErrors).toEqual([]);
+    expect(failedResponses).toEqual([]);
     await page.screenshot({
       path: path.join(
         outputDir,
-        `home-${deviceName.toLowerCase().replaceAll(" ", "-")}.png`,
+        `webkit-${deviceName.toLowerCase().replaceAll(" ", "-")}.jpg`,
       ),
       fullPage: true,
+      quality: 82,
+      type: "jpeg",
     });
     await context.close();
   }
@@ -81,7 +109,9 @@ test("map view mode, interaction mode, sheet gesture, and rotation work", async 
   await expect(googleMapsLink).toHaveAttribute("href", /^https:\/\/www\.google\.com\/maps\//);
   await expect(googleMapsLink).toHaveAttribute("target", "_blank");
   await page.screenshot({
-    path: path.join(outputDir, "map-sheet-iphone-15-pro.png"),
+    path: path.join(outputDir, "webkit-map-sheet-iphone-15-pro.jpg"),
+    quality: 82,
+    type: "jpeg",
   });
 
   await handle.hover();
@@ -102,8 +132,9 @@ test("map view mode, interaction mode, sheet gesture, and rotation work", async 
   );
   expect(landscapeOverflow).toBe(0);
   await page.screenshot({
-    path: path.join(outputDir, "map-landscape-iphone-15-pro.png"),
-    fullPage: true,
+    path: path.join(outputDir, "webkit-landscape.jpg"),
+    quality: 82,
+    type: "jpeg",
   });
   await page.getByRole("link", { name: "繭が遺した地図 トップへ" }).click();
   await expect(page).toHaveURL(`${baseUrl}/`);
@@ -129,7 +160,36 @@ test("geolocation grant and denial keep the map usable", async ({ browser }) => 
   await expect(
     deniedPage.getByText("現在地を利用できません。スポット一覧から選べます。"),
   ).toBeVisible();
+  await deniedPage.screenshot({
+    path: path.join(outputDir, "webkit-geolocation-denied.jpg"),
+    quality: 82,
+    type: "jpeg",
+  });
   await denied.close();
+
+  const failed = await browser.newContext({ ...devices["iPhone 15 Pro"] });
+  await failed.addInitScript(() => {
+    Object.defineProperty(navigator, "geolocation", {
+      configurable: true,
+      value: {
+        getCurrentPosition: (_success, error) => {
+          error({ code: 2, message: "Position unavailable" });
+        },
+      },
+    });
+  });
+  const failedPage = await failed.newPage();
+  await failedPage.goto(`${baseUrl}/map/`, { waitUntil: "networkidle" });
+  await failedPage.getByRole("button", { name: "現在地を地図に表示する" }).click();
+  await expect(
+    failedPage.getByText("現在地を利用できません。スポット一覧から選べます。"),
+  ).toBeVisible();
+  await failedPage.screenshot({
+    path: path.join(outputDir, "webkit-geolocation-failed.jpg"),
+    quality: 82,
+    type: "jpeg",
+  });
+  await failed.close();
 });
 
 test("reduced motion removes permanent animation loops", async ({ browser }) => {
@@ -150,7 +210,9 @@ test("reduced motion removes permanent animation loops", async ({ browser }) => 
   expect(motionState.activeFields).toBe(0);
   expect(motionState.infiniteAnimations).toBe(0);
   await page.screenshot({
-    path: path.join(outputDir, "home-reduced-motion-iphone-15-pro.png"),
+    path: path.join(outputDir, "reduced-motion.jpg"),
+    quality: 82,
+    type: "jpeg",
   });
   await context.close();
 });

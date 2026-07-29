@@ -34,6 +34,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     let raf = 0;
     let motionEnabled = false;
     let inView = true;
+    let pageVisible = !document.hidden;
 
     const resize = () => {
       const bounds = section.getBoundingClientRect();
@@ -79,11 +80,12 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
     const requestDraw = () => {
       window.cancelAnimationFrame(raf);
+      if (!pageVisible) return;
       raf = window.requestAnimationFrame(draw);
     };
 
     const handlePointer = (event: PointerEvent) => {
-      if (!inView || event.pointerType === "touch") return;
+      if (!inView || !pageVisible || event.pointerType === "touch") return;
       const bounds = section.getBoundingClientRect();
       pointer.x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
       pointer.y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
@@ -94,7 +96,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
     let scrollTicking = false;
     const handleScroll = () => {
-      if (!inView || scrollTicking) return;
+      if (!inView || !pageVisible || scrollTicking) return;
       scrollTicking = true;
       window.requestAnimationFrame(() => {
         const bounds = section.getBoundingClientRect();
@@ -102,6 +104,19 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         section.style.setProperty("--hero-progress", progress.toFixed(3));
         scrollTicking = false;
       });
+    };
+
+    const updatePageVisibility = () => {
+      pageVisible = !document.hidden;
+      section.dataset.inView = String(
+        inView && pageVisible && !motionQuery.matches,
+      );
+      if (!pageVisible) {
+        window.cancelAnimationFrame(raf);
+        return;
+      }
+      handleScroll();
+      requestDraw();
     };
 
     const syncMotionPreference = () => {
@@ -116,6 +131,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         section.style.setProperty("--pointer-x", "0");
         section.style.setProperty("--pointer-y", "0");
         section.style.setProperty("--hero-progress", "0");
+        section.dataset.inView = "false";
         requestDraw();
         return;
       }
@@ -128,13 +144,16 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         window.addEventListener("scroll", handleScroll, { passive: true });
         motionEnabled = true;
       }
+      section.dataset.inView = String(inView && pageVisible);
       handleScroll();
     };
 
     const visibilityObserver = new IntersectionObserver(
       ([entry]) => {
         inView = Boolean(entry?.isIntersecting);
-        section.dataset.inView = String(inView && !motionQuery.matches);
+        section.dataset.inView = String(
+          inView && pageVisible && !motionQuery.matches,
+        );
         if (inView) handleScroll();
       },
       { rootMargin: "12% 0px 12% 0px", threshold: 0 },
@@ -144,6 +163,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     window.addEventListener("resize", resize, { passive: true });
     motionQuery.addEventListener("change", syncMotionPreference);
     finePointerQuery.addEventListener("change", syncMotionPreference);
+    document.addEventListener("visibilitychange", updatePageVisibility);
     visibilityObserver.observe(section);
     syncMotionPreference();
 
@@ -154,6 +174,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       window.removeEventListener("scroll", handleScroll);
       motionQuery.removeEventListener("change", syncMotionPreference);
       finePointerQuery.removeEventListener("change", syncMotionPreference);
+      document.removeEventListener("visibilitychange", updatePageVisibility);
       visibilityObserver.disconnect();
       delete section.dataset.inView;
     };

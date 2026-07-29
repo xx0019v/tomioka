@@ -133,18 +133,27 @@ export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | null = null;
+    let intersecting = false;
+
+    const updateActive = () => {
+      setActive(!motionQuery.matches && !document.hidden && intersecting);
+    };
 
     const sync = () => {
       observer?.disconnect();
       observer = null;
 
       if (motionQuery.matches) {
+        intersecting = false;
         setActive(false);
         return;
       }
 
       observer = new IntersectionObserver(
-        ([entry]) => setActive(Boolean(entry?.isIntersecting)),
+        ([entry]) => {
+          intersecting = Boolean(entry?.isIntersecting);
+          updateActive();
+        },
         { rootMargin: "12% 0px 12% 0px", threshold: 0.01 },
       );
       observer.observe(field);
@@ -152,9 +161,11 @@ export function ArtifactField({ variant, className = "" }: ArtifactFieldProps) {
 
     sync();
     motionQuery.addEventListener("change", sync);
+    document.addEventListener("visibilitychange", updateActive);
     return () => {
       observer?.disconnect();
       motionQuery.removeEventListener("change", sync);
+      document.removeEventListener("visibilitychange", updateActive);
     };
   }, []);
 

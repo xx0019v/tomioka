@@ -28,13 +28,27 @@ export function GuideCharacter({
     const guide = guideRef.current;
     if (!guide) return;
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motionQuery.matches) return;
+    let intersecting = false;
+
+    const updateVisible = () => {
+      setIsVisible(!motionQuery.matches && !document.hidden && intersecting);
+    };
+
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(Boolean(entry?.isIntersecting)),
+      ([entry]) => {
+        intersecting = Boolean(entry?.isIntersecting);
+        updateVisible();
+      },
       { rootMargin: "8% 0px", threshold: 0.01 },
     );
     observer.observe(guide);
-    return () => observer.disconnect();
+    motionQuery.addEventListener("change", updateVisible);
+    document.addEventListener("visibilitychange", updateVisible);
+    return () => {
+      observer.disconnect();
+      motionQuery.removeEventListener("change", updateVisible);
+      document.removeEventListener("visibilitychange", updateVisible);
+    };
   }, []);
 
   function closeGuide() {

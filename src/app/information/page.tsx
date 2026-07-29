@@ -6,9 +6,21 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { siteConfig } from "@/data/site";
 import styles from "../subpage.module.css";
 
+const informationDescription = "開催日時、参加方法、受付場所、アクセス、雨天時の対応、安全上の注意事項。";
+const informationUrl = `${siteConfig.siteUrl.replace(/\/$/, "")}/information/`;
+
 export const metadata: Metadata = {
   title: "開催情報・参加案内",
-  description: "開催日時、参加方法、受付場所、アクセス、雨天時の対応、安全上の注意事項。",
+  description: informationDescription,
+  alternates: { canonical: informationUrl },
+  openGraph: {
+    title: "開催情報・参加案内｜繭が遺した地図",
+    description: informationDescription,
+    url: informationUrl,
+    siteName: "繭が遺した地図",
+    locale: "ja_JP",
+    type: "website",
+  },
 };
 
 export default function InformationPage() {
@@ -81,7 +93,7 @@ export default function InformationPage() {
                 <p>車でお越しの方は、周辺の有料駐車場をご利用ください。</p>
                 <a
                   className={styles.inlineLink}
-                  href="https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E5%AF%8C%E3%81%A1%E3%82%83%E3%82%93%E5%AE%B6%20%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AF%8C%E5%B2%A1%E5%B8%82%E5%AF%8C%E5%B2%A11151-1"
+                  href={siteConfig.start.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

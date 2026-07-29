@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { EventSpot } from "@/data/spots";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./InteractiveRoute.module.css";
@@ -18,12 +18,41 @@ const routeArtifacts = [
 
 export function InteractiveRoute({ points }: { points: EventSpot[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [motionActive, setMotionActive] = useState(false);
+  const experienceRef = useRef<HTMLDivElement>(null);
   const active = points[activeIndex];
   const positions = normalizeForDiagram(points);
   const routePath = positions.map((point) => `${point.x},${point.y}`).join(" ");
 
+  useEffect(() => {
+    const experience = experienceRef.current;
+    if (!experience) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let intersecting = false;
+
+    const updateMotion = () => {
+      setMotionActive(!motionQuery.matches && !document.hidden && intersecting);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        intersecting = Boolean(entry?.isIntersecting);
+        updateMotion();
+      },
+      { rootMargin: "8% 0px", threshold: 0.01 },
+    );
+    observer.observe(experience);
+    motionQuery.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", updateMotion);
+    return () => {
+      observer.disconnect();
+      motionQuery.removeEventListener("change", updateMotion);
+      document.removeEventListener("visibilitychange", updateMotion);
+    };
+  }, []);
+
   return (
-    <div className={styles.experience}>
+    <div ref={experienceRef} className={styles.experience} data-motion-active={motionActive}>
       <div className={styles.visual}>
         <div className={styles.visualHeader}>
           <span>EVENT AREA / TOMIOKA</span>
