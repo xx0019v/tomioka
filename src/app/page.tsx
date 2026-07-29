@@ -51,12 +51,16 @@ export default function Home() {
           <ArtifactField variant="discover" />
           <div className={styles.signalCopy}>
             <p className={styles.eyebrow}>EVENT EXPERIENCE / TOMIOKA</p>
-            <h2 id="signal-heading">記憶は、富岡の街に眠る</h2>
+            <h2 id="signal-heading"><span>記憶は、</span><span>富岡の街に眠る</span></h2>
             <p>富岡製糸場周辺の商店街を歩きながら、街の景色と物語を楽しむ約60〜90分の体験です。</p>
             <Link href="/information/">開催概要を確認 <span aria-hidden="true">↗</span></Link>
           </div>
           <dl className={styles.eventManifest} aria-label="イベントの特徴">
-            <div><dt>DATE</dt><dd>2026.08.08</dd><span>一日限定</span></div>
+            <div className={styles.dateEntry}>
+              <dt>DATE / ONE DAY</dt>
+              <dd><strong>08</strong><i aria-hidden="true">/</i><strong>08</strong></dd>
+              <span>2026 — SATURDAY</span>
+            </div>
             <div><dt>AREA</dt><dd>富岡製糸場周辺</dd><span>商店街を歩く物語</span></div>
             <div><dt>ENTRY</dt><dd>参加無料</dd><span>事前申込不要</span></div>
           </dl>
@@ -160,9 +164,10 @@ export default function Home() {
 
         <section id="share" className={styles.share} aria-labelledby="share-heading">
           <ArtifactField variant="share" />
+          <p className={styles.shareFolio} aria-hidden="true">TOMIOKA — 08.08</p>
           <div>
             <p className={styles.eyebrow}>SHARE / 街歩きの誘い</p>
-            <h2 id="share-heading">この物語を、誰と歩く？</h2>
+            <h2 id="share-heading"><span>この物語を、</span><span>誰と歩く？</span></h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
           </div>
           <ShareActions

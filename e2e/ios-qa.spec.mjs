@@ -5,7 +5,7 @@ import path from "node:path";
 const baseUrl = process.env.QA_BASE_URL ?? "http://127.0.0.1:3002";
 const outputDir = path.join(
   process.cwd(),
-  "docs/qa/2026-07-29-ios-motion/round2-webkit",
+  "test-results/ios-qa",
 );
 
 test.describe.configure({ mode: "serial" });
