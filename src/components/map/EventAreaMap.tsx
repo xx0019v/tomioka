@@ -398,6 +398,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   return (
     <section className={styles.section} aria-labelledby="map-heading">
       <div className={styles.headingRow}>
+        <p className={styles.folio} aria-hidden="true">MAP / 01</p>
         <div>
           <p className={styles.eyebrow}>EVENT AREA / TOMIOKA</p>
           <h2 id="map-heading"><span>絹糸が結ぶ、</span><span>富岡の街</span></h2>

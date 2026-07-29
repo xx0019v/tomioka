@@ -6,10 +6,20 @@
 
 .headingRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 470px);
-  gap: 48px;
+  grid-template-columns: 110px minmax(0, 1fr) minmax(280px, 420px);
+  gap: clamp(28px, 4vw, 64px);
   align-items: end;
-  margin-bottom: 28px;
+  margin-bottom: 44px;
+}
+
+.folio {
+  align-self: start;
+  padding-top: 10px;
+  color: var(--color-gold);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  writing-mode: vertical-rl;
 }
 
 .headingRow h2 {
@@ -40,9 +50,10 @@
   grid-template-columns: minmax(0, 1fr) 400px;
   min-height: 690px;
   overflow: hidden;
-  border: 1px solid var(--color-hairline-strong);
+  border-top: 1px solid var(--color-hairline-strong);
+  border-bottom: 1px solid var(--color-hairline-strong);
   background: #d9d2c3;
-  box-shadow: var(--shadow-paper);
+  box-shadow: 0 28px 80px rgba(23, 55, 47, 0.08);
 }
 
 .mapStage,
@@ -231,7 +242,7 @@
 }
 
 .indexPanel {
-  padding: 42px 34px;
+  padding: 52px 38px;
 }
 
 .indexPanel h3,
@@ -239,6 +250,19 @@
   margin-top: 5px;
   color: var(--color-ink-green-deep);
   font-size: clamp(1.45rem, 2vw, 2rem);
+}
+
+.indexLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.indexLabel::after {
+  width: 54px;
+  height: 1px;
+  background: var(--color-vermilion);
+  content: "";
 }
 
 .indexPanel ul {
@@ -479,9 +503,17 @@
     gap: 14px;
   }
 
+  .folio {
+    position: absolute;
+    right: 20px;
+    padding-top: 0;
+    writing-mode: horizontal-tb;
+  }
+
   .mapShell {
     display: block;
     min-height: 720px;
+    box-shadow: none;
   }
 
   .mapStage,

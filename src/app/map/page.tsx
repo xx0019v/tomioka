@@ -5,6 +5,7 @@ import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { EventAreaMap } from "@/components/map/EventAreaMap";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
+import { siteConfig } from "@/data/site";
 import { eventSpots } from "@/data/spots";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
@@ -30,9 +31,16 @@ export default function MapPage() {
           />
           <ArtifactField variant="map" />
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>物語を巡る街</p>
-            <h1><span>富岡</span><span>街歩きマップ</span></h1>
-            <p className={styles.lead}>受付と、街歩きの目印がわかります。</p>
+            <div className={styles.heroCopy}>
+              <p className={styles.kicker}>FIELD MAP / TOMIOKA</p>
+              <h1><span>富岡の街を、</span><span>絹糸でたどる</span></h1>
+              <p className={styles.lead}>受付、街歩きの目印、休憩地点を地図で確認できます。</p>
+            </div>
+            <dl className={styles.heroLedger} aria-label="街歩きマップの概要">
+              <div><dt>AREA</dt><dd>富岡製糸場周辺</dd></div>
+              <div><dt>DATE</dt><dd>{siteConfig.eventDate}</dd></div>
+              <div><dt>SPOTS</dt><dd>{eventSpots.length}地点</dd></div>
+            </dl>
           </div>
           <GuideCharacter lines={["地図の印を選ぶと", "場所と目印がわかるよ"]} />
         </section>

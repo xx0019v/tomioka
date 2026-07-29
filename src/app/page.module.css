@@ -70,9 +70,8 @@
   gap: 8px 18px;
   align-items: baseline;
   min-height: 142px;
-  padding: 27px 24px;
+  padding: 27px 8px;
   border-bottom: 1px solid rgba(224, 206, 162, 0.2);
-  background: linear-gradient(90deg, rgba(216, 239, 107, 0.045), transparent 72%);
 }
 
 .eventManifest > div:nth-child(2) {
@@ -102,6 +101,48 @@
   font-size: 0.72rem;
 }
 
+.eventManifest .dateEntry {
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 184px;
+  padding-top: 18px;
+}
+
+.dateEntry dt {
+  grid-column: 1;
+  align-self: start;
+}
+
+.eventManifest .dateEntry dd {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: clamp(12px, 2vw, 28px);
+  align-items: baseline;
+  justify-content: flex-end;
+  margin-top: -8px;
+  line-height: 0.86;
+}
+
+.dateEntry dd strong {
+  font-family: var(--font-sans);
+  font-size: clamp(4.6rem, 9vw, 8rem);
+  font-weight: 300;
+  letter-spacing: -0.08em;
+}
+
+.dateEntry dd i {
+  color: #a23f2f;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.eventManifest .dateEntry > span {
+  grid-column: 1 / -1;
+  justify-self: end;
+  letter-spacing: 0.16em;
+}
+
 .signalCopy h2,
 .routeHeader h2,
 .share h2 {
@@ -113,6 +154,11 @@
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 1.04;
+}
+
+.signalCopy h2 span,
+.share h2 span {
+  display: block;
 }
 
 .signalCopy > p:not(.eyebrow),
@@ -192,6 +238,8 @@
 }
 .steps li { display: grid; grid-template-columns: 180px 1fr 46px; gap: 32px; align-items: center; min-height: 168px; border-top: 1px solid rgba(32, 66, 55, 0.22); }
 .steps li:last-child { border-bottom: 1px solid rgba(32, 66, 55, 0.22); }
+.steps li:nth-child(2) { margin-left: clamp(20px, 6vw, 90px); }
+.steps li:nth-child(3) { margin-right: clamp(28px, 9vw, 132px); }
 .stepNumber { position: relative; display: flex; flex-direction: column; padding-left: 110px; }
 .stepNumber::after {
   position: absolute;
@@ -293,6 +341,20 @@
 .share { display: flex; justify-content: space-between; align-items: end; gap: 70px; padding: clamp(90px, 11vw, 150px) max(32px, calc((100vw - 1180px) / 2)); background: #10251f; color: #f1ead9; }
 .share h2 { max-width: 8ch; }
 .share > div > p:not(.eyebrow) { margin-top: 24px; color: #a8aaa1; }
+.shareFolio {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.25em;
+  z-index: 0;
+  color: rgba(239, 230, 208, 0.035);
+  font-family: var(--font-sans);
+  font-size: clamp(5rem, 15vw, 14rem);
+  font-weight: 300;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
 
 @media (max-width: 900px) {
   .signal, .story, .access { grid-template-columns: 1fr; }
@@ -354,10 +416,17 @@
     min-height: 112px;
     padding: 22px 16px;
   }
+  .eventManifest .dateEntry {
+    min-height: 152px;
+    padding-inline: 4px;
+  }
+  .dateEntry dd strong { font-size: clamp(4.4rem, 23vw, 6.5rem); }
   .eventManifest > div:nth-child(2) { margin-left: 16px; }
   .eventManifest > div:nth-child(3) { margin-right: 22px; }
   .steps { margin-top: 52px; }
   .steps li { grid-template-columns: 66px 1fr; gap: 16px; min-height: 150px; }
+  .steps li:nth-child(2) { margin-left: 12px; }
+  .steps li:nth-child(3) { margin-right: 18px; }
   .steps::before {
     top: 42px;
     bottom: 42px;
@@ -379,6 +448,11 @@
   .access dl { grid-template-columns: 1fr; gap: 26px; }
   .accessActions { flex-direction: column; }
   .share { align-items: stretch; flex-direction: column; padding-block: 86px; }
+  .shareFolio {
+    right: -0.08em;
+    bottom: 0.08em;
+    font-size: 24vw;
+  }
 }
 
 @media (max-width: 360px) {
