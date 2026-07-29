@@ -45,7 +45,7 @@ export default function MapPage() {
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
               <p className={styles.kicker}>FIELD MAP / TOMIOKA</p>
-              <h1><span>富岡の街を、</span><span>絹糸でたどる</span></h1>
+              <h1><span>富岡の街を</span><span>絹糸でたどる</span></h1>
               <p className={styles.lead}>受付、街歩きの目印、休憩地点を地図で確認できます。</p>
             </div>
             <dl className={styles.heroLedger} aria-label="街歩きマップの概要">

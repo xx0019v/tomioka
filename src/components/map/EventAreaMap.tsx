@@ -415,7 +415,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
         <p className={styles.folio} aria-hidden="true">MAP / 01</p>
         <div>
           <p className={styles.eyebrow}>EVENT AREA / TOMIOKA</p>
-          <h2 id="map-heading"><span>絹糸が結ぶ、</span><span>富岡の街</span></h2>
+          <h2 id="map-heading"><span>絹糸が結ぶ</span><span>富岡の街</span></h2>
         </div>
         <p>記号か街歩きスポット一覧を選ぶと、場所の特徴とアクセス情報を確認できます。</p>
       </div>
