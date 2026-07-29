@@ -45,7 +45,7 @@
 .steps,
 .primaryCta,
 .routeHeader,
-.routeExperience,
+.routeIndex,
 .routeCta,
 .accessIntro,
 .access dl,
@@ -157,6 +157,7 @@
 }
 
 .signalCopy h2 span,
+.routeHeader h2 span,
 .share h2 span {
   display: block;
 }
@@ -322,6 +323,49 @@
 .routeHeader h2 { max-width: 10ch; }
 .routeHeader > p:not(.eyebrow) { align-self: end; margin-top: 0; }
 .routeCta { background: #d8ef6b; color: #091510; }
+
+/* 地点索引：地図機能を複製せず、当日たどる場所だけを台帳として示す */
+.routeIndex {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  gap: 0 clamp(28px, 5vw, 72px);
+  margin: clamp(48px, 6vw, 76px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(224, 206, 162, 0.24);
+}
+
+.routeIndex li {
+  display: grid;
+  grid-template-columns: 2.4em minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 20px 2px;
+  border-bottom: 1px solid rgba(224, 206, 162, 0.16);
+}
+
+.routeIndexMark {
+  color: #a23f2f;
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+
+.routeIndexName {
+  color: #f4eddd;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
+}
+
+.routeIndexKind {
+  color: #9aa094;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
 
 .access {
   display: grid;

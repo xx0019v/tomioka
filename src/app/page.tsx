@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
-import { InteractiveRoute } from "@/components/immersive/InteractiveRoute";
 import { ShareActions } from "@/components/site/ShareActions";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -51,7 +50,7 @@ export default function Home() {
           <ArtifactField variant="discover" />
           <div className={styles.signalCopy}>
             <p className={styles.eyebrow}>EVENT EXPERIENCE / TOMIOKA</p>
-            <h2 id="signal-heading"><span>記憶は、</span><span>富岡の街に眠る</span></h2>
+            <h2 id="signal-heading"><span>記憶は</span><span>富岡の街に眠る</span></h2>
             <p>富岡製糸場周辺の商店街を歩きながら、街の景色と物語を楽しむ約60〜90分の体験です。</p>
             <Link href="/information/">開催概要を確認 <span aria-hidden="true">↗</span></Link>
           </div>
@@ -80,7 +79,7 @@ export default function Home() {
           </figure>
           <div className={styles.storyContent}>
             <p className={styles.eyebrow}>STORY / 明治五年</p>
-            <h2 id="story-heading"><span>街が守った、</span><span>繭の記録</span></h2>
+            <h2 id="story-heading"><span>街が守った</span><span>繭の記録</span></h2>
             <div className={styles.storyText}>
               <p>明治五年。富岡の街に、一人の研究者がいた。</p>
               <p>カイコの糸に生涯を捧げた女性——永山 繭。</p>
@@ -96,7 +95,7 @@ export default function Home() {
           <ArtifactField variant="howto" />
           <header className={styles.sectionHeader}>
             <p className={styles.eyebrow}>HOW TO JOIN / 三つのステップ</p>
-            <h2 id="howto-heading"><span>富岡の街へ、</span><span>物語を歩きに行く</span></h2>
+            <h2 id="howto-heading"><span>富岡の街へ</span><span>物語を歩きに行く</span></h2>
             <p>当日はお富ちゃん家で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
           </header>
 
@@ -124,13 +123,19 @@ export default function Home() {
           />
           <div className={styles.routeVeil} aria-hidden="true" />
           <header className={styles.routeHeader}>
-            <p className={styles.eyebrow}>EVENT AREA / 実座標から作成</p>
-            <h2 id="route-heading">物語を巡る、富岡の街</h2>
-            <p>受付地点、歴史を感じる建物、商店街の店先、休憩場所。絹糸の見取図から街歩きの風景をのぞいてみてください。</p>
+            <p className={styles.eyebrow}>EVENT AREA / 富岡製糸場周辺</p>
+            <h2 id="route-heading"><span>街を歩く道は</span><span>ひとつの地図に</span></h2>
+            <p>受付、街歩きの目印、休憩地点。当日たどる{eventSpots.length}か所は、街歩きマップにまとめています。</p>
           </header>
-          <div className={styles.routeExperience}>
-            <InteractiveRoute points={eventSpots} />
-          </div>
+          <ol className={styles.routeIndex}>
+            {eventSpots.map((spot) => (
+              <li key={spot.id}>
+                <span className={styles.routeIndexMark} aria-hidden="true">{spot.marker}</span>
+                <span className={styles.routeIndexName}>{spot.name}</span>
+                <span className={styles.routeIndexKind}>{spot.categoryLabel}</span>
+              </li>
+            ))}
+          </ol>
           <Image
             className={styles.routeStrata}
             src={withBasePath("/images/environment/silk-strata.webp")}
@@ -140,14 +145,14 @@ export default function Home() {
             sizes="(max-width: 680px) 120vw, 88vw"
             aria-hidden="true"
           />
-          <Link href="/map/" className={styles.routeCta}>全体マップと住所を見る <span aria-hidden="true">↗</span></Link>
+          <Link href="/map/" className={styles.routeCta}>街歩きマップを開く <span aria-hidden="true">↗</span></Link>
         </section>
 
         <section id="access" className={styles.access} aria-labelledby="access-heading">
           <ArtifactField variant="access" />
           <div className={styles.accessIntro}>
             <p className={styles.eyebrow}>START / お富ちゃん家</p>
-            <h2 id="access-heading"><span>物語の入口は、</span><span>お富ちゃん家</span></h2>
+            <h2 id="access-heading"><span>物語の入口は</span><span>お富ちゃん家</span></h2>
             <p>お富ちゃん家（富岡市観光案内所）で、参加キットを受け取れます。</p>
           </div>
           <dl>
@@ -167,7 +172,7 @@ export default function Home() {
           <p className={styles.shareFolio} aria-hidden="true">TOMIOKA — 08.08</p>
           <div>
             <p className={styles.eyebrow}>SHARE / 街歩きの誘い</p>
-            <h2 id="share-heading"><span>この物語を、</span><span>誰と歩く？</span></h2>
+            <h2 id="share-heading"><span>この物語を</span><span>誰と歩く？</span></h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
           </div>
           <ShareActions
