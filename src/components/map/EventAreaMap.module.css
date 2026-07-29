@@ -510,15 +510,18 @@
     writing-mode: horizontal-tb;
   }
 
+  /* 画面高に追従させ、iPhone SEでも地図と操作系が同時に収まるようにする。
+     --map-sheet で「畳んだシートの高さ」を一元管理し、操作ボタンを常にその上へ置く。 */
   .mapShell {
+    --map-sheet: min(38svh, 300px);
     display: block;
-    min-height: 720px;
+    min-height: max(440px, min(78svh, 720px));
     box-shadow: none;
   }
 
   .mapStage,
   .map {
-    min-height: 720px;
+    min-height: max(440px, min(78svh, 720px));
   }
 
   .mapStage[data-map-interaction="view"] .map {
@@ -527,8 +530,21 @@
 
   .interactionButton {
     right: 12px;
-    bottom: 390px;
+    bottom: calc(var(--map-sheet) + 14px);
     display: inline-flex;
+  }
+
+  /* 現在地はシートに隠れない高さで、左手・右手どちらの親指でも届く位置へ */
+  .locateWrap {
+    right: auto;
+    bottom: calc(var(--map-sheet) + 14px);
+    left: 12px;
+    justify-items: start;
+  }
+
+  .locateHint {
+    max-width: min(60vw, 220px);
+    text-align: left;
   }
 
   .sidePanel {
@@ -544,7 +560,7 @@
   }
 
   .indexPanel {
-    max-height: 320px;
+    max-height: var(--map-sheet);
     overflow: auto;
     padding: 24px 22px max(26px, var(--safe-bottom));
   }
