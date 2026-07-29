@@ -1,53 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArchiveLedger } from "@/components/immersive/ArchiveLedger";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
+import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
 import { InteractiveRoute } from "@/components/immersive/InteractiveRoute";
 import { ShareActions } from "@/components/site/ShareActions";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { getOrderedCheckpoints } from "@/data/checkpoints";
 import { siteConfig } from "@/data/site";
+import { eventSpots } from "@/data/spots";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
-const howToPlaySteps = [
+const participationSteps = [
   {
     number: "01",
-    title: "記録を受け取る",
-    body: "お富ちゃん家で調査キットを受け取る。繭の言葉を読み、QRコードから記録を開く。",
-    meta: "START / 約5分",
+    title: "スタート地点へ",
+    body: "お富ちゃん家へお越しください",
+    meta: "START",
   },
   {
     number: "02",
-    title: "街の痕跡を追う",
-    body: "富岡の商店街を歩き、現地の景色や店内に残された手がかりを観察する。",
-    meta: "FIELD / 約45分",
+    title: "参加キットを受け取る",
+    body: "受付時間内に無料で受け取れます",
+    meta: "RECEPTION",
   },
   {
     number: "03",
-    title: "4つの言葉を結ぶ",
-    body: "集めた言葉を組み合わせ、最後の地図を完成させる。答えはゴールで確かめよう。",
-    meta: "FINAL / 約10分",
+    title: "富岡の街を歩く",
+    body: "配布キットを手に、街歩き型の物語をお楽しみください",
+    meta: "TOMIOKA",
   },
 ];
 
 export default function Home() {
-  const checkpoints = getOrderedCheckpoints();
-
-  const routePoints = checkpoints.map((checkpoint) => ({
-    id: checkpoint.id,
-    slug: checkpoint.slug,
-    shortName: checkpoint.shortName,
-    name: checkpoint.name,
-    tags: checkpoint.tags,
-    latitude: checkpoint.latitude,
-    longitude: checkpoint.longitude,
-    role: checkpoint.role,
-  }));
-  const archiveRecords = routePoints.filter((point) => point.role === "checkpoint");
-
   return (
     <div className={styles.page}>
       <SiteHeader />
@@ -57,21 +43,27 @@ export default function Home() {
           eventDate={siteConfig.eventDate}
           location={siteConfig.location}
           duration={siteConfig.duration}
-          fee={siteConfig.fee}
+          fee={`${siteConfig.fee}・事前申込${siteConfig.registration}`}
         />
         <ArchiveTrace />
 
         <section id="discover" className={styles.signal} aria-labelledby="signal-heading">
+          <ArtifactField variant="discover" />
           <div className={styles.signalCopy}>
-            <p className={styles.eyebrow}>調査台帳・序録 / 記録番号 00</p>
-            <h2 id="signal-heading">百五十年前の記録は、街の中でまだ息をしている。</h2>
-            <p>永山 繭が遺したのは、紙の地図だけではない。店の記憶、路地の形、建物に刻まれた小さな違和感。そのすべてが、あなたを次の地点へ導く。</p>
-            <Link href="/information/">調査前の注意事項 <span aria-hidden="true">↗</span></Link>
+            <p className={styles.eyebrow}>EVENT EXPERIENCE / TOMIOKA</p>
+            <h2 id="signal-heading">記憶は、富岡の街に眠る</h2>
+            <p>富岡製糸場周辺の商店街を歩きながら、街の景色と物語を楽しむ約60〜90分の体験です。</p>
+            <Link href="/information/">開催概要を確認 <span aria-hidden="true">↗</span></Link>
           </div>
-          <ArchiveLedger records={archiveRecords} />
+          <dl className={styles.eventManifest} aria-label="イベントの特徴">
+            <div><dt>DATE</dt><dd>2026.08.08</dd><span>一日限定</span></div>
+            <div><dt>AREA</dt><dd>富岡製糸場周辺</dd><span>商店街を歩く物語</span></div>
+            <div><dt>ENTRY</dt><dd>参加無料</dd><span>事前申込不要</span></div>
+          </dl>
         </section>
 
         <section id="story" className={styles.story} aria-labelledby="story-heading">
+          <ArtifactField variant="story" />
           <figure className={styles.storyVisual}>
             <Image
               src={withBasePath("/images/story-silk.webp")}
@@ -82,27 +74,29 @@ export default function Home() {
             <figcaption>RESEARCH NOTE / MEIJI 5</figcaption>
           </figure>
           <div className={styles.storyContent}>
-            <p className={styles.eyebrow}>収蔵資料・手記 / 明治五年</p>
-            <h2 id="story-heading">街が守った、ひとつの記録。</h2>
+            <p className={styles.eyebrow}>STORY / 明治五年</p>
+            <h2 id="story-heading">街が守った、繭の記録</h2>
             <div className={styles.storyText}>
               <p>明治五年。富岡の街に、一人の研究者がいた。</p>
-              <p>カイコの糸に生涯を捧げた女性、永山 繭。彼女は息を引き取る間際、こう言い残したという。</p>
+              <p>カイコの糸に生涯を捧げた女性——永山 繭。</p>
+              <p>彼女は息を引き取る間際、こう言い残したという。</p>
               <blockquote>「私が遺したものを、いつかだれかが見つけてくれる。それまで、この街が守ってくれるはずだ」</blockquote>
               <p>それから百五十年。あなたのもとに、一通の依頼が届いた。</p>
-              <p>彼女が街に遺した「謎の地図」を、探し出してほしい。</p>
+              <p>——彼女が街に遺した「謎の地図」を、探し出してほしい。</p>
             </div>
           </div>
         </section>
 
         <section id="how-to-play" className={styles.howTo} aria-labelledby="howto-heading">
+          <ArtifactField variant="howto" />
           <header className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>現地調査票 / 三つの行程</p>
-            <h2 id="howto-heading">街を歩くことが、物語を進める。</h2>
-            <p>必要なのは配布キットとスマートフォン。画面の中だけでは完結しない、約60〜90分の調査です。</p>
+            <p className={styles.eyebrow}>HOW TO JOIN / 三つのステップ</p>
+            <h2 id="howto-heading">富岡の街へ、物語を歩きに行く</h2>
+            <p>当日はお富ちゃん家で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
           </header>
 
           <ol className={styles.steps}>
-            {howToPlaySteps.map((step) => (
+            {participationSteps.map((step) => (
               <li key={step.number}>
                 <div className={styles.stepNumber}><span>{step.number}</span><small>{step.meta}</small></div>
                 <div><h3>{step.title}</h3><p>{step.body}</p></div>
@@ -110,10 +104,11 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <Link href="/game/" className={styles.primaryCta}>調査画面を開く <span aria-hidden="true">↗</span></Link>
+          <Link href="/information/" className={styles.primaryCta}>参加案内を見る <span aria-hidden="true">↗</span></Link>
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
+          <ArtifactField variant="route" />
           <Image
             className={styles.routeGround}
             src={withBasePath("/images/environment/field-archive-ground.webp")}
@@ -124,11 +119,13 @@ export default function Home() {
           />
           <div className={styles.routeVeil} aria-hidden="true" />
           <header className={styles.routeHeader}>
-            <p className={styles.eyebrow}>巡回図面 / 実座標から作成</p>
-            <h2 id="route-heading">巡回5地点と、ひとつの補助地点。</h2>
-            <p>集める言葉は4つ。岡重で手掛かりを読み、銀座まちなか交流館で解くCP02を含む6地点の調査記録です。</p>
+            <p className={styles.eyebrow}>EVENT AREA / 実座標から作成</p>
+            <h2 id="route-heading">物語を巡る、富岡の街</h2>
+            <p>受付地点、歴史を感じる建物、商店街の店先、休憩場所。絹糸の見取図から街歩きの風景をのぞいてみてください。</p>
           </header>
-          <InteractiveRoute points={routePoints} />
+          <div className={styles.routeExperience}>
+            <InteractiveRoute points={eventSpots} />
+          </div>
           <Image
             className={styles.routeStrata}
             src={withBasePath("/images/environment/silk-strata.webp")}
@@ -142,31 +139,33 @@ export default function Home() {
         </section>
 
         <section id="access" className={styles.access} aria-labelledby="access-heading">
+          <ArtifactField variant="access" />
           <div className={styles.accessIntro}>
-            <p className={styles.eyebrow}>始点・帰着票 / お富ちゃん家</p>
-            <h2 id="access-heading">すべては、<br />お富ちゃん家から。</h2>
-            <p>富岡市観光案内所でキットを受け取り、調査を始めてください。</p>
+            <p className={styles.eyebrow}>START / お富ちゃん家</p>
+            <h2 id="access-heading">物語の入口は、お富ちゃん家</h2>
+            <p>まちなか観光物産館のお富ちゃん家で、参加キットを受け取れます。</p>
           </div>
           <dl>
-            <div><dt>ADDRESS</dt><dd>群馬県富岡市富岡1430-1</dd></div>
-            <div><dt>ACCESS</dt><dd>上信電鉄 上州富岡駅から徒歩約5分</dd></div>
+            <div><dt>ADDRESS</dt><dd>群馬県富岡市富岡1151-1</dd></div>
+            <div><dt>ACCESS</dt><dd>上信電鉄 上州富岡駅から徒歩約10分</dd></div>
             <div><dt>RECEPTION</dt><dd>{siteConfig.reception}</dd></div>
             <div><dt>PARKING</dt><dd>周辺の有料駐車場をご利用ください</dd></div>
           </dl>
           <div className={styles.accessActions}>
-            <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E5%AF%8C%E3%81%A1%E3%82%83%E3%82%93%E5%AE%B6%20%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AF%8C%E5%B2%A1%E5%B8%82%E5%AF%8C%E5%B2%A11430-1" target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
+            <a href="https://www.google.com/maps/search/?api=1&query=%E3%81%8A%E5%AF%8C%E3%81%A1%E3%82%83%E3%82%93%E5%AE%B6%20%E7%BE%A4%E9%A6%AC%E7%9C%8C%E5%AF%8C%E5%B2%A1%E5%B8%82%E5%AF%8C%E5%B2%A11151-1" target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
             <Link href="/information/">開催情報を確認</Link>
           </div>
         </section>
 
         <section id="share" className={styles.share} aria-labelledby="share-heading">
+          <ArtifactField variant="share" />
           <div>
-            <p className={styles.eyebrow}>同行記録 / 連絡票</p>
-            <h2 id="share-heading">この調査を、<br />誰と始める？</h2>
+            <p className={styles.eyebrow}>SHARE / 街歩きの誘い</p>
+            <h2 id="share-heading">この物語を、誰と歩く？</h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
           </div>
           <ShareActions
-            text={`富岡まち歩き謎解き「${siteConfig.title}」 ${siteConfig.eventDate}開催 #${siteConfig.hashtag}`}
+            text={`富岡まち歩き謎解き「${siteConfig.title}」 ${siteConfig.eventDate}開催`}
             url={siteConfig.siteUrl}
           />
         </section>

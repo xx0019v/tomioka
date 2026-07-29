@@ -6,6 +6,9 @@
 .route,
 .access,
 .share {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   scroll-margin-top: 132px;
 }
 
@@ -32,6 +35,71 @@
   margin: 0 auto;
   padding: 140px 0;
   color: #eee7d6;
+}
+
+.signalCopy,
+.eventManifest,
+.storyVisual,
+.storyContent,
+.sectionHeader,
+.steps,
+.primaryCta,
+.routeHeader,
+.routeExperience,
+.routeCta,
+.accessIntro,
+.access dl,
+.accessActions,
+.share > div {
+  position: relative;
+  z-index: 3;
+}
+
+.eventManifest {
+  display: grid;
+  min-width: 0;
+  margin: 0;
+  border-top: 1px solid rgba(224, 206, 162, 0.28);
+  color: #f3ecdc;
+}
+
+.eventManifest > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 8px 18px;
+  align-items: baseline;
+  min-height: 142px;
+  padding: 27px 24px;
+  border-bottom: 1px solid rgba(224, 206, 162, 0.2);
+  background: linear-gradient(90deg, rgba(216, 239, 107, 0.045), transparent 72%);
+}
+
+.eventManifest > div:nth-child(2) {
+  margin-left: clamp(18px, 4vw, 58px);
+}
+
+.eventManifest > div:nth-child(3) {
+  margin-right: clamp(26px, 6vw, 76px);
+}
+
+.eventManifest dt {
+  color: #c9aa68;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.eventManifest dd {
+  color: #f5eddd;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.3vw, 2rem);
+}
+
+.eventManifest span {
+  grid-column: 2;
+  color: #999a91;
+  font-size: 0.72rem;
 }
 
 .signalCopy h2,
@@ -81,7 +149,13 @@
 .storyVisual::after { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6, 20, 16, 0.5), transparent 35%); content: ""; }
 .storyVisual figcaption { position: absolute; z-index: 1; bottom: 26px; left: 28px; color: #eee6d4; font-size: 0.58rem; letter-spacing: 0.18em; }
 
-.storyContent { display: flex; flex-direction: column; justify-content: center; padding: clamp(60px, 8vw, 130px); }
+.storyContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(60px, 8vw, 130px);
+  background: linear-gradient(90deg, rgba(242, 236, 223, 0.98), rgba(242, 236, 223, 0.88) 62%, rgba(242, 236, 223, 0.68));
+}
 .storyContent h2,
 .sectionHeader h2,
 .access h2 {
@@ -105,9 +179,33 @@
 .sectionHeader > p:not(.eyebrow) { max-width: 45ch; color: #667069; }
 
 .steps { margin-top: 82px; padding: 0; list-style: none; }
+.steps::before {
+  position: absolute;
+  top: 52px;
+  bottom: 52px;
+  left: 88px;
+  z-index: -1;
+  width: 1px;
+  background: linear-gradient(#a23f2f, #c1a463 46%, #17372f);
+  box-shadow: 0 0 0 4px rgba(169, 137, 79, 0.05);
+  content: "";
+}
 .steps li { display: grid; grid-template-columns: 180px 1fr 46px; gap: 32px; align-items: center; min-height: 168px; border-top: 1px solid rgba(32, 66, 55, 0.22); }
 .steps li:last-child { border-bottom: 1px solid rgba(32, 66, 55, 0.22); }
-.stepNumber { display: flex; flex-direction: column; }
+.stepNumber { position: relative; display: flex; flex-direction: column; padding-left: 110px; }
+.stepNumber::after {
+  position: absolute;
+  top: 50%;
+  left: 83px;
+  width: 11px;
+  height: 11px;
+  transform: translateY(-50%);
+  border: 2px solid #f7f3e9;
+  border-radius: 50%;
+  background: #a23f2f;
+  box-shadow: 0 0 0 1px rgba(23, 55, 47, 0.36);
+  content: "";
+}
 .stepNumber span { color: #a23f2f; font-family: var(--font-sans); font-size: 2.8rem; font-weight: 500; letter-spacing: -0.05em; line-height: 1; }
 .stepNumber small { margin-top: 8px; color: #665f54; font-size: 0.55rem; letter-spacing: 0.14em; }
 .steps h3 { color: #163b31; font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
@@ -150,6 +248,7 @@
   object-position: center;
   opacity: 0.58;
   filter: saturate(0.72) brightness(0.66);
+  pointer-events: none;
 }
 .routeVeil {
   position: absolute;
@@ -212,11 +311,15 @@
   .route,
   .access,
   .share {
-    scroll-margin-top: 112px;
+    scroll-margin-top: 144px;
   }
 
   .signal { width: calc(100% - 36px); padding: 92px 0; gap: 58px; }
-  .signalCopy h2, .routeHeader h2, .share h2 { font-size: clamp(2.55rem, 12vw, 4rem); }
+  .signalCopy h2, .routeHeader h2, .share h2 {
+    max-width: 11ch;
+    font-size: clamp(1.95rem, 9.6vw, 3.2rem);
+    text-wrap: balance;
+  }
   .story { min-height: 0; }
   .storyVisual { min-height: 112vw; }
   .storyContent { padding: 64px 22px 76px; }
@@ -238,8 +341,26 @@
     opacity: 0.28;
   }
   .sectionHeader { gap: 18px; }
+  .eventManifest > div {
+    min-height: 112px;
+    padding: 22px 16px;
+  }
+  .eventManifest > div:nth-child(2) { margin-left: 16px; }
+  .eventManifest > div:nth-child(3) { margin-right: 22px; }
   .steps { margin-top: 52px; }
   .steps li { grid-template-columns: 66px 1fr; gap: 16px; min-height: 150px; }
+  .steps::before {
+    top: 42px;
+    bottom: 42px;
+    left: 31px;
+  }
+  .stepNumber { padding-left: 0; }
+  .stepNumber::after {
+    top: -20px;
+    left: 26px;
+    width: 10px;
+    height: 10px;
+  }
   .stepNumber span { font-size: 2rem; }
   .steps li > i { display: none; }
   .steps h3 { font-size: 1.25rem; }

@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
-import { CheckpointMap } from "@/components/map/CheckpointMap";
+import { ArtifactField } from "@/components/immersive/ArtifactField";
+import { EventAreaMap } from "@/components/map/EventAreaMap";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { getOrderedCheckpoints } from "@/data/checkpoints";
+import { eventSpots } from "@/data/spots";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "チェックポイントマップ",
-  description: "繭が遺した地図の巡回順、各チェックポイントの住所とGoogleマップへのリンク。",
+  title: "富岡 街歩きマップ",
+  description: "受付場所と富岡製糸場周辺のイベントエリア、休憩地点を確認できる街歩きマップ。",
 };
 
 export default function MapPage() {
-  const checkpoints = getOrderedCheckpoints();
-
   return (
     <div className={styles.page}>
       <SiteHeader />
@@ -24,20 +23,21 @@ export default function MapPage() {
           <Image
             className={styles.heroImage}
             src={withBasePath("/images/route-thread.webp")}
-            alt="4つの手がかりを絹糸で結んだ巡回記録"
+            alt="富岡の街並みを絹糸で結んだ見取図"
             fill
             priority
             sizes="100vw"
           />
+          <ArtifactField variant="map" />
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>巡回案内</p>
-            <h1><span>チェックポイント</span><span>マップ</span></h1>
-            <p className={styles.lead}>スタートからゴールまでの順番と、各地点の住所を確認できます。</p>
+            <p className={styles.kicker}>物語を巡る街</p>
+            <h1><span>富岡</span><span>街歩きマップ</span></h1>
+            <p className={styles.lead}>受付場所と、イベントエリアの目印を確認できます。</p>
           </div>
-          <GuideCharacter placement="map-hero" />
+          <GuideCharacter lines={["地図の印を選ぶと", "場所と目印がわかるよ"]} />
         </section>
 
-        <CheckpointMap checkpoints={checkpoints} />
+        <EventAreaMap spots={eventSpots} />
       </main>
       <SiteFooter />
     </div>

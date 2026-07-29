@@ -10,14 +10,14 @@ export default function NotFound() {
       <main id="main-content">
         <section className={styles.compactHero}>
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>記録が見つかりません</p>
-            <h1>この手がかりは存在しないようだ。</h1>
+            <p className={styles.kicker}>404 / NOT FOUND</p>
+            <h1>ページが見つかりません</h1>
           </div>
         </section>
         <div className={styles.readingContent}>
-          <p>QRコードをもう一度読み取るか、全体マップから目的の地点を選んでください。</p>
+          <p>URLをご確認いただくか、トップまたは街歩きマップから目的の情報をお探しください。</p>
           <div className={styles.actions}>
-            <Link href="/map/" className={styles.button}>全体マップへ</Link>
+            <Link href="/map/" className={styles.button}>街歩きマップへ</Link>
             <Link href="/" className={styles.outlineButton}>トップへ戻る</Link>
           </div>
         </div>

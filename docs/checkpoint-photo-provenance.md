@@ -15,12 +15,12 @@
 
 | 地点 | 公開ファイル | 掲載元 | 利用根拠・表示クレジット |
 | --- | --- | --- | --- |
-| お富ちゃん家 | `public/checkpoints/photos/otomi-chan-ie.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/souvenir/detail/Otomi-chan-chi.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
-| アトリエ | `public/checkpoints/photos/atelier.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/id%3D6488) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
-| 岡重肉店 | `public/checkpoints/photos/okashige.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/Okaju-meat.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
-| 銀座まちなか交流館 | `public/checkpoints/photos/ginza-koryukan.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_spot/sightseeing/detail/ginza.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
-| キリンヤ周辺 | `public/checkpoints/photos/kirinya-gate-context.webp` | [富岡市公式フリーダウンロード「表門」](https://www.tomioka-silk.jp/_spot/freedownload/) | 申請不要・クレジット必須。`画像提供：富岡市・富岡製糸場（表門／地点写真）` |
-| カフェドローム | `public/checkpoints/photos/cafe-drome.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/cafedrome.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
+| お富ちゃん家 | `public/spots/photos/otomi-chan-ie.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/souvenir/detail/Otomi-chan-chi.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
+| アトリエ | `public/spots/photos/atelier.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/id%3D6488) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
+| 岡重肉店 | `public/spots/photos/okashige.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/Okaju-meat.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
+| 銀座まちなか交流館 | `public/spots/photos/ginza-koryukan.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_spot/sightseeing/detail/ginza.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
+| キリンヤ周辺 | `public/spots/photos/kirinya-gate-context.webp` | [富岡市公式フリーダウンロード「表門」](https://www.tomioka-silk.jp/_spot/freedownload/) | 申請不要・クレジット必須。`画像提供：富岡市・富岡製糸場（表門／地点写真）` |
+| カフェドローム | `public/spots/photos/cafe-drome.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/cafedrome.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
 
 ## 権利条件の確認
 

@@ -3,9 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
-import { ArchivePrelude } from "./ArchivePrelude";
+import { ArtifactField } from "./ArtifactField";
 import styles from "./HeroExperience.module.css";
 
 interface HeroExperienceProps {
@@ -28,11 +27,13 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     if (!context) return;
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
     const pointer = { x: 0.58, y: 0.42 };
     let width = 0;
     let height = 0;
     let raf = 0;
     let motionEnabled = false;
+    let inView = true;
 
     const resize = () => {
       const bounds = section.getBoundingClientRect();
@@ -82,6 +83,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     };
 
     const handlePointer = (event: PointerEvent) => {
+      if (!inView || event.pointerType === "touch") return;
       const bounds = section.getBoundingClientRect();
       pointer.x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
       pointer.y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
@@ -92,7 +94,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
     let scrollTicking = false;
     const handleScroll = () => {
-      if (scrollTicking) return;
+      if (!inView || scrollTicking) return;
       scrollTicking = true;
       window.requestAnimationFrame(() => {
         const bounds = section.getBoundingClientRect();
@@ -118,17 +120,30 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         return;
       }
 
-      if (!motionEnabled) {
+      section.removeEventListener("pointermove", handlePointer);
+      if (finePointerQuery.matches) {
         section.addEventListener("pointermove", handlePointer, { passive: true });
+      }
+      if (!motionEnabled) {
         window.addEventListener("scroll", handleScroll, { passive: true });
         motionEnabled = true;
       }
       handleScroll();
     };
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        inView = Boolean(entry?.isIntersecting);
+        if (inView) handleScroll();
+      },
+      { rootMargin: "12% 0px 12% 0px", threshold: 0 },
+    );
+
     resize();
     window.addEventListener("resize", resize, { passive: true });
     motionQuery.addEventListener("change", syncMotionPreference);
+    finePointerQuery.addEventListener("change", syncMotionPreference);
+    visibilityObserver.observe(section);
     syncMotionPreference();
 
     return () => {
@@ -137,6 +152,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", handleScroll);
       motionQuery.removeEventListener("change", syncMotionPreference);
+      finePointerQuery.removeEventListener("change", syncMotionPreference);
+      visibilityObserver.disconnect();
     };
   }, []);
 
@@ -144,15 +161,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     <section ref={sectionRef} className={styles.hero} aria-labelledby="hero-title">
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
-      <Image
-        className={styles.mulberry}
-        src={withBasePath("/images/environment/mulberry-branch.webp")}
-        alt=""
-        width={1200}
-        height={800}
-        sizes="(max-width: 680px) 78vw, 38vw"
-        aria-hidden="true"
-      />
+      <ArtifactField variant="hero" />
 
       <div className={styles.stage}>
         <div className={styles.dateBadge}>
@@ -175,17 +184,16 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         </div>
 
         <div className={styles.copy}>
-          <p className={styles.kicker}>TOMIOKA IMMERSIVE MYSTERY</p>
+          <p className={styles.kicker}>まち歩き型リアル謎解きイベント</p>
           <h1 id="hero-title">
-            <span>街は、まだ</span>
-            <span>記憶している。</span>
+            <span>繭が遺した</span>
+            <span>地図</span>
           </h1>
-          <p className={styles.title}>繭が遺した地図</p>
-          <p className={styles.lead}>富岡の街に散らばった4つの言葉。歩き、観察し、百五十年前の記録を完成させよ。</p>
-          <ArchivePrelude />
-          <GuideCharacter placement="archive-inline" />
+          <p className={styles.title}>街は、まだ記憶している</p>
+          <p className={styles.lead}>絹の記憶をたどり、富岡の街へ。百五十年前の物語が、街並みの中であなたを待っています。</p>
           <div className={styles.actions}>
-            <Link href="/game/" className={styles.primary}>調査を始める <span aria-hidden="true">↗</span></Link>
+            <Link href="/information/" className={styles.primary}>開催情報を見る <span aria-hidden="true">↗</span></Link>
+            <Link href="/map/" className={styles.secondary}>街歩きマップを見る <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
 

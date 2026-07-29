@@ -57,6 +57,10 @@
   display: block;
 }
 
+.hero h1 span:last-child {
+  margin-left: clamp(28px, 7vw, 128px);
+}
+
 .lead {
   max-width: 62ch;
   margin-top: 13px;
@@ -83,8 +87,12 @@
     white-space: nowrap;
   }
 
+  .hero h1 span:last-child {
+    margin-left: 40px;
+  }
+
   .lead {
     max-width: 100%;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
   }
 }

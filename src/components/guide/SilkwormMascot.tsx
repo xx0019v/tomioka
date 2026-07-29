@@ -1,4 +1,15 @@
-import type { GuideExpression } from "@/data/guide-character";
+export type GuideExpression =
+  | "greeting"
+  | "neutral"
+  | "pointing"
+  | "map-reading"
+  | "discovery"
+  | "thinking"
+  | "pleased"
+  | "concerned"
+  | "caution"
+  | "loading"
+  | "clear";
 
 /**
  * 繭標（まゆしるべ・愛称「きぬ」）— カイコの幼虫をモチーフにした案内役のインラインSVG。

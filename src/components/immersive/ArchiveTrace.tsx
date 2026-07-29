@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import styles from "./ArchiveTrace.module.css";
 
 const chapters = [
-  { id: "discover", label: "序録" },
-  { id: "story", label: "手記" },
-  { id: "how-to-play", label: "手順" },
-  { id: "route", label: "巡回" },
-  { id: "access", label: "始終" },
-  { id: "share", label: "同行" },
+  { id: "discover", label: "概要" },
+  { id: "story", label: "物語" },
+  { id: "how-to-play", label: "参加" },
+  { id: "route", label: "街歩き" },
+  { id: "access", label: "受付" },
+  { id: "share", label: "共有" },
 ] as const;
 
 export function ArchiveTrace() {
@@ -37,11 +37,11 @@ export function ArchiveTrace() {
   const activeIndex = Math.max(0, chapters.findIndex((chapter) => chapter.id === activeId));
 
   return (
-    <nav className={styles.trace} aria-label="調査台帳の章">
-      <p><span>綴じ順</span><strong>{String(activeIndex + 1).padStart(2, "0")}</strong></p>
+    <nav className={styles.trace} aria-label="ページ内ナビゲーション">
+      <p><span>SECTION</span><strong>{String(activeIndex + 1).padStart(2, "0")}</strong></p>
       <ol>
         {chapters.map((chapter, index) => (
-          <li key={chapter.id} className={index <= activeIndex ? styles.reached : ""}>
+          <li key={chapter.id} className={index === activeIndex ? styles.active : ""}>
             <a
               href={`#${chapter.id}`}
               aria-label={`${chapter.label}へ移動`}

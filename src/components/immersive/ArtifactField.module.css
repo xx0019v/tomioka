@@ -1,0 +1,503 @@
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.atmosphere,
+.silkGuide,
+.item {
+  position: absolute;
+}
+
+.atmosphere {
+  inset: 0;
+  z-index: 0;
+  opacity: 0.8;
+  background:
+    radial-gradient(circle at 18% 28%, rgba(216, 184, 111, 0.11), transparent 22%),
+    radial-gradient(circle at 82% 74%, rgba(154, 55, 39, 0.09), transparent 24%),
+    linear-gradient(112deg, transparent 34%, rgba(255, 246, 219, 0.04) 50%, transparent 66%);
+  mix-blend-mode: screen;
+}
+
+.silkGuide {
+  inset: -4%;
+  z-index: 1;
+  width: 108%;
+  height: 108%;
+  overflow: visible;
+  opacity: 0.88;
+}
+
+.silkShadow,
+.silkLine {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.silkShadow {
+  stroke: rgba(4, 10, 8, 0.38);
+  stroke-width: 3.2;
+}
+
+.silkLine {
+  stroke: rgba(205, 168, 86, 0.66);
+  stroke-linecap: round;
+  stroke-width: 1.1;
+  filter: drop-shadow(0 0 5px rgba(205, 168, 86, 0.2));
+}
+
+.silkNode {
+  fill: #b34332;
+  stroke: rgba(248, 235, 199, 0.75);
+  stroke-width: 0.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.item {
+  --artifact-transform: rotate(0deg);
+  --artifact-filter: saturate(0.88) contrast(1.04);
+  --entry-x: 0px;
+  --entry-y: 28px;
+  z-index: 2;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  filter: var(--artifact-filter);
+  transform: var(--artifact-transform);
+  transform-origin: center;
+  will-change: auto;
+}
+
+.slot2 {
+  --entry-y: 42px;
+}
+
+.slot3 {
+  --entry-y: 20px;
+}
+
+.field[data-motion-ready="true"][data-revealed="false"] .item,
+.field[data-motion-ready="true"][data-revealed="false"] .silkLine,
+.field[data-motion-ready="true"][data-revealed="false"] .silkNode {
+  opacity: 0;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"] .item {
+  animation: artifactReveal 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"] .slot2 {
+  animation-delay: 90ms;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"] .slot3 {
+  animation-delay: 170ms;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"] .silkLine {
+  animation: silkDraw 920ms 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.field[data-motion-ready="true"][data-revealed="true"] .silkNode {
+  animation: nodeReveal 260ms 720ms ease-out both;
+}
+
+/* Hero:桑の前景と製糸機械の対角線が、糸をCTAへ送る。 */
+.field[data-variant="hero"] .slot1 {
+  --artifact-transform: rotate(10deg);
+  --artifact-filter: saturate(0.96) brightness(1.08) contrast(1.05) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.34));
+  top: -10vw;
+  left: -21vw;
+  width: min(70vw, 990px);
+  opacity: 0.82;
+}
+
+.field[data-variant="hero"] .slot2 {
+  --artifact-transform: rotate(-9deg);
+  --artifact-filter: saturate(0.86) brightness(1.06) contrast(1.07) drop-shadow(0 26px 44px rgba(0, 0, 0, 0.42));
+  right: auto;
+  left: -13vw;
+  bottom: -20vw;
+  width: min(68vw, 930px);
+  opacity: 0.88;
+}
+
+.field[data-variant="hero"] .slot3 {
+  --artifact-transform: rotate(15deg);
+  --artifact-filter: sepia(0.08) saturate(0.74) brightness(1.02) contrast(1.04);
+  top: auto;
+  right: -3%;
+  bottom: 7%;
+  width: min(30vw, 400px);
+  opacity: 0.58;
+}
+
+/* Discover:記録紙をコピーと台帳の継ぎ目へ差し込み、糸巻が巡回方向を示す。 */
+.field[data-variant="discover"] .slot1 {
+  --artifact-transform: rotate(-9deg);
+  --artifact-filter: sepia(0.16) saturate(0.72) brightness(0.76);
+  top: 9%;
+  left: 26%;
+  width: min(58vw, 810px);
+  opacity: 0.5;
+}
+
+.field[data-variant="discover"] .slot2 {
+  --artifact-transform: rotate(13deg);
+  right: -9vw;
+  bottom: -7vw;
+  width: min(34vw, 470px);
+  opacity: 0.78;
+}
+
+/* Story:木箱は写真と本文の境界をまたぎ、記録紙は時間の下層へ沈む。 */
+.field[data-variant="story"] .slot1 {
+  --artifact-transform: rotate(-8deg);
+  right: -11vw;
+  bottom: -10vw;
+  width: min(48vw, 680px);
+  opacity: 0.84;
+}
+
+.field[data-variant="story"] .slot2 {
+  --artifact-transform: rotate(16deg);
+  top: -5vw;
+  right: 17%;
+  width: min(38vw, 520px);
+  opacity: 0.38;
+}
+
+/* How-to:糸巻→機械→煉瓦の順で手順線を作る。 */
+.field[data-variant="howto"] .slot1 {
+  --artifact-transform: rotate(-17deg);
+  top: 11%;
+  left: -12vw;
+  width: min(38vw, 510px);
+  opacity: 0.78;
+}
+
+.field[data-variant="howto"] .slot2 {
+  --artifact-transform: rotate(7deg);
+  --artifact-filter: saturate(0.72) brightness(0.84);
+  top: 40%;
+  right: -16vw;
+  width: min(52vw, 720px);
+  opacity: 0.7;
+}
+
+.field[data-variant="howto"] .slot3 {
+  --artifact-transform: rotate(4deg);
+  right: -8vw;
+  bottom: -5vw;
+  width: min(38vw, 520px);
+  opacity: 0.82;
+}
+
+/* Route:地面を近景、機械を中景、記録を背景へ明確に分離する。 */
+.field[data-variant="route"] .slot1 {
+  --artifact-filter: saturate(0.64) brightness(0.72) contrast(1.12);
+  right: -13vw;
+  bottom: -6vw;
+  width: min(112vw, 1580px);
+  opacity: 0.82;
+}
+
+.field[data-variant="route"] .slot2 {
+  --artifact-transform: rotate(-8deg);
+  --artifact-filter: saturate(0.68) brightness(0.72);
+  top: 18%;
+  right: -16vw;
+  width: min(52vw, 720px);
+  opacity: 0.58;
+}
+
+.field[data-variant="route"] .slot3 {
+  --artifact-transform: rotate(13deg);
+  --artifact-filter: sepia(0.2) saturate(0.52) brightness(0.7);
+  top: 33%;
+  left: -14vw;
+  width: min(43vw, 580px);
+  opacity: 0.34;
+}
+
+.field[data-variant="access"] .slot1 {
+  --artifact-transform: rotate(-9deg);
+  right: -13vw;
+  bottom: -11vw;
+  width: min(50vw, 690px);
+  opacity: 0.82;
+}
+
+.field[data-variant="access"] .slot2 {
+  --artifact-transform: rotate(18deg);
+  top: -10vw;
+  left: -18vw;
+  width: min(52vw, 720px);
+  opacity: 0.38;
+}
+
+.field[data-variant="share"] .slot1 {
+  --artifact-transform: rotate(20deg);
+  --artifact-filter: sepia(0.14) saturate(0.62) brightness(0.8);
+  top: -18vw;
+  right: -8vw;
+  width: min(53vw, 730px);
+  opacity: 0.7;
+}
+
+/* Map:地面の上に機械が現れ、桑が奥の経路を額縁化する。 */
+.field[data-variant="map"] .slot1 {
+  --artifact-filter: saturate(0.58) brightness(0.66);
+  right: -15vw;
+  bottom: -14vw;
+  width: min(100vw, 1450px);
+  opacity: 0.78;
+}
+
+.field[data-variant="map"] .slot2 {
+  --artifact-transform: rotate(-8deg);
+  --artifact-filter: saturate(0.72) brightness(0.75);
+  top: -13%;
+  right: -6vw;
+  width: min(45vw, 620px);
+  opacity: 0.88;
+}
+
+.field[data-variant="map"] .slot3 {
+  --artifact-transform: rotate(15deg);
+  top: -18vw;
+  left: -20vw;
+  width: min(58vw, 790px);
+  opacity: 0.46;
+}
+
+.field[data-variant="information"] .slot1 {
+  --artifact-transform: rotate(-9deg);
+  --artifact-filter: sepia(0.16) saturate(0.66) brightness(0.82);
+  top: -38%;
+  right: -5vw;
+  width: min(48vw, 630px);
+  opacity: 0.76;
+}
+
+.field[data-variant="information"] .slot2 {
+  --artifact-transform: rotate(4deg);
+  left: -9vw;
+  bottom: -38%;
+  width: min(44vw, 580px);
+  opacity: 0.7;
+}
+
+@keyframes artifactReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--entry-x), var(--entry-y), 0) var(--artifact-transform);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0) var(--artifact-transform);
+  }
+}
+
+@keyframes silkDraw {
+  from {
+    opacity: 0.15;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    opacity: 1;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nodeReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+    transform-origin: center;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .silkGuide {
+    inset: -2% -12%;
+    width: 124%;
+    height: 104%;
+  }
+
+  .silkLine {
+    stroke-width: 1.35;
+  }
+
+  .field[data-variant="hero"] .slot1 {
+    top: -4%;
+    left: -60vw;
+    width: 150vw;
+    opacity: 0.86;
+  }
+
+  .field[data-variant="hero"] .slot2 {
+    left: auto;
+    right: -72vw;
+    bottom: -5%;
+    width: 168vw;
+    opacity: 0.9;
+  }
+
+  .field[data-variant="hero"] .slot3 {
+    top: 23%;
+    right: -18vw;
+    width: 68vw;
+    opacity: 0.58;
+  }
+
+  .field[data-variant="discover"] .slot1 {
+    top: 29%;
+    left: 11vw;
+    width: 136vw;
+    opacity: 0.52;
+  }
+
+  .field[data-variant="discover"] .slot2 {
+    right: -31vw;
+    bottom: -3%;
+    width: 86vw;
+    opacity: 0.72;
+  }
+
+  .field[data-variant="story"] .slot1 {
+    right: -47vw;
+    bottom: 22%;
+    width: 120vw;
+    opacity: 0.76;
+  }
+
+  .field[data-variant="story"] .slot2 {
+    top: 45%;
+    right: 18vw;
+    width: 100vw;
+    opacity: 0.3;
+  }
+
+  .field[data-variant="howto"] .slot1 {
+    top: 14%;
+    left: -28vw;
+    width: 94vw;
+    opacity: 0.82;
+  }
+
+  .field[data-variant="howto"] .slot2 {
+    top: 43%;
+    right: -70vw;
+    width: 142vw;
+    opacity: 0.68;
+  }
+
+  .field[data-variant="howto"] .slot3 {
+    right: -36vw;
+    bottom: -2%;
+    width: 106vw;
+    opacity: 0.78;
+  }
+
+  .field[data-variant="route"] .slot1 {
+    right: -72vw;
+    bottom: -2vw;
+    width: 238vw;
+    opacity: 0.72;
+  }
+
+  .field[data-variant="route"] .slot2 {
+    top: 27%;
+    right: -56vw;
+    width: 136vw;
+    opacity: 0.58;
+  }
+
+  .field[data-variant="route"] .slot3 {
+    top: 54%;
+    left: -55vw;
+    width: 122vw;
+    opacity: 0.28;
+  }
+
+  .field[data-variant="access"] .slot1 {
+    right: -48vw;
+    bottom: -2%;
+    width: 128vw;
+    opacity: 0.78;
+  }
+
+  .field[data-variant="access"] .slot2 {
+    top: -4%;
+    left: -76vw;
+    width: 146vw;
+    opacity: 0.34;
+  }
+
+  .field[data-variant="share"] .slot1 {
+    top: -28vw;
+    right: -35vw;
+    width: 110vw;
+    opacity: 0.72;
+  }
+
+  .field[data-variant="map"] .slot1 {
+    right: -90vw;
+    bottom: -4vw;
+    width: 252vw;
+    opacity: 0.64;
+  }
+
+  .field[data-variant="map"] .slot2 {
+    top: 3%;
+    right: -54vw;
+    width: 132vw;
+    opacity: 0.82;
+  }
+
+  .field[data-variant="map"] .slot3 {
+    top: -8%;
+    left: -64vw;
+    width: 140vw;
+    opacity: 0.42;
+  }
+
+  .field[data-variant="information"] .slot1 {
+    top: -17%;
+    right: -52vw;
+    width: 124vw;
+    opacity: 0.74;
+  }
+
+  .field[data-variant="information"] .slot2 {
+    left: -48vw;
+    bottom: -43%;
+    width: 108vw;
+    opacity: 0.68;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .silkLine,
+  .silkNode {
+    animation: none !important;
+    transition: none !important;
+  }
+}

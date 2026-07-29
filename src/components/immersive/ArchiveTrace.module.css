@@ -72,8 +72,8 @@
   background: #07120f;
 }
 
-.reached a { color: #e9dfc7; }
-.reached a > span:first-child { border-color: #b44a38; background: #b44a38; }
+.active a { color: #e9dfc7; }
+.active a > span:first-child { border-color: #b44a38; background: #b44a38; }
 .trace a[aria-current="location"] { color: #d8ef6b; }
 .trace a[aria-current="location"] > span:first-child {
   width: 11px;

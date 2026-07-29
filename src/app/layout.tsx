@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
-import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
@@ -30,7 +29,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "繭が遺した地図｜富岡まち歩き謎解き",
-    description: "富岡の街を歩き、4つの手がかりを集めるリアル謎解きイベント。",
+    description: "2026年8月8日、富岡製糸場周辺商店街で開催するまち歩き型リアル謎解きイベント。",
   },
   alternates: { canonical: siteConfig.siteUrl },
   manifest: withBasePath("/manifest.webmanifest"),
@@ -39,6 +38,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   themeColor: "#0c241f",
 };
 
@@ -53,7 +53,6 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">本文へ移動</a>
         <EventBanner />
         {children}
-        <GuideCharacter />
         <Suspense fallback={null}>
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         </Suspense>
