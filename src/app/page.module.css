@@ -1,5 +1,12 @@
 .page { min-height: 100vh; min-height: 100svh; background: #07120f; }
 
+/* 下部固定ナビゲーションのぶんだけ本文の下に余白を確保する */
+@media (max-width: 680px) {
+  .page {
+    padding-bottom: calc(54px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .signal,
 .story,
 .howTo,

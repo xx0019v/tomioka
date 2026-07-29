@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import styles from "./ArchiveTrace.module.css";
 
+/** primary: スマートフォンの下部ナビゲーションに残す項目 */
 const chapters = [
-  { id: "discover", label: "概要" },
-  { id: "story", label: "物語" },
-  { id: "how-to-play", label: "参加" },
-  { id: "route", label: "街歩き" },
-  { id: "access", label: "受付" },
-  { id: "share", label: "共有" },
+  { id: "discover", label: "概要", primary: true },
+  { id: "story", label: "物語", primary: true },
+  { id: "how-to-play", label: "参加", primary: true },
+  { id: "route", label: "街歩き", primary: true },
+  { id: "access", label: "受付", primary: true },
+  { id: "share", label: "共有", primary: false },
 ] as const;
 
 export function ArchiveTrace() {
@@ -41,7 +42,11 @@ export function ArchiveTrace() {
       <p><span>SECTION</span><strong>{String(activeIndex + 1).padStart(2, "0")}</strong></p>
       <ol>
         {chapters.map((chapter, index) => (
-          <li key={chapter.id} className={index === activeIndex ? styles.active : ""}>
+          <li
+            key={chapter.id}
+            className={index === activeIndex ? styles.active : ""}
+            data-primary={chapter.primary ? "true" : "false"}
+          >
             <a
               href={`#${chapter.id}`}
               aria-label={`${chapter.label}へ移動`}
