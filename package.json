@@ -1,6 +1,6 @@
 {
   "name": "tomioka",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test:e2e:ios": "playwright test e2e/ios-qa.spec.mjs --project=webkit --workers=1",
     "test:e2e:editorial": "playwright test e2e/editorial-qa.spec.mjs --project=chromium --workers=1",
+    "test:e2e:otomi": "playwright test e2e/otomi-arrival.spec.mjs --project=chromium --project=webkit --workers=1",
     "test:e2e:v11": "playwright test e2e/v11-release-qa.spec.mjs --project=chromium --project=webkit --workers=1 && node scripts/qa-v11-summary.mjs"
   },
   "dependencies": {
