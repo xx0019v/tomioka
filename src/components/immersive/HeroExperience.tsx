@@ -95,18 +95,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       requestDraw();
     };
 
-    let scrollTicking = false;
-    const handleScroll = () => {
-      if (!inView || !pageVisible || scrollTicking) return;
-      scrollTicking = true;
-      window.requestAnimationFrame(() => {
-        const bounds = section.getBoundingClientRect();
-        const progress = Math.min(1, Math.max(0, -bounds.top / Math.max(bounds.height, 1)));
-        section.style.setProperty("--hero-progress", progress.toFixed(3));
-        scrollTicking = false;
-      });
-    };
-
     const updatePageVisibility = () => {
       pageVisible = !document.hidden;
       section.dataset.inView = String(
@@ -116,7 +104,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         window.cancelAnimationFrame(raf);
         return;
       }
-      handleScroll();
       requestDraw();
     };
 
@@ -124,7 +111,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       if (motionQuery.matches) {
         if (motionEnabled) {
           section.removeEventListener("pointermove", handlePointer);
-          window.removeEventListener("scroll", handleScroll);
         }
         motionEnabled = false;
         pointer.x = 0.58;
@@ -141,12 +127,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       if (finePointerQuery.matches) {
         section.addEventListener("pointermove", handlePointer, { passive: true });
       }
-      if (!motionEnabled) {
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        motionEnabled = true;
-      }
+      motionEnabled = true;
       section.dataset.inView = String(inView && pageVisible);
-      handleScroll();
     };
 
     const visibilityObserver = new IntersectionObserver(
@@ -155,7 +137,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         section.dataset.inView = String(
           inView && pageVisible && !motionQuery.matches,
         );
-        if (inView) handleScroll();
+        if (inView) requestDraw();
       },
       { rootMargin: "12% 0px 12% 0px", threshold: 0 },
     );
@@ -172,7 +154,6 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       window.cancelAnimationFrame(raf);
       section.removeEventListener("pointermove", handlePointer);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", handleScroll);
       motionQuery.removeEventListener("change", syncMotionPreference);
       finePointerQuery.removeEventListener("change", syncMotionPreference);
       document.removeEventListener("visibilitychange", updatePageVisibility);
@@ -211,8 +192,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         <div className={styles.copy}>
           <p className={styles.kicker}>まち歩き型リアル謎解きイベント</p>
           <h1 id="hero-title">
-            <span>繭が遺した</span>
-            <span>地図</span>
+            <span className={styles.titleLine}><span>繭が遺した</span></span>
+            <span className={styles.titleLine}><span>地図</span></span>
           </h1>
           <p className={styles.title}>街は、まだ記憶している</p>
           <p className={styles.lead}>一本の絹糸をたどり、きぬと富岡の街へ。百五十年前の物語が、街並みの中であなたを待っています。</p>
@@ -222,24 +203,26 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           </div>
         </div>
 
-        <div className={styles.datePanel}>
-          <span>一日限定</span>
-          <strong><b>08</b><i>/</i><b>08</b></strong>
-          <small className="no-break">{eventDate}</small>
-        </div>
+        <div className={styles.supportRail}>
+          <div className={styles.datePanel}>
+            <span>一日限定</span>
+            <strong><b>08</b><i>/</i><b>08</b></strong>
+            <small className="no-break">{eventDate}</small>
+          </div>
 
-        <div className={styles.kinu}>
-          <GuideCharacter
-            placement="information"
-            expression="greeting"
-            initiallyOpen
-            lines={["絹糸の先へ", "いっしょに行こう"]}
-            reactions={[
-              { lines: ["開催日は8月8日", "一日限定だよ"], expression: "pointing" },
-              { lines: ["まずは開催情報を", "確認してみてね"], expression: "discovery" },
-              { lines: ["街の記憶を", "ゆっくりたどろう"], expression: "pleased" },
-            ]}
-          />
+          <div className={styles.kinu}>
+            <GuideCharacter
+              placement="information"
+              expression="greeting"
+              initiallyOpen
+              lines={["絹糸の先へ", "いっしょに行こう"]}
+              reactions={[
+                { lines: ["開催日は8月8日", "一日限定だよ"], expression: "pointing" },
+                { lines: ["まずは開催情報を", "確認してみてね"], expression: "discovery" },
+                { lines: ["街の記憶を", "ゆっくりたどろう"], expression: "pleased" },
+              ]}
+            />
+          </div>
         </div>
 
         <div className={styles.scrollCue} aria-hidden="true">
