@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
@@ -90,6 +91,18 @@ export default function Home() {
               <p>それから百五十年。あなたのもとに、一通の依頼が届いた。</p>
               <p>——彼女が街に遺した「謎の地図」を、探し出してほしい。</p>
             </div>
+            {/* 記録紙の端から、きぬが物語に寄り添う */}
+            <GuideCharacter
+              placement="information"
+              expression="thinking"
+              initiallyOpen={false}
+              lines={["この記録の先に", "富岡の街があるよ"]}
+              reactions={[
+                { lines: ["繭は街の記憶を", "糸に変えていたんだ"], expression: "neutral" },
+                { lines: ["絹糸の先をたどってみて"], expression: "pointing" },
+                { lines: ["百五十年前の紙が", "まだ残っているよ"], expression: "discovery" },
+              ]}
+            />
           </div>
         </section>
 
@@ -167,6 +180,18 @@ export default function Home() {
             <a href={siteConfig.start.googleMapsUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
             <Link href="/information/">開催情報を確認</Link>
           </div>
+          {/* 受付では、案内標識のように立つ */}
+          <GuideCharacter
+            placement="information"
+            expression="greeting"
+            initiallyOpen={false}
+            lines={["ここが出発地点", "お富ちゃん家だよ"]}
+            reactions={[
+              { lines: ["キットを受け取ったら", "街へ出かけよう"], expression: "pointing" },
+              { lines: ["上州富岡駅から", "歩いて5分ほど"], expression: "neutral" },
+              { lines: ["開催情報はここに", "まとめてあるよ"], expression: "map-reading" },
+            ]}
+          />
         </section>
 
         <section id="share" className={styles.share} aria-labelledby="share-heading">
@@ -180,6 +205,18 @@ export default function Home() {
           <ShareActions
             text={`富岡まち歩き謎解き「${siteConfig.title}」 ${siteConfig.eventDate}開催`}
             url={siteConfig.siteUrl}
+          />
+          {/* ページの終わり。繭へ戻るような余韻を残す */}
+          <GuideCharacter
+            placement="information"
+            expression="pleased"
+            initiallyOpen={false}
+            lines={["富岡で待っているよ"]}
+            reactions={[
+              { lines: ["絹糸はここで", "ひとまず休むね"], expression: "loading" },
+              { lines: ["街歩きマップも", "見ておいてね"], expression: "map-reading" },
+              { lines: ["また会おう"], expression: "greeting" },
+            ]}
           />
         </section>
       </main>
