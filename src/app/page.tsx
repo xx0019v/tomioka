@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { OtomiArrival } from "@/components/arrival/OtomiArrival";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
@@ -176,36 +177,7 @@ export default function Home() {
           <Link href="/map/" className={styles.routeCta}>街歩きマップを開く <span aria-hidden="true">↗</span></Link>
         </section>
 
-        <section id="access" className={styles.access} aria-labelledby="access-heading">
-          <ArtifactField variant="access" />
-          <div className={styles.accessIntro}>
-            <p className={styles.eyebrow}>START / お富ちゃん家</p>
-            <h2 id="access-heading"><span>物語の入口は</span><span>お富ちゃん家</span></h2>
-            <p>お富ちゃん家（富岡市観光案内所）で、参加キットを受け取れます。</p>
-          </div>
-          <dl>
-            <div><dt>ADDRESS</dt><dd>{siteConfig.start.address}</dd></div>
-            <div><dt>ACCESS</dt><dd>{siteConfig.start.access}</dd></div>
-            <div><dt>RECEPTION</dt><dd>{siteConfig.reception}</dd></div>
-            <div><dt>PARKING</dt><dd>周辺の有料駐車場をご利用ください</dd></div>
-          </dl>
-          <div className={styles.accessActions}>
-            <a href={siteConfig.start.googleMapsUrl} target="_blank" rel="noopener noreferrer">Googleマップで開く <span aria-hidden="true">↗</span></a>
-            <Link href="/information/">開催情報を確認</Link>
-          </div>
-          {/* 受付では、案内標識のように立つ */}
-          <GuideCharacter
-            placement="information"
-            expression="greeting"
-            initiallyOpen={false}
-            lines={["ここが出発地点", "お富ちゃん家だよ"]}
-            reactions={[
-              { lines: ["キットを受け取ったら", "街へ出かけよう"], expression: "pointing" },
-              { lines: ["上州富岡駅から", "歩いて5分ほど"], expression: "neutral" },
-              { lines: ["開催情報はここに", "まとめてあるよ"], expression: "map-reading" },
-            ]}
-          />
-        </section>
+        <OtomiArrival />
 
         <section id="share" className={styles.share} aria-labelledby="share-heading">
           <ArtifactField variant="share" />

@@ -1,4 +1,4 @@
-.page { min-height: 100vh; min-height: 100svh; background: #07120f; }
+.page { min-height: 100svh; background: #07120f; }
 
 /* 下部固定ナビゲーションのぶんだけ本文の下に余白を確保する */
 @media (max-width: 680px) {
@@ -11,7 +11,6 @@
 .story,
 .howTo,
 .route,
-.access,
 .share {
   position: relative;
   isolation: isolate;
@@ -27,8 +26,7 @@
 }
 
 .storyContent .eyebrow,
-.howTo .eyebrow,
-.access .eyebrow {
+.howTo .eyebrow {
   color: #6c5328;
 }
 
@@ -54,9 +52,6 @@
 .routeHeader,
 .routeIndex,
 .routeCta,
-.accessIntro,
-.access dl,
-.accessActions,
 .share > div {
   position: relative;
   z-index: 3;
@@ -215,8 +210,7 @@
   background: linear-gradient(90deg, rgba(242, 236, 223, 0.98), rgba(242, 236, 223, 0.88) 62%, rgba(242, 236, 223, 0.68));
 }
 .storyContent h2,
-.sectionHeader h2,
-.access h2 {
+.sectionHeader h2 {
   max-width: 12ch;
   margin-top: 16px;
   color: #11342b;
@@ -391,21 +385,6 @@
   white-space: nowrap;
 }
 
-.access {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 40px 100px;
-  padding: clamp(100px, 12vw, 170px) max(32px, calc((100vw - 1180px) / 2));
-  background: #e7decd;
-}
-.accessIntro > p:not(.eyebrow) { max-width: 40ch; margin-top: 26px; color: #4d594f; }
-.access dl { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-content: center; }
-.access dt { color: #6c5328; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.16em; }
-.access dd { margin-top: 6px; color: #17372f; font-weight: 700; }
-.accessActions { display: flex; gap: 12px; grid-column: 2; }
-.accessActions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: var(--touch-control); padding: 12px 24px; border: 1px solid #17372f; border-radius: 4px; color: #17372f; font-size: 0.78rem; font-weight: 700; }
-.accessActions a:first-child { background: #17372f; color: #f4eddd; }
-
 .share { display: flex; justify-content: space-between; align-items: end; gap: 70px; padding: clamp(90px, 11vw, 150px) max(32px, calc((100vw - 1180px) / 2)); background: #10251f; color: #f1ead9; }
 .share > div { min-width: 18rem; }
 .share h2 { max-width: 9ch; }
@@ -427,13 +406,12 @@
 }
 
 @media (max-width: 900px) {
-  .signal, .story, .access { grid-template-columns: 1fr; }
+  .signal, .story { grid-template-columns: 1fr; }
   .signal { min-height: 0; }
   .signalCopy { max-width: 680px; }
   .storyVisual { min-height: 68vw; }
   .sectionHeader, .routeHeader { grid-template-columns: 1fr; }
   .sectionHeader .eyebrow, .routeHeader .eyebrow { grid-column: 1; }
-  .accessActions { grid-column: 1; }
 }
 
 @media (max-width: 680px) {
@@ -441,7 +419,6 @@
   .story,
   .howTo,
   .route,
-  .access,
   .share {
     scroll-margin-top: 144px;
   }
@@ -452,21 +429,20 @@
     font-size: clamp(1.95rem, 9.6vw, 3.2rem);
     text-wrap: balance;
   }
-  .sectionHeader h2 span,
-  .access h2 span {
+  .sectionHeader h2 span {
     display: block;
     white-space: nowrap;
   }
   .story { min-height: 0; }
   .storyVisual { min-height: 112vw; }
   .storyContent { padding: 64px 22px 76px; }
-  .storyContent h2, .sectionHeader h2, .access h2 { font-size: clamp(2.45rem, 11.5vw, 4rem); }
+  .storyContent h2, .sectionHeader h2 { font-size: clamp(2.45rem, 11.5vw, 4rem); }
   .storyContent h2 span {
     display: block;
     white-space: nowrap;
   }
   .storyText { margin-top: 28px; font-size: 0.9rem; }
-  .howTo, .route, .access, .share { padding-inline: 20px; }
+  .howTo, .route, .share { padding-inline: 20px; }
   .howTo, .route { padding-block: 96px; }
   .routeGround {
     object-position: 64% center;
@@ -514,9 +490,6 @@
   .steps h3 { font-size: 1.25rem; }
   .steps p { font-size: 0.84rem; line-height: 1.7; }
   .routeHeader { gap: 18px; }
-  .access { gap: 62px; padding-block: 90px; }
-  .access dl { grid-template-columns: 1fr; gap: 26px; }
-  .accessActions { flex-direction: column; }
   .share { align-items: stretch; flex-direction: column; padding-block: 86px; }
   .share > div { min-width: 0; }
   .shareFolio {
@@ -528,8 +501,7 @@
 
 @media (max-width: 360px) {
   .storyContent h2,
-  .sectionHeader h2,
-  .access h2 {
+  .sectionHeader h2 {
     font-size: 1.88rem;
   }
 
