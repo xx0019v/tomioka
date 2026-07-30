@@ -1,0 +1,110 @@
+[
+  {
+    "viewport": "320x568",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "360x800",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "375x812",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "390x844",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "393x852",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "430x932",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "768x1024",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "1024x768",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "viewport": "1440x900",
+    "overflow": 0,
+    "smallTargets": 0,
+    "wrappedButtons": 0,
+    "probableOrphans": 0,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  }
+]

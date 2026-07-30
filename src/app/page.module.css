@@ -169,6 +169,10 @@
   display: block;
 }
 
+.signalCopy h2 span {
+  white-space: nowrap;
+}
+
 .signalCopy > p:not(.eyebrow),
 .routeHeader > p:not(.eyebrow) {
   max-width: 48ch;
@@ -339,7 +343,8 @@
 }
 .routeHeader { display: grid; grid-template-columns: 1fr 0.62fr; gap: 28px 80px; align-items: end; }
 .routeHeader .eyebrow { grid-column: 1 / -1; }
-.routeHeader h2 { max-width: 10ch; }
+.routeHeader h2 { max-width: 12ch; }
+.routeHeader h2 span { white-space: nowrap; }
 .routeHeader > p:not(.eyebrow) { align-self: end; margin-top: 0; }
 .routeCta { background: #d8ef6b; color: #091510; }
 
@@ -402,7 +407,9 @@
 .accessActions a:first-child { background: #17372f; color: #f4eddd; }
 
 .share { display: flex; justify-content: space-between; align-items: end; gap: 70px; padding: clamp(90px, 11vw, 150px) max(32px, calc((100vw - 1180px) / 2)); background: #10251f; color: #f1ead9; }
-.share h2 { max-width: 8ch; }
+.share > div { min-width: 18rem; }
+.share h2 { max-width: 9ch; }
+.share h2 span { white-space: nowrap; }
 .share > div > p:not(.eyebrow) { margin-top: 24px; color: #a8aaa1; }
 .shareFolio {
   position: absolute;
@@ -511,6 +518,7 @@
   .access dl { grid-template-columns: 1fr; gap: 26px; }
   .accessActions { flex-direction: column; }
   .share { align-items: stretch; flex-direction: column; padding-block: 86px; }
+  .share > div { min-width: 0; }
   .shareFolio {
     right: -0.08em;
     bottom: 0.08em;

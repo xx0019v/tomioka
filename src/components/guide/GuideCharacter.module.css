@@ -76,6 +76,7 @@
 
 .characterButton {
   position: relative;
+  flex: 0 0 78px;
   width: 78px;
   height: 98px;
   padding: 0;
@@ -277,6 +278,7 @@
   }
 
   .characterButton {
+    flex-basis: 64px;
     width: 64px;
     height: 76px;
   }
