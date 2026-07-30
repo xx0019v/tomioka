@@ -435,7 +435,17 @@
   }
   .story { min-height: 0; }
   .storyVisual { min-height: 112vw; }
-  .storyContent { padding: 64px 22px 76px; }
+  /* 1カラムに畳まれると、横方向のスクリムの薄い側が本文の下に来てしまい、
+     背後の資料写真が透けて可読性が落ちる。縦方向のほぼ均一なスクリムに差し替える。 */
+  .storyContent {
+    padding: 64px 22px 76px;
+    background: linear-gradient(
+      180deg,
+      rgba(242, 236, 223, 0.97) 0%,
+      rgba(242, 236, 223, 0.96) 70%,
+      rgba(242, 236, 223, 0.92) 100%
+    );
+  }
   .storyContent h2, .sectionHeader h2 { font-size: clamp(2.45rem, 11.5vw, 4rem); }
   .storyContent h2 span {
     display: block;
