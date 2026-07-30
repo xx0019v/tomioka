@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
+import { SilkTrail } from "@/components/immersive/SilkTrail";
 import { ShareActions } from "@/components/site/ShareActions";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -35,6 +36,7 @@ const participationSteps = [
 export default function Home() {
   return (
     <div className={styles.page}>
+      <SilkTrail />
       <SiteHeader />
 
       <main id="main-content">
