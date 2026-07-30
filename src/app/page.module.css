@@ -286,6 +286,18 @@
   font-weight: 700;
   transition: transform 180ms ease;
 }
+
+.howToFooter {
+  display: flex;
+  min-height: 132px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.howToFooter .primaryCta {
+  order: -1;
+}
 .primaryCta { min-height: var(--touch-primary); }
 .primaryCta:hover, .routeCta:hover { transform: translateY(-3px); }
 

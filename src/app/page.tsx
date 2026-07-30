@@ -123,7 +123,20 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <Link href="/information/" className={styles.primaryCta}>参加案内を見る <span aria-hidden="true">↗</span></Link>
+          <div className={styles.howToFooter}>
+            <GuideCharacter
+              placement="information"
+              expression="pointing"
+              initiallyOpen={false}
+              lines={["三つの記録を", "順にたどろう"]}
+              reactions={[
+                { lines: ["はじまりは", "お富ちゃん家だよ"], expression: "greeting" },
+                { lines: ["キットを受け取ったら", "街へ出発しよう"], expression: "discovery" },
+                { lines: ["大切なのは", "街をよく見ること"], expression: "thinking" },
+              ]}
+            />
+            <Link href="/information/" className={styles.primaryCta}>参加案内を見る <span aria-hidden="true">↗</span></Link>
+          </div>
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">

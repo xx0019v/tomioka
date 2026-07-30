@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
 import { ArtifactField } from "./ArtifactField";
 import styles from "./HeroExperience.module.css";
@@ -187,12 +188,13 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       <ArtifactField variant="hero" />
 
       <div className={styles.stage}>
-        <div className={styles.dateBadge}>
-          <span>一日限定</span>
-          <strong className="no-break">{eventDate}</strong>
+        <div className={styles.folio} aria-hidden="true">
+          <span>SILK MEMORY ATLAS</span>
+          <i>01 / TOMIOKA</i>
         </div>
 
         <div className={styles.evidence} aria-hidden="true">
+          <span className={styles.threadArc} />
           <div className={styles.evidenceCard}>
             <Image
               src={withBasePath("/images/hero-archive-800.jpg")}
@@ -213,11 +215,31 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
             <span>地図</span>
           </h1>
           <p className={styles.title}>街は、まだ記憶している</p>
-          <p className={styles.lead}>絹の記憶をたどり、富岡の街へ。百五十年前の物語が、街並みの中であなたを待っています。</p>
+          <p className={styles.lead}>一本の絹糸をたどり、きぬと富岡の街へ。百五十年前の物語が、街並みの中であなたを待っています。</p>
           <div className={styles.actions}>
             <Link href="/information/" className={styles.primary}>開催情報を見る <span aria-hidden="true">↗</span></Link>
             <Link href="/map/" className={styles.secondary}>街歩きマップを見る <span aria-hidden="true">↗</span></Link>
           </div>
+        </div>
+
+        <div className={styles.datePanel}>
+          <span>一日限定</span>
+          <strong><b>08</b><i>/</i><b>08</b></strong>
+          <small className="no-break">{eventDate}</small>
+        </div>
+
+        <div className={styles.kinu}>
+          <GuideCharacter
+            placement="information"
+            expression="greeting"
+            initiallyOpen
+            lines={["絹糸の先へ", "いっしょに行こう"]}
+            reactions={[
+              { lines: ["開催日は8月8日", "一日限定だよ"], expression: "pointing" },
+              { lines: ["まずは開催情報を", "確認してみてね"], expression: "discovery" },
+              { lines: ["街の記憶を", "ゆっくりたどろう"], expression: "pleased" },
+            ]}
+          />
         </div>
 
         <div className={styles.scrollCue} aria-hidden="true">

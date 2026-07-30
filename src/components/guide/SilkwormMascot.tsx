@@ -56,7 +56,7 @@ function Eyes({ face }: { face: FaceKind }) {
   if (face === "happy") {
     // 穏やかな弧の目（にっこり）
     return (
-      <g data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
+      <g data-rig="eyes" data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
         <path d="M70 55.5c1.6-2.1 4.4-2.1 6 0" />
         <path d="M82 55.5c1.6-2.1 4.4-2.1 6 0" />
       </g>
@@ -65,7 +65,7 @@ function Eyes({ face }: { face: FaceKind }) {
   if (face === "rest") {
     // 休息・読み込み（半分閉じた目）
     return (
-      <g data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
+      <g data-rig="eyes" data-kinu-eyes fill="none" stroke={eye} strokeWidth="2.4" strokeLinecap="round">
         <path d="M70 57c1.8 1.4 4.2 1.4 6 0" />
         <path d="M82 57c1.8 1.4 4.2 1.4 6 0" />
       </g>
@@ -74,7 +74,7 @@ function Eyes({ face }: { face: FaceKind }) {
   const dy = face === "down" ? 2.4 : 0;
   const dx = face === "look" ? 1.6 : 0;
   return (
-    <g data-kinu-eyes fill={eye}>
+    <g data-rig="eyes" data-kinu-eyes fill={eye}>
       <ellipse cx={73 + dx} cy={56 + dy} rx="1.9" ry="2.6" />
       <ellipse cx={85 + dx} cy={56 + dy} rx="1.9" ry="2.6" />
       {/* やわらかなハイライト（大きすぎるアニメ目にしない） */}
@@ -143,6 +143,7 @@ export function SilkwormMascot({
         </radialGradient>
       </defs>
 
+      <g data-rig="body">
       {/* やわらかな影（接地感） */}
       <ellipse cx="58" cy="94" rx="40" ry="6.5" fill="#2a3b34" opacity="0.12" />
 
@@ -192,6 +193,7 @@ export function SilkwormMascot({
         </g>
       )}
 
+      <g data-rig="head">
       {/* 頭部（丸く上品に） */}
       <circle cx="80" cy="52" r="19" fill="url(#silk-body)" stroke="#cbb892" strokeWidth="1.4" />
       <ellipse cx="74" cy="46" rx="14" ry="11" fill="url(#silk-sheen)" opacity="0.85" />
@@ -214,6 +216,8 @@ export function SilkwormMascot({
           <path d="M99 34l1.4 3.2 3.2 1.4-3.2 1.4-1.4 3.2-1.4-3.2-3.2-1.4 3.2-1.4z" />
         </g>
       )}
+      </g>
+      </g>
     </svg>
   );
 }

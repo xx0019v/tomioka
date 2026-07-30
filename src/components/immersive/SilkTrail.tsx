@@ -32,10 +32,14 @@ export function SilkTrail() {
 
     let frame = 0;
     let active = true;
+    let requestCount = 0;
 
     const drawStatic = () => {
       // 動きを止める場合でも糸は「引かれた状態」で見せる
       path.style.strokeDashoffset = "0";
+      path.dataset.progress = "1.000";
+      rootRef.current?.setAttribute("data-loop-count", "0");
+      rootRef.current?.setAttribute("data-motion-active", "false");
       if (bead) bead.style.opacity = "0";
     };
 
@@ -45,6 +49,9 @@ export function SilkTrail() {
       const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
 
       path.style.strokeDashoffset = `${length * (1 - progress)}`;
+      path.dataset.progress = progress.toFixed(3);
+      rootRef.current?.setAttribute("data-frame-pending", "false");
+      rootRef.current?.setAttribute("data-motion-active", String(active));
 
       if (bead) {
         const point = path.getPointAtLength(length * progress);
@@ -55,6 +62,9 @@ export function SilkTrail() {
 
     const request = () => {
       if (!active || frame) return;
+      requestCount += 1;
+      rootRef.current?.setAttribute("data-request-count", String(requestCount));
+      rootRef.current?.setAttribute("data-frame-pending", "true");
       frame = window.requestAnimationFrame(update);
     };
 
@@ -67,6 +77,7 @@ export function SilkTrail() {
         return;
       }
       active = true;
+      rootRef.current?.setAttribute("data-motion-active", "true");
       request();
     };
 
@@ -75,12 +86,20 @@ export function SilkTrail() {
     const onVisibility = () => {
       if (reduce.matches) return;
       active = !document.hidden;
+      rootRef.current?.setAttribute("data-motion-active", String(active));
       if (active) request();
+    };
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      // bfcache復帰時も既存リスナーを再登録せず、現在位置を1度だけ描き直す。
+      if (event.persisted) request();
     };
 
     applyMotionPreference();
     window.addEventListener("scroll", request, { passive: true });
     window.addEventListener("resize", request, { passive: true });
+    window.addEventListener("orientationchange", request, { passive: true });
+    window.addEventListener("pageshow", onPageShow);
     document.addEventListener("visibilitychange", onVisibility);
     reduce.addEventListener("change", applyMotionPreference);
 
@@ -88,13 +107,23 @@ export function SilkTrail() {
       if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", request);
       window.removeEventListener("resize", request);
+      window.removeEventListener("orientationchange", request);
+      window.removeEventListener("pageshow", onPageShow);
       document.removeEventListener("visibilitychange", onVisibility);
       reduce.removeEventListener("change", applyMotionPreference);
     };
   }, []);
 
   return (
-    <div ref={rootRef} className={styles.trail} aria-hidden="true">
+    <div
+      ref={rootRef}
+      className={styles.trail}
+      data-silk-trail
+      data-loop-count="0"
+      data-frame-pending="false"
+      data-motion-active="false"
+      aria-hidden="true"
+    >
       <svg viewBox="0 0 40 1000" preserveAspectRatio="none" focusable="false">
         {/* 下地。糸が通る道筋をごく淡く示す */}
         <path
@@ -105,6 +134,8 @@ export function SilkTrail() {
         <path
           ref={pathRef}
           className={styles.thread}
+          data-silk-path
+          data-silk-trail-thread
           d="M20 0 C 6 120, 34 240, 20 360 S 6 600, 20 720 S 34 880, 20 1000"
         />
         {/* 糸の先端の繭 */}
