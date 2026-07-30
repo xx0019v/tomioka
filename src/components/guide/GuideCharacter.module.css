@@ -76,6 +76,7 @@
 
 .characterButton {
   position: relative;
+  flex: 0 0 78px;
   width: 78px;
   height: 98px;
   padding: 0;
@@ -109,11 +110,11 @@
    data-react を 0/1 で切り替えることで連打でも確実に再生し直す。
    呼吸は svg 側に当てているため、ここと競合しない。 */
 .characterFrame[data-react="0"] {
-  animation: kinuReactA 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: kinuReactA 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .characterFrame[data-react="1"] {
-  animation: kinuReactB 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: kinuReactB 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes kinuReactA {
@@ -137,17 +138,69 @@
   transform-origin: 50% 92%;
 }
 
-.guide[data-active="true"] .characterFrame svg {
-  animation: guideBreathe 12s ease-in-out infinite;
-}
-
-.characterFrame svg [data-kinu-eyes] {
+.characterFrame svg [data-rig="body"],
+.characterFrame svg [data-rig="head"],
+.characterFrame svg [data-rig="eyes"] {
   transform-box: fill-box;
-  transform-origin: center;
 }
 
-.guide[data-active="true"] .characterFrame svg [data-kinu-eyes] {
-  animation: kinuBlink 9.7s linear infinite;
+.characterFrame svg [data-rig="body"] {
+  transform-origin: 50% 100%;
+}
+
+.characterFrame svg [data-rig="head"] {
+  transform-origin: 42% 82%;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.characterFrame svg [data-rig="eyes"] {
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.guide[data-active="true"][data-guide-state="breathing"] .characterFrame svg [data-rig="body"] {
+  animation: guideBreathe 5.3s ease-in-out infinite;
+}
+
+.guide[data-guide-state="blinking"] .characterFrame svg [data-rig="eyes"] {
+  transform: scaleY(0.08);
+}
+
+.guide[data-guide-state="looking-left"] .characterFrame svg [data-rig="eyes"] {
+  transform: translateX(-2.2px);
+}
+
+.guide[data-guide-state="looking-left"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(-3deg);
+}
+
+.guide[data-guide-state="looking-right"] .characterFrame svg [data-rig="eyes"] {
+  transform: translateX(2.2px);
+}
+
+.guide[data-guide-state="looking-right"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(3deg);
+}
+
+.guide[data-guide-state="guiding"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(-2deg) translateY(-1px);
+}
+
+.guide[data-guide-state="thinking"] .characterFrame svg [data-rig="head"],
+.guide[data-guide-state="locating"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(-4deg);
+}
+
+.guide[data-active="true"][data-guide-state="locating"] .characterFrame svg [data-rig="body"] {
+  animation: kinuLocate 1.8s ease-in-out infinite;
+}
+
+.guide[data-guide-state="success"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(2deg) translateY(-1px);
+}
+
+.guide[data-guide-state="soft-warning"] .characterFrame svg [data-rig="head"] {
+  transform: rotate(-6deg) translateY(1px);
 }
 
 .callout {
@@ -198,26 +251,13 @@
 }
 
 @keyframes guideBreathe {
-  0%, 8%, 100% { transform: translateY(0) rotate(0); }
-  4% { transform: translateY(-2px) rotate(-0.35deg); }
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-1px) scaleY(1.012); }
 }
 
-@keyframes kinuBlink {
-  0%,
-  44%,
-  47%,
-  73%,
-  76%,
-  100% {
-    transform: scaleY(1);
-  }
-
-  45.2%,
-  46%,
-  74.2%,
-  75% {
-    transform: scaleY(0.08);
-  }
+@keyframes kinuLocate {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(1.5px); }
 }
 
 @media (max-width: 680px) {
@@ -238,6 +278,7 @@
   }
 
   .characterButton {
+    flex-basis: 64px;
     width: 64px;
     height: 76px;
   }
@@ -258,8 +299,9 @@
   .characterFrame[data-react="0"],
   .characterFrame[data-react="1"],
   .characterFrame svg,
-  .characterFrame svg [data-kinu-eyes] {
-    animation: none;
+  .characterFrame svg [data-rig] {
+    animation: none !important;
+    transition: none;
   }
 
   .characterButton {

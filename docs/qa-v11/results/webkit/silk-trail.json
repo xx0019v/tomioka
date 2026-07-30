@@ -1,0 +1,32 @@
+{
+  "states": [
+    {
+      "progress": "0.000",
+      "dashoffset": 1002.254822
+    },
+    {
+      "progress": "0.250",
+      "dashoffset": 751.616165
+    },
+    {
+      "progress": "0.500",
+      "dashoffset": 501.127411
+    },
+    {
+      "progress": "0.750",
+      "dashoffset": 250.488754
+    },
+    {
+      "progress": "1.000",
+      "dashoffset": 0
+    }
+  ],
+  "lifecycle": {
+    "beforeBurst": 32,
+    "afterBurst": 33,
+    "hiddenStart": 33,
+    "restored": 34,
+    "idleAfterRestore": 34,
+    "loopCount": 0
+  }
+}

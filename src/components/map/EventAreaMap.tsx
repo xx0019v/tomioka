@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { Map as LeafletMap, Marker as LeafletMarker } from "leaflet";
-import { GuideCharacter } from "@/components/guide/GuideCharacter";
+import { GuideCharacter, type GuideState } from "@/components/guide/GuideCharacter";
 import type { GuideExpression } from "@/components/guide/SilkwormMascot";
 import type { EventSpot } from "@/data/spots";
 import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
@@ -13,6 +13,7 @@ import { NEAR_THRESHOLD_METERS, distanceInMeters } from "@/lib/geo";
 import styles from "./EventAreaMap.module.css";
 
 type GeoState = "idle" | "locating" | "granted" | "denied" | "unavailable";
+type SelectionPhase = "idle" | "thread" | "gaze" | "sheet";
 
 interface EventAreaMapProps {
   spots: EventSpot[];
@@ -31,6 +32,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   const lastTriggerRef = useRef<{ slug: string; source: "marker" | "list" } | null>(null);
   const pendingFocusRef = useRef<{ slug: string; source: "marker" | "list" } | null>(null);
   const locatingRef = useRef(false);
+  const selectionTimersRef = useRef<number[]>([]);
   const hasSyncedUrlRef = useRef(false);
   const mobileMapRef = useRef(false);
   const sheetDragRef = useRef<{
@@ -41,6 +43,8 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
     velocity: number;
   } | null>(null);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  const [selectionPhase, setSelectionPhase] = useState<SelectionPhase>("idle");
+  const [selectionGaze, setSelectionGaze] = useState<"looking-left" | "looking-right">("looking-left");
   const [mapState, setMapState] = useState<"loading" | "ready" | "limited" | "failed">("loading");
   const [geoState, setGeoState] = useState<GeoState>("idle");
   const [mapInteractionEnabled, setMapInteractionEnabled] = useState(false);
@@ -53,18 +57,26 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
    * 現在地の取得状況を最優先し、次に選択中のスポット、最後に地図の操作状態を見る。
    * 攻略順・ヒント・答えには触れない。
    */
-  const guide: { lines: readonly [string, string?]; expression: GuideExpression } =
-    geoState === "locating"
-      ? { lines: ["現在地を探しているよ", "少しだけ待ってね"], expression: "thinking" }
+  const guide: { lines: readonly [string, string?]; expression: GuideExpression; state: GuideState } =
+    !mapVisible
+      ? { lines: ["地図のそばで", "静かに待っているよ"], expression: "neutral", state: "resting" }
+      : geoState === "locating"
+      ? { lines: ["現在地を探しているよ", "少しだけ待ってね"], expression: "thinking", state: "locating" }
       : geoState === "granted"
-        ? { lines: ["現在地が出たよ", "近い場所から歩けるね"], expression: "pleased" }
+        ? { lines: ["現在地が出たよ", "近い場所から歩けるね"], expression: "pleased", state: "success" }
         : geoState === "denied" || geoState === "unavailable"
-          ? { lines: ["現在地は使えないけれど", "スポット一覧から選べるよ"], expression: "concerned" }
+          ? { lines: ["現在地は使えないけれど", "スポット一覧から選べるよ"], expression: "concerned", state: "soft-warning" }
           : selected
-            ? { lines: [`${selected.name}を選んだね`, "場所と行き方を見てみよう"], expression: "pointing" }
+            ? selectionPhase === "thread"
+              ? { lines: ["絹糸をたどって", `${selected.name}へ`], expression: "pointing", state: "guiding" }
+              : selectionPhase === "gaze"
+                ? { lines: [`${selected.name}は`, "この先にあるよ"], expression: "pointing", state: selectionGaze }
+                : { lines: [`${selected.name}を選んだね`, "場所と行き方を見てみよう"], expression: "pointing", state: "guiding" }
             : mapInteractionEnabled
-              ? { lines: ["地図を動かせるよ", "指でなぞってみて"], expression: "map-reading" }
-              : { lines: ["地図の印を選ぶと", "場所と目印がわかるよ"], expression: "map-reading" };
+              ? { lines: ["地図を動かせるよ", "終わったら操作を終了してね"], expression: "map-reading", state: "guiding" }
+              : mapState === "loading"
+                ? { lines: ["地図をひらいているよ", "少しだけ待ってね"], expression: "thinking", state: "thinking" }
+                : { lines: ["地図の印を選ぶと", "場所と目印がわかるよ"], expression: "map-reading", state: "breathing" };
 
   const focusTrigger = useCallback((slug: string, source: "marker" | "list") => {
     window.requestAnimationFrame(() => {
@@ -83,13 +95,52 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   }, []);
 
   const syncSelectionFromUrl = useCallback(() => {
+    selectionTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    selectionTimersRef.current = [];
     const slug = new URL(window.location.href).searchParams.get("spot");
     const spot = spots.find((item) => item.slug === slug);
     setSelectedSlug(spot?.slug ?? null);
+    setSelectionPhase(spot ? "sheet" : "idle");
     if (spot) setAnnouncement(`${spot.name}の案内を開きました。`);
     else if (hasSyncedUrlRef.current) setAnnouncement("スポット案内を閉じました。");
     hasSyncedUrlRef.current = true;
   }, [spots]);
+
+  const clearSelectionFlow = useCallback(() => {
+    selectionTimersRef.current.forEach((timer) => window.clearTimeout(timer));
+    selectionTimersRef.current = [];
+  }, []);
+
+  const pointThreadAtMarker = useCallback((slug: string) => {
+    const stage = mapStageRef.current;
+    const marker = markersRef.current.get(slug)?.getElement();
+    if (!stage || !marker) return;
+    const stageRect = stage.getBoundingClientRect();
+    const markerRect = marker.getBoundingClientRect();
+    const startX = markerRect.left + markerRect.width / 2 - stageRect.left;
+    const startY = markerRect.top + markerRect.height / 2 - stageRect.top;
+    const targetX = Math.max(36, stageRect.width - 46);
+    const targetY = 62;
+    const dx = targetX - startX;
+    const dy = targetY - startY;
+    stage.style.setProperty("--selection-thread-x", `${startX}px`);
+    stage.style.setProperty("--selection-thread-y", `${startY}px`);
+    stage.style.setProperty("--selection-thread-length", `${Math.hypot(dx, dy)}px`);
+    stage.style.setProperty("--selection-thread-angle", `${Math.atan2(dy, dx)}rad`);
+    setSelectionGaze(dx < 0 ? "looking-left" : "looking-right");
+  }, []);
+
+  const beginSelectionFlow = useCallback((slug: string) => {
+    clearSelectionFlow();
+    setSelectionPhase("thread");
+    window.requestAnimationFrame(() => pointThreadAtMarker(slug));
+    selectionTimersRef.current = [
+      window.setTimeout(() => setSelectionPhase("gaze"), 180),
+      window.setTimeout(() => setSelectionPhase("sheet"), 380),
+    ];
+  }, [clearSelectionFlow, pointThreadAtMarker]);
+
+  useEffect(() => clearSelectionFlow, [clearSelectionFlow]);
 
   useEffect(() => {
     const initialSync = window.setTimeout(syncSelectionFromUrl, 0);
@@ -200,11 +251,24 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
         const syncMapSize = () => {
           window.requestAnimationFrame(() => map.invalidateSize({ pan: false }));
         };
+        const syncOrientation = () => {
+          syncMapSize();
+          if (!mobileMap) return;
+          [
+            map.dragging,
+            map.touchZoom,
+            map.doubleClickZoom,
+            map.boxZoom,
+            map.keyboard,
+          ].forEach((handler) => handler.disable());
+          setMapInteractionEnabled(false);
+          setAnnouncement("画面の向きが変わりました。地図は表示モードに戻りました。");
+        };
         window.addEventListener("resize", syncMapSize, { passive: true });
-        window.addEventListener("orientationchange", syncMapSize);
+        window.addEventListener("orientationchange", syncOrientation);
         map.once("unload", () => {
           window.removeEventListener("resize", syncMapSize);
-          window.removeEventListener("orientationchange", syncMapSize);
+          window.removeEventListener("orientationchange", syncOrientation);
         });
       })
       .catch(() => setMapState("failed"));
@@ -223,14 +287,29 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   }, []);
 
   useEffect(() => {
-    if (!selectedSlug) return;
+    markersRef.current.forEach((marker, slug) => {
+      marker.getElement()?.classList.toggle("map-marker-shell--selected", slug === selectedSlug);
+    });
+  }, [selectedSlug]);
+
+  useEffect(() => {
+    if (!selectedSlug || selectionPhase !== "gaze") return;
     const marker = markersRef.current.get(selectedSlug);
     if (marker && mapRef.current) {
       const animate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      mapRef.current.panTo(marker.getLatLng(), { animate, duration: animate ? 0.45 : 0 });
+      mapRef.current.panInside(marker.getLatLng(), {
+        paddingTopLeft: [72, 92],
+        paddingBottomRight: [72, 120],
+        animate,
+        duration: animate ? 0.32 : 0,
+      });
     }
+  }, [selectedSlug, selectionPhase]);
+
+  useEffect(() => {
+    if (!selectedSlug || selectionPhase !== "sheet") return;
     window.requestAnimationFrame(() => closeButtonRef.current?.focus());
-  }, [selectedSlug]);
+  }, [selectedSlug, selectionPhase]);
 
   useEffect(() => {
     if (selectedSlug || !pendingFocusRef.current) return;
@@ -320,11 +399,13 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
 
   function openSpot(slug: string, source: "marker" | "list") {
     if (new URL(window.location.href).searchParams.get("spot") === slug) return;
+    clearSelectionFlow();
     lastTriggerRef.current = { slug, source };
     const url = new URL(window.location.href);
     url.searchParams.set("spot", slug);
     window.history.pushState({ ...window.history.state, mayuMapPanel: true, source }, "", url);
     setSelectedSlug(slug);
+    beginSelectionFlow(slug);
     const spot = spots.find((item) => item.slug === slug);
     if (spot) setAnnouncement(`${spot.name}の案内を開きました。`);
     trackEvent(AnalyticsEvent.SpotSelect, { spot: slug, source });
@@ -416,6 +497,8 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
 
   function closeSpot() {
     if (!selectedSlug) return;
+    clearSelectionFlow();
+    setSelectionPhase("idle");
     const triggerToFocus = lastTriggerRef.current ?? { slug: selectedSlug, source: "marker" as const };
     pendingFocusRef.current = triggerToFocus;
     if (window.history.state?.mayuMapPanel) {
@@ -428,6 +511,8 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
       setAnnouncement("スポット案内を閉じました。");
     }
   }
+
+  const detailVisible = selected && selectionPhase === "sheet" ? selected : null;
 
   return (
     <section className={styles.section} aria-labelledby="map-heading">
@@ -460,6 +545,11 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             className={styles.map}
             role="region"
             aria-label="富岡のイベントエリアと街歩きスポットの地図"
+          />
+          <span
+            className={styles.selectionThread}
+            data-phase={selectionPhase}
+            aria-hidden="true"
           />
           {mapState === "loading" && <p className={styles.mapMessage}>地図資料を展開しています…</p>}
           {(mapState === "limited" || mapState === "failed") && (
@@ -503,10 +593,10 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
 
         <aside
           ref={sidePanelRef}
-          className={`${styles.sidePanel} ${selected ? styles.sidePanelOpen : ""}`}
-          aria-label={selected ? `${selected.name}のスポット案内` : "街歩きスポット一覧"}
+          className={`${styles.sidePanel} ${detailVisible ? styles.sidePanelOpen : ""}`}
+          aria-label={detailVisible ? `${detailVisible.name}のスポット案内` : "街歩きスポット一覧"}
         >
-          {selected ? (
+          {detailVisible ? (
             <article className={styles.detail}>
               <div
                 className={styles.sheetHandle}
@@ -519,34 +609,34 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
                 <span />
               </div>
               <div className={styles.detailTopline}>
-                <span className={styles.recordNumber}>{selected.marker}</span>
-                <button ref={closeButtonRef} type="button" className={styles.closeButton} onClick={closeSpot} aria-label={`${selected.name}の案内を閉じる`}>
+                <span className={styles.recordNumber}>{detailVisible.marker}</span>
+                <button ref={closeButtonRef} type="button" className={styles.closeButton} onClick={closeSpot} aria-label={`${detailVisible.name}の案内を閉じる`}>
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
               <div className={styles.detailVisual}>
-                <Image src={selected.visualSrc} alt={selected.visualAlt} fill sizes="(max-width: 899px) 100vw, 390px" />
+                <Image src={detailVisible.visualSrc} alt={detailVisible.visualAlt} fill sizes="(max-width: 899px) 100vw, 390px" />
               </div>
               <p className={styles.photoCredit}>
-                <a href={selected.visualSourceUrl} target="_blank" rel="noopener noreferrer">
-                  {selected.visualCredit}
+                <a href={detailVisible.visualSourceUrl} target="_blank" rel="noopener noreferrer">
+                  {detailVisible.visualCredit}
                 </a>
               </p>
-              <p className={styles.detailKicker}>{selected.categoryLabel} / TOMIOKA</p>
-              <h3>{selected.formalName ?? selected.name}</h3>
-              <p className={styles.description}>{selected.description}</p>
+              <p className={styles.detailKicker}>{detailVisible.categoryLabel} / TOMIOKA</p>
+              <h3>{detailVisible.formalName ?? detailVisible.name}</h3>
+              <p className={styles.description}>{detailVisible.description}</p>
 
               <dl className={styles.facts}>
-                <div><dt>所在地</dt><dd>{selected.address}</dd></div>
-                <div><dt>位置の目安</dt><dd>{selected.relation}</dd></div>
+                <div><dt>所在地</dt><dd>{detailVisible.address}</dd></div>
+                <div><dt>位置の目安</dt><dd>{detailVisible.relation}</dd></div>
               </dl>
 
               <div className={styles.actions}>
                 <a
-                  href={selected.googleMapsUrl}
+                  href={detailVisible.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackEvent(AnalyticsEvent.GoogleMapsClick, { spot: selected.slug })}
+                  onClick={() => trackEvent(AnalyticsEvent.GoogleMapsClick, { spot: detailVisible.slug })}
                 >
                   Googleマップで開く
                 </a>
@@ -582,6 +672,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
           placement="map-stage"
           lines={guide.lines}
           expression={guide.expression}
+          state={guide.state}
           initiallyOpen={false}
         />
       </div>

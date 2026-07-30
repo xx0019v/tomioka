@@ -4,6 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import { SilkwormMascot, type GuideExpression } from "./SilkwormMascot";
 import styles from "./GuideCharacter.module.css";
 
+export const GUIDE_STATES = [
+  "idle",
+  "breathing",
+  "blinking",
+  "looking-left",
+  "looking-right",
+  "guiding",
+  "thinking",
+  "locating",
+  "success",
+  "soft-warning",
+  "resting",
+] as const;
+
+export type GuideState = (typeof GUIDE_STATES)[number];
+
 export interface GuideReaction {
   lines: readonly [string, string?];
   expression: GuideExpression;
@@ -14,6 +30,8 @@ interface GuideCharacterProps {
   expression?: GuideExpression;
   placement?: "map-hero" | "map-stage" | "information";
   initiallyOpen?: boolean;
+  /** アプリ状態を姿勢へ集約する。未指定時は既存 expression から互換変換する。 */
+  state?: GuideState;
   /** きぬに触れるたびに順に返す短い反応。答えやヒントは含めない。 */
   reactions?: readonly GuideReaction[];
 }
@@ -31,12 +49,28 @@ const DEFAULT_REACTIONS: readonly GuideReaction[] = [
 
 /** 連打でアニメーションが重ならないための最小間隔 */
 const REACTION_INTERVAL_MS = 220;
+const BLINK_DURATION_MS = 180;
+
+const stateForExpression: Record<GuideExpression, GuideState> = {
+  greeting: "guiding",
+  neutral: "breathing",
+  pointing: "guiding",
+  "map-reading": "thinking",
+  discovery: "success",
+  thinking: "thinking",
+  pleased: "success",
+  concerned: "soft-warning",
+  caution: "soft-warning",
+  loading: "resting",
+  clear: "success",
+};
 
 export function GuideCharacter({
   lines = ["現在地を表示すると", "街歩きの目安になるよ"],
   expression = "map-reading",
   placement = "map-hero",
   initiallyOpen = true,
+  state,
   reactions = DEFAULT_REACTIONS,
 }: GuideCharacterProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
@@ -44,6 +78,7 @@ export function GuideCharacter({
   // step 0 = 最初の案内。1以降は触れるたびの反応を巡回する。
   const [step, setStep] = useState(0);
   const [reactTick, setReactTick] = useState(0);
+  const [isBlinking, setIsBlinking] = useState(false);
   const lastTapRef = useRef(0);
   const guideRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -61,6 +96,13 @@ export function GuideCharacter({
   const current = step === 0 || reactions.length === 0 ? null : reactions[(step - 1) % reactions.length];
   const shownLines = current ? current.lines : lines;
   const shownExpression = current ? current.expression : expression;
+  const requestedState = state ?? stateForExpression[shownExpression];
+  const ambientState = requestedState === "idle" ? "breathing" : requestedState;
+  const shownState: GuideState = !isVisible
+    ? "resting"
+    : isBlinking && ambientState === "breathing"
+      ? "blinking"
+      : ambientState;
 
   useEffect(() => {
     const guide = guideRef.current;
@@ -88,6 +130,37 @@ export function GuideCharacter({
       document.removeEventListener("visibilitychange", updateVisible);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isVisible || ambientState !== "breathing") {
+      return;
+    }
+
+    let blinkTimer = 0;
+    let finishTimer = 0;
+    let disposed = false;
+    const scheduleBlink = () => {
+      const wait = 3500 + Math.round(Math.random() * 4500);
+      blinkTimer = window.setTimeout(() => {
+        if (disposed || document.hidden) {
+          scheduleBlink();
+          return;
+        }
+        setIsBlinking(true);
+        finishTimer = window.setTimeout(() => {
+          setIsBlinking(false);
+          if (!disposed) scheduleBlink();
+        }, BLINK_DURATION_MS);
+      }, wait);
+    };
+    scheduleBlink();
+
+    return () => {
+      disposed = true;
+      window.clearTimeout(blinkTimer);
+      window.clearTimeout(finishTimer);
+    };
+  }, [ambientState, isVisible]);
 
   function closeGuide() {
     setIsOpen(false);
@@ -117,6 +190,7 @@ export function GuideCharacter({
       className={styles.guide}
       data-placement={placement}
       data-active={isVisible}
+      data-guide-state={shownState}
       aria-label="きぬの街歩き案内"
     >
       {isOpen && (

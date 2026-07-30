@@ -35,7 +35,7 @@
   position: relative;
   z-index: 4;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.88fr);
   align-items: center;
   width: min(calc(100% - 64px), 1340px);
   min-height: calc(100svh - 148px);
@@ -43,27 +43,22 @@
   padding: 74px 0 86px;
 }
 
-.dateBadge {
+.folio {
   position: absolute;
   top: 26px;
   left: 0;
   display: flex;
+  width: 100%;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   color: #bcae8c;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
 }
 
-.dateBadge span {
-  padding: 4px 8px;
-  border: 1px solid rgba(224, 207, 165, 0.28);
-  border-radius: 999px;
-}
-
-.dateBadge strong {
-  color: #f4ecd9;
-  font-weight: 500;
+.folio i {
+  font-style: normal;
+  color: rgba(216, 239, 107, 0.72);
 }
 
 .copy {
@@ -171,6 +166,28 @@
   transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.threadArc {
+  position: absolute;
+  inset: -4%;
+  border: 1px solid rgba(210, 179, 111, 0.34);
+  border-right-color: transparent;
+  border-bottom-color: rgba(216, 239, 107, 0.2);
+  border-radius: 46% 54% 58% 42%;
+  transform: rotate(-18deg);
+}
+
+.threadArc::after {
+  position: absolute;
+  right: 4%;
+  bottom: 14%;
+  width: 8px;
+  height: 12px;
+  border: 1px solid #b44c38;
+  border-radius: 50%;
+  background: #eee3c8;
+  content: "";
+}
+
 .evidenceCard {
   position: absolute;
   inset: 18%;
@@ -208,6 +225,66 @@
   color: rgba(255, 248, 227, 0.72);
   font-size: 0.55rem;
   letter-spacing: 0.16em;
+}
+
+.datePanel {
+  position: absolute;
+  right: 0;
+  bottom: 74px;
+  z-index: 5;
+  display: grid;
+  width: min(33vw, 410px);
+  grid-template-columns: auto 1fr;
+  align-items: end;
+  padding-top: 12px;
+  border-top: 1px solid rgba(232, 223, 198, 0.28);
+  color: #f3ecda;
+}
+
+.datePanel > span {
+  align-self: start;
+  color: #c9aa68;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+}
+
+.datePanel strong {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: clamp(10px, 1.4vw, 22px);
+  line-height: 0.82;
+}
+
+.datePanel b {
+  font-size: clamp(3.8rem, 7vw, 7rem);
+  font-weight: 300;
+  letter-spacing: -0.08em;
+}
+
+.datePanel i {
+  color: #b44c38;
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  font-style: normal;
+}
+
+.datePanel small {
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin-top: 12px;
+  color: #aaa695;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+}
+
+.kinu {
+  position: absolute;
+  right: clamp(210px, 20vw, 330px);
+  bottom: 56px;
+  z-index: 8;
+  width: min(190px, 16vw);
 }
 
 
@@ -321,26 +398,21 @@
     display: flex;
     min-height: calc(100svh - 154px);
     width: calc(100% - 32px);
-    padding: 116px 0 44px;
+    padding: 112px 0 40px;
   }
 
-  .dateBadge {
-    top: 18px;
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px 10px;
-    padding-right: min(38vw, 150px);
+  .folio {
+    top: 15px;
   }
 
-  .dateBadge strong {
-    font-size: 0.68rem;
-    line-height: 1.4;
+  .folio i {
+    display: none;
   }
 
   .copy {
     width: 100%;
     align-self: flex-end;
+    padding-bottom: 105px;
   }
 
   .kicker {
@@ -390,11 +462,11 @@
 
   .evidence {
     position: absolute;
-    top: 48px;
-    right: -20px;
-    width: 54vw;
-    max-width: 230px;
-    opacity: 0.88;
+    top: 36px;
+    right: -36px;
+    width: 58vw;
+    max-width: 250px;
+    opacity: 0.84;
   }
 
   .evidenceCard {
@@ -403,6 +475,33 @@
 
   .scrollCue {
     display: none;
+  }
+
+  .datePanel {
+    right: auto;
+    bottom: 14px;
+    left: 0;
+    width: min(58vw, 230px);
+    padding-top: 8px;
+  }
+
+  .datePanel > span {
+    font-size: 0.54rem;
+  }
+
+  .datePanel b {
+    font-size: clamp(3rem, 15vw, 4.1rem);
+  }
+
+  .datePanel small {
+    margin-top: 7px;
+    font-size: 0.56rem;
+  }
+
+  .kinu {
+    right: -8px;
+    bottom: 3px;
+    width: min(42vw, 164px);
   }
 
   .facts {

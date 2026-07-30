@@ -85,6 +85,44 @@
   content: "";
 }
 
+.selectionThread {
+  position: absolute;
+  top: var(--selection-thread-y, 50%);
+  left: var(--selection-thread-x, 50%);
+  z-index: 690;
+  display: block;
+  width: var(--selection-thread-length, 0);
+  height: 2px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, rgba(168, 64, 42, 0.92), rgba(201, 170, 104, 0.76));
+  box-shadow: 0 0 0 1px rgba(251, 248, 240, 0.55);
+  transform: rotate(var(--selection-thread-angle, 0));
+  transform-origin: 0 50%;
+}
+
+.selectionThread[data-phase="thread"],
+.selectionThread[data-phase="gaze"] {
+  opacity: 1;
+  animation: drawSelectionThread 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mapStage :global(.map-marker-shell--selected .map-marker) {
+  box-shadow:
+    0 0 0 5px rgba(251, 248, 240, 0.9),
+    0 0 0 8px rgba(168, 64, 42, 0.52),
+    0 12px 28px rgba(12, 36, 31, 0.28);
+}
+
+@keyframes drawSelectionThread {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+
 .mapMessage {
   position: absolute;
   top: 20px;
@@ -678,5 +716,9 @@
   .sidePanel,
   .indexPanel button > span:last-child {
     transition: none;
+  }
+
+  .selectionThread {
+    animation: none !important;
   }
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "route": "/information/",
+    "status": 200,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  },
+  {
+    "route": "/map/",
+    "status": 200,
+    "brokenImages": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "badResponses": 0
+  }
+]
