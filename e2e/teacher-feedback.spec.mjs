@@ -4,7 +4,7 @@ import path from "node:path";
 
 const baseUrl = process.env.QA_BASE_URL ?? "http://127.0.0.1:3000";
 const phase = process.env.TEACHER_QA_PHASE ?? "after";
-const strict = phase === "after";
+const strict = !phase.includes("before");
 const outputDir = path.join(process.cwd(), "docs/qa-teacher-feedback", phase);
 
 const viewports = [
