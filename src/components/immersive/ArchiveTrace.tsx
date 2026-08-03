@@ -39,7 +39,7 @@ export function ArchiveTrace() {
 
   return (
     <nav className={styles.trace} aria-label="ページ内ナビゲーション">
-      <p><span>SECTION</span><strong>{String(activeIndex + 1).padStart(2, "0")}</strong></p>
+      <p><span>頁</span><strong>{["壱", "弐", "参", "肆", "伍", "陸", "漆", "捌"][activeIndex] ?? String(activeIndex + 1)}</strong></p>
       <ol>
         {chapters.map((chapter, index) => (
           <li

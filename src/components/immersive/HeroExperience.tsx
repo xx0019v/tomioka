@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
 import { ArtifactField } from "./ArtifactField";
+import { WovenTitle } from "./WovenTitle";
 import styles from "./HeroExperience.module.css";
 
 interface HeroExperienceProps {
@@ -192,8 +193,13 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         <div className={styles.copy}>
           <p className={styles.kicker}>まち歩き型リアル謎解きイベント</p>
           <h1 id="hero-title">
-            <span className={styles.titleLine}><span>繭が遺した</span></span>
-            <span className={styles.titleLine}><span>地図</span></span>
+            {/* 題字は織り上がる。縦糸が張られ、横糸が通った範囲だけ文字になる */}
+            <span className={styles.titleLine}>
+              <WovenTitle delayMs={160}>繭が遺した</WovenTitle>
+            </span>
+            <span className={styles.titleLine}>
+              <WovenTitle delayMs={420}>地図</WovenTitle>
+            </span>
           </h1>
           <p className={styles.title}>街は、まだ記憶している</p>
           <p className={styles.lead}>一本の絹糸をたどり、きぬと富岡の街へ。百五十年前の物語が、街並みの中であなたを待っています。</p>

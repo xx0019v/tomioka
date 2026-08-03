@@ -198,7 +198,7 @@ export function GuideCharacter({
     >
       {isOpen && (
         <section id={MESSAGE_ID} className={styles.bubble} role="status">
-          <div className={styles.label}>KINU / 街歩き案内</div>
+          <div className={styles.label}>きぬ — 街歩き案内</div>
           <p>
             <span>{shownLines[0]}</span>
             {shownLines[1] && <span>{shownLines[1]}</span>}

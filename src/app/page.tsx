@@ -157,7 +157,8 @@ export default function Home() {
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
-          {/* 写真の地面ではなく、配布キットの地図ページを引き直した図版を敷く */}
+          {/* 写真の地面ではなく、配布キットの地図ページを引き直した図版を敷く。
+              奥行きは動かして見せない。層・影・質感・縮尺差だけで作る */}
           <FieldMapPlate />
           <header className={styles.routeHeader}>
             <p className={styles.eyebrow}>手がかりの地図</p>

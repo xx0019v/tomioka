@@ -19,14 +19,14 @@
 }
 
 .route {
-  stroke: rgba(142, 36, 54, 0.5);
+  stroke: rgba(163, 59, 43, 0.5);
   stroke-width: 3.4;
   stroke-dasharray: 15 12;
   stroke-linecap: round;
 }
 
 .routeHead {
-  fill: rgba(142, 36, 54, 0.5);
+  fill: rgba(163, 59, 43, 0.5);
 }
 
 .compassRing {
@@ -35,11 +35,11 @@
 }
 
 .compassSouth {
-  fill: rgba(30, 37, 54, 0.34);
+  fill: rgba(27, 58, 49, 0.34);
 }
 
 .compassNorth {
-  fill: rgba(142, 36, 54, 0.5);
+  fill: rgba(163, 59, 43, 0.5);
 }
 
 .scaleBar {
@@ -51,4 +51,22 @@
   .plate {
     opacity: 0.6;
   }
+}
+
+/* --- 奥行きは「動き」ではなく「濃度と影」で作る ---------------------------
+ * パララックスは不採用。紙の地図に厚みを感じさせるのは、
+ * 層ごとの濃度差・線幅差・にじみであって、追従して動くことではない。
+ * ------------------------------------------------------------------------ */
+
+.layerFar {
+  opacity: 0.72;
+}
+
+.layerMid {
+  opacity: 0.9;
+  filter: drop-shadow(0 1px 0 rgba(251, 247, 236, 0.55));
+}
+
+.layerNear {
+  filter: drop-shadow(0 2px 1px rgba(90, 70, 44, 0.16));
 }

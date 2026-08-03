@@ -18,33 +18,33 @@ export function FieldMapPlate() {
       focusable="false"
     >
       {/* 茶色の道。太い通りと細い路地で、キットと同じ濃淡をつける */}
-      <g className={styles.roadMinor} fill="none" strokeLinecap="round">
+      <g className={`${styles.roadMinor} ${styles.layerFar}`} fill="none" strokeLinecap="round">
         <path d="M-20 176h1240M-20 372h1240M-20 548h1240" />
         <path d="M172 -20v740M398 -20v740M642 -20v740M886 -20v740M1064 -20v740" />
         <path d="M62 96h300M840 268h340M280 640h420" />
       </g>
-      <g className={styles.roadMajor} fill="none" strokeLinecap="round">
+      <g className={`${styles.roadMajor} ${styles.layerMid}`} fill="none" strokeLinecap="round">
         <path d="M-20 268C210 258 470 292 720 276s340-40 520-52" />
         <path d="M520 -20c14 210 -8 350 26 740" />
       </g>
 
-      {/* 臙脂の破線の順路。矢印はキットと同じ向きで一つだけ */}
+      {/* 朱の破線の順路。矢印はキットと同じ向きで一つだけ */}
       <path
-        className={styles.route}
+        className={`${styles.route} ${styles.layerNear}`}
         d="M244 574C368 500 402 396 540 356s258 22 372-56"
         fill="none"
       />
-      <path className={styles.routeHead} d="M912 296l26 6-20 18z" />
+      <path className={`${styles.routeHead} ${styles.layerNear}`} d="M912 296l26 6-20 18z" />
 
       {/* 方位記号 */}
-      <g transform="translate(1082 108)">
+      <g className={styles.layerNear} transform="translate(1082 108)">
         <circle className={styles.compassRing} r="30" fill="none" />
         <path className={styles.compassSouth} d="M0-28 7 0 0 28 -7 0Z" />
         <path className={styles.compassNorth} d="M0-28 7 0 0 0Z" />
       </g>
 
       {/* 縮尺 */}
-      <g transform="translate(96 626)">
+      <g className={styles.layerMid} transform="translate(96 626)">
         <path className={styles.scaleBar} d="M0 0h96" fill="none" />
         <path className={styles.scaleBar} d="M0-6v12M96-6v12" fill="none" />
       </g>
