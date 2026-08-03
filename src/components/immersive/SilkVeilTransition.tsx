@@ -21,6 +21,23 @@ import styles from "./SilkVeilTransition.module.css";
 const COVER_MS = 560;
 const UNRAVEL_MS = 880;
 
+/**
+ * basePath 付きの絶対パスから、next/navigation が扱う内部パスへ戻す。
+ *
+ * GitHub Pages 配信では location.pathname に basePath（/tomioka）が含まれる。
+ * router.push は basePath を自分で前置するため、剥がさずに渡すと
+ * /tomioka/tomioka/map になり、街歩きマップも開催情報も開かなくなる。
+ * basePath が空のローカルでは再現しないので、必ず basePath 付きで検証すること。
+ */
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+function toInternalPath(pathname: string): string {
+  if (!BASE_PATH) return pathname;
+  if (pathname === BASE_PATH) return "/";
+  if (pathname.startsWith(`${BASE_PATH}/`)) return pathname.slice(BASE_PATH.length);
+  return pathname;
+}
+
 type Phase = "idle" | "cover" | "unravel";
 
 export function SilkVeilTransition() {
@@ -72,12 +89,13 @@ export function SilkVeilTransition() {
       event.preventDefault();
       event.stopPropagation();
       clearTimers();
-      pendingRef.current = window.location.pathname;
+      // 比較相手は usePathname（basePath を含まない）なので、表現を揃える
+      pendingRef.current = toInternalPath(window.location.pathname);
       setPhase("cover");
 
       // 布が渡りきってから遷移する。遷移が遅い場合でも布の裏で待つ
       const go = window.setTimeout(() => {
-        router.push(url.pathname + url.search + url.hash);
+        router.push(toInternalPath(url.pathname) + url.search + url.hash);
       }, COVER_MS - 60);
       timersRef.current.push(go);
 

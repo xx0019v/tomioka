@@ -67,10 +67,31 @@
 @keyframes react { 0%,100% { transform: translateY(0) rotate(0); } 38% { transform: translateY(-6px) rotate(-3deg); } 70% { transform: translateY(-1px) rotate(2deg); } }
 @media (min-width:768px) {
   .arrival { grid-template-columns: minmax(0,1.08fr) minmax(300px,.92fr); gap: 38px clamp(38px,5vw,78px); padding: 120px max(36px,calc((100vw - 1180px)/2)) 132px; scroll-margin-top: 132px; }
-  .heading { grid-column: 1 / -1; max-width: 58rem; }.heading h2 { max-width: none; font-size: clamp(4rem,6.8vw,6.8rem); }
+  .heading { grid-column: 1 / -1; max-width: 58rem; }
+  /* 巨大化をやめ、他セクションと同じ明朝の声へ揃える。
+     98px まで拡大していたため「物語の入口は、」で折り返し、
+     行末に読点だけが残っていた（指摘事項）。1 行に収める。 */
+  .heading h2 { max-width: none; font-size: clamp(1.9rem,3.2vw,2.6rem); }
+  .heading h2 span,.heading h2 strong { display: inline; white-space: nowrap; }
+  .heading h2 strong::after { bottom: -0.06em; }
   .place { grid-row: span 2; align-self: start; }.photo { min-height: clamp(420px,52vw,650px); }.ticket { align-self: end; padding: 32px 28px; }.guide { align-self: start; }
-  .route,.actions { grid-column: 1 / -1; }.route ol { grid-template-columns: repeat(4,minmax(0,1fr)); }.route li { grid-template-columns: 32px minmax(0,1fr); padding-right: 20px; }
-  .route li:not(:last-child)::after { top: calc(50% + 18px); right: 6px; bottom: auto; left: 36px; width: auto; height: 1px; }
+  .route,.actions { grid-column: 1 / -1; }
+  .route ol { grid-template-columns: repeat(4,minmax(0,1fr)); }
+
+  /* 番号と地名を上下に分ける。
+     横一列のまま線を引くと、線が地名の幅いっぱいを走り、
+     交差していなくても「取り消し線」に見える（指摘事項）。
+     線は丸印どうしだけをつなぎ、文字の高さには一切入らない。 */
+  .route li { grid-template-columns: minmax(0,1fr); gap: 10px; padding-right: 20px; }
+  .route li:not(:last-child)::after {
+    top: 13px;
+    right: 6px;
+    bottom: auto;
+    left: 34px;
+    width: auto;
+    height: 1px;
+  }
+  .route li strong { padding-left: 2px; }
   .actions { grid-template-columns: 1.35fr 1fr 1fr; }
 }
 @media (min-width:1100px) { .heading { margin-left: clamp(70px,8vw,132px); }.place { margin-top: -12px; }.ticket { margin-top: 60px; } }
@@ -103,6 +124,18 @@
   transform-origin: top;
   scale: 1 0;
   transition: scale 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 横に引く画面幅では、左から右へ伸びる */
+@media (min-width: 768px) {
+  .route li:not(:last-child)::after {
+    transform-origin: left;
+    scale: 0 1;
+  }
+
+  .route li[data-reached="true"]:not(:last-child)::after {
+    scale: 1 1;
+  }
 }
 
 .route li[data-reached="true"]:not(:last-child)::after {

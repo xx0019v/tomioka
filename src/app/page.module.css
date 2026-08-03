@@ -754,7 +754,7 @@
   .steps::before {
     top: 20px;
     bottom: 20px;
-    left: 8px;
+    left: 6px;
   }
 
   .steps li {
@@ -819,12 +819,14 @@
 
 /* --- キットの道具（SVG）の置き場 ----------------------------------------- */
 
-/* 封蝋は、参加のしかたの紙を留めているように左肩へ */
+/* 封蝋は紙を留める。ただし壱弐参の丸印の列には掛けない。
+   左肩に置くと、綴じの罫と番号のあいだに割り込んで読みにくくなる（指摘事項）。
+   番号の列から離した紙の右肩へ移す。 */
 .stepObjects {
   position: absolute;
+  right: clamp(18px, 6vw, 64px);
   z-index: 4;
-  margin-top: clamp(28px, 4vw, 50px);
-  margin-left: -14px;
+  margin-top: clamp(56px, 8vw, 92px);
   font-size: 30px;
   pointer-events: none;
 }

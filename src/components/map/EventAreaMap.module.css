@@ -547,7 +547,9 @@
 @media (max-width: 899px) {
   .section {
     width: min(calc(100% - 32px), 720px);
-    padding: 58px 0 72px;
+    /* 一覧の下に 72px の空白が残り、意味のない余白として見えていた（指摘事項）。
+       一覧のすぐ下からフッターへ続くようにする。 */
+    padding: 58px 0 0;
   }
 
   .headingRow {
@@ -564,7 +566,7 @@
 
   /* 地図と一覧を通常フローで積み、一覧の下に固定高由来の空白を残さない。 */
   .mapShell {
-    --map-sheet: min(38svh, 300px);
+    --map-sheet: min(42svh, 330px);
     display: block;
     min-height: 0;
     box-shadow: none;
@@ -617,7 +619,11 @@
   .indexPanel {
     max-height: var(--map-sheet);
     overflow: auto;
-    padding: 24px 22px max(26px, var(--safe-bottom));
+    /* 下端は行の途中で切れる。スクロールできることが分かるよう、
+       最後に薄い紙のフェードを重ねる（下の空白では伝えない） */
+    padding: 20px 22px max(20px, var(--safe-bottom));
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 26px), transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 26px), transparent 100%);
   }
 
   .indexPanel h3,
