@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
 import { ArtifactField } from "./ArtifactField";
+import { SilkMemoryScene } from "./SilkMemoryScene";
 import styles from "./HeroExperience.module.css";
 
 interface HeroExperienceProps {
@@ -166,6 +167,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
     <section ref={sectionRef} className={styles.hero} aria-labelledby="hero-title">
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
+      <SilkMemoryScene />
       <ArtifactField variant="hero" />
 
       <div className={styles.stage}>
