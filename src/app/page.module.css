@@ -836,3 +836,66 @@
   margin-right: -8px;
 }
 
+
+/* --- 絹糸が壱→弐→参を順に結ぶ ---------------------------------------------
+ * 到達した項目の結び目が朱で満たされ、読んでいる項目だけがわずかに強まる。
+ * 読み終えた項目は静かに背景へ下がる（消さない。情報は常に読める）。
+ * 番号の位置と綴じの罫は動かさない（指摘事項の保護対象）。
+ * ------------------------------------------------------------------------ */
+
+.steps li[data-reached="false"] .stepNumber {
+  border-color: rgba(163, 59, 43, 0.34);
+}
+
+.steps li[data-reached="false"] .stepNumber span {
+  color: rgba(163, 59, 43, 0.44);
+}
+
+.steps li[data-reached="true"] .stepNumber {
+  border-color: var(--kit-seal);
+  box-shadow: inset 0 0 0 3px rgba(163, 59, 43, 0.1);
+}
+
+.steps li[data-current="true"] .stepNumber {
+  background: var(--kit-seal);
+}
+
+.steps li[data-current="true"] .stepNumber span {
+  color: var(--kit-paper-raised);
+}
+
+.steps li[data-current="true"] h3 {
+  color: var(--kit-seal);
+}
+
+/* 読み終えた項目は背景へ一段下がる。読めなくはしない */
+.steps li[data-reached="true"]:not([data-current="true"]) h3,
+.steps li[data-reached="true"]:not([data-current="true"]) p {
+  opacity: 0.74;
+}
+
+.steps li .stepNumber,
+.steps li .stepNumber span,
+.steps li h3,
+.steps li p {
+  transition:
+    color 420ms ease,
+    opacity 420ms ease,
+    border-color 420ms ease,
+    background-color 420ms ease,
+    box-shadow 420ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steps li .stepNumber,
+  .steps li .stepNumber span,
+  .steps li h3,
+  .steps li p {
+    transition: none;
+  }
+
+  .steps li[data-reached="true"]:not([data-current="true"]) h3,
+  .steps li[data-reached="true"]:not([data-current="true"]) p {
+    opacity: 1;
+  }
+}

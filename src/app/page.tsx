@@ -7,6 +7,7 @@ import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { FieldMapPlate } from "@/components/immersive/FieldMapPlate";
 import { SilkCityScene } from "@/components/immersive/SilkCityScene";
+import { ThreadProgress } from "@/components/immersive/ThreadProgress";
 import { TypographyReveal } from "@/components/immersive/TypographyReveal";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
 import { SilkTrail } from "@/components/immersive/SilkTrail";
@@ -132,7 +133,9 @@ export default function Home() {
           <span className={styles.stepObjects} aria-hidden="true">
             <ArchiveObject name="wax-seal" tilt={-8} />
           </span>
-          <ol className={styles.steps}>
+          {/* 絹糸が壱→弐→参を順に結ぶ。番号位置と縦線には触れない */}
+          <ThreadProgress selector={`.${styles.steps}`} />
+          <ol className={styles.steps} data-thread-track>
             {participationSteps.map((step) => (
               <li key={step.number}>
                 <div className={styles.stepNumber}><span>{step.number}</span><small>{step.meta}</small></div>

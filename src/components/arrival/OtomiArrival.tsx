@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SilkwormMascot, type GuideExpression } from "@/components/guide/SilkwormMascot";
 import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
+import { ThreadProgress } from "@/components/immersive/ThreadProgress";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./OtomiArrival.module.css";
@@ -146,6 +147,8 @@ export function OtomiArrival() {
       </aside>
 
       <nav className={styles.route} aria-label="上州富岡駅から物語の入口まで">
+        {/* 絹糸が経路線に変わり、駅から入口へ順に地点が有効化される */}
+        <ThreadProgress selector={`.${styles.route} ol`} />
         <p>駅から入口まで</p>
         <ol>{routeSteps.map((label, index) => (
           <li key={label} style={{ "--route-index": index } as CSSProperties}><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><strong>{label}</strong></li>
