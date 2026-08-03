@@ -28,6 +28,38 @@ test("pre-Three.js main baseline has no WebGL renderer or shader errors", async 
   }
 });
 
+test("browser back and repeated route visits do not duplicate Canvas or renderer state", async ({ browser, baseURL }) => {
+  const context = await createContext(browser, VIEWPORTS.desktop[1], { reducedMotion: "no-preference" });
+  const page = await context.newPage();
+  await installRuntimeProbe(page);
+  const failures = observePageFailures(page, baseURL);
+  await page.goto(routeUrl(baseURL, "/"));
+
+  for (let visit = 0; visit < 3; visit += 1) {
+    await page.locator("header").getByRole("link", { name: /街歩きマップ/ }).click();
+    await expect(page).toHaveURL(/\/map\/$/);
+    await expect(page.locator("main h1")).toBeVisible();
+    await page.goBack({ waitUntil: "domcontentloaded" });
+    await expect(page.locator("main h1")).toBeVisible();
+  }
+
+  await page.waitForTimeout(500);
+  const snapshot = await runtimeSnapshot(page);
+  expect(snapshot.webglCanvasCount).toBeLessThanOrEqual(1);
+  expect(await page.locator("canvas[data-threejs-canvas]").count()).toBeLessThanOrEqual(1);
+  if (ACCEPTANCE_MODE) {
+    expect(snapshot.hook).toMatchObject({ rendererCount: 1, canvasCount: 1 });
+  } else {
+    expect(snapshot.hookPresent).toBe(false);
+    expect(snapshot.webglCanvasCount).toBe(0);
+  }
+  expect(failures.consoleErrors).toEqual([]);
+  expect(failures.pageErrors).toEqual([]);
+  expect(failures.failedRequests).toEqual([]);
+  expect(failures.badResponses).toEqual([]);
+  await context.close();
+});
+
 test("acceptance hook reports one renderer/canvas and no duplicate initialization", async ({ browser, baseURL }) => {
   test.skip(!ACCEPTANCE_MODE, "Run with THREEJS_ACCEPTANCE=1 after the feature branch is available.");
   const context = await createContext(browser, VIEWPORTS.desktop[2], { reducedMotion: "no-preference" });

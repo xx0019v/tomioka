@@ -121,7 +121,7 @@ test("focused perceptual regression baselines protect the teacher fixes and glob
     await settlePage(page);
     const target = page.locator(shot.selector).first();
     await target.scrollIntoViewIfNeeded();
-    const masks = [page.locator("canvas"), page.locator(".leaflet-tile-pane")];
+    const masks = [page.locator("canvas"), page.locator("[data-map-interaction]")];
     await expect(target).toHaveScreenshot(
       `${shot.name}/${shot.name}__${padWidth(shot.viewport.width)}w__light__reduce.png`,
       {

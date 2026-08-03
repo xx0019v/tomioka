@@ -2,7 +2,7 @@
 
 このディレクトリは `origin/main@8a28087478cc858bc1e12908613947c5dad0234e` の不変基準です。
 
-基準画像は116枚、約38 MBです。1枚最大約1.47 MB、総数200枚以下・総量80 MB以下の運用予算内です。
+基準画像は116枚、約36 MBです。1枚最大約1.47 MB、総数200枚以下・総量80 MB以下の運用予算内です。
 
 - `full/<browser>/<route>/`: full-page JPEG evidence
 - `visual/<browser>/<state>/`: Playwright focused PNG snapshots

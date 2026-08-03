@@ -16,7 +16,7 @@
 | `npm run lint` | PASS |
 | `npm run typecheck` | PASS |
 | `npm run qa:threejs:build-compare` | PASS |
-| `npm run qa:threejs:all` | PASS: 46 passed / 20 intentionally skipped / 0 failed、5.3分 |
+| `npm run qa:threejs:all` | PASS: 48 passed / 20 intentionally skipped / 0 failed、4.4分 |
 | 既存 `test:e2e:teacher` | PASS: 8 passed / 0 failed、33.7秒 |
 | focused visual regression | PASS: Chromium / WebKit、46画像 |
 

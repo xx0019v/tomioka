@@ -3,13 +3,13 @@
   "baselineCommit": "8a28087478cc858bc1e12908613947c5dad0234e",
   "files": 124,
   "images": 116,
-  "totalBytes": 39543477,
+  "totalBytes": 37741436,
   "largestImageBytes": 1480644,
   "entries": [
     {
       "path": "README.md",
       "bytes": 937,
-      "sha256": "cb9ef1bd98735cadc2e3466a27bca45a77b11d4de487805c9bfa0a3ac3084b14"
+      "sha256": "172e090c3e67432757eca6514bf0660c04f5cc1bbdc69ad649a87f459e46f761"
     },
     {
       "path": "env-chromium.json",
@@ -428,13 +428,13 @@
     },
     {
       "path": "visual/chromium/map-map-0390w-light-reduce.png",
-      "bytes": 216720,
-      "sha256": "af87fc50c0d133880f761a88cb0ba69ff8814310c7e0dc21bdafa6876f26dd57"
+      "bytes": 53926,
+      "sha256": "3ff557458764c57ffb95bffe85cac5eb351de4957153a3eaea099669156b410a"
     },
     {
       "path": "visual/chromium/map-map-1440w-light-reduce.png",
-      "bytes": 649462,
-      "sha256": "96bf289bf48aae74761757de05e8d3af1bcc79092002a6a047a4f463c35c017f"
+      "bytes": 106533,
+      "sha256": "18c0e52b8454ae14e8742fc2bf4469de686a8ca8d58b8c7d916e55d6f6de7167"
     },
     {
       "path": "visual/chromium/not-found-not-found-0390w-light-reduce.png",
@@ -543,13 +543,13 @@
     },
     {
       "path": "visual/webkit/map-map-0390w-light-reduce.png",
-      "bytes": 289679,
-      "sha256": "b80dd60f927444e66c88c7385cec03c718ecd0c87c7e345a2be89c61d9a3c351"
+      "bytes": 65625,
+      "sha256": "1c1f089c9a80289de55b66b9ffbef9a2dddf51b8b23be040393d8f6660fff58b"
     },
     {
       "path": "visual/webkit/map-map-1440w-light-reduce.png",
-      "bytes": 1012450,
-      "sha256": "994c8b1c53d9c172547ee4a1016a70dc1912a66f14e245862c03848f0825bf18"
+      "bytes": 140186,
+      "sha256": "d09dd7452f7ca93a1372dcf31bc3d2b6500eabbacc7c9577bc31f55cc350856f"
     },
     {
       "path": "visual/webkit/not-found-not-found-0390w-light-reduce.png",

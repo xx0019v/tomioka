@@ -27,7 +27,7 @@ ChromiumとWebKitを別基準として保存します。幅は `320 / 375 / 390 
 
 `manifest.json` に各証跡のbyte数とSHA-256を記録します。基準画像を更新した場合は `npm run qa:threejs:optimize-baseline && npm run qa:threejs:manifest` を実行し、画像だけでなくmanifest差分もレビューします。
 
-JPEGは証跡用、focused PNGはPlaywrightのperceptual comparison用です。通常のThree.js Canvasと地図タイルは描画ノイズを避けるためfocused比較時だけmaskします。DOM geometry、文字矩形、Canvas範囲は別テストで判定するため、maskで衝突を隠しません。
+JPEGは証跡用、focused PNGはPlaywrightのperceptual comparison用です。通常のThree.js Canvasと外部タイル成否で変化する地図stageは、描画ノイズを避けるためfocused比較時だけmaskします。地図の見出し、一覧、section高さはmaskしません。ピン座標、先端、余白、DOM geometry、文字矩形、Canvas範囲は別テストで判定するため、maskで衝突を隠しません。
 
 ## 現行の意味
 
