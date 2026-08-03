@@ -22,13 +22,39 @@
   vector-effect: non-scaling-stroke;
 }
 
-.thread {
+/* --- 一本の絹糸 ------------------------------------------------------------
+ * 3 本の path を重ねて「線」ではなく「撚った糸」に見せる。
+ *   影   … 芯の右下 0.6px。糸に厚みが生まれる
+ *   芯   … スクロール量で伸びる本体
+ *   光沢 … 芯より細く明るい。絹特有の控えめな照り
+ * 発光はさせない（ネオンにしない）。太くしない（縄にしない）。
+ * ------------------------------------------------------------------------- */
+
+.threadShade,
+.thread,
+.threadSheen {
   fill: none;
-  stroke: #c9aa68;
-  stroke-width: 1.4;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
+}
+
+.threadShade {
+  stroke: rgba(74, 58, 30, 0.28);
+  stroke-width: 2.2;
+  translate: 0.6px 0.6px;
+  /* 芯と同じだけ伸びる。dash は芯側の JS が両方へ書く */
+}
+
+.thread {
+  stroke: #c9aa68;
+  stroke-width: 1.4;
   /* stroke-dashoffset は JS がスクロール量から与える */
+}
+
+.threadSheen {
+  stroke: rgba(255, 244, 214, 0.7);
+  stroke-width: 0.5;
+  translate: -0.35px 0;
 }
 
 .bead {
@@ -46,6 +72,14 @@
 /* 明るい紙面のセクションでは、糸を濃くして視認性を保つ */
 :global(.paper-section) .thread {
   stroke: #9a7a3c;
+}
+
+:global(.paper-section) .threadShade {
+  stroke: rgba(74, 58, 30, 0.18);
+}
+
+:global(.paper-section) .threadSheen {
+  stroke: rgba(255, 248, 226, 0.5);
 }
 
 @media (max-width: 680px) {

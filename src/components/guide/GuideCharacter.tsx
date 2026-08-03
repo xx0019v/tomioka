@@ -134,36 +134,62 @@ export function GuideCharacter({
     };
   }, []);
 
+  /**
+   * きぬは常時動かない。
+   *
+   * 旧実装は 3.5〜8 秒ごとに無条件で瞬きし続けていた（＝常時ループ）。
+   * 案内役が理由もなく動き続けると、読者の視線がそこへ持っていかれ、
+   * 本文とキャラクターが競合する。
+   *
+   * 今は「意味のある瞬間」にだけ一度反応する:
+   *   - このセクションへ初めて入ってきたとき（一度だけ視線を動かす）
+   *   - 触れられたとき（reactToGuide 側）
+   *   - しばらく操作が無いとき（一度だけ。繰り返さない）
+   */
   useEffect(() => {
-    if (!isVisible || ambientState !== "breathing") {
-      return;
-    }
+    if (!isVisible) return;
 
-    let blinkTimer = 0;
-    let finishTimer = 0;
     let disposed = false;
-    const scheduleBlink = () => {
-      const wait = 3500 + Math.round(Math.random() * 4500);
-      blinkTimer = window.setTimeout(() => {
-        if (disposed || document.hidden) {
-          scheduleBlink();
-          return;
-        }
-        setIsBlinking(true);
-        finishTimer = window.setTimeout(() => {
-          setIsBlinking(false);
-          if (!disposed) scheduleBlink();
-        }, BLINK_DURATION_MS);
-      }, wait);
+    const timers: number[] = [];
+
+    const blinkOnce = () => {
+      if (disposed || document.hidden) return;
+      setIsBlinking(true);
+      timers.push(
+        window.setTimeout(() => {
+          if (!disposed) setIsBlinking(false);
+        }, BLINK_DURATION_MS),
+      );
     };
-    scheduleBlink();
+
+    // 1. 画面に入ってきた合図として、一度だけ
+    timers.push(window.setTimeout(blinkOnce, 620));
+
+    // 2. しばらく操作が無ければ、一度だけ「まだここにいる」を返す。
+    //    操作があるたびに数え直し、繰り返し反応はしない。
+    let idleTimer = 0;
+    let idleUsed = false;
+    const restartIdle = () => {
+      window.clearTimeout(idleTimer);
+      if (idleUsed || disposed) return;
+      idleTimer = window.setTimeout(() => {
+        idleUsed = true;
+        blinkOnce();
+      }, 18000);
+    };
+    const activity = ["scroll", "pointerdown", "keydown"] as const;
+    for (const type of activity) {
+      window.addEventListener(type, restartIdle, { passive: true });
+    }
+    restartIdle();
 
     return () => {
       disposed = true;
-      window.clearTimeout(blinkTimer);
-      window.clearTimeout(finishTimer);
+      for (const id of timers) window.clearTimeout(id);
+      window.clearTimeout(idleTimer);
+      for (const type of activity) window.removeEventListener(type, restartIdle);
     };
-  }, [ambientState, isVisible]);
+  }, [isVisible]);
 
   function closeGuide() {
     setIsOpen(false);

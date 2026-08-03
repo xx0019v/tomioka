@@ -158,8 +158,10 @@
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* 常時の呼吸ループは持たない。既定は静止。
+   案内役が動き続けると本文と視線を奪い合うため（指示: 常時浮遊・常時瞬き禁止）。 */
 .guide[data-active="true"][data-guide-state="breathing"] .characterFrame svg [data-rig="body"] {
-  animation: guideBreathe 5.3s ease-in-out infinite;
+  animation: none;
 }
 
 .guide[data-guide-state="blinking"] .characterFrame svg [data-rig="eyes"] {
@@ -191,8 +193,10 @@
   transform: rotate(-4deg);
 }
 
+/* 現在地取得中だけは、処理が動いていることを示すために限定的に繰り返す。
+   取得が終われば state が変わり、ただちに静止する。 */
 .guide[data-active="true"][data-guide-state="locating"] .characterFrame svg [data-rig="body"] {
-  animation: kinuLocate 1.8s ease-in-out infinite;
+  animation: kinuLocate 1.8s ease-in-out 3;
 }
 
 .guide[data-guide-state="success"] .characterFrame svg [data-rig="head"] {

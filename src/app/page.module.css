@@ -31,7 +31,10 @@
 .share {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  /* overflow: hidden はスクロールコンテナを作ってしまい、内側の position: sticky が
+     ビューポートではなくこのセクションに貼りついてしまう（＝街の場面が枠内で
+     縮んで見える）。clip はコンテナを作らないので sticky が正しく効く。 */
+  overflow: clip;
   scroll-margin-top: 132px;
 }
 
@@ -513,7 +516,10 @@
   z-index: 0;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(88px, 10vw, 144px) max(24px, calc((100vw - 1180px) / 2));
+  /* 街が組み上がる進行を読めるだけの縦の距離を確保する。
+     pin はしない（スクロールを奪わない）。長さで見せる。 */
+  min-height: 168vh;
+  padding: clamp(120px, 14vw, 200px) max(24px, calc((100vw - 1180px) / 2));
   background:
     repeating-linear-gradient(to bottom, transparent 0 27px, rgba(112, 104, 64, 0.15) 27px 28px),
     repeating-linear-gradient(to right, transparent 0 27px, rgba(112, 104, 64, 0.12) 27px 28px),
@@ -553,6 +559,11 @@
 
 .routeCta:hover {
   background: #ab4330;
+}
+
+/* 街が組み上がる間合い。文字を置かないぶんだけ、演出が読める */
+.routeFormation {
+  height: 62vh;
 }
 
 /* 地点索引：地図機能を複製せず、当日たどる場所だけを台帳として示す */
@@ -725,6 +736,15 @@
   .howTo,
   .route {
     padding-block: 84px;
+  }
+
+  /* モバイルでは同じ進行を短い距離で見せる。縦に長く歩かせない */
+  .route {
+    min-height: 118vh;
+  }
+
+  .routeFormation {
+    height: 34vh;
   }
 
   .steps {

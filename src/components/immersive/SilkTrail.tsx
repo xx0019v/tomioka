@@ -28,6 +28,13 @@ export function SilkTrail() {
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     const length = path.getTotalLength();
+    // 影・芯・光沢の 3 本を同じ長さで伸ばす。1 本でも遅れると糸が割れて見える
+    const strands = Array.from(
+      path.parentElement?.querySelectorAll<SVGPathElement>("path") ?? [],
+    ).filter((node) => node !== path.parentElement?.firstElementChild);
+    for (const strand of strands) {
+      strand.style.strokeDasharray = `${length}`;
+    }
     path.style.strokeDasharray = `${length}`;
 
     let frame = 0;
@@ -36,6 +43,7 @@ export function SilkTrail() {
 
     const drawStatic = () => {
       // 動きを止める場合でも糸は「引かれた状態」で見せる
+      for (const strand of strands) strand.style.strokeDashoffset = "0";
       path.style.strokeDashoffset = "0";
       path.dataset.progress = "1.000";
       rootRef.current?.setAttribute("data-loop-count", "0");
@@ -48,7 +56,9 @@ export function SilkTrail() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
 
-      path.style.strokeDashoffset = `${length * (1 - progress)}`;
+      const offset = `${length * (1 - progress)}`;
+      for (const strand of strands) strand.style.strokeDashoffset = offset;
+      path.style.strokeDashoffset = offset;
       path.dataset.progress = progress.toFixed(3);
       rootRef.current?.setAttribute("data-frame-pending", "false");
       rootRef.current?.setAttribute("data-motion-active", String(active));
@@ -130,12 +140,22 @@ export function SilkTrail() {
           className={styles.guide}
           d="M20 0 C 6 120, 34 240, 20 360 S 6 600, 20 720 S 34 880, 20 1000"
         />
+        {/* 糸の影。1px 横へずらすだけで、線が「面」ではなく「糸」に見える */}
+        <path
+          className={styles.threadShade}
+          d="M20 0 C 6 120, 34 240, 20 360 S 6 600, 20 720 S 34 880, 20 1000"
+        />
         {/* 実際に伸びる絹糸 */}
         <path
           ref={pathRef}
           className={styles.thread}
           data-silk-path
           data-silk-trail-thread
+          d="M20 0 C 6 120, 34 240, 20 360 S 6 600, 20 720 S 34 880, 20 1000"
+        />
+        {/* 撚りの上に乗る光沢。糸の芯より細く、少し明るい */}
+        <path
+          className={styles.threadSheen}
           d="M20 0 C 6 120, 34 240, 20 360 S 6 600, 20 720 S 34 880, 20 1000"
         />
         {/* 糸の先端の繭 */}

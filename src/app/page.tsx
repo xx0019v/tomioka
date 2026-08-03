@@ -6,6 +6,7 @@ import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { FieldMapPlate } from "@/components/immersive/FieldMapPlate";
+import { SilkCityScene } from "@/components/immersive/SilkCityScene";
 import { TypographyReveal } from "@/components/immersive/TypographyReveal";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
 import { SilkTrail } from "@/components/immersive/SilkTrail";
@@ -157,14 +158,19 @@ export default function Home() {
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
-          {/* 写真の地面ではなく、配布キットの地図ページを引き直した図版を敷く。
-              奥行きは動かして見せない。層・影・質感・縮尺差だけで作る */}
+          {/* 紙の図版が土台。WebGL が使えない・reduce のときはこれだけが残る */}
           <FieldMapPlate />
+          {/* その上で、スクロールに合わせて古地図から街が組み上がる。
+              施設名・開催情報・CTA は canvas に描かず、DOM のまま下に置いてある */}
+          <SilkCityScene />
           <header className={styles.routeHeader}>
             <p className={styles.eyebrow}>手がかりの地図</p>
             <h2 id="route-heading" data-line-reveal="waiting"><span>街を歩く道は</span><span>ひとつの地図に</span></h2>
             <p>受付、街歩きの目印、休憩地点。当日たどる{eventSpots.length}か所は、街歩きマップにまとめています。</p>
           </header>
+          {/* 街が組み上がるあいだの距離。ここには情報を置かない。
+              読み終えたころに、下の索引と CTA へ到達する */}
+          <div className={styles.routeFormation} aria-hidden="true" />
           <ol className={styles.routeIndex}>
             {eventSpots.map((spot) => (
               <li key={spot.id}>
