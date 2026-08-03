@@ -333,6 +333,10 @@ test("mobile map list and detail reach their real scroll end", async ({ browser 
   const page = await context.newPage();
   await page.goto(`${baseUrl}/map/`, { waitUntil: "domcontentloaded" });
   await settle(page);
+  // 静的HTMLが先に届く公開環境では、React/Leafletの初期化前にも一覧ボタンが
+  // 見える。操作ハンドラが付く前の早すぎるクリックを避け、実際の利用可能状態を待つ。
+  await expect(page.locator(".leaflet-container")).toBeVisible();
+  await expect(page.getByText("地図資料を展開しています…")).toBeHidden();
   const panel = page.locator("section[aria-labelledby='map-heading'] aside:not([data-placement])");
   await panel.scrollIntoViewIfNeeded();
 
