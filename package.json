@@ -16,10 +16,12 @@
     "test:e2e:v11": "playwright test e2e/v11-release-qa.spec.mjs --project=chromium --project=webkit --workers=1 && node scripts/qa-v11-summary.mjs"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "leaflet": "^1.9.4",
     "next": "16.2.11",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.0",

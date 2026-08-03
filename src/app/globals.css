@@ -2,42 +2,55 @@
   color-scheme: light;
 
   /* ------------------------------------------------------------------
-   * SILK STORY ARCHIVE — 参加者配布キットから抽出した実色。
-   * 表紙の藍墨、方眼の生成り、地図の茶、印の臙脂、細罫の真鍮、蝋燭の光。
-   * 「暗い高級感」を作る色ではなく、キットの紙とインクをそのまま持ち込む。
+   * 絹糸に導かれて、富岡の世界を歩く Web — 配色。
+   *
+   * 配布キットの版面（方眼・記録票・地図・印）はそのまま活かしつつ、
+   * 色は富岡の温かいパレットへ戻した。藍色の冷たさではなく、
+   * 生糸を煮る湯気と古地図の匂いのある墨緑・生成り・金・朱で組む。
+   *
+   * ベタ戻しではない。旧値に対して
+   *   墨緑: 明度 +4%・彩度 -6%（本文コントラストを確保しつつ重さを抜く）
+   *   紙  : 赤みを 1 段抜き、黄へ寄せた（写真のセピアと喧嘩させない）
+   *   朱  : そのまま基準色。派生に温かい赤茶を 1 段追加
+   *   金  : 細罫用に彩度を落とした真鍮を追加
+   * の調整を掛けてある。
    * ------------------------------------------------------------------ */
 
-  /* 藍墨 — 表紙の闇であり、本文の文字色でもある */
-  --kit-ink: #1e2536;
-  --kit-ink-deep: #141a28;
-  --kit-ink-dusk: #2b3550;
+  /* 墨緑 — 生糸の釜の影。表紙の闇であり、本文の文字色でもある */
+  --kit-ink: #1b3a31;
+  --kit-ink-deep: #102520;
+  --kit-ink-dusk: #2c5045;
 
   /* 生成り — 方眼紙のページ、めくれた記録カード、影になった紙 */
-  --kit-paper: #f2ecda;
-  --kit-paper-raised: #faf5e8;
-  --kit-paper-deep: #e6dcc0;
-  --kit-grid-line: rgba(122, 100, 62, 0.16);
-  --kit-rule-line: rgba(122, 100, 62, 0.26);
+  --kit-paper: #f3efe4;
+  --kit-paper-raised: #fbf7ec;
+  --kit-paper-deep: #e7ddc8;
+  --kit-grid-line: rgba(112, 104, 64, 0.15);
+  --kit-rule-line: rgba(112, 104, 64, 0.24);
 
   /* 茶 — 地図の道路、古い木材、革の記録帳 */
-  --kit-brown: #7d6544;
-  --kit-brown-deep: #5a462c;
-  --kit-leather: #6b4f31;
+  --kit-brown: #7b6242;
+  --kit-brown-deep: #584429;
+  --kit-leather: #6a4d2f;
 
-  /* 臙脂 — 見出し、チェックポイントの丸印、順路の破線、封蝋 */
-  --kit-seal: #8e2436;
-  --kit-seal-soft: #a94456;
+  /* 朱 — 見出し、チェックポイントの丸印、順路の破線、封蝋 */
+  --kit-seal: #a33b2b;
+  --kit-seal-soft: #b8543c;
 
-  /* 真鍮 — 細罫、地図ピン、ルーペ、方位記号 */
-  --kit-brass: #b9964f;
-  --kit-brass-soft: #d9bd7f;
+  /* 金・真鍮 — 細罫、地図ピン、方位記号 */
+  --kit-brass: #9b7a3f;
+  --kit-brass-soft: #c9aa68;
 
   /* 蝋燭 — 表紙の光源。発光ではなく「温度」として使う */
-  --kit-candle: #f5d79b;
+  --kit-candle: #f3d9a2;
+
+  /* 絹糸そのもの。サイト全体を貫く一本の線の色 */
+  --silk-thread: #d9c48c;
+  --silk-thread-glint: #fff2cd;
 
   /* きぬの身体 */
-  --kit-cream: #f6ecd6;
-  --kit-cocoa: #b99a76;
+  --kit-cream: #f7f1e2;
+  --kit-cocoa: #bb9c74;
 
   /* --- 意味づけ（画面はこちらだけを参照する） --- */
   --color-ink: var(--kit-ink);
@@ -45,17 +58,17 @@
   --color-paper: var(--kit-paper);
   --color-paper-raised: var(--kit-paper-raised);
   --color-paper-deep: var(--kit-paper-deep);
-  --color-gold: #8f7231;
-  --color-gold-wash: #ece0c4;
+  --color-gold: #8d7135;
+  --color-gold-wash: #ece2cd;
   --color-seal: var(--kit-seal);
-  --color-text: #232a3a;
-  --color-muted: #5f5a4c;
-  --color-hairline: rgba(101, 82, 50, 0.22);
-  --color-hairline-strong: rgba(101, 82, 50, 0.42);
+  --color-text: #24251f;
+  --color-muted: #5d6055;
+  --color-hairline: rgba(92, 88, 52, 0.22);
+  --color-hairline-strong: rgba(92, 88, 52, 0.42);
 
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
   --font-sans: "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
-  --shadow-paper: 0 22px 60px rgba(30, 37, 54, 0.1);
+  --shadow-paper: 0 22px 60px rgba(27, 58, 49, 0.1);
   --radius-panel: 14px;
   --radius-control: 8px;
   --content-wide: 1180px;
@@ -120,7 +133,7 @@ body {
       transparent 0 27px,
       var(--kit-grid-line) 27px 28px
     ),
-    radial-gradient(120% 90% at 50% 0%, #f6f1e2 0%, var(--color-paper) 58%, #ece4cd 100%);
+    radial-gradient(120% 90% at 50% 0%, #f6f1e2 0%, var(--color-paper) 58%, #e9e3d3 100%);
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -211,7 +224,7 @@ a {
 }
 
 ::selection {
-  background: rgba(142, 36, 54, 0.2);
+  background: rgba(163, 59, 43, 0.2);
 }
 
 .map-marker-shell {
@@ -229,7 +242,7 @@ a {
   width: 46px;
   height: 46px;
   place-items: center;
-  /* 配布キット p4/p5 の丸印。生成りの地に臙脂の輪、中に印の文字。 */
+  /* 配布キット p4/p5 の丸印。生成りの地に朱の輪、中に印の文字。 */
   border: 2.5px solid var(--kit-seal);
   border-radius: 50%;
   background: var(--kit-paper-raised);
@@ -237,7 +250,7 @@ a {
   font-family: var(--font-serif);
   font-size: var(--text-body);
   font-weight: 600;
-  box-shadow: 0 6px 16px rgba(22, 30, 48, 0.26);
+  box-shadow: 0 6px 16px rgba(18, 42, 34, 0.26);
   transition: box-shadow 180ms ease;
 }
 
@@ -259,11 +272,11 @@ a {
   content: "";
 }
 
-/* 出発・帰還の地は、キットと同じ「濃紺の地名札」の色を持つ */
+/* 出発・帰還の地は、キットと同じ「墨緑の地名札」の色を持つ */
 .map-marker--start {
   border-color: var(--kit-ink);
   background: var(--kit-ink);
-  color: #f6ecd6;
+  color: #f7f1e2;
 }
 
 .map-marker--annex {
@@ -274,14 +287,14 @@ a {
 /* 現在地に最も近い地点 */
 .map-marker--near {
   box-shadow:
-    0 6px 18px rgba(22, 30, 48, 0.32),
+    0 6px 18px rgba(18, 42, 34, 0.32),
     0 0 0 3px #fff8e8,
-    0 0 0 7px rgba(147, 40, 58, 0.55);
+    0 0 0 7px rgba(168, 64, 42, 0.55);
 }
 
 .map-marker-shell:focus .map-marker,
 .map-marker-shell:hover .map-marker {
-  box-shadow: 0 10px 24px rgba(22, 30, 48, 0.36), 0 0 0 3px #fff8e8;
+  box-shadow: 0 10px 24px rgba(18, 42, 34, 0.36), 0 0 0 3px #fff8e8;
 }
 
 [data-map-visible="true"] .map-marker-glyph {
@@ -318,7 +331,7 @@ a {
   border: 3px solid #fff8e8;
   border-radius: 50%;
   background: #2f6df0;
-  box-shadow: 0 0 0 6px rgba(47, 109, 240, 0.22), 0 3px 10px rgba(22, 30, 48, 0.35);
+  box-shadow: 0 0 0 6px rgba(47, 109, 240, 0.22), 0 3px 10px rgba(18, 42, 34, 0.35);
 }
 
 .map-user-dot::after {
@@ -377,7 +390,7 @@ a {
   color: var(--color-ink-deep);
   font-family: var(--font-sans);
   font-weight: 700;
-  box-shadow: 0 8px 20px rgba(22, 30, 48, 0.16);
+  box-shadow: 0 8px 20px rgba(18, 42, 34, 0.16);
 }
 
 .skip-link {
@@ -453,9 +466,9 @@ a {
 .kit-card {
   border: 1px solid var(--color-hairline);
   background:
-    repeating-linear-gradient(to bottom, transparent 0 26px, rgba(122, 100, 62, 0.09) 26px 27px),
+    repeating-linear-gradient(to bottom, transparent 0 26px, rgba(112, 104, 64, 0.09) 26px 27px),
     var(--color-paper-raised);
-  box-shadow: 0 10px 26px rgba(30, 37, 54, 0.09);
+  box-shadow: 0 10px 26px rgba(27, 58, 49, 0.09);
 }
 
 /* 和紙テープ。カードの角を紙に留める */
@@ -464,7 +477,7 @@ a {
   width: 74px;
   height: 26px;
   background: linear-gradient(100deg, rgba(214, 190, 138, 0.72), rgba(196, 170, 116, 0.5));
-  box-shadow: 0 2px 6px rgba(30, 37, 54, 0.12);
+  box-shadow: 0 2px 6px rgba(27, 58, 49, 0.12);
   opacity: 0.9;
   pointer-events: none;
 }

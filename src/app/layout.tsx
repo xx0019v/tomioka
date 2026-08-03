@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { EventBanner } from "@/components/site/EventBanner";
+import { SilkVeilTransition } from "@/components/immersive/SilkVeilTransition";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
@@ -39,7 +40,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#17202f",
+  themeColor: "#153029",
 };
 
 export default function RootLayout({
@@ -52,6 +53,8 @@ export default function RootLayout({
       <body>
         <a className="skip-link" href="#main-content">本文へ移動</a>
         <EventBanner />
+        {/* 画面の切り替えは黒幕ではなく、一枚の絹布が横切る */}
+        <SilkVeilTransition />
         {children}
         <Suspense fallback={null}>
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />

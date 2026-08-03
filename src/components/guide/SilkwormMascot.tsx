@@ -143,7 +143,7 @@ export function SilkwormMascot({
       <defs>
         <linearGradient id="silk-body" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#fefcf6" />
-          <stop offset="0.5" stopColor="#f6ecd6" />
+          <stop offset="0.5" stopColor="#f7f1e2" />
           <stop offset="1" stopColor="#dfcdae" />
         </linearGradient>
         <radialGradient id="silk-sheen" cx="0.38" cy="0.3" r="0.7">
@@ -154,14 +154,14 @@ export function SilkwormMascot({
 
       <g data-rig="body">
       {/* やわらかな影（接地感） */}
-      <ellipse cx="58" cy="94" rx="40" ry="6.5" fill="#2b3550" opacity="0.14" />
+      <ellipse cx="58" cy="94" rx="40" ry="6.5" fill="#2c5045" opacity="0.14" />
 
       {/* 引いている絹糸（識別要素・赤煉瓦色）— 尾から静かに伸びる */}
       {!simplified && (
         <path
           d="M22 80c-8 1-13 6-11 12 1.6 5-1 8-6 8"
           fill="none"
-          stroke="#8e2436"
+          stroke="#a33b2b"
           strokeWidth="1.6"
           strokeLinecap="round"
           opacity="0.85"
@@ -194,18 +194,18 @@ export function SilkwormMascot({
         <circle cx="58" cy={expression === "walking" ? 85 : 83.5} r="2.6" />
       </g>
 
-      {/* 首元の識別要素：臙脂の細いリボンと、真鍮色の記録タグ。
+      {/* 首元の識別要素：朱の細いリボンと、真鍮色の記録タグ。
           可愛さは「大きさ」ではなく「小ささ」で作る。付けるのは 2 点まで。 */}
       {!simplified && (
         <g transform="translate(63 60) rotate(-14)">
           <path
             d="M-2 2c3-3 7-3 9 0 2-3 6-3 9 0-3 3-6 3-9 1-3 2-6 2-9-1z"
-            fill="#8e2436"
+            fill="#a33b2b"
           />
-          <circle cx="7" cy="2.4" r="1.5" fill="#a94456" />
-          <path d="M7 4v6" stroke="#b9964f" strokeWidth="0.9" strokeLinecap="round" />
-          <rect x="4.4" y="9.6" width="5.6" height="7" rx="1" fill="#faf5e8" stroke="#b9964f" strokeWidth="0.8" />
-          <path d="M5.8 12h2.8M5.8 14h2" stroke="#2b3550" strokeWidth="0.6" opacity="0.6" />
+          <circle cx="7" cy="2.4" r="1.5" fill="#b8543c" />
+          <path d="M7 4v6" stroke="#9b7a3f" strokeWidth="0.9" strokeLinecap="round" />
+          <rect x="4.4" y="9.6" width="5.6" height="7" rx="1" fill="#fbf7ec" stroke="#9b7a3f" strokeWidth="0.8" />
+          <path d="M5.8 12h2.8M5.8 14h2" stroke="#2c5045" strokeWidth="0.6" opacity="0.6" />
         </g>
       )}
 
@@ -228,7 +228,7 @@ export function SilkwormMascot({
 
       {/* 到達・喜びの小さな煌めき（控えめ） */}
       {(expression === "clear" || expression === "discovery") && !simplified && (
-        <g fill="#b9964f">
+        <g fill="#9b7a3f">
           <path d="M99 34l1.4 3.2 3.2 1.4-3.2 1.4-1.4 3.2-1.4-3.2-3.2-1.4 3.2-1.4z" />
         </g>
       )}
