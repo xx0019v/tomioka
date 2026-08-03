@@ -82,4 +82,10 @@ npm run build
 
 <https://mayu-no-chizu.cid-ac.com/>
 
-静的出力を `gh-pages` ブランチへ同期し、GitHub Pagesから公開します。旧ファイルが残らないよう、公開時は `out/` と公開ブランチを完全同期してください。
+GitHub Pages確認URL:
+
+<https://xx0019v.github.io/tomioka/>
+
+2026年8月3日時点で、正式URLはXSERVER上の独立した静的サイト、GitHub Pagesは`gh-pages`ブランチの静的出力を配信しており、自動同期されていません。構成、必要権限、統一方針は[`docs/hosting-deployment-audit.md`](docs/hosting-deployment-audit.md)を参照してください。
+
+GitHub Pagesへは、`NEXT_PUBLIC_BASE_PATH=/tomioka`で生成した`out/`を、最新の`origin/gh-pages`を基点に完全同期します。`public/.nojekyll`はビルド後の`out/.nojekyll`へ引き継がれます。

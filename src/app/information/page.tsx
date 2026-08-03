@@ -77,7 +77,7 @@ export default function InformationPage() {
               <ol className={styles.participation}>
                 <li><span>01</span><div><h3>スタート地点へ</h3><p>お富ちゃん家が受付です</p></div></li>
                 <li><span>02</span><div><h3>参加キットを受け取る</h3><p>受付時間内に無料配布</p></div></li>
-                <li><span>03</span><div><h3>富岡の街を歩く</h3><p>配布キットを手に、街歩き型の物語をお楽しみください</p></div></li>
+                <li><span>03</span><div><h3>富岡の街を歩く</h3><p>配布キットを手に、<span className="no-break" data-ja-unit="街歩き型の物語">街歩き型の物語</span>をお楽しみください</p></div></li>
               </ol>
             </section>
 
@@ -119,7 +119,7 @@ export default function InformationPage() {
                 <h2 id="safety">街歩きの注意</h2>
               </header>
               <ul className={styles.safetyList}>
-                <li>歩きながらスマートフォンを操作しないでください。</li>
+                <li><span className="no-break" data-ja-unit="歩きながら">歩きながら</span>スマートフォンを操作しないでください。</li>
                 <li>車道へ出ず、信号と交通ルールを守ってください。</li>
                 <li>店舗入口や歩道をふさがないでください。</li>
                 <li>展示物や建物には、許可なく触れないでください。</li>

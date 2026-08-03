@@ -18,7 +18,12 @@ const participationSteps = [
   {
     number: "01",
     title: "スタート地点へ",
-    body: "お富ちゃん家へお越しください",
+    body: (
+      <>
+        <span className="no-break" data-ja-unit="お富ちゃん家へ">お富ちゃん家へ</span>
+        <span className="no-break" data-ja-unit="お越しください">お越しください</span>
+      </>
+    ),
     meta: "START",
   },
   {
@@ -30,7 +35,11 @@ const participationSteps = [
   {
     number: "03",
     title: "富岡の街を歩く",
-    body: "配布キットを手に、街歩き型の物語をお楽しみください",
+    body: (
+      <>
+        配布キットを手に、<span className="no-break" data-ja-unit="街歩き型の物語">街歩き型の物語</span>をお楽しみください
+      </>
+    ),
     meta: "TOMIOKA",
   },
 ];
@@ -55,7 +64,7 @@ export default function Home() {
           <div className={styles.signalCopy}>
             <p className={styles.eyebrow}>EVENT EXPERIENCE / TOMIOKA</p>
             <h2 id="signal-heading"><span>記憶は</span><span>富岡の街に眠る</span></h2>
-            <p>富岡製糸場周辺の商店街を歩きながら、街の景色と物語を楽しむ約60〜90分の体験です。</p>
+            <p>富岡製糸場周辺の商店街を<span className="no-break" data-ja-unit="歩きながら、">歩きながら、</span>街の景色と物語を楽しむ約60〜90分の体験です。</p>
             <Link href="/information/">開催概要を確認 <span aria-hidden="true">↗</span></Link>
           </div>
           <dl className={styles.eventManifest} aria-label="イベントの特徴">
@@ -86,11 +95,11 @@ export default function Home() {
             <h2 id="story-heading"><span>街が守った</span><span>繭の記録</span></h2>
             <div className={styles.storyText}>
               <p>明治五年。富岡の街に、一人の研究者がいた。</p>
-              <p>カイコの糸に生涯を捧げた女性——永山 繭。</p>
+              <p>カイコの糸に生涯を捧げた女性——<span className="no-break" data-ja-unit="永山 繭">永山 繭</span>。</p>
               <p>彼女は息を引き取る間際、こう言い残したという。</p>
               <blockquote>「私が遺したものを、いつかだれかが見つけてくれる。それまで、この街が守ってくれるはずだ」</blockquote>
               <p>それから百五十年。あなたのもとに、一通の依頼が届いた。</p>
-              <p>——彼女が街に遺した「謎の地図」を、探し出してほしい。</p>
+              <p>——彼女が街に遺した「謎の地図」を、<span className="no-break" data-ja-unit="探し出してほしい。">探し出してほしい。</span></p>
             </div>
             {/* 記録紙の端から、きぬが物語に寄り添う */}
             <GuideCharacter
@@ -112,7 +121,7 @@ export default function Home() {
           <header className={styles.sectionHeader}>
             <p className={styles.eyebrow}>HOW TO JOIN / 三つのステップ</p>
             <h2 id="howto-heading"><span>富岡の街へ</span><span>物語を歩きに行く</span></h2>
-            <p>当日はお富ちゃん家で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
+            <p>当日は<span className="no-break" data-ja-unit="お富ちゃん家">お富ちゃん家</span>で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
           </header>
 
           <ol className={styles.steps}>

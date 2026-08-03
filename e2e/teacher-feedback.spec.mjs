@@ -116,10 +116,34 @@ async function auditHome(page) {
         );
       });
 
+    const japaneseUnits = [...document.querySelectorAll("[data-ja-unit]")].map((element) => {
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      const lineTops = new Set();
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        for (let index = 0; index < (node.textContent?.length ?? 0); index += 1) {
+          if (!node.textContent?.[index]?.trim()) continue;
+          const range = document.createRange();
+          range.setStart(node, index);
+          range.setEnd(node, index + 1);
+          const rect = range.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) lineTops.add(Math.round(rect.top));
+        }
+      }
+      const rect = element.getBoundingClientRect();
+      return {
+        unit: element.getAttribute("data-ja-unit"),
+        text: element.textContent,
+        lineCount: lineTops.size,
+        insideViewport: rect.left >= -0.5 && rect.right <= innerWidth + 0.5,
+      };
+    });
+
     return {
       overflow: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) - innerWidth,
       stepNumberLineOverlaps: numberRects,
       routeLineIntersections,
+      japaneseUnits,
       canonical: document.querySelector("link[rel='canonical']")?.href ?? null,
       openGraphUrl: document.querySelector("meta[property='og:url']")?.content ?? null,
       footerUrl: document.querySelector("footer a[href^='https://mayu-no-chizu.cid-ac.com']")?.href ?? null,
@@ -201,6 +225,11 @@ test("specified viewport matrix passes the six teacher-feedback gates", async ({
       expect(home.canonical).toBe("https://mayu-no-chizu.cid-ac.com/");
       expect(home.openGraphUrl).toBe("https://mayu-no-chizu.cid-ac.com/");
       expect(home.footerUrl).toBe("https://mayu-no-chizu.cid-ac.com/");
+      if (viewport.width <= 430) {
+        expect(home.japaneseUnits.length).toBeGreaterThanOrEqual(7);
+        expect(home.japaneseUnits.every((unit) => unit.lineCount === 1 && unit.insideViewport)).toBe(true);
+        expect(home.japaneseUnits.some((unit) => unit.unit === "永山 繭" && unit.text === "永山 繭")).toBe(true);
+      }
       expect(map.markers).toHaveLength(6);
       expect(map.markers.every((marker) => marker.width === 56 && marker.height === 62)).toBe(true);
       expect(map.markers.find((marker) => marker.label?.startsWith("お富ちゃん家"))).toMatchObject({
@@ -221,6 +250,72 @@ test("specified viewport matrix passes the six teacher-feedback gates", async ({
 
   await fs.writeFile(
     path.join(outputDir, `report-${testInfo.project.name}.json`),
+    JSON.stringify(results, null, 2),
+  );
+});
+
+test("map marker tips remain on their geographic anchor throughout normal motion", async ({ browser }, testInfo) => {
+  const results = [];
+  for (const viewport of [
+    { width: 390, height: 844 },
+    { width: 1440, height: 900 },
+  ]) {
+    const context = await browser.newContext({
+      viewport,
+      deviceScaleFactor: 1,
+      hasTouch: viewport.width <= 430,
+      isMobile: viewport.width <= 430,
+      locale: "ja-JP",
+      timezoneId: "Asia/Tokyo",
+      reducedMotion: "no-preference",
+    });
+    const page = await context.newPage();
+    await page.goto(`${baseUrl}/map/`, { waitUntil: "domcontentloaded" });
+    await page.locator("section[aria-labelledby='map-heading']").scrollIntoViewIfNeeded();
+    await expect(page.locator(".leaflet-container")).toBeVisible();
+    await page.waitForFunction(() => document.querySelector("[data-map-visible='true'] .map-marker-glyph")?.getAnimations().length);
+
+    const motion = await page.evaluate(async () => {
+      const shell = document.querySelector("[data-map-visible='true'] .map-marker-shell");
+      const marker = shell?.querySelector(".map-marker");
+      const glyph = shell?.querySelector(".map-marker-glyph");
+      const animation = glyph?.getAnimations().find((item) => item.animationName === "mapMarkerGlyphFloat");
+      if (!shell || !marker || !glyph || !animation) return null;
+
+      const duration = Number(animation.effect?.getComputedTiming().duration);
+      animation.pause();
+      const samples = [];
+      for (const progress of [0, 0.999]) {
+        animation.currentTime = duration * progress;
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        const shellRect = shell.getBoundingClientRect();
+        const markerRect = marker.getBoundingClientRect();
+        const glyphRect = glyph.getBoundingClientRect();
+        const tail = getComputedStyle(marker, "::after");
+        const tipY = markerRect.bottom - Number.parseFloat(tail.bottom);
+        samples.push({
+          shellBottom: shellRect.bottom,
+          markerBottom: markerRect.bottom,
+          tipY,
+          anchorError: Math.abs(tipY - shellRect.bottom),
+          glyphTop: glyphRect.top,
+        });
+      }
+      animation.play();
+      return samples;
+    });
+
+    expect(motion).not.toBeNull();
+    expect(Math.abs(motion[1].shellBottom - motion[0].shellBottom)).toBeLessThanOrEqual(0.1);
+    expect(Math.abs(motion[1].markerBottom - motion[0].markerBottom)).toBeLessThanOrEqual(0.1);
+    expect(Math.abs(motion[1].tipY - motion[0].tipY)).toBeLessThanOrEqual(0.1);
+    expect(Math.max(...motion.map((sample) => sample.anchorError))).toBeLessThanOrEqual(0.25);
+    expect(Math.abs(motion[1].glyphTop - motion[0].glyphTop)).toBeGreaterThanOrEqual(1.5);
+    results.push({ viewport: `${viewport.width}x${viewport.height}`, samples: motion });
+    await context.close();
+  }
+  await fs.writeFile(
+    path.join(outputDir, `marker-motion-${testInfo.project.name}.json`),
     JSON.stringify(results, null, 2),
   );
 });
@@ -273,6 +368,9 @@ test("mobile map list and detail reach their real scroll end", async ({ browser 
 
 test("captures focused before-and-after evidence", async ({ browser }, testInfo) => {
   const shots = [
+    { path: "/", width: 320, height: 568, selector: "#discover", name: "japanese-wrap-discover-mobile" },
+    { path: "/", width: 320, height: 568, selector: "#story", name: "japanese-wrap-story-mobile" },
+    { path: "/", width: 320, height: 568, selector: "#how-to-play", name: "japanese-wrap-how-to-mobile" },
     { path: "/", width: 375, height: 667, selector: "#how-to-play", name: "section-3-how-to-mobile" },
     { path: "/", width: 1440, height: 900, selector: "#route", name: "section-4-facilities-desktop" },
     { path: "/", width: 1440, height: 900, selector: "#access nav", name: "section-5-route-line-desktop" },

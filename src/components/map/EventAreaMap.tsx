@@ -231,7 +231,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             alt: `${spot.name}の案内を開く`,
             icon: L.divIcon({
               className: "map-marker-shell",
-              html: `<span class="map-marker${roleClass}"><span>${spot.marker}</span></span>`,
+              html: `<span class="map-marker${roleClass}"><span class="map-marker-glyph" aria-hidden="true">${spot.marker}</span></span>`,
               iconSize: [56, 62],
               iconAnchor: [28, 62],
             }),

@@ -148,6 +148,13 @@ export const eventSpots: EventSpot[] = [
     openingHours: null,
     closedDays: null,
     googleMapsUrl: googleMapsSearchUrl("キリンヤ洋品店 群馬県富岡市富岡1072-4"),
+    /*
+     * 座標根拠（2026-08-03）:
+     * 現在値は Yahoo!マップのキリンヤ洋品店 POI（住所表記 1072-4）に合わせている。
+     * Mapion の掲載点・住所表記 1072-3 とは約28mの差があるが、外部資料だけでは
+     * 施設入口の一点を確定できない。建物／POI位置としては維持し、入口へ変更する場合は
+     * 現地確認または担当教員の確認を必須とする。推測による再調整は行わない。
+     */
     latitude: 36.25773372,
     longitude: 138.88893693,
     sourceStatus: "day_of_event",
