@@ -79,9 +79,9 @@
     "facilityLines": {},
     "map": {
       "overflow": 0,
-      "shellHeight": 577.828125,
+      "shellHeight": 600.546875,
       "stageHeight": 360,
-      "panelHeight": 215.828125,
+      "panelHeight": 238.546875,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -210,9 +210,9 @@
     "facilityLines": {},
     "map": {
       "overflow": 0,
-      "shellHeight": 615.453125,
+      "shellHeight": 642.125,
       "stageHeight": 360,
-      "panelHeight": 253.453125,
+      "panelHeight": 280.125,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -341,9 +341,9 @@
     "facilityLines": {},
     "map": {
       "overflow": 0,
-      "shellHeight": 740.875,
+      "shellHeight": 770.875,
       "stageHeight": 438.875,
-      "panelHeight": 300,
+      "panelHeight": 330,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -472,9 +472,9 @@
     "facilityLines": {},
     "map": {
       "overflow": 0,
-      "shellHeight": 786.625,
+      "shellHeight": 816.625,
       "stageHeight": 484.625,
-      "panelHeight": 300,
+      "panelHeight": 330,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -603,9 +603,9 @@
     "facilityLines": {},
     "map": {
       "overflow": 0,
-      "shellHeight": 802,
+      "shellHeight": 832,
       "stageHeight": 500,
-      "panelHeight": 300,
+      "panelHeight": 330,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
