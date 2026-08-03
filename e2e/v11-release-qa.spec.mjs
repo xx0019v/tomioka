@@ -17,8 +17,8 @@ const viewports = [
 ];
 
 const routes = ["/", "/information/", "/map/"];
-const silkThreadSelector =
-  "[data-silk-trail-thread], [data-silk-path], path[style*='stroke-dasharray']";
+// 装飾用の影・光沢にもstroke-dasharrayが付くため、実際に進捗属性を持つ芯だけを選ぶ。
+const silkThreadSelector = "[data-silk-trail-thread]";
 const evidenceDir = path.join(process.cwd(), "docs/qa-v11/results");
 
 test.describe.configure({ mode: "serial" });
