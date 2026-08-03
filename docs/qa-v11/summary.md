@@ -1,8 +1,8 @@
 # v11 automated QA summary
 
-Generated: 2026-07-30T02:53:43.026Z
+Generated: 2026-08-03T05:55:27.679Z
 
-QA base URL: `http://127.0.0.1:3002/tomioka`
+QA base URL: `http://localhost:3000`
 
 | Project | Viewports | Layout/resource failures | Silk states | Reduce infinite | Map landscape overflow |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -16,24 +16,24 @@ QA base URL: `http://127.0.0.1:3002/tomioka`
 | Progress | stroke-dashoffset |
 | ---: | ---: |
 | 0.000 | 1002.250000 |
-| 0.250 | 751.616000 |
+| 0.250 | 751.628000 |
 | 0.500 | 501.127000 |
-| 0.750 | 250.489000 |
+| 0.750 | 250.501000 |
 | 1.000 | 0.000000 |
 
-Lifecycle request counts: burst 95 → 96; hidden 96; restore 97; idle 97; persistent loops 0.
+Lifecycle request counts: burst 104 → 105; hidden 105; restore 106; idle 106; persistent loops 0.
 
 ### webkit
 
 | Progress | stroke-dashoffset |
 | ---: | ---: |
 | 0.000 | 1002.254822 |
-| 0.250 | 751.616165 |
-| 0.500 | 501.127411 |
-| 0.750 | 250.488754 |
+| 0.250 | 751.722511 |
+| 0.500 | 501.064621 |
+| 0.750 | 250.532310 |
 | 1.000 | 0.000000 |
 
-Lifecycle request counts: burst 32 → 33; hidden 33; restore 34; idle 34; persistent loops 0.
+Lifecycle request counts: burst 33 → 34; hidden 34; restore 35; idle 35; persistent loops 0.
 
 ## Scope note
 

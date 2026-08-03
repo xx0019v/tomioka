@@ -9,12 +9,12 @@ const outputDir = path.join(
 );
 
 const routes = [
-  { name: "home", path: "/", canonical: "https://xx0019v.github.io/tomioka/" },
-  { name: "map", path: "/map/", canonical: "https://xx0019v.github.io/tomioka/map/" },
+  { name: "home", path: "/", canonical: "https://mayu-no-chizu.cid-ac.com/" },
+  { name: "map", path: "/map/", canonical: "https://mayu-no-chizu.cid-ac.com/map/" },
   {
     name: "information",
     path: "/information/",
-    canonical: "https://xx0019v.github.io/tomioka/information/",
+    canonical: "https://mayu-no-chizu.cid-ac.com/information/",
   },
 ];
 
@@ -158,25 +158,25 @@ test("official event access information stays consistent across routes", async (
 
   for (const route of ["/", "/information/"]) {
     await page.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
-    await expect(page.getByText("群馬県富岡市富岡1430-1", { exact: true })).toBeVisible();
+    await expect(page.getByText("群馬県富岡市富岡1151-1", { exact: true })).toBeVisible();
     await expect(page.getByText("上信電鉄 上州富岡駅から徒歩約5分", { exact: true })).toBeVisible();
-    await expect(page.getByText("群馬県富岡市富岡1151-1", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("群馬県富岡市富岡1430-1", { exact: true })).toHaveCount(0);
     await expect(page.getByText("上信電鉄 上州富岡駅から徒歩約10分", { exact: true })).toHaveCount(0);
 
     const mapLink = page.getByRole("link", { name: "Googleマップで開く" });
     await expect(mapLink).toHaveCount(1);
     const href = await mapLink.getAttribute("href");
-    expect(decodeURIComponent(href ?? "")).toContain("お富ちゃん家 富岡市観光案内所 群馬県富岡市富岡1430-1");
+    expect(decodeURIComponent(href ?? "")).toContain("お富ちゃん家 富岡市観光案内所 群馬県富岡市富岡1151-1");
   }
 
   await page.goto(`${baseUrl}/map/?spot=otomi-chan-ie`, { waitUntil: "networkidle" });
   const detail = page.locator("aside[aria-label='お富ちゃん家のスポット案内']");
   await expect(detail).toBeVisible();
-  await expect(detail.getByText("群馬県富岡市富岡1430-1", { exact: true })).toBeVisible();
+  await expect(detail.getByText("群馬県富岡市富岡1151-1", { exact: true })).toBeVisible();
   await expect(detail.getByText("上信電鉄 上州富岡駅から徒歩約5分", { exact: true })).toBeVisible();
   const detailMapLink = detail.getByRole("link", { name: "Googleマップで開く" });
   const detailHref = await detailMapLink.getAttribute("href");
-  expect(decodeURIComponent(detailHref ?? "")).toContain("群馬県富岡市富岡1430-1");
+  expect(decodeURIComponent(detailHref ?? "")).toContain("群馬県富岡市富岡1151-1");
 
   await context.close();
 });

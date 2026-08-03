@@ -69,7 +69,7 @@
   .heading { grid-column: 1 / -1; max-width: 58rem; }.heading h2 { max-width: none; font-size: clamp(4rem,6.8vw,6.8rem); }
   .place { grid-row: span 2; align-self: start; }.photo { min-height: clamp(420px,52vw,650px); }.ticket { align-self: end; padding: 32px 28px; }.guide { align-self: start; }
   .route,.actions { grid-column: 1 / -1; }.route ol { grid-template-columns: repeat(4,minmax(0,1fr)); }.route li { grid-template-columns: 32px minmax(0,1fr); padding-right: 20px; }
-  .route li:not(:last-child)::after { top: 50%; right: 6px; bottom: auto; left: 36px; width: auto; height: 1px; }
+  .route li:not(:last-child)::after { top: calc(50% + 18px); right: 6px; bottom: auto; left: 36px; width: auto; height: 1px; }
   .actions { grid-template-columns: 1.35fr 1fr 1fr; }
 }
 @media (min-width:1100px) { .heading { margin-left: clamp(70px,8vw,132px); }.place { margin-top: -12px; }.ticket { margin-top: 60px; } }

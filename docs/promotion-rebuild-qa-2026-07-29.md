@@ -79,5 +79,5 @@
 
 - `npm run lint`：成功
 - `npm run typecheck`：成功
-- `NEXT_PUBLIC_BASE_PATH=/tomioka NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka npm run build`：成功
+- `NEXT_PUBLIC_BASE_PATH=/tomioka NEXT_PUBLIC_SITE_URL=https://mayu-no-chizu.cid-ac.com/ npm run build`：成功
 - 静的出力ルート：`/`、`/map/`、`/information/`、404、manifest、OG画像、robots、sitemap

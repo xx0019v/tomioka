@@ -29,6 +29,13 @@
 .url {
   margin-top: 3px;
   color: #c7b88e;
+  overflow-wrap: anywhere;
+}
+
+.url a {
+  display: inline-flex;
+  min-height: var(--touch-target);
+  align-items: center;
 }
 
 .links {

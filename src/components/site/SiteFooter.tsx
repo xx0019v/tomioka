@@ -3,14 +3,16 @@ import { siteConfig } from "@/data/site";
 import styles from "./SiteFooter.module.css";
 
 export function SiteFooter() {
-  const displayUrl = siteConfig.siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
-
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div>
           <p className={styles.title}>繭が遺した地図</p>
-          <p className={styles.url}>{displayUrl}</p>
+          <p className={styles.url}>
+            <a href={siteConfig.siteUrl} target="_blank" rel="noopener noreferrer">
+              {siteConfig.siteUrl}
+            </a>
+          </p>
         </div>
         <nav className={styles.links} aria-label="フッターナビゲーション">
           <Link href="/">トップ</Link>

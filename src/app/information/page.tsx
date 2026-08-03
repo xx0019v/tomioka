@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 import styles from "../subpage.module.css";
 
 const informationDescription = "開催日時、参加方法、受付場所、アクセス、雨天時の対応、安全上の注意事項。";
-const informationUrl = `${siteConfig.siteUrl.replace(/\/$/, "")}/information/`;
+const informationUrl = new URL("information/", siteConfig.siteUrl).toString();
 
 export const metadata: Metadata = {
   title: "開催情報・参加案内",

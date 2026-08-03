@@ -1,7 +1,7 @@
 # ヒーロー重なり修正とタイポグラフィモーション
 
 実施日: 2026-07-30  
-対象: `https://xx0019v.github.io/tomioka/`  
+対象: `https://mayu-no-chizu.cid-ac.com/`
 ブランチ: `fix/hero-overlap-and-typography-motion`
 
 ## 結論

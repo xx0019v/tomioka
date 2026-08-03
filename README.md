@@ -24,7 +24,7 @@ GitHub Pages用の静的出力を検証する場合:
 
 ```bash
 NEXT_PUBLIC_BASE_PATH=/tomioka \
-NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka \
+NEXT_PUBLIC_SITE_URL=https://mayu-no-chizu.cid-ac.com/ \
 npm run build
 ```
 
@@ -39,7 +39,7 @@ npm run build
 
 スポットの所在地、営業時間、休業情報は公開元とイベント当日の案内を照合して更新してください。未確定の問い合わせ先、企業名、ロゴ、ハッシュタグは、値が確定するまで公開画面へ表示しません。
 
-イベントのスタート地点「お富ちゃん家 / 富岡市観光案内所」は、イベント正式仕様の `群馬県富岡市富岡1430-1`、上信電鉄 上州富岡駅から徒歩約5分を掲載しています。イベント受付時間は `9:00〜15:00` です。
+イベントのスタート地点「お富ちゃん家 / 富岡市観光案内所」は、富岡市観光公式情報の `群馬県富岡市富岡1151-1`、上信電鉄 上州富岡駅から徒歩約5分を掲載しています。イベント受付時間は `9:00〜15:00` です。
 
 ## マップと現在地
 
@@ -80,6 +80,6 @@ npm run build
 
 本番URL:
 
-<https://xx0019v.github.io/tomioka/>
+<https://mayu-no-chizu.cid-ac.com/>
 
 静的出力を `gh-pages` ブランチへ同期し、GitHub Pagesから公開します。旧ファイルが残らないよう、公開時は `out/` と公開ブランチを完全同期してください。

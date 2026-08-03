@@ -1,11 +1,12 @@
 export type EventState = "scheduled" | "open" | "cancelled" | "ended";
 
-const startAddress = "群馬県富岡市富岡1430-1";
+const officialSiteUrl = "https://mayu-no-chizu.cid-ac.com/";
+const startAddress = "群馬県富岡市富岡1151-1";
 const startMapQuery = `お富ちゃん家 富岡市観光案内所 ${startAddress}`;
 
 export const siteConfig = {
   title: "繭が遺した地図",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "https://xx0019v.github.io/tomioka",
+  siteUrl: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? officialSiteUrl).toString(),
   eventState: "scheduled" as EventState,
   eventDate: "2026年8月8日（土）",
   reception: "9:00〜15:00",
@@ -22,8 +23,8 @@ export const siteConfig = {
     address: startAddress,
     access: "上信電鉄 上州富岡駅から徒歩約5分",
     googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(startMapQuery)}`,
-    latitude: 36.25845,
-    longitude: 138.892532,
+    latitude: 36.2561208,
+    longitude: 138.8914794,
   },
   contact: null as string | null,
   emergency: {

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const baseUrl = process.env.QA_BASE_URL ?? "http://localhost:3000";
-const productionUrl = "https://xx0019v.github.io/tomioka/";
+const productionUrl = "https://mayu-no-chizu.cid-ac.com/";
 const matrix = [
   { width: 320, height: 568 },
   { width: 360, height: 800 },

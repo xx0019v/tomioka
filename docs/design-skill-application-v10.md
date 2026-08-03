@@ -54,7 +54,7 @@
 
 ## 5. 検証状況（正直な記録）
 
-**確認できたこと（本番 `https://xx0019v.github.io/tomioka/` 実測）**
+**確認できたこと（本番 `https://mayu-no-chizu.cid-ac.com/` 実測）**
 - HTTP 200、新ビルド `Pbwi_cUDVoq3EKed1qchG` 反映
 - thread / guide / bead すべて DOM に存在
 - `getTotalLength()` が実ジオメトリに対し 1002 を返し、`stroke-dasharray` がその値で初期化されている

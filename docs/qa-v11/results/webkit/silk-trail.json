@@ -6,15 +6,15 @@
     },
     {
       "progress": "0.250",
-      "dashoffset": 751.616165
+      "dashoffset": 751.722511
     },
     {
       "progress": "0.500",
-      "dashoffset": 501.127411
+      "dashoffset": 501.064621
     },
     {
       "progress": "0.750",
-      "dashoffset": 250.488754
+      "dashoffset": 250.53231
     },
     {
       "progress": "1.000",
@@ -22,11 +22,11 @@
     }
   ],
   "lifecycle": {
-    "beforeBurst": 32,
-    "afterBurst": 33,
-    "hiddenStart": 33,
-    "restored": 34,
-    "idleAfterRestore": 34,
+    "beforeBurst": 33,
+    "afterBurst": 34,
+    "hiddenStart": 34,
+    "restored": 35,
+    "idleAfterRestore": 35,
     "loopCount": 0
   }
 }

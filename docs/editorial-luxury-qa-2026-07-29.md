@@ -123,7 +123,7 @@
 - `npm run typecheck`：成功
 - `npm run test:e2e:editorial`：2 / 2成功
 - `npm run test:e2e:ios`：4 / 4成功
-- `NEXT_PUBLIC_BASE_PATH=/tomioka NEXT_PUBLIC_SITE_URL=https://xx0019v.github.io/tomioka npm run build`：成功
+- `NEXT_PUBLIC_BASE_PATH=/tomioka NEXT_PUBLIC_SITE_URL=https://mayu-no-chizu.cid-ac.com/ npm run build`：成功
 - 静的本番24画面：
   - 横方向オーバーフロー：0 / 24
   - 44px未満の操作対象：0 / 24

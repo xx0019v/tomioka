@@ -6,7 +6,7 @@
     },
     {
       "progress": "0.250",
-      "dashoffset": 751.616
+      "dashoffset": 751.628
     },
     {
       "progress": "0.500",
@@ -14,7 +14,7 @@
     },
     {
       "progress": "0.750",
-      "dashoffset": 250.489
+      "dashoffset": 250.501
     },
     {
       "progress": "1.000",
@@ -22,11 +22,11 @@
     }
   ],
   "lifecycle": {
-    "beforeBurst": 95,
-    "afterBurst": 96,
-    "hiddenStart": 96,
-    "restored": 97,
-    "idleAfterRestore": 97,
+    "beforeBurst": 104,
+    "afterBurst": 105,
+    "hiddenStart": 105,
+    "restored": 106,
+    "idleAfterRestore": 106,
     "loopCount": 0
   }
 }

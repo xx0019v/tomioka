@@ -232,15 +232,18 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             icon: L.divIcon({
               className: "map-marker-shell",
               html: `<span class="map-marker${roleClass}"><span>${spot.marker}</span></span>`,
-              iconSize: [56, 56],
-              iconAnchor: [28, 28],
+              iconSize: [56, 62],
+              iconAnchor: [28, 62],
             }),
           });
           marker.on("click", () => openSpot(spot.slug, "marker"));
           marker.on("add", () => {
-            marker.getElement()?.setAttribute("aria-label", `${spot.name}の案内を開く`);
+            const element = marker.getElement();
+            element?.setAttribute("aria-label", `${spot.name}の案内を開く`);
+            element?.setAttribute("data-latitude", String(spot.latitude));
+            element?.setAttribute("data-longitude", String(spot.longitude));
           });
-          marker.bindTooltip(spot.name, { direction: "top", offset: [0, -20] });
+          marker.bindTooltip(spot.name, { direction: "top", offset: [0, -51] });
           marker.addTo(map);
           markerStore.set(spot.slug, marker);
           bounds.extend([spot.latitude, spot.longitude]);
@@ -563,6 +566,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             className={styles.interactionButton}
             onClick={() => setMapInteraction(!mapInteractionEnabled)}
             aria-pressed={mapInteractionEnabled}
+            disabled={mapState === "loading"}
           >
             <span aria-hidden="true">{mapInteractionEnabled ? "↕" : "＋"}</span>
             {mapInteractionEnabled ? "操作を終了" : "地図を操作"}

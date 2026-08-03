@@ -1,0 +1,813 @@
+[
+  {
+    "viewport": "320x568",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 577.828125,
+      "stageHeight": 360,
+      "panelHeight": 215.828125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "375x667",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 615.453125,
+      "stageHeight": 360,
+      "panelHeight": 253.453125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "390x844",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 740.875,
+      "stageHeight": 438.875,
+      "panelHeight": 300,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "430x932",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 48,
+          "right": 86.859375,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 786.625,
+      "stageHeight": 484.625,
+      "panelHeight": 300,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "768x1024",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 188.078125,
+          "right": 242.46875,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 802,
+      "stageHeight": 500,
+      "panelHeight": 300,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1024x768",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 203.4375,
+          "right": 257.828125,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 760.140625,
+      "stageHeight": 758.140625,
+      "panelHeight": 758.140625,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1280x800",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 218.796875,
+          "right": 273.1875,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 142,
+          "right": 196.390625,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 763.484375,
+      "stageHeight": 761.484375,
+      "panelHeight": 761.484375,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1440x900",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 220,
+          "right": 274.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 306.390625,
+          "right": 360.78125,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 220,
+          "right": 274.390625,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 767.96875,
+      "stageHeight": 765.96875,
+      "panelHeight": 765.96875,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1920x1080",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "01",
+          "left": 460,
+          "right": 514.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "02",
+          "left": 550,
+          "right": 604.390625,
+          "overlapsLine": false
+        },
+        {
+          "text": "03",
+          "left": 460,
+          "right": 514.390625,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 772.453125,
+      "stageHeight": 770.453125,
+      "panelHeight": 770.453125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  }
+]

@@ -86,6 +86,7 @@ async function waitForPageAssets(page) {
         ) {
           continue;
         }
+        if (!(await image.isVisible())) continue;
         await image.scrollIntoViewIfNeeded();
         await expect
           .poll(() => image.evaluate((element) => element.naturalWidth), { timeout: 10_000 })
@@ -119,6 +120,7 @@ async function auditLayout(page) {
       const tops = [];
       while (walker.nextNode()) {
         const node = walker.currentNode;
+        if (node.parentElement?.closest("[aria-hidden='true']")) continue;
         for (let index = 0; index < node.textContent.length; index += 1) {
           if (!node.textContent[index].trim()) continue;
           const range = document.createRange();

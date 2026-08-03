@@ -10,7 +10,7 @@ import { withBasePath } from "@/lib/base-path";
 import styles from "./page.module.css";
 
 const mapDescription = "受付場所と富岡製糸場周辺のイベントエリア、休憩地点を確認できる街歩きマップ。";
-const mapUrl = `${siteConfig.siteUrl.replace(/\/$/, "")}/map/`;
+const mapUrl = new URL("map/", siteConfig.siteUrl).toString();
 
 export const metadata: Metadata = {
   title: "富岡 街歩きマップ",

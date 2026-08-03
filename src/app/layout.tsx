@@ -7,7 +7,7 @@ import { withBasePath } from "@/lib/base-path";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
-const metadataOrigin = new URL(new URL(siteConfig.siteUrl).origin);
+const metadataOrigin = new URL(siteConfig.siteUrl);
 
 export const metadata: Metadata = {
   metadataBase: metadataOrigin,
