@@ -170,8 +170,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
 
       <div className={styles.stage}>
         <div className={styles.folio} aria-hidden="true">
-          <span>SILK MEMORY ATLAS</span>
-          <i>01 / TOMIOKA</i>
+          <span>絹の記憶を綴じた台帳</span>
+          <i>富岡 — 壱</i>
         </div>
 
         <div className={styles.evidence} aria-hidden="true">
@@ -185,7 +185,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
               fetchPriority="high"
               sizes="(max-width: 700px) 48vw, 28vw"
             />
-            <span>再構成 / MEIJI</span>
+            <span>手記より — 明治</span>
           </div>
         </div>
 
@@ -226,7 +226,7 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
         </div>
 
         <div className={styles.scrollCue} aria-hidden="true">
-          <span>SCROLL TO DISCOVER</span>
+          <span>読み進める</span>
           <i />
         </div>
       </div>

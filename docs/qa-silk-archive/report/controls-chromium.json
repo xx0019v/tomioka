@@ -1,0 +1,56 @@
+[
+  {
+    "route": "/",
+    "width": 320,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/",
+    "width": 390,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/",
+    "width": 430,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/map/",
+    "width": 320,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/map/",
+    "width": 390,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/map/",
+    "width": 430,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/information/",
+    "width": 320,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/information/",
+    "width": 390,
+    "small": [],
+    "wrapped": []
+  },
+  {
+    "route": "/information/",
+    "width": 430,
+    "small": [],
+    "wrapped": []
+  }
+]

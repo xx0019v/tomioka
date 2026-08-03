@@ -1,0 +1,54 @@
+.plate {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.roadMinor {
+  stroke: rgba(125, 101, 68, 0.28);
+  stroke-width: 2;
+}
+
+.roadMajor {
+  stroke: rgba(107, 79, 49, 0.42);
+  stroke-width: 7;
+}
+
+.route {
+  stroke: rgba(142, 36, 54, 0.5);
+  stroke-width: 3.4;
+  stroke-dasharray: 15 12;
+  stroke-linecap: round;
+}
+
+.routeHead {
+  fill: rgba(142, 36, 54, 0.5);
+}
+
+.compassRing {
+  stroke: rgba(107, 79, 49, 0.42);
+  stroke-width: 1.4;
+}
+
+.compassSouth {
+  fill: rgba(30, 37, 54, 0.34);
+}
+
+.compassNorth {
+  fill: rgba(142, 36, 54, 0.5);
+}
+
+.scaleBar {
+  stroke: rgba(107, 79, 49, 0.5);
+  stroke-width: 1.6;
+}
+
+@media (max-width: 680px) {
+  .plate {
+    opacity: 0.6;
+  }
+}

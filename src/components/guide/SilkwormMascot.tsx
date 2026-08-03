@@ -9,7 +9,12 @@ export type GuideExpression =
   | "concerned"
   | "caution"
   | "loading"
-  | "clear";
+  | "clear"
+  /* 視線だけが動く状態。表情を変えずに「見ている」を伝える */
+  | "looking-left"
+  | "looking-right"
+  /* 街を歩いている状態。脚の位置と体の傾きだけが変わる */
+  | "walking";
 
 /**
  * 繭標（まゆしるべ・愛称「きぬ」）— カイコの幼虫をモチーフにした案内役のインラインSVG。
@@ -32,6 +37,7 @@ type FaceKind =
   | "calm"
   | "smile"
   | "look"
+  | "look-back"
   | "down"
   | "happy"
   | "worried"
@@ -49,6 +55,9 @@ const faceForExpression: Record<GuideExpression, FaceKind> = {
   caution: "worried",
   loading: "rest",
   clear: "happy",
+  "looking-left": "look-back",
+  "looking-right": "look",
+  walking: "smile",
 };
 
 function Eyes({ face }: { face: FaceKind }) {
@@ -72,7 +81,7 @@ function Eyes({ face }: { face: FaceKind }) {
     );
   }
   const dy = face === "down" ? 2.4 : 0;
-  const dx = face === "look" ? 1.6 : 0;
+  const dx = face === "look" ? 1.6 : face === "look-back" ? -1.8 : 0;
   return (
     <g data-rig="eyes" data-kinu-eyes fill={eye}>
       <ellipse cx={73 + dx} cy={56 + dy} rx="1.9" ry="2.6" />
@@ -133,9 +142,9 @@ export function SilkwormMascot({
       {title ? <title>{title}</title> : null}
       <defs>
         <linearGradient id="silk-body" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fdfbf4" />
-          <stop offset="0.55" stopColor="#f4ecd9" />
-          <stop offset="1" stopColor="#e7dcc2" />
+          <stop offset="0" stopColor="#fefcf6" />
+          <stop offset="0.5" stopColor="#f6ecd6" />
+          <stop offset="1" stopColor="#dfcdae" />
         </linearGradient>
         <radialGradient id="silk-sheen" cx="0.38" cy="0.3" r="0.7">
           <stop offset="0" stopColor="#ffffff" stopOpacity="0.65" />
@@ -145,14 +154,14 @@ export function SilkwormMascot({
 
       <g data-rig="body">
       {/* やわらかな影（接地感） */}
-      <ellipse cx="58" cy="94" rx="40" ry="6.5" fill="#2a3b34" opacity="0.12" />
+      <ellipse cx="58" cy="94" rx="40" ry="6.5" fill="#2b3550" opacity="0.14" />
 
       {/* 引いている絹糸（識別要素・赤煉瓦色）— 尾から静かに伸びる */}
       {!simplified && (
         <path
           d="M22 80c-8 1-13 6-11 12 1.6 5-1 8-6 8"
           fill="none"
-          stroke="#a8402a"
+          stroke="#8e2436"
           strokeWidth="1.6"
           strokeLinecap="round"
           opacity="0.85"
@@ -160,42 +169,49 @@ export function SilkwormMascot({
       )}
 
       {/* 尾角（カイコ特有の小さな角・識別要素） */}
-      <path d="M23 70c-4-3-8-3-10 0" fill="none" stroke="#cbb892" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M23 70c-4-3-8-3-10 0" fill="none" stroke="#c6ac86" strokeWidth="2.2" strokeLinecap="round" />
 
       {/* 体（ふっくらした幼虫の胴） */}
       <path
         d="M24 78 C 17 68 22 56 38 55 C 52 54 60 60 74 60 C 85 60 90 70 82 78 C 70 87 40 88 24 78 Z"
         fill="url(#silk-body)"
-        stroke="#cbb892"
+        stroke="#c6ac86"
         strokeWidth="1.4"
         strokeLinejoin="round"
       />
 
       {/* 節（体の上のやわらかな弧・強すぎない） */}
-      <g fill="none" stroke="#d8c9a6" strokeWidth="1.6" strokeLinecap="round" opacity="0.85">
+      <g fill="none" stroke="#d3bd97" strokeWidth="1.6" strokeLinecap="round" opacity="0.85">
         <path d="M35 58c-2 6-2 12 0 18" />
         <path d="M48 59c-2 6-2 12 0 18" />
         <path d="M61 60c-2 6-2 11 0 16" />
       </g>
 
-      {/* 小さな脚（幼虫であることの合図） */}
-      <g fill="#e2d3b2" stroke="#cbb892" strokeWidth="0.8">
-        <circle cx="34" cy="83" r="2.6" />
-        <circle cx="46" cy="84" r="2.6" />
-        <circle cx="58" cy="83.5" r="2.6" />
+      {/* 小さな脚（幼虫であることの合図）。歩行時だけ前後にずれる */}
+      <g fill="#e6d5b6" stroke="#c6ac86" strokeWidth="0.8">
+        <circle cx="34" cy={expression === "walking" ? 85.5 : 83} r="2.6" />
+        <circle cx="46" cy={expression === "walking" ? 82 : 84} r="2.6" />
+        <circle cx="58" cy={expression === "walking" ? 85 : 83.5} r="2.6" />
       </g>
 
-      {/* 桑の葉タグ（識別要素・首元） */}
+      {/* 首元の識別要素：臙脂の細いリボンと、真鍮色の記録タグ。
+          可愛さは「大きさ」ではなく「小ささ」で作る。付けるのは 2 点まで。 */}
       {!simplified && (
-        <g transform="translate(62 62) rotate(-20)">
-          <path d="M0 0c5-3 11-2 12 3 1 5-4 9-9 8-4-1-6-6-3-11z" fill="#5c7148" opacity="0.92" />
-          <path d="M2 3c3 1 6 3 8 6" fill="none" stroke="#3f5231" strokeWidth="0.8" />
+        <g transform="translate(63 60) rotate(-14)">
+          <path
+            d="M-2 2c3-3 7-3 9 0 2-3 6-3 9 0-3 3-6 3-9 1-3 2-6 2-9-1z"
+            fill="#8e2436"
+          />
+          <circle cx="7" cy="2.4" r="1.5" fill="#a94456" />
+          <path d="M7 4v6" stroke="#b9964f" strokeWidth="0.9" strokeLinecap="round" />
+          <rect x="4.4" y="9.6" width="5.6" height="7" rx="1" fill="#faf5e8" stroke="#b9964f" strokeWidth="0.8" />
+          <path d="M5.8 12h2.8M5.8 14h2" stroke="#2b3550" strokeWidth="0.6" opacity="0.6" />
         </g>
       )}
 
       <g data-rig="head">
       {/* 頭部（丸く上品に） */}
-      <circle cx="80" cy="52" r="19" fill="url(#silk-body)" stroke="#cbb892" strokeWidth="1.4" />
+      <circle cx="80" cy="52" r="19" fill="url(#silk-body)" stroke="#c6ac86" strokeWidth="1.4" />
       <ellipse cx="74" cy="46" rx="14" ry="11" fill="url(#silk-sheen)" opacity="0.85" />
 
       {/* 顔 */}
@@ -212,7 +228,7 @@ export function SilkwormMascot({
 
       {/* 到達・喜びの小さな煌めき（控えめ） */}
       {(expression === "clear" || expression === "discovery") && !simplified && (
-        <g fill="#ad8a4e">
+        <g fill="#b9964f">
           <path d="M99 34l1.4 3.2 3.2 1.4-3.2 1.4-1.4 3.2-1.4-3.2-3.2-1.4 3.2-1.4z" />
         </g>
       )}

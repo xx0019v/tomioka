@@ -5,21 +5,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 48,
-          "right": 86.859375,
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 48,
-          "right": 86.859375,
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 48,
-          "right": 86.859375,
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         }
       ],
@@ -27,6 +27,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -92,21 +136,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 48,
-          "right": 86.859375,
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 48,
-          "right": 86.859375,
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 48,
-          "right": 86.859375,
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         }
       ],
@@ -114,6 +158,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -179,21 +267,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 48,
-          "right": 86.859375,
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 48,
-          "right": 86.859375,
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 48,
-          "right": 86.859375,
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         }
       ],
@@ -201,6 +289,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -266,21 +398,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 48,
-          "right": 86.859375,
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 48,
-          "right": 86.859375,
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 48,
-          "right": 86.859375,
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
           "overlapsLine": false
         }
       ],
@@ -288,6 +420,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -353,21 +529,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 142,
-          "right": 196.390625,
+          "text": "壱",
+          "left": 66.109375,
+          "right": 88.109375,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 188.078125,
-          "right": 242.46875,
+          "text": "弐",
+          "left": 66.109375,
+          "right": 88.109375,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 142,
-          "right": 196.390625,
+          "text": "参",
+          "left": 66.109375,
+          "right": 88.109375,
           "overlapsLine": false
         }
       ],
@@ -375,6 +551,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -440,21 +660,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 142,
-          "right": 196.390625,
+          "text": "壱",
+          "left": 74.8125,
+          "right": 96.8125,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 203.4375,
-          "right": 257.828125,
+          "text": "弐",
+          "left": 74.8125,
+          "right": 96.8125,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 142,
-          "right": 196.390625,
+          "text": "参",
+          "left": 74.8125,
+          "right": 96.8125,
           "overlapsLine": false
         }
       ],
@@ -462,6 +682,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -477,9 +741,9 @@
     },
     "map": {
       "overflow": 0,
-      "shellHeight": 760.046875,
-      "stageHeight": 758.046875,
-      "panelHeight": 758.046875,
+      "shellHeight": 814.4375,
+      "stageHeight": 812.4375,
+      "panelHeight": 812.4375,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -534,21 +798,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 142,
-          "right": 196.390625,
+          "text": "壱",
+          "left": 168,
+          "right": 190,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 218.796875,
-          "right": 273.1875,
+          "text": "弐",
+          "left": 168,
+          "right": 190,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 142,
-          "right": 196.390625,
+          "text": "参",
+          "left": 168,
+          "right": 190,
           "overlapsLine": false
         }
       ],
@@ -556,6 +820,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -571,9 +879,9 @@
     },
     "map": {
       "overflow": 0,
-      "shellHeight": 763.421875,
-      "stageHeight": 761.421875,
-      "panelHeight": 761.421875,
+      "shellHeight": 818.15625,
+      "stageHeight": 816.15625,
+      "panelHeight": 816.15625,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -628,21 +936,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 219.984375,
-          "right": 274.375,
+          "text": "壱",
+          "left": 247.984375,
+          "right": 269.984375,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 306.375,
-          "right": 360.765625,
+          "text": "弐",
+          "left": 247.984375,
+          "right": 269.984375,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 219.984375,
-          "right": 274.375,
+          "text": "参",
+          "left": 247.984375,
+          "right": 269.984375,
           "overlapsLine": false
         }
       ],
@@ -650,6 +958,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -665,9 +1017,9 @@
     },
     "map": {
       "overflow": 0,
-      "shellHeight": 767.90625,
-      "stageHeight": 765.90625,
-      "panelHeight": 765.90625,
+      "shellHeight": 823.125,
+      "stageHeight": 821.125,
+      "panelHeight": 821.125,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [
@@ -722,21 +1074,21 @@
       "overflow": 0,
       "stepNumberLineOverlaps": [
         {
-          "text": "01",
-          "left": 460,
-          "right": 514.390625,
+          "text": "壱",
+          "left": 488,
+          "right": 510,
           "overlapsLine": false
         },
         {
-          "text": "02",
-          "left": 550,
-          "right": 604.390625,
+          "text": "弐",
+          "left": 488,
+          "right": 510,
           "overlapsLine": false
         },
         {
-          "text": "03",
-          "left": 460,
-          "right": 514.390625,
+          "text": "参",
+          "left": 488,
+          "right": 510,
           "overlapsLine": false
         }
       ],
@@ -744,6 +1096,50 @@
         false,
         false,
         false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
       ],
       "canonical": "https://mayu-no-chizu.cid-ac.com/",
       "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
@@ -759,9 +1155,9 @@
     },
     "map": {
       "overflow": 0,
-      "shellHeight": 772.390625,
-      "stageHeight": 770.390625,
-      "panelHeight": 770.390625,
+      "shellHeight": 828.09375,
+      "stageHeight": 826.09375,
+      "panelHeight": 826.09375,
       "trailingGap": 1,
       "panelPosition": "relative",
       "markers": [

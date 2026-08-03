@@ -3,7 +3,10 @@ import Link from "next/link";
 import { OtomiArrival } from "@/components/arrival/OtomiArrival";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
+import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
+import { FieldMapPlate } from "@/components/immersive/FieldMapPlate";
+import { TypographyReveal } from "@/components/immersive/TypographyReveal";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
 import { SilkTrail } from "@/components/immersive/SilkTrail";
 import { ShareActions } from "@/components/site/ShareActions";
@@ -16,7 +19,7 @@ import styles from "./page.module.css";
 
 const participationSteps = [
   {
-    number: "01",
+    number: "壱",
     title: "スタート地点へ",
     body: (
       <>
@@ -27,13 +30,13 @@ const participationSteps = [
     meta: "START",
   },
   {
-    number: "02",
+    number: "弐",
     title: "参加キットを受け取る",
     body: "受付時間内に無料配布",
     meta: "RECEPTION",
   },
   {
-    number: "03",
+    number: "参",
     title: "富岡の街を歩く",
     body: (
       <>
@@ -48,6 +51,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <SilkTrail />
+      <TypographyReveal />
       <SiteHeader />
 
       <main id="main-content">
@@ -62,19 +66,19 @@ export default function Home() {
         <section id="discover" className={styles.signal} aria-labelledby="signal-heading">
           <ArtifactField variant="discover" />
           <div className={styles.signalCopy}>
-            <p className={styles.eyebrow}>EVENT EXPERIENCE / TOMIOKA</p>
-            <h2 id="signal-heading"><span>記憶は</span><span>富岡の街に眠る</span></h2>
+            <p className={styles.eyebrow}>TOMIOKA</p>
+            <h2 id="signal-heading" data-line-reveal="waiting"><span>記憶は</span><span>富岡の街に眠る</span></h2>
             <p>富岡製糸場周辺の商店街を<span className="no-break" data-ja-unit="歩きながら、">歩きながら、</span>街の景色と物語を楽しむ約60〜90分の体験です。</p>
             <Link href="/information/">開催概要を確認 <span aria-hidden="true">↗</span></Link>
           </div>
           <dl className={styles.eventManifest} aria-label="イベントの特徴">
             <div className={styles.dateEntry}>
-              <dt>DATE / ONE DAY</dt>
+              <dt>開催日</dt>
               <dd><strong>08</strong><i aria-hidden="true">/</i><strong>08</strong></dd>
-              <span>2026 — SATURDAY</span>
+              <span className="no-break">2026年 土曜</span>
             </div>
-            <div><dt>AREA</dt><dd>富岡製糸場周辺</dd><span>商店街を歩く物語</span></div>
-            <div><dt>ENTRY</dt><dd>参加無料</dd><span>事前申込不要</span></div>
+            <div><dt>場所</dt><dd className="no-break">富岡製糸場周辺</dd><span>商店街を歩く物語</span></div>
+            <div><dt>参加</dt><dd className="no-break">参加無料</dd><span className="no-break">事前申込不要</span></div>
           </dl>
         </section>
 
@@ -88,11 +92,11 @@ export default function Home() {
               loading="eager"
               sizes="(max-width: 760px) 100vw, 48vw"
             />
-            <figcaption>RESEARCH NOTE / MEIJI 5</figcaption>
+            <figcaption>手記、明治五年——</figcaption>
           </figure>
           <div className={styles.storyContent}>
-            <p className={styles.eyebrow}>STORY / 明治五年</p>
-            <h2 id="story-heading"><span>街が守った</span><span>繭の記録</span></h2>
+            <p className={styles.eyebrow}>あらすじ</p>
+            <h2 id="story-heading" data-line-reveal="waiting"><span>街が守った</span><span>繭の記録</span></h2>
             <div className={styles.storyText}>
               <p>明治五年。富岡の街に、一人の研究者がいた。</p>
               <p>カイコの糸に生涯を捧げた女性——<span className="no-break" data-ja-unit="永山 繭">永山 繭</span>。</p>
@@ -119,11 +123,14 @@ export default function Home() {
         <section id="how-to-play" className={styles.howTo} aria-labelledby="howto-heading">
           <ArtifactField variant="howto" />
           <header className={styles.sectionHeader}>
-            <p className={styles.eyebrow}>HOW TO JOIN / 三つのステップ</p>
-            <h2 id="howto-heading"><span>富岡の街へ</span><span>物語を歩きに行く</span></h2>
+            <p className={styles.eyebrow}>参加のしかた</p>
+            <h2 id="howto-heading" data-line-reveal="waiting"><span>富岡の街へ</span><span>物語を歩きに行く</span></h2>
             <p>当日は<span className="no-break" data-ja-unit="お富ちゃん家">お富ちゃん家</span>で参加キットを受け取り、富岡の街並みとともに物語をお楽しみください。</p>
           </header>
 
+          <span className={styles.stepObjects} aria-hidden="true">
+            <ArchiveObject name="wax-seal" tilt={-8} />
+          </span>
           <ol className={styles.steps}>
             {participationSteps.map((step) => (
               <li key={step.number}>
@@ -150,19 +157,11 @@ export default function Home() {
         </section>
 
         <section id="route" className={styles.route} aria-labelledby="route-heading">
-          <ArtifactField variant="route" />
-          <Image
-            className={styles.routeGround}
-            src={withBasePath("/images/environment/field-archive-ground.webp")}
-            alt=""
-            fill
-            sizes="100vw"
-            aria-hidden="true"
-          />
-          <div className={styles.routeVeil} aria-hidden="true" />
+          {/* 写真の地面ではなく、配布キットの地図ページを引き直した図版を敷く */}
+          <FieldMapPlate />
           <header className={styles.routeHeader}>
-            <p className={styles.eyebrow}>EVENT AREA / 富岡製糸場周辺</p>
-            <h2 id="route-heading"><span>街を歩く道は</span><span>ひとつの地図に</span></h2>
+            <p className={styles.eyebrow}>手がかりの地図</p>
+            <h2 id="route-heading" data-line-reveal="waiting"><span>街を歩く道は</span><span>ひとつの地図に</span></h2>
             <p>受付、街歩きの目印、休憩地点。当日たどる{eventSpots.length}か所は、街歩きマップにまとめています。</p>
           </header>
           <ol className={styles.routeIndex}>
@@ -174,26 +173,20 @@ export default function Home() {
               </li>
             ))}
           </ol>
-          <Image
-            className={styles.routeStrata}
-            src={withBasePath("/images/environment/silk-strata.webp")}
-            alt=""
-            width={1440}
-            height={576}
-            sizes="(max-width: 680px) 120vw, 88vw"
-            aria-hidden="true"
-          />
-          <Link href="/map/" className={styles.routeCta}>街歩きマップを開く <span aria-hidden="true">↗</span></Link>
+          <Link href="/map/" className={styles.routeCta}>
+            <ArchiveObject name="map-pin" className={styles.ctaObject} />
+            街歩きマップを開く <span aria-hidden="true">↗</span>
+          </Link>
         </section>
 
         <OtomiArrival />
 
         <section id="share" className={styles.share} aria-labelledby="share-heading">
           <ArtifactField variant="share" />
-          <p className={styles.shareFolio} aria-hidden="true">TOMIOKA — 08.08</p>
+          <p className={styles.shareFolio} aria-hidden="true">繭が遺した地図 — 富岡</p>
           <div>
-            <p className={styles.eyebrow}>SHARE / 街歩きの誘い</p>
-            <h2 id="share-heading"><span>この物語を</span><span>誰と歩く？</span></h2>
+            <p className={styles.eyebrow}>誘いの一筆</p>
+            <h2 id="share-heading" data-line-reveal="waiting"><span>この物語を</span><span>誰と歩く？</span></h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
           </div>
           <ShareActions
