@@ -6,7 +6,7 @@
   position: relative;
   min-height: 430px;
   overflow: hidden;
-  background: var(--color-ink-green-deep);
+  background: var(--color-ink-deep);
   color: var(--color-paper);
 }
 
@@ -15,8 +15,8 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(12, 36, 31, 0.98), rgba(12, 36, 31, 0.56)),
-    linear-gradient(0deg, rgba(12, 36, 31, 0.32), transparent 52%);
+    linear-gradient(90deg, rgba(22, 30, 48, 0.98), rgba(22, 30, 48, 0.56)),
+    linear-gradient(0deg, rgba(22, 30, 48, 0.32), transparent 52%);
   content: "";
 }
 
@@ -34,7 +34,7 @@
 
 .kicker {
   color: #d3b978;
-  font-size: 0.76rem;
+  font-size: var(--text-body);
   font-weight: 700;
   letter-spacing: 0.14em;
 }
@@ -88,19 +88,19 @@
 .sectionHeading > p:not(.sectionIndex) {
   margin-top: 16px;
   color: var(--color-muted);
-  font-size: 0.86rem;
+  font-size: var(--text-body);
 }
 
 .sectionIndex {
   margin-bottom: 12px;
-  color: var(--color-vermilion);
-  font-size: 0.62rem;
+  color: var(--color-seal);
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.16em;
 }
 
 .sectionHeading h2 {
-  color: var(--color-ink-green);
+  color: var(--color-ink);
   font-size: clamp(1.7rem, 4vw, 2.7rem);
   text-wrap: balance;
 }
@@ -137,14 +137,14 @@
   align-self: stretch;
   padding-top: 28px;
   border-top: 1px solid var(--color-hairline-strong);
-  color: var(--color-ink-green-deep);
+  color: var(--color-ink-deep);
 }
 
 .dateComposition > span,
 .dateComposition > small {
   grid-column: 1 / -1;
   color: var(--color-gold);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
 }
@@ -158,7 +158,7 @@
 }
 
 .dateComposition i {
-  color: var(--color-vermilion);
+  color: var(--color-seal);
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 5vw, 4.6rem);
   font-style: normal;
@@ -189,13 +189,13 @@
 .keyFacts dt,
 .facts dt {
   color: var(--color-gold);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
 .keyFacts dd {
   margin-top: 8px;
-  color: var(--color-ink-green-deep);
+  color: var(--color-ink-deep);
   font-family: var(--font-serif);
   font-size: clamp(1.15rem, 2vw, 1.65rem);
   font-weight: 600;
@@ -231,13 +231,13 @@
   left: 0;
   width: 18px;
   height: 1px;
-  background: var(--color-vermilion);
+  background: var(--color-seal);
   content: "";
 }
 
 .facts dd {
   margin-top: 8px;
-  color: var(--color-ink-green-deep);
+  color: var(--color-ink-deep);
   font-weight: 700;
 }
 
@@ -261,13 +261,13 @@
 }
 
 .participation li > span {
-  color: var(--color-vermilion);
+  color: var(--color-seal);
   font-family: var(--font-serif);
   font-size: 1.7rem;
 }
 
 .participation h3 {
-  color: var(--color-ink-green-deep);
+  color: var(--color-ink-deep);
   font-size: 1.1rem;
 }
 
@@ -307,9 +307,9 @@
 
 .notice {
   padding: 14px 16px;
-  border-left: 3px solid var(--color-vermilion);
+  border-left: 3px solid var(--color-seal);
   background: var(--color-gold-wash);
-  color: var(--color-ink-green-deep);
+  color: var(--color-ink-deep);
 }
 
 .inlineLink {
@@ -318,9 +318,9 @@
   align-items: center;
   margin-top: 22px;
   padding-bottom: 4px;
-  border-bottom: 1px solid var(--color-ink-green);
-  color: var(--color-ink-green);
-  font-size: 0.82rem;
+  border-bottom: 1px solid var(--color-ink);
+  color: var(--color-ink);
+  font-size: var(--text-body);
   font-weight: 700;
 }
 
@@ -377,9 +377,9 @@
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  border: 1px solid var(--color-ink-green);
+  border: 1px solid var(--color-ink);
   border-radius: var(--radius-control);
-  background: var(--color-ink-green);
+  background: var(--color-ink);
   color: var(--color-paper);
   font-weight: 700;
   line-height: 1;
@@ -389,7 +389,7 @@
 
 .outlineButton {
   background: transparent;
-  color: var(--color-ink-green);
+  color: var(--color-ink);
 }
 
 .button:active,

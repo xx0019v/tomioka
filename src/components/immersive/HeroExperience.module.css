@@ -4,9 +4,32 @@
   position: relative;
   min-height: calc(100svh - 68px);
   overflow: hidden;
-  background: #07120f;
+  /* 配布キット表紙の光。右上に蝋燭が一本あり、そこから紙が温まっている */
+  background:
+    radial-gradient(58% 46% at 78% 24%, rgba(245, 215, 155, 0.2), transparent 62%),
+    radial-gradient(120% 100% at 50% 120%, rgba(107, 79, 49, 0.32), transparent 58%),
+    linear-gradient(180deg, #1a2131 0%, #141a28 52%, #10151f 100%);
   color: #f6f0df;
   isolation: isolate;
+}
+
+/* 表紙の金の細枠。中に一回り細い罫がもう一本入る */
+.hero::before {
+  position: absolute;
+  inset: clamp(12px, 2.2vw, 30px);
+  z-index: 5;
+  border: 1px solid rgba(185, 150, 79, 0.34);
+  content: "";
+  pointer-events: none;
+}
+
+.hero::after {
+  position: absolute;
+  inset: calc(clamp(12px, 2.2vw, 30px) + 6px);
+  z-index: 5;
+  border: 1px solid rgba(185, 150, 79, 0.14);
+  content: "";
+  pointer-events: none;
 }
 
 .canvas,
@@ -45,9 +68,9 @@
     / minmax(0, 1.08fr) minmax(380px, 0.92fr);
   column-gap: clamp(40px, 6vw, 104px);
   width: min(calc(100% - 64px), 1340px);
-  min-height: calc(100svh - 148px);
+  min-height: calc(100svh - 216px);
   margin: 0 auto;
-  padding: 24px 0 40px;
+  padding: 20px 0 28px;
 }
 
 .folio {
@@ -56,13 +79,14 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
-  color: #bcae8c;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  color: rgba(201, 186, 152, 0.86);
+  font-family: var(--font-serif);
+  font-size: var(--text-label);
+  letter-spacing: 0.3em;
 }
 
 .folio i {
-  color: rgba(216, 239, 107, 0.72);
+  color: rgba(217, 189, 127, 0.72);
   font-style: normal;
 }
 
@@ -73,28 +97,31 @@
   min-width: 0;
   flex-direction: column;
   align-self: center;
-  padding-block: 32px 48px;
+  padding-block: 20px 30px;
 }
 
 .kicker {
-  color: #c9a95e;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  color: #cdae64;
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  font-weight: 400;
+  letter-spacing: 0.28em;
   animation: kickerIn 640ms 80ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .copy h1 {
   display: flex;
-  max-width: 10ch;
-  margin-top: 16px;
+  max-width: 12ch;
+  margin-top: 22px;
   flex-direction: column;
   color: #f8f3e8;
-  font-family: var(--font-sans);
-  font-size: clamp(3.5rem, 5.9vw, 6rem);
+  /* 配布キットの表紙と同じ声。太らせず、字間で強くする */
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.98;
+  letter-spacing: 0.16em;
+  line-height: 1.36;
+  text-shadow: 0 0 34px rgba(245, 215, 155, 0.16);
 }
 
 .titleLine {
@@ -109,7 +136,7 @@
 }
 
 .titleLine:last-child {
-  margin-left: clamp(16px, 4vw, 72px);
+  margin-left: clamp(10px, 2.4vw, 40px);
 }
 
 .titleLine:last-child > span {
@@ -117,20 +144,32 @@
 }
 
 .title {
-  margin-top: 24px;
-  color: #dbbd75;
+  position: relative;
+  margin-top: 34px;
+  padding-top: 26px;
+  color: #dcc084;
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2vw, 1.65rem);
-  letter-spacing: 0.12em;
+  font-size: clamp(1.0625rem, 1.7vw, 1.3rem);
+  letter-spacing: 0.2em;
   animation: quietTextIn 600ms 520ms ease-out both;
 }
 
+.title::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 88px;
+  height: 1px;
+  background: rgba(185, 150, 79, 0.6);
+  content: "";
+}
+
 .lead {
-  max-width: 42ch;
-  margin-top: 12px;
-  color: #c8c5b7;
-  font-size: 1rem;
-  line-height: 1.85;
+  max-width: 34ch;
+  margin-top: 16px;
+  color: #cec6b2;
+  font-size: var(--text-body-lead);
+  line-height: 1.95;
   animation: leadIn 760ms 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -149,8 +188,8 @@
   justify-content: space-between;
   gap: 20px;
   padding: 16px 22px;
-  border-radius: 4px;
-  font-size: 0.78rem;
+  border-radius: 2px;
+  font-size: 1rem;
   font-weight: 700;
   white-space: nowrap;
   transition:
@@ -194,14 +233,15 @@
 }
 
 .primary {
-  background: #d8ef6b;
-  color: #0b1713;
-  box-shadow: 0 0 32px rgba(216, 239, 107, 0.12);
+  border: 1px solid rgba(185, 150, 79, 0.5);
+  background: linear-gradient(180deg, #faf5e8, #eee4c9);
+  color: var(--kit-ink-deep);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.34);
 }
 
 .secondary {
-  border: 1px solid rgba(232, 223, 198, 0.46);
-  color: #f4ecd9;
+  border: 1px solid rgba(185, 150, 79, 0.5);
+  color: #f2e8d2;
 }
 
 .evidence {
@@ -226,7 +266,7 @@
   inset: -4%;
   border: 1px solid rgba(210, 179, 111, 0.34);
   border-right-color: transparent;
-  border-bottom-color: rgba(216, 239, 107, 0.2);
+  border-bottom-color: rgba(217, 189, 127, 0.2);
   border-radius: 46% 54% 58% 42%;
   transform: rotate(-18deg);
 }
@@ -237,7 +277,7 @@
   bottom: 14%;
   width: 8px;
   height: 12px;
-  border: 1px solid #b44c38;
+  border: 1px solid #a1394a;
   border-radius: 50%;
   background: #eee3c8;
   content: "";
@@ -249,7 +289,7 @@
   overflow: hidden;
   border: 1px solid rgba(246, 236, 208, 0.35);
   border-radius: 3px;
-  background: #17231e;
+  background: #1c2334;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.58);
   transform: rotateX(calc(-7deg + var(--pointer-y) * -9deg)) rotateY(calc(-13deg + var(--pointer-x) * 14deg)) rotateZ(5deg);
   transform-style: preserve-3d;
@@ -278,7 +318,7 @@
   bottom: 8px;
   z-index: 1;
   color: rgba(255, 248, 227, 0.72);
-  font-size: 0.55rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
 }
 
@@ -288,8 +328,8 @@
   grid-template-columns: minmax(260px, 0.72fr) minmax(460px, 1.28fr);
   gap: clamp(32px, 5vw, 80px);
   align-items: end;
-  padding-top: 24px;
-  border-top: 1px solid rgba(232, 223, 198, 0.24);
+  padding-top: 18px;
+  border-top: 1px solid rgba(185, 150, 79, 0.28);
 }
 
 .datePanel {
@@ -303,7 +343,7 @@
 .datePanel > span {
   align-self: start;
   color: #c9aa68;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   animation: kickerIn 560ms 700ms ease-out both;
 }
@@ -318,9 +358,10 @@
 
 .datePanel b {
   display: inline-block;
-  font-size: clamp(3.4rem, 5.2vw, 5.8rem);
-  font-weight: 300;
-  letter-spacing: -0.08em;
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   animation: dateIn 720ms 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -331,7 +372,7 @@
 .datePanel i {
   /* 2つの数字より少し遅れて、細く開くように現れる。数字と同じ動きにはしない */
   animation: dateSlashIn 560ms 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  color: #b44c38;
+  color: #a1394a;
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 3vw, 3.2rem);
   font-style: normal;
@@ -341,7 +382,7 @@
   grid-column: 1 / -1;
   margin-top: 10px;
   color: #aaa695;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
 }
 
@@ -358,7 +399,7 @@
   align-items: center;
   gap: 12px;
   color: #918e81;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
   transform: rotate(90deg) translateX(50%);
   transform-origin: right center;
@@ -375,7 +416,7 @@
 .scrollCue i::after {
   position: absolute;
   inset: 0;
-  background: #d8ef6b;
+  background: #d9bd7f;
   content: "";
   transform: scaleX(0.38);
   transform-origin: left;
@@ -387,7 +428,7 @@
   display: grid;
   grid-template-columns: 1.2fr 0.7fr 0.8fr;
   border-top: 1px solid rgba(232, 222, 196, 0.14);
-  background: rgba(8, 24, 20, 0.78);
+  background: rgba(18, 25, 40, 0.78);
   backdrop-filter: blur(16px);
 }
 
@@ -406,13 +447,13 @@
 
 .facts dt {
   color: #9e8d67;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.16em;
 }
 
 .facts dd {
   color: #efe8d8;
-  font-size: 0.78rem;
+  font-size: var(--text-body);
   font-weight: 700;
 }
 
@@ -562,13 +603,15 @@
   }
 
   .kicker {
-    font-size: 0.68rem;
+    font-size: 1rem;
+    letter-spacing: 0.16em;
   }
 
   .copy h1 {
     max-width: 100%;
-    font-size: clamp(2.75rem, 12vw, 3.4rem);
-    line-height: 0.98;
+    font-size: clamp(2rem, 9.4vw, 2.6rem);
+    letter-spacing: 0.14em;
+    line-height: 1.5;
   }
 
   .titleLine {
@@ -599,7 +642,7 @@
     flex: 1 1 0;
     gap: 8px;
     padding-inline: 16px;
-    font-size: clamp(0.7rem, 3vw, 0.78rem);
+    font-size: var(--text-body);
   }
 
   .supportRail {
@@ -615,7 +658,7 @@
   }
 
   .datePanel b {
-    font-size: clamp(3.8rem, 18vw, 5rem);
+    font-size: clamp(2.9rem, 13vw, 3.6rem);
   }
 
   .kinu {
@@ -651,7 +694,7 @@
   .facts dd {
     margin-left: 10px;
     overflow-wrap: normal;
-    font-size: clamp(0.68rem, 2.8vw, 0.78rem);
+    font-size: var(--text-body);
   }
 }
 
@@ -684,7 +727,7 @@
   }
 
   .copy h1 {
-    font-size: clamp(2.55rem, 13vw, 3rem);
+    font-size: clamp(1.85rem, 9vw, 2.3rem);
   }
 
   .title {
@@ -707,7 +750,7 @@
   .actions a {
     flex: 1 1 0;
     padding-inline: 12px;
-    font-size: 0.66rem;
+    font-size: var(--text-body);
   }
 }
 

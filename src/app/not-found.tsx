@@ -10,7 +10,7 @@ export default function NotFound() {
       <main id="main-content">
         <section className={styles.compactHero}>
           <div className={styles.heroInner}>
-            <p className={styles.kicker}>404 / NOT FOUND</p>
+            <p className={styles.kicker}>該当の頁がありません</p>
             <h1>ページが見つかりません</h1>
           </div>
         </section>

@@ -1,4 +1,21 @@
-.page { min-height: 100svh; background: #07120f; }
+/* ---------------------------------------------------------------------------
+ * SILK STORY ARCHIVE — 配布キットの台帳をそのまま web の版面にする。
+ *
+ * 各セクションは「キットの何ページ目か」を持つ。
+ *   宣言   … 表紙（藍墨・蝋燭・金の細枠）
+ *   あらすじ … p2（セピア写真の上に生成りの文字）
+ *   参加方法 … p3（方眼紙 + 和紙テープで留めた記録カード + 壱弐参）
+ *   街の索引 … p4/p5（地図ページ。茶の道、臙脂の丸印、濃紺の地名札）
+ *   結び   … 奥付
+ *
+ * 役割が違うので、骨格・密度・色の明暗を意図的にずらしてある。
+ * 「英語ラベル → 巨大見出し → カード 3 枚」を全セクションで繰り返さない。
+ * ------------------------------------------------------------------------- */
+
+.page {
+  min-height: 100svh;
+  background: var(--kit-paper);
+}
 
 /* 下部固定ナビゲーションのぶんだけ本文の下に余白を確保する */
 @media (max-width: 680px) {
@@ -18,28 +35,56 @@
   scroll-margin-top: 132px;
 }
 
+/* --- キットの柱（英字は日本語より小さく、目立たせない） ------------------- */
+
 .eyebrow {
-  color: #c9aa68;
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--kit-brass);
+  font-family: var(--font-serif);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+}
+
+.eyebrow::before {
+  width: 26px;
+  height: 1px;
+  background: currentcolor;
+  content: "";
 }
 
 .storyContent .eyebrow,
 .howTo .eyebrow {
-  color: #6c5328;
+  color: var(--kit-seal);
 }
+
+/* =========================================================================
+ * 1. 宣言 — 配布キットの表紙。藍墨の紙に、蝋燭の光がひとつ。
+ * ========================================================================= */
 
 .signal {
   display: grid;
-  grid-template-columns: minmax(300px, 0.72fr) minmax(540px, 1.28fr);
-  gap: clamp(48px, 6vw, 96px);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  gap: clamp(44px, 6vw, 92px);
   align-items: center;
-  width: min(calc(100% - 64px), 1280px);
-  min-height: 900px;
-  margin: 0 auto;
-  padding: 140px 0;
-  color: #eee7d6;
+  padding: clamp(96px, 11vw, 156px) max(32px, calc((100vw - 1180px) / 2));
+  /* 表紙と同じ藍墨の紙。暗い面はここだけで、以降は生成りの台帳が続く */
+  background:
+    radial-gradient(62% 48% at 76% 22%, rgba(245, 215, 155, 0.14), transparent 64%),
+    linear-gradient(180deg, #1a2131, #141a28 60%, #10151f);
+  color: #efe7d3;
+}
+
+.signal::before {
+  position: absolute;
+  inset: clamp(18px, 3vw, 40px);
+  z-index: 0;
+  border: 1px solid rgba(185, 150, 79, 0.32);
+  content: "";
+  pointer-events: none;
 }
 
 .signalCopy,
@@ -57,322 +102,491 @@
   z-index: 3;
 }
 
-.eventManifest {
-  display: grid;
-  min-width: 0;
-  margin: 0;
-  border-top: 1px solid rgba(224, 206, 162, 0.28);
-  color: #f3ecdc;
-}
-
-.eventManifest > div {
-  position: relative;
-  display: grid;
-  grid-template-columns: 74px minmax(0, 1fr);
-  gap: 8px 18px;
-  align-items: baseline;
-  min-height: 142px;
-  padding: 27px 8px;
-  border-bottom: 1px solid rgba(224, 206, 162, 0.2);
-}
-
-.eventManifest > div:nth-child(2) {
-  margin-left: clamp(18px, 4vw, 58px);
-}
-
-.eventManifest > div:nth-child(3) {
-  margin-right: clamp(26px, 6vw, 76px);
-}
-
-.eventManifest dt {
-  color: #c9aa68;
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-}
-
-.eventManifest dd {
-  color: #f5eddd;
+.signalCopy h2 {
+  margin-top: 22px;
+  color: #f6efdc;
   font-family: var(--font-serif);
-  font-size: clamp(1.25rem, 2.3vw, 2rem);
-}
-
-.eventManifest span {
-  grid-column: 2;
-  color: #999a91;
-  font-size: 0.72rem;
-}
-
-.eventManifest .dateEntry {
-  grid-template-columns: minmax(0, 1fr) auto;
-  min-height: 184px;
-  padding-top: 18px;
-}
-
-.dateEntry dt {
-  grid-column: 1;
-  align-self: start;
-}
-
-.eventManifest .dateEntry dd {
-  display: flex;
-  grid-column: 1 / -1;
-  gap: clamp(12px, 2vw, 28px);
-  align-items: baseline;
-  justify-content: flex-end;
-  margin-top: -8px;
-  line-height: 0.86;
-}
-
-.dateEntry dd strong {
-  font-family: var(--font-sans);
-  font-size: clamp(4.6rem, 9vw, 8rem);
-  font-weight: 300;
-  letter-spacing: -0.08em;
-}
-
-.dateEntry dd i {
-  color: #a23f2f;
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3.8rem);
-  font-style: normal;
-  font-weight: 400;
-}
-
-.eventManifest .dateEntry > span {
-  grid-column: 1 / -1;
-  justify-self: end;
-  letter-spacing: 0.16em;
-}
-
-.signalCopy h2,
-.routeHeader h2,
-.share h2 {
-  max-width: 12ch;
-  margin-top: 18px;
-  color: #f4eddd;
-  font-family: var(--font-sans);
-  font-size: clamp(2.8rem, 5.5vw, 5.6rem);
+  /* 表紙の題字。巨大化ではなく、字間と余白で強さを作る */
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
   font-weight: 500;
-  letter-spacing: -0.055em;
-  line-height: 1.04;
-}
-
-.signalCopy h2 span,
-.routeHeader h2 span,
-.share h2 span {
-  display: block;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
 }
 
 .signalCopy h2 span {
+  display: block;
   white-space: nowrap;
 }
 
-.signalCopy > p:not(.eyebrow),
-.routeHeader > p:not(.eyebrow) {
-  max-width: 48ch;
-  margin-top: 28px;
-  color: #aaa99f;
-  line-height: 1.9;
+.signalCopy h2::after {
+  display: block;
+  width: 96px;
+  height: 1px;
+  margin-top: 26px;
+  background: rgba(185, 150, 79, 0.6);
+  content: "";
+}
+
+.signalCopy > p:not(.eyebrow) {
+  max-width: 34ch;
+  margin-top: 26px;
+  color: #cfc7b2;
+  font-size: var(--text-body-lead);
+  line-height: 1.95;
 }
 
 .signalCopy a {
   display: inline-flex;
   min-height: var(--touch-target);
-  gap: 28px;
+  gap: 22px;
   align-items: center;
-  margin-top: 34px;
+  margin-top: 30px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #d8ef6b;
-  color: #d8ef6b;
-  font-size: 0.8rem;
+  border-bottom: 1px solid var(--kit-brass-soft);
+  color: var(--kit-brass-soft);
+  font-size: var(--text-body);
   font-weight: 700;
 }
 
-.story {
+/* 開催情報は「記録票」として、藍墨の上に生成りの紙で貼る */
+.eventManifest {
   display: grid;
-  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
-  min-height: 880px;
-  background: #f2ecdf;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(20px, 3vw, 30px) clamp(18px, 2.6vw, 28px);
+  border: 1px solid rgba(101, 82, 50, 0.28);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 26px, rgba(122, 100, 62, 0.1) 26px 27px),
+    var(--kit-paper-raised);
+  box-shadow: 0 18px 40px rgba(10, 14, 24, 0.4);
+  color: var(--kit-ink);
 }
 
-.storyVisual { position: relative; min-height: 700px; overflow: hidden; }
-.storyVisual img { object-fit: cover; transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-.story:hover .storyVisual img { transform: scale(1.025); }
-.storyVisual::after { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6, 20, 16, 0.5), transparent 35%); content: ""; }
-.storyVisual figcaption { position: absolute; z-index: 1; bottom: 26px; left: 28px; color: #eee6d4; font-size: 0.58rem; letter-spacing: 0.18em; }
+.eventManifest > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5.2em minmax(0, 1fr);
+  gap: 4px 16px;
+  align-items: baseline;
+  padding: 16px 2px;
+  border-bottom: 1px solid rgba(101, 82, 50, 0.2);
+}
+
+.eventManifest > div:last-child {
+  border-bottom: 0;
+}
+
+.eventManifest dt {
+  color: var(--kit-seal);
+  font-family: var(--font-serif);
+  font-size: var(--text-note);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+.eventManifest dd {
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.0625rem, 1.7vw, 1.35rem);
+  letter-spacing: 0.04em;
+}
+
+.eventManifest span {
+  grid-column: 2;
+  color: var(--kit-brown);
+  font-size: var(--text-note);
+}
+
+/* 日付だけは台帳の中で一段強い。数字は明朝ではなく、印刷された記録の顔で */
+.eventManifest .dateEntry {
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: 6px;
+}
+
+.dateEntry dt {
+  grid-column: 1;
+}
+
+.eventManifest .dateEntry dd {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 2px;
+  line-height: 0.92;
+}
+
+.dateEntry dd strong {
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 7vw, 4.6rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.dateEntry dd i {
+  color: var(--kit-seal);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-style: normal;
+}
+
+.eventManifest .dateEntry > span {
+  grid-column: 1;
+  margin-top: 6px;
+  letter-spacing: 0.18em;
+}
+
+/* =========================================================================
+ * 2. あらすじ — キット p2。写真の上に、生成りの文字だけが乗る。
+ * ========================================================================= */
+
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  background: var(--kit-paper);
+}
+
+.storyVisual {
+  position: relative;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+.storyVisual img {
+  object-fit: cover;
+  filter: sepia(0.24) saturate(0.86);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.story:hover .storyVisual img {
+  transform: scale(1.02);
+}
+
+.storyVisual::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(20, 26, 40, 0.46), transparent 38%);
+  content: "";
+}
+
+.storyVisual figcaption {
+  position: absolute;
+  z-index: 1;
+  bottom: 24px;
+  left: 26px;
+  color: #ece2c9;
+  font-family: var(--font-serif);
+  font-size: var(--text-label);
+  letter-spacing: 0.24em;
+}
 
 .storyContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(60px, 8vw, 130px);
-  background: linear-gradient(90deg, rgba(242, 236, 223, 0.98), rgba(242, 236, 223, 0.88) 62%, rgba(242, 236, 223, 0.68));
-}
-.storyContent h2,
-.sectionHeader h2 {
-  max-width: 12ch;
-  margin-top: 16px;
-  color: #11342b;
-  font-size: clamp(2.6rem, 5vw, 5rem);
-  line-height: 1.16;
+  padding: clamp(56px, 7vw, 108px) clamp(28px, 6vw, 96px);
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 27px, rgba(122, 100, 62, 0.11) 27px 28px),
+    linear-gradient(90deg, var(--kit-paper-raised), #f4eedd 70%, #efe7d2);
 }
 
-.storyText { display: grid; gap: 17px; max-width: 42rem; margin-top: 38px; color: #4f5650; }
-.storyText blockquote { margin: 8px 0; padding: 22px 0 22px 22px; border-left: 2px solid #a9894f; color: #17372f; font-family: var(--font-serif); font-size: 1.05rem; }
+.storyContent h2 {
+  margin-top: 18px;
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  letter-spacing: 0.12em;
+  line-height: 1.75;
+}
+
+.storyContent h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+/* 手記は読みもの幅。35〜45 字に収める */
+.storyText {
+  display: grid;
+  gap: 15px;
+  max-width: var(--content-reading);
+  margin-top: 32px;
+  color: #40465a;
+  font-size: var(--text-body);
+  line-height: 1.95;
+}
+
+.storyText blockquote {
+  margin: 10px 0;
+  padding: 20px 0 20px 22px;
+  border-left: 2px solid var(--kit-seal);
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lead);
+  line-height: 2;
+}
+
+/* =========================================================================
+ * 3. 参加方法 — キット p3。方眼紙に、和紙テープで留めた記録カード。
+ * ========================================================================= */
 
 .howTo {
-  padding: clamp(100px, 12vw, 180px) max(32px, calc((100vw - 1220px) / 2));
-  background: #f7f3e9;
+  padding: clamp(84px, 10vw, 140px) max(24px, calc((100vw - 1060px) / 2));
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 27px, rgba(122, 100, 62, 0.13) 27px 28px),
+    repeating-linear-gradient(to right, transparent 0 27px, rgba(122, 100, 62, 0.09) 27px 28px),
+    #f0e9d4;
 }
 
-.sectionHeader { display: grid; grid-template-columns: 1fr 0.8fr; gap: 24px 80px; align-items: end; }
-.sectionHeader .eyebrow { grid-column: 1 / -1; }
-.sectionHeader > p:not(.eyebrow) { max-width: 45ch; color: #667069; }
+.sectionHeader {
+  display: grid;
+  gap: 16px;
+  max-width: var(--content-reading);
+}
 
-.steps { margin-top: 82px; padding: 0; list-style: none; }
+.sectionHeader h2 {
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  letter-spacing: 0.12em;
+  line-height: 1.75;
+}
+
+.sectionHeader h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.sectionHeader > p:not(.eyebrow) {
+  color: #4b4740;
+  font-size: var(--text-body);
+}
+
+/* 三つの記録。カードを並べるのではなく、一枚の紙に綴じた台帳にする */
+.steps {
+  position: relative;
+  margin-top: clamp(44px, 6vw, 68px);
+  padding: clamp(30px, 4vw, 46px) clamp(22px, 3.4vw, 42px);
+  border: 1px solid rgba(101, 82, 50, 0.26);
+  background: var(--kit-paper-raised);
+  box-shadow: 0 14px 34px rgba(30, 37, 54, 0.1);
+  list-style: none;
+}
+
+/* 和紙テープで紙に留める */
+.steps::after {
+  position: absolute;
+  top: -13px;
+  right: clamp(24px, 8vw, 88px);
+  width: 82px;
+  height: 26px;
+  background: linear-gradient(100deg, rgba(214, 190, 138, 0.78), rgba(196, 170, 116, 0.52));
+  box-shadow: 0 2px 6px rgba(30, 37, 54, 0.14);
+  content: "";
+  rotate: 4deg;
+}
+
+/* 紙そのものは回さない。文字を回すと 1 行が複数行に見え、
+   日本語の改行検査（指摘事項）を誤らせるため。留めの表現はテープと影で作る。 */
+
+/* 綴じの罫。台帳の左端を一本の絹糸が通る。
+   ※ 壱弐参の数字の上を線が横切らないこと（指摘事項）。
+      そのため丸印の列には掛けず、必ず紙の左余白に置く。 */
 .steps::before {
   position: absolute;
-  top: 52px;
-  bottom: 52px;
-  left: 88px;
-  z-index: -1;
+  top: 26px;
+  bottom: 26px;
+  left: 11px;
   width: 1px;
-  background: linear-gradient(#a23f2f, #c1a463 46%, #17372f);
-  box-shadow: 0 0 0 4px rgba(169, 137, 79, 0.05);
+  background: linear-gradient(var(--kit-seal), var(--kit-brass) 52%, var(--kit-ink));
   content: "";
 }
-.steps li { display: grid; grid-template-columns: 180px 1fr 46px; gap: 32px; align-items: center; min-height: 168px; border-top: 1px solid rgba(32, 66, 55, 0.22); }
-.steps li:last-child { border-bottom: 1px solid rgba(32, 66, 55, 0.22); }
-.steps li:nth-child(2) { margin-left: clamp(20px, 6vw, 90px); }
-.steps li:nth-child(3) { margin-right: clamp(28px, 9vw, 132px); }
-.stepNumber { position: relative; display: flex; align-items: flex-start; flex-direction: column; padding-left: 110px; }
-.stepNumber::after {
-  position: absolute;
-  top: 50%;
-  left: 83px;
-  width: 11px;
-  height: 11px;
-  transform: translateY(-50%);
-  border: 2px solid #f7f3e9;
+
+.steps li {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 6px 22px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px dashed rgba(101, 82, 50, 0.3);
+}
+
+.steps li:last-child {
+  border-bottom: 0;
+  padding-bottom: 4px;
+}
+
+/* キット地図と同じ、臙脂の丸で囲った漢数字 */
+.stepNumber {
+  display: grid;
+  grid-row: span 2;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 2px solid var(--kit-seal);
   border-radius: 50%;
-  background: #a23f2f;
-  box-shadow: 0 0 0 1px rgba(23, 55, 47, 0.36);
-  content: "";
+  background: var(--kit-paper-raised);
 }
-.stepNumber span { width: max-content; color: #a23f2f; font-family: var(--font-sans); font-size: 2.8rem; font-weight: 500; letter-spacing: -0.05em; line-height: 1; }
-.stepNumber small { margin-top: 8px; color: #665f54; font-size: 0.55rem; letter-spacing: 0.14em; }
-.steps h3 { color: #163b31; font-size: clamp(1.4rem, 2.5vw, 2.2rem); }
-.steps p { max-width: 52ch; margin-top: 8px; color: #626a64; }
-.steps li > i { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid rgba(23, 55, 47, 0.25); border-radius: 50%; color: #17372f; font-style: normal; transition: transform 220ms ease, background-color 220ms ease; }
-.steps li:hover > i { transform: rotate(-45deg); background: #d8ef6b; }
+
+.stepNumber span {
+  color: var(--kit-seal);
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.stepNumber small {
+  display: none;
+}
+
+.steps h3 {
+  align-self: center;
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.125rem, 2vw, 1.4rem);
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+.steps p {
+  grid-column: 2;
+  max-width: 42ch;
+  margin-top: 6px;
+  color: #4b4740;
+  font-size: var(--text-body);
+  line-height: 1.85;
+}
+
+.steps li > i {
+  display: none;
+}
 
 .primaryCta,
 .routeCta {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  min-width: 210px;
-  min-height: var(--touch-control);
-  margin-top: 38px;
-  padding: 12px 24px;
-  border-radius: 4px;
-  background: #163b31;
-  color: #f7f2e7;
-  font-size: 0.82rem;
+  gap: 24px;
+  min-width: 15rem;
+  min-height: var(--touch-primary);
+  margin-top: 34px;
+  padding: 12px 26px;
+  border: 1px solid rgba(101, 82, 50, 0.4);
+  border-radius: 2px;
+  background: var(--kit-ink);
+  color: #f4ecd8;
+  font-size: 1rem;
   font-weight: 700;
-  transition: transform 180ms ease;
+  white-space: nowrap;
+  transition: transform 180ms ease, background-color 180ms ease;
 }
 
 .howToFooter {
   display: flex;
-  min-height: 132px;
   align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
+  margin-top: 8px;
 }
 
 .howToFooter .primaryCta {
   order: -1;
 }
-.primaryCta { min-height: var(--touch-primary); }
-.primaryCta:hover, .routeCta:hover { transform: translateY(-3px); }
+
+.primaryCta:hover,
+.routeCta:hover {
+  background: #2b3550;
+  transform: translateY(-2px);
+}
+
+.primaryCta:active,
+.routeCta:active {
+  transform: translateY(0) scale(0.985);
+}
+
+/* =========================================================================
+ * 4. 街の索引 — キット p4/p5 の地図ページ。生成りの方眼に茶の道と臙脂の印。
+ * ========================================================================= */
 
 .route {
   position: relative;
   z-index: 0;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(110px, 12vw, 180px) max(32px, calc((100vw - 1280px) / 2));
-  background: #07120f;
-  color: #eee7d6;
-}
-.routeGround {
-  z-index: -3;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.58;
-  filter: saturate(0.72) brightness(0.66);
-  pointer-events: none;
-}
-.routeVeil {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+  padding: clamp(88px, 10vw, 144px) max(24px, calc((100vw - 1180px) / 2));
   background:
-    linear-gradient(180deg, rgba(7, 18, 15, 0.96) 0%, rgba(7, 18, 15, 0.7) 34%, rgba(7, 18, 15, 0.88) 100%),
-    linear-gradient(90deg, rgba(7, 18, 15, 0.9) 0%, transparent 52%, rgba(7, 18, 15, 0.3) 100%);
+    repeating-linear-gradient(to bottom, transparent 0 27px, rgba(122, 100, 62, 0.15) 27px 28px),
+    repeating-linear-gradient(to right, transparent 0 27px, rgba(122, 100, 62, 0.12) 27px 28px),
+    #ece4cd;
+  color: var(--kit-ink);
 }
-.routeStrata {
-  position: absolute;
-  right: -8vw;
-  bottom: -5vw;
-  z-index: -1;
-  width: min(88vw, 1380px);
-  height: auto;
-  opacity: 0.42;
-  filter: saturate(0.68) brightness(0.72);
-  pointer-events: none;
+
+.routeHeader {
+  display: grid;
+  gap: 16px;
+  max-width: var(--content-reading);
 }
-.routeHeader { display: grid; grid-template-columns: 1fr 0.62fr; gap: 28px 80px; align-items: end; }
-.routeHeader .eyebrow { grid-column: 1 / -1; }
-.routeHeader h2 { max-width: 12ch; }
-.routeHeader h2 span { white-space: nowrap; }
-.routeHeader > p:not(.eyebrow) { align-self: end; margin-top: 0; }
-.routeCta { background: #d8ef6b; color: #091510; }
+
+.routeHeader h2 {
+  color: var(--kit-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  letter-spacing: 0.12em;
+  line-height: 1.75;
+}
+
+.routeHeader h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.routeHeader > p:not(.eyebrow) {
+  color: #4b4740;
+  font-size: var(--text-body);
+}
+
+.routeCta {
+  background: var(--kit-seal);
+  border-color: rgba(101, 82, 50, 0.34);
+  color: #fbf3e2;
+}
+
+.routeCta:hover {
+  background: #a1394a;
+}
 
 /* 地点索引：地図機能を複製せず、当日たどる場所だけを台帳として示す */
 .routeIndex {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  gap: 0 clamp(28px, 5vw, 72px);
-  margin: clamp(48px, 6vw, 76px) 0 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 0 clamp(24px, 4vw, 64px);
+  margin: clamp(40px, 5vw, 64px) 0 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid rgba(224, 206, 162, 0.24);
+  border-top: 1px solid rgba(101, 82, 50, 0.32);
 }
 
 .routeIndex li {
   display: grid;
-  grid-template-columns: 2.4em minmax(0, 1fr);
-  gap: 7px 16px;
+  grid-template-columns: 2.6em minmax(0, 1fr);
+  gap: 5px 14px;
   align-items: baseline;
-  padding: 20px 2px;
-  border-bottom: 1px solid rgba(224, 206, 162, 0.16);
+  padding: 18px 2px;
+  border-bottom: 1px solid rgba(101, 82, 50, 0.2);
 }
 
 .routeIndexMark {
-  color: #a23f2f;
+  color: var(--kit-seal);
   font-family: var(--font-serif);
-  font-size: 0.92rem;
-  letter-spacing: 0.08em;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
 }
 
 .routeIndexName {
-  color: #f4eddd;
+  color: var(--kit-ink);
   font-family: var(--font-serif);
-  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  font-size: clamp(1.0625rem, 1.9vw, 1.3rem);
+  letter-spacing: 0.04em;
   overflow-wrap: normal;
   word-break: keep-all;
   line-break: strict;
@@ -380,38 +594,79 @@
 
 .routeIndexKind {
   grid-column: 2;
-  color: #9aa094;
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  color: var(--kit-brown);
+  font-size: var(--text-note);
+  letter-spacing: 0.06em;
 }
 
-.share { display: flex; justify-content: space-between; align-items: end; gap: 70px; padding: clamp(90px, 11vw, 150px) max(32px, calc((100vw - 1180px) / 2)); background: #10251f; color: #f1ead9; }
-.share > div { min-width: 18rem; }
-.share h2 { max-width: 9ch; }
-.share h2 span { white-space: nowrap; }
-.share > div > p:not(.eyebrow) { margin-top: 24px; color: #a8aaa1; }
+/* =========================================================================
+ * 5. 結び — 奥付。密度は最も低く、余韻だけを残す。
+ * ========================================================================= */
+
+.share {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 56px;
+  padding: clamp(76px, 9vw, 124px) max(24px, calc((100vw - 1060px) / 2));
+  background: var(--kit-ink-deep);
+  color: #efe7d3;
+}
+
+.share > div {
+  min-width: 17rem;
+}
+
+.share h2 {
+  margin-top: 20px;
+  color: #f4ecd8;
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  letter-spacing: 0.14em;
+  line-height: 1.75;
+}
+
+.share h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.share > div > p:not(.eyebrow) {
+  margin-top: 20px;
+  color: #c3bba7;
+  font-size: var(--text-body);
+}
+
 .shareFolio {
   position: absolute;
-  right: -0.04em;
-  bottom: -0.25em;
+  right: clamp(20px, 4vw, 56px);
+  bottom: clamp(18px, 3vw, 40px);
   z-index: 0;
-  color: rgba(239, 230, 208, 0.035);
-  font-family: var(--font-sans);
-  font-size: clamp(5rem, 15vw, 14rem);
-  font-weight: 300;
-  letter-spacing: -0.08em;
-  line-height: 1;
+  color: rgba(185, 150, 79, 0.42);
+  font-family: var(--font-serif);
+  font-size: var(--text-note);
+  letter-spacing: 0.28em;
   white-space: nowrap;
   pointer-events: none;
 }
 
+/* =========================================================================
+ * 画面幅
+ * ========================================================================= */
+
 @media (max-width: 900px) {
-  .signal, .story { grid-template-columns: 1fr; }
-  .signal { min-height: 0; }
-  .signalCopy { max-width: 680px; }
-  .storyVisual { min-height: 68vw; }
-  .sectionHeader, .routeHeader { grid-template-columns: 1fr; }
-  .sectionHeader .eyebrow, .routeHeader .eyebrow { grid-column: 1; }
+  .signal,
+  .story {
+    grid-template-columns: 1fr;
+  }
+
+  .signal {
+    gap: 48px;
+  }
+
+  .storyVisual {
+    min-height: 64vw;
+  }
 }
 
 @media (max-width: 680px) {
@@ -423,100 +678,140 @@
     scroll-margin-top: 144px;
   }
 
-  .signal { width: calc(100% - 36px); padding: 92px 0; gap: 58px; }
-  .signalCopy h2, .routeHeader h2, .share h2 {
-    max-width: 11ch;
-    font-size: clamp(1.95rem, 9.6vw, 3.2rem);
-    text-wrap: balance;
+  .signal {
+    padding: 68px 18px 76px;
+    gap: 40px;
   }
-  .sectionHeader h2 span {
-    display: block;
-    white-space: nowrap;
+
+  .signal::before {
+    inset: 10px;
   }
-  .story { min-height: 0; }
-  .storyVisual { min-height: 112vw; }
-  /* 1カラムに畳まれると、横方向のスクリムの薄い側が本文の下に来てしまい、
-     背後の資料写真が透けて可読性が落ちる。縦方向のほぼ均一なスクリムに差し替える。 */
+
+  .signalCopy {
+    padding-inline: 14px;
+  }
+
+  .signalCopy h2 {
+    font-size: clamp(1.55rem, 7.4vw, 2.3rem);
+    letter-spacing: 0.12em;
+  }
+
+  .eventManifest {
+    margin-inline: 10px;
+  }
+
+  .story {
+    min-height: 0;
+  }
+
+  .storyVisual {
+    min-height: 92vw;
+  }
+
   .storyContent {
-    padding: 64px 22px 76px;
-    background: linear-gradient(
-      180deg,
-      rgba(242, 236, 223, 0.97) 0%,
-      rgba(242, 236, 223, 0.96) 70%,
-      rgba(242, 236, 223, 0.92) 100%
-    );
+    padding: 56px 22px 68px;
   }
-  .storyContent h2, .sectionHeader h2 { font-size: clamp(2.45rem, 11.5vw, 4rem); }
-  .storyContent h2 span {
-    display: block;
-    white-space: nowrap;
+
+  .storyContent h2 {
+    font-size: clamp(1.5rem, 7vw, 2.1rem);
   }
-  .storyText { margin-top: 28px; font-size: 0.9rem; }
-  .howTo, .route, .share { padding-inline: 20px; }
-  .howTo, .route { padding-block: 96px; }
-  .routeGround {
-    object-position: 64% center;
-    opacity: 0.42;
+
+  .howTo,
+  .route,
+  .share {
+    padding-inline: 18px;
   }
-  .routeVeil {
-    background: linear-gradient(180deg, rgba(7, 18, 15, 0.96), rgba(7, 18, 15, 0.76) 42%, rgba(7, 18, 15, 0.92));
+
+  .howTo,
+  .route {
+    padding-block: 84px;
   }
-  .routeStrata {
-    right: -32vw;
-    bottom: -3vw;
-    width: 155vw;
-    opacity: 0.28;
+
+  .steps {
+    padding: 26px 18px;
   }
-  .sectionHeader { gap: 18px; }
-  .eventManifest > div {
-    min-height: 112px;
-    padding: 22px 16px;
-  }
-  .eventManifest .dateEntry {
-    min-height: 152px;
-    padding-inline: 4px;
-  }
-  .dateEntry dd strong { font-size: clamp(4.4rem, 23vw, 6.5rem); }
-  .eventManifest > div:nth-child(2) { margin-left: 16px; }
-  .eventManifest > div:nth-child(3) { margin-right: 22px; }
-  .steps { position: relative; margin-top: 52px; }
-  .steps li { position: relative; z-index: 1; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; min-height: 150px; }
-  .steps li:nth-child(2) { margin-left: 0; }
-  .steps li:nth-child(3) { margin-right: 0; }
+
   .steps::before {
-    top: 75px;
-    bottom: 75px;
-    left: 12px;
-    z-index: 0;
+    top: 20px;
+    bottom: 20px;
+    left: 8px;
   }
-  .stepNumber { padding-left: 28px; }
-  .stepNumber::after {
-    top: 50%;
-    left: 5px;
-    width: 10px;
-    height: 10px;
+
+  .steps li {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 6px 16px;
   }
-  .stepNumber span { font-size: 2rem; }
-  .steps li > i { display: none; }
-  .steps h3 { font-size: 1.25rem; }
-  .steps p { font-size: 0.84rem; line-height: 1.7; }
-  .routeHeader { gap: 18px; }
-  .share { align-items: stretch; flex-direction: column; padding-block: 86px; }
-  .share > div { min-width: 0; }
+
+  .stepNumber {
+    width: 46px;
+    height: 46px;
+  }
+
+  .stepNumber span {
+    font-size: 1.1875rem;
+  }
+
+  .howToFooter {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .howToFooter .primaryCta {
+    order: 0;
+    justify-content: center;
+  }
+
+  .primaryCta,
+  .routeCta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .share {
+    align-items: stretch;
+    flex-direction: column;
+    padding-block: 76px;
+  }
+
+  .share > div {
+    min-width: 0;
+  }
+
   .shareFolio {
-    right: -0.08em;
-    bottom: 0.08em;
-    font-size: 24vw;
+    position: static;
+    margin-top: 34px;
   }
 }
 
 @media (max-width: 360px) {
+  .signalCopy h2,
   .storyContent h2,
-  .sectionHeader h2 {
-    font-size: 1.88rem;
+  .sectionHeader h2,
+  .routeHeader h2 {
+    font-size: 1.4375rem;
+    letter-spacing: 0.08em;
   }
 
   .steps h3 {
-    font-size: 1.1rem;
+    font-size: 1.0625rem;
   }
+}
+
+/* --- キットの道具（SVG）の置き場 ----------------------------------------- */
+
+/* 封蝋は、参加のしかたの紙を留めているように左肩へ */
+.stepObjects {
+  position: absolute;
+  z-index: 4;
+  margin-top: clamp(28px, 4vw, 50px);
+  margin-left: -14px;
+  font-size: 30px;
+  pointer-events: none;
+}
+
+/* 地図 CTA の真鍮ピン。文字と同じ行に収める */
+.ctaObject {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: -8px;
 }

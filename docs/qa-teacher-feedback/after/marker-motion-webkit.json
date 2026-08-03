@@ -1,0 +1,40 @@
+[
+  {
+    "viewport": "390x844",
+    "samples": [
+      {
+        "shellBottom": 581.96875,
+        "markerBottom": 573.96875,
+        "tipY": 581.96875,
+        "anchorError": 0,
+        "glyphTop": 529.96875
+      },
+      {
+        "shellBottom": 581.96875,
+        "markerBottom": 573.96875,
+        "tipY": 581.96875,
+        "anchorError": 0,
+        "glyphTop": 527.96875
+      }
+    ]
+  },
+  {
+    "viewport": "1440x900",
+    "samples": [
+      {
+        "shellBottom": 730.765625,
+        "markerBottom": 722.765625,
+        "tipY": 730.765625,
+        "anchorError": 0,
+        "glyphTop": 678.765625
+      },
+      {
+        "shellBottom": 730.765625,
+        "markerBottom": 722.765625,
+        "tipY": 730.765625,
+        "anchorError": 0,
+        "glyphTop": 676.765625
+      }
+    ]
+  }
+]

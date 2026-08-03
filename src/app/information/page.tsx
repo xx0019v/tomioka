@@ -41,7 +41,7 @@ export default function InformationPage() {
           <div className={styles.sections}>
             <section className={`${styles.section} ${styles.overview}`} aria-labelledby="event-facts">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>01 / EVENT LEDGER</p>
+                <p className={styles.sectionIndex}>壱 — 開催の記録</p>
                 <h2 id="event-facts">開催概要</h2>
                 <p>一日限りの街歩き。参加前に必要な情報を確認できます。</p>
               </header>
@@ -70,7 +70,7 @@ export default function InformationPage() {
 
             <section className={styles.section} aria-labelledby="participation">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>02 / HOW TO JOIN</p>
+                <p className={styles.sectionIndex}>弐 — 参加のしかた</p>
                 <h2 id="participation">参加方法</h2>
                 <p>受付から街歩きまでは、三つの手順です。</p>
               </header>
@@ -83,7 +83,7 @@ export default function InformationPage() {
 
             <section className={styles.section} aria-labelledby="start-access">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>03 / START</p>
+                <p className={styles.sectionIndex}>参 — 出発地点</p>
                 <h2 id="start-access"><span>スタート地点</span><span>アクセス</span></h2>
               </header>
               <div className={styles.panel}>
@@ -104,7 +104,7 @@ export default function InformationPage() {
 
             <section className={styles.section} aria-labelledby="weather">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>04 / WEATHER</p>
+                <p className={styles.sectionIndex}>肆 — 天候について</p>
                 <h2 id="weather">雨天・荒天時</h2>
               </header>
               <div className={styles.panel}>
@@ -115,7 +115,7 @@ export default function InformationPage() {
 
             <section className={styles.section} aria-labelledby="safety">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>05 / SAFETY</p>
+                <p className={styles.sectionIndex}>伍 — 安全のために</p>
                 <h2 id="safety">街歩きの注意</h2>
               </header>
               <ul className={styles.safetyList}>
@@ -130,7 +130,7 @@ export default function InformationPage() {
 
             <section className={styles.section} aria-labelledby="web-use">
               <header className={styles.sectionHeading}>
-                <p className={styles.sectionIndex}>06 / PRIVACY</p>
+                <p className={styles.sectionIndex}>陸 — 個人情報の扱い</p>
                 <h2 id="web-use"><span>現在地と</span><span>プライバシー</span></h2>
               </header>
               <div className={styles.panel}>

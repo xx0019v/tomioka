@@ -1,0 +1,14 @@
+[
+  {
+    "route": "/",
+    "loops": 0
+  },
+  {
+    "route": "/map/",
+    "loops": 0
+  },
+  {
+    "route": "/information/",
+    "loops": 0
+  }
+]

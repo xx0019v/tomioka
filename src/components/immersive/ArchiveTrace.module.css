@@ -10,7 +10,7 @@
   padding: 8px max(24px, calc((100vw - 1280px) / 2));
   border-top: 1px solid rgba(217, 201, 161, 0.14);
   border-bottom: 1px solid rgba(217, 201, 161, 0.16);
-  background: rgba(7, 18, 15, 0.95);
+  background: rgba(16, 23, 37, 0.95);
   color: #b8b3a6;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .trace > p span {
-  font-size: 0.58rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
 }
 
@@ -60,7 +60,7 @@
   justify-content: center;
   gap: 8px;
   color: #7f8278;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
   font-weight: 700;
 }
 
@@ -69,18 +69,18 @@
   height: 7px;
   border: 1px solid #777568;
   border-radius: 50%;
-  background: #07120f;
+  background: #101725;
 }
 
 .active a { color: #e9dfc7; }
-.active a > span:first-child { border-color: #b44a38; background: #b44a38; }
-.trace a[aria-current="location"] { color: #d8ef6b; }
+.active a > span:first-child { border-color: #a1394a; background: #a1394a; }
+.trace a[aria-current="location"] { color: #d9bd7f; }
 .trace a[aria-current="location"] > span:first-child {
   width: 11px;
   height: 11px;
-  border-color: #d8ef6b;
-  background: #07120f;
-  box-shadow: inset 0 0 0 2px #d8ef6b;
+  border-color: #d9bd7f;
+  background: #101725;
+  box-shadow: inset 0 0 0 2px #d9bd7f;
 }
 
 /* スマートフォンでは上部の縮小バーではなく、親指の届く下部ナビゲーションにする。
@@ -98,7 +98,7 @@
     padding: 0 var(--safe-right) calc(env(safe-area-inset-bottom, 0px)) var(--safe-left);
     border-top: 1px solid rgba(217, 201, 161, 0.22);
     border-bottom: 0;
-    background: rgba(7, 18, 15, 0.97);
+    background: rgba(16, 23, 37, 0.97);
     backdrop-filter: blur(12px);
   }
 
@@ -130,7 +130,7 @@
   /* ラベルはスマートフォンでも必ず出す */
   .trace a > span:last-child {
     display: block;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     letter-spacing: 0.02em;
     white-space: nowrap;
   }
@@ -155,7 +155,7 @@
 
 @media (max-width: 360px) {
   .trace a > span:last-child {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
   }
 }
 

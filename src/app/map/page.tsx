@@ -43,7 +43,7 @@ export default function MapPage() {
           <ArtifactField variant="map" />
           <div className={styles.heroInner}>
             <div className={styles.heroCopy}>
-              <p className={styles.kicker}>FIELD MAP / TOMIOKA</p>
+              <p className={styles.kicker}>手がかりの地図</p>
               <h1><span>富岡の街を</span><span>絹糸でたどる</span></h1>
               <p className={styles.lead}>受付、街歩きの目印、休憩地点を地図で確認できます。</p>
             </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { SilkwormMascot, type GuideExpression } from "@/components/guide/SilkwormMascot";
+import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/base-path";
 import styles from "./OtomiArrival.module.css";
@@ -101,9 +102,9 @@ export function OtomiArrival() {
 
   return (
     <section ref={sectionRef} id="access" className={styles.arrival} data-entered={entered} data-active={active} aria-labelledby="access-heading">
-      <span className={styles.folio} aria-hidden="true">TOMIOKA / ARRIVAL 08.08</span>
+      <span className={styles.folio} aria-hidden="true">富岡 — 出発・帰還の地</span>
       <header className={styles.heading}>
-        <p className={styles.kicker}>ARRIVAL AT OTOMI-CHAN HOUSE</p>
+        <p className={styles.kicker}>物語の入口</p>
         <h2 id="access-heading" aria-label="物語の入口は、お富ちゃん家">
           <span>物語の入口は、</span><strong>お富ちゃん家</strong>
         </h2>
@@ -113,12 +114,16 @@ export function OtomiArrival() {
       <figure className={styles.place}>
         <div className={styles.photo}>
           <Image src={withBasePath("/spots/photos/otomi-chan-ie.webp")} alt="富岡の街にある、お富ちゃん家の建物外観" fill sizes="(max-width: 767px) 100vw, 52vw" />
-          <span aria-hidden="true">START POINT / 01</span>
+          <span aria-hidden="true">出発の地 — 壱</span>
         </div>
         <figcaption><span>受付場所</span><strong>{siteConfig.start.name}</strong><small>富岡市観光案内所</small></figcaption>
       </figure>
 
       <div className={styles.ticket}>
+        <span className={styles.ticketObjects} aria-hidden="true">
+          <ArchiveObject name="cocoon-box" tilt={-6} />
+          <ArchiveObject name="old-key" tilt={9} />
+        </span>
         <div className={styles.stamp} aria-hidden="true"><span>到着</span><b>08.08</b></div>
         <address><span>住所</span><strong>{siteConfig.start.address}</strong></address>
         <button type="button" className={styles.copyButton} onClick={copyAddress}>{copyState === "success" ? "コピーしました" : "住所をコピー"}</button>
@@ -131,7 +136,7 @@ export function OtomiArrival() {
       </div>
 
       <aside className={styles.guide} aria-label="きぬの受付案内">
-        <div className={styles.bubble} role="status"><small>KINU / 受付案内</small><p><span>{guide.lines[0]}</span><span>{guide.lines[1]}</span></p></div>
+        <div className={styles.bubble} role="status"><small>きぬ — 受付案内</small><p><span>{guide.lines[0]}</span><span>{guide.lines[1]}</span></p></div>
         <button type="button" onClick={reactToGuide} aria-label="きぬにふれて次の受付案内を見る">
           <span className={styles.mascot} data-active={active} data-blinking={blinking} data-react={reactTick % 2} aria-hidden="true">
             <SilkwormMascot expression={guide.expression} />

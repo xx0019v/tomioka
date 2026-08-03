@@ -520,9 +520,9 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
   return (
     <section className={styles.section} aria-labelledby="map-heading">
       <div className={styles.headingRow}>
-        <p className={styles.folio} aria-hidden="true">MAP / 01</p>
+        <p className={styles.folio} aria-hidden="true">手がかりの地図 — 壱</p>
         <div>
-          <p className={styles.eyebrow}>EVENT AREA / TOMIOKA</p>
+          <p className={styles.eyebrow}>富岡製糸場周辺</p>
           <h2 id="map-heading"><span>絹糸が結ぶ</span><span>富岡の街</span></h2>
         </div>
         <p>記号か街歩きスポット一覧を選ぶと、場所の特徴とアクセス情報を確認できます。</p>
@@ -626,7 +626,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
                   {detailVisible.visualCredit}
                 </a>
               </p>
-              <p className={styles.detailKicker}>{detailVisible.categoryLabel} / TOMIOKA</p>
+              <p className={styles.detailKicker}>{detailVisible.categoryLabel}</p>
               <h3>{detailVisible.formalName ?? detailVisible.name}</h3>
               <p className={styles.description}>{detailVisible.description}</p>
 
@@ -648,7 +648,7 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
             </article>
           ) : (
             <div className={styles.indexPanel}>
-              <p className={styles.indexLabel}>SPOT INDEX</p>
+              <p className={styles.indexLabel}>地点一覧</p>
               <h3>街歩きスポット</h3>
               <ul>
                 {spots.map((spot) => (
@@ -660,6 +660,8 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
                       }}
                       type="button"
                       onClick={() => openSpot(spot.slug, "list")}
+                      /* 記号・名称・種別を積む一覧行。ボタン内改行ではなく、意図した多段構成 */
+                      data-multiline-ok=""
                     >
                       <span>{spot.marker}</span>
                       <span><strong>{spot.name}</strong><small>{spot.categoryLabel}</small></span>

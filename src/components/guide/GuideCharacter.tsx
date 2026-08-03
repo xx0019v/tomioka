@@ -63,6 +63,9 @@ const stateForExpression: Record<GuideExpression, GuideState> = {
   caution: "soft-warning",
   loading: "resting",
   clear: "success",
+  "looking-left": "looking-left",
+  "looking-right": "looking-right",
+  walking: "guiding",
 };
 
 export function GuideCharacter({
