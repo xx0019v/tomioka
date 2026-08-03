@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "8a28087478cc858bc1e12908613947c5dad0234e",
+  "project": "chromium",
+  "profile": "mobile-390",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "runtime": {
+    "hookPresent": false,
+    "hook": null,
+    "canvasCount": 1,
+    "webglCanvasCount": 0,
+    "canvases": [
+      {
+        "width": 390,
+        "height": 1084.75,
+        "backingWidth": 390,
+        "backingHeight": 1085,
+        "backingRatio": 1,
+        "ariaHidden": "true",
+        "pointerEvents": "auto",
+        "webgl": false
+      }
+    ],
+    "rafActiveCallbacks": 0,
+    "rafScheduled": 94,
+    "rafCancelled": 2,
+    "runningAnimations": 9,
+    "persistentAnimations": 9,
+    "longTasks": [
+      60
+    ],
+    "cls": 0,
+    "lcpMs": 408,
+    "maxEventDurationMs": 64,
+    "memory": {
+      "usedJSHeapSize": 12399570,
+      "totalJSHeapSize": 20038002
+    }
+  },
+  "network": {
+    "resourceCount": 29,
+    "transferBytes": 1361073,
+    "encodedBodyBytes": 1352373,
+    "scriptTransferBytes": 794531,
+    "failedResourceEntries": 0
+  },
+  "frameTiming": {
+    "sampleCount": 90,
+    "averageMs": 16.665555555538997,
+    "p95Ms": 17,
+    "worstMs": 18.299999997019768,
+    "over50Ms": 0
+  },
+  "failures": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "badResponses": [],
+    "webglMessages": []
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "commit": "8a28087478cc858bc1e12908613947c5dad0234e",
+  "basePath": "/tomioka",
+  "fileCount": 83,
+  "totalBytes": 3816148,
+  "javascript": {
+    "files": 19,
+    "bytes": 900968,
+    "gzipBytes": 271374,
+    "largest": [
+      {
+        "path": "_next/static/chunks/14podnilsu8gn.js",
+        "bytes": 226356,
+        "gzipBytes": 70536
+      },
+      {
+        "path": "_next/static/chunks/0ls11j2txjbu0.js",
+        "bytes": 148486,
+        "gzipBytes": 42439
+      },
+      {
+        "path": "_next/static/chunks/3t11idsi7ov7w.js",
+        "bytes": 137765,
+        "gzipBytes": 37571
+      },
+      {
+        "path": "_next/static/chunks/0cz1d0mv5g_q7.js",
+        "bytes": 112594,
+        "gzipBytes": 39373
+      },
+      {
+        "path": "_next/static/chunks/14mrh2-p_w84d.js",
+        "bytes": 54646,
+        "gzipBytes": 12816
+      },
+      {
+        "path": "_next/static/chunks/27jktro2p5rq9.js",
+        "bytes": 44414,
+        "gzipBytes": 9197
+      },
+      {
+        "path": "_next/static/chunks/3z524g4q0o21c.js",
+        "bytes": 30836,
+        "gzipBytes": 8687
+      },
+      {
+        "path": "_next/static/chunks/450fl_-obonr7.js",
+        "bytes": 29846,
+        "gzipBytes": 9205
+      },
+      {
+        "path": "_next/static/chunks/27aec-lhfnsbw.js",
+        "bytes": 28111,
+        "gzipBytes": 9080
+      },
+      {
+        "path": "_next/static/chunks/21js_889dan9l.js",
+        "bytes": 25972,
+        "gzipBytes": 9186
+      }
+    ]
+  },
+  "css": {
+    "bytes": 114743,
+    "gzipBytes": 21425
+  },
+  "html": {
+    "files": 6,
+    "bytes": 208955
+  },
+  "images": {
+    "files": 23,
+    "bytes": 2300253
+  },
+  "sourceMaps": 0,
+  "requiredExports": {
+    "index": true,
+    "map": true,
+    "information": true,
+    "notFound": true,
+    "robots": true,
+    "sitemap": true,
+    "noJekyll": true
+  },
+  "officialUrlIntegrity": {
+    "officialUrl": "https://mayu-no-chizu.cid-ac.com/",
+    "canonical": true,
+    "openGraph": true,
+    "robotsSitemap": true,
+    "sitemapHome": true,
+    "legacyUrlMatches": []
+  }
+}

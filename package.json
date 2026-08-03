@@ -13,7 +13,20 @@
     "test:e2e:hero": "playwright test e2e/hero-overlap-motion.spec.mjs --project=chromium --project=webkit --workers=1",
     "test:e2e:otomi": "playwright test e2e/otomi-arrival.spec.mjs --project=chromium --project=webkit --workers=1",
     "test:e2e:teacher": "playwright test e2e/teacher-feedback.spec.mjs --project=chromium --project=webkit --workers=1",
-    "test:e2e:v11": "playwright test e2e/v11-release-qa.spec.mjs --project=chromium --project=webkit --workers=1 && node scripts/qa-v11-summary.mjs"
+    "test:e2e:v11": "playwright test e2e/v11-release-qa.spec.mjs --project=chromium --project=webkit --workers=1 && node scripts/qa-v11-summary.mjs",
+    "qa:threejs:regression": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-regression-gates.spec.mjs e2e/threejs-typography.spec.mjs --workers=1",
+    "qa:threejs:runtime": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-runtime-acceptance.spec.mjs e2e/threejs-scroll-mobile.spec.mjs --workers=1",
+    "qa:threejs:a11y": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-accessibility.spec.mjs --workers=1",
+    "qa:threejs:performance": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-performance.spec.mjs --workers=1",
+    "qa:threejs:visual": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-visual-regression.spec.mjs --workers=1",
+    "qa:threejs:capture-baseline": "THREEJS_CAPTURE_BASELINE=1 playwright test --config=playwright.threejs.config.mjs e2e/threejs-visual-regression.spec.mjs e2e/threejs-performance.spec.mjs --workers=1 --update-snapshots=all",
+    "qa:threejs:optimize-baseline": "node scripts/qa/optimize-baseline-images.mjs",
+    "qa:threejs:manifest": "node scripts/qa/write-baseline-manifest.mjs",
+    "qa:threejs:accept": "THREEJS_ACCEPTANCE=1 playwright test --config=playwright.threejs.config.mjs e2e/threejs-*.spec.mjs --workers=1",
+    "qa:threejs:all": "playwright test --config=playwright.threejs.config.mjs e2e/threejs-*.spec.mjs --workers=1",
+    "qa:threejs:build-baseline": "NEXT_PUBLIC_BASE_PATH=/tomioka npm run build && NEXT_PUBLIC_BASE_PATH=/tomioka THREEJS_CAPTURE_BASELINE=1 node scripts/qa/collect-build-metrics.mjs",
+    "qa:threejs:build-compare": "NEXT_PUBLIC_BASE_PATH=/tomioka npm run build && NEXT_PUBLIC_BASE_PATH=/tomioka node scripts/qa/collect-build-metrics.mjs --compare",
+    "qa:serve-export": "node scripts/qa/serve-static-export.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
