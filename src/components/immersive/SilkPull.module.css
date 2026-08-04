@@ -1,0 +1,150 @@
+/* ---------------------------------------------------------------------------
+ * 絹糸を手繰るヒーローの仕掛け。
+ * 握り（繭）以外は操作を持たない。本文・CTA・スクロールを妨げない。
+ * ------------------------------------------------------------------------- */
+
+.root {
+  --pull: 0;
+  position: absolute;
+  right: clamp(12px, 4vw, 64px);
+  top: clamp(72px, 12vh, 148px);
+  z-index: 6;
+  width: clamp(150px, 22vw, 240px);
+  height: clamp(84px, 12vw, 128px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* 手繰った量だけ糸が「引き出される」。0 で巻き取られ、1 で張りきる */
+.thread,
+.threadSheen {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  /* --pull が 0 のとき糸はほぼ巻き取られている（0.82 隠す）→ 1 で全部出る */
+  stroke-dashoffset: calc(0.82 - var(--pull) * 0.82);
+  transition: stroke-dashoffset 120ms linear;
+}
+
+.thread {
+  stroke: #c9aa68;
+  stroke-width: 1.6;
+}
+
+.threadSheen {
+  stroke: rgba(255, 244, 214, 0.72);
+  stroke-width: 0.6;
+  translate: 0 -0.4px;
+}
+
+.root[data-releasing="true"] .thread,
+.root[data-releasing="true"] .threadSheen {
+  transition: stroke-dashoffset 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 握り＝繭。掴める大きさ（44px 以上）を確保する */
+.handle {
+  position: absolute;
+  left: -6px;
+  bottom: -6px;
+  display: grid;
+  width: 60px;
+  height: 60px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  /* 手繰るほど糸に沿って少し引かれる（張力の手応え） */
+  translate: calc(var(--pull) * 118px) calc(var(--pull) * -58px);
+  transition: translate 120ms linear;
+}
+
+.root[data-releasing="true"] .handle {
+  transition: translate 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.cocoon {
+  display: block;
+  width: 26px;
+  height: 34px;
+  border-radius: 50% 50% 48% 52% / 44% 44% 56% 56%;
+  background:
+    radial-gradient(60% 44% at 42% 32%, #fefaf0, transparent 70%),
+    linear-gradient(160deg, #f4ecd6, #e2cfa8);
+  box-shadow: 0 6px 16px rgba(30, 32, 24, 0.28), inset 0 0 0 1px rgba(120, 96, 58, 0.28);
+}
+
+/* 繭の絹目 */
+.cocoon::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    72deg,
+    transparent 0 2px,
+    rgba(120, 96, 58, 0.12) 2px 3px
+  );
+  content: "";
+}
+
+.hint {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--kit-brass, #9b7a3f);
+  font-family: var(--font-serif, serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  /* 手繰りが始まったら文字は消える（所作の説明はもう不要） */
+  opacity: calc(1 - var(--pull) * 2.4);
+  transition: opacity 160ms ease;
+}
+
+/* 手繰りきったら握りごと静かに消え、糸だけが余韻を残す */
+.root[data-pulled="true"] .handle {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 700ms ease 200ms, translate 120ms linear;
+}
+
+.root[data-pulled="true"] .thread {
+  opacity: 0.5;
+  transition: opacity 900ms ease;
+}
+
+.root[data-pulled="true"] .threadSheen {
+  opacity: 0;
+}
+
+/* 握りのフォーカス可視化（キーボード操作者向け） */
+.handle:focus-visible {
+  outline: 3px solid var(--color-seal, #a33b2b);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+@media (max-width: 680px) {
+  .root {
+    top: clamp(64px, 9vh, 110px);
+    width: clamp(128px, 40vw, 180px);
+  }
+}

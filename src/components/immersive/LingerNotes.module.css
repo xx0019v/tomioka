@@ -1,0 +1,46 @@
+/* 適応ペーシングの余韻。ゆっくり読む人にだけ静かに浮かぶ */
+.notes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.note {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: var(--kit-brown, #7d6544);
+  font-family: var(--font-serif, serif);
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 0 6px;
+  transition: opacity 720ms ease, translate 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ゆっくり読み進めているときだけ、順に浮かぶ */
+.notes[data-linger="true"] .note {
+  opacity: 0.5;
+  translate: 0 0;
+}
+
+.notes[data-linger="true"] .note:nth-child(2) { transition-delay: 90ms; }
+.notes[data-linger="true"] .note:nth-child(3) { transition-delay: 180ms; }
+.notes[data-linger="true"] .note:nth-child(4) { transition-delay: 270ms; }
+.notes[data-linger="true"] .note:nth-child(5) { transition-delay: 360ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .note {
+    opacity: 0.42;
+    translate: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .note {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+}

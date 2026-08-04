@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { GuideCharacter } from "@/components/guide/GuideCharacter";
 import { withBasePath } from "@/lib/base-path";
 import { ArtifactField } from "./ArtifactField";
+import { SilkPull } from "./SilkPull";
 import { WovenTitle } from "./WovenTitle";
 import styles from "./HeroExperience.module.css";
 
@@ -168,6 +169,8 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       <div className={styles.noise} aria-hidden="true" />
       <ArtifactField variant="hero" />
+      {/* 来場者が絹糸を手繰ると、題字が織り上がる */}
+      <SilkPull />
 
       <div className={styles.stage}>
         <div className={styles.folio} aria-hidden="true">
@@ -195,10 +198,10 @@ export function HeroExperience({ eventDate, location, duration, fee }: HeroExper
           <h1 id="hero-title">
             {/* 題字は織り上がる。縦糸が張られ、横糸が通った範囲だけ文字になる */}
             <span className={styles.titleLine}>
-              <WovenTitle delayMs={160}>繭が遺した</WovenTitle>
+              <WovenTitle delayMs={160} trigger="pull">繭が遺した</WovenTitle>
             </span>
             <span className={styles.titleLine}>
-              <WovenTitle delayMs={420}>地図</WovenTitle>
+              <WovenTitle delayMs={420} trigger="pull">地図</WovenTitle>
             </span>
           </h1>
           <p className={styles.title}>街は、まだ記憶している</p>

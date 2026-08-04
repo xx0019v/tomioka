@@ -5,12 +5,15 @@
  * 縦糸（warp）が先に張られ、横糸（weft）が左から通されて、
  * 通った範囲だけ文字が現れる。＝ 布が織り上がるにつれて題字が生まれる。
  *
+ * 織り量は `--weave`（0..1）。auto は下の遷移で 0→1、pull は手繰り量がそのまま入る。
+ *
  * 文字自体は DOM のまま 1 つのテキストノードとして存在する。
  * 分解も複製もしないので、選択・読み上げ・検索・翻訳が壊れない。
  * 動くのは「マスク」と「糸の線」だけ。
  * ------------------------------------------------------------------------- */
 
 .loom {
+  --weave: 0;
   position: relative;
   display: block;
   isolation: isolate;
@@ -26,103 +29,68 @@
     transparent 0 5px,
     rgba(217, 196, 140, 0.5) 5px 6px
   );
-  opacity: 0;
+  /* 織りが始まると張られ、進むほど薄れる */
+  opacity: calc(0.85 - var(--weave) * 0.55);
   pointer-events: none;
-  /* 上下から張られていく */
-  scale: 1 0;
+  scale: 1 1;
 }
 
-/* 横糸。左から通される 1 本の光る線 */
+/* 横糸。いま織っている位置に立つ 1 本の光る線 */
 .weft {
   position: absolute;
   top: -0.16em;
   bottom: -0.08em;
-  left: 0;
+  left: calc(var(--weave) * 100%);
   z-index: 2;
   width: 2px;
   background: linear-gradient(
     to bottom,
     transparent,
-    var(--silk-thread-glint) 18%,
-    var(--silk-thread) 50%,
-    var(--silk-thread-glint) 82%,
+    var(--silk-thread-glint, #fff2cd) 18%,
+    var(--silk-thread, #d9c48c) 50%,
+    var(--silk-thread-glint, #fff2cd) 82%,
     transparent
   );
   box-shadow: 0 0 14px rgba(255, 242, 205, 0.55);
-  opacity: 0;
+  /* 端（0 と 1）では消える。織っている最中だけ見える */
+  opacity: calc(min(var(--weave), 1 - var(--weave)) * 6);
   pointer-events: none;
 }
 
-/* 文字。横糸が通った範囲だけ現れる */
+/* 文字。織り量ぶんだけ左から現れる */
 .cloth {
   position: relative;
   z-index: 1;
   display: block;
-  /* 織り上がる前は幅 0 のマスク。横糸の進行と同じ速度で開く */
-  clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 calc((1 - var(--weave)) * 100%) 0 0);
 }
 
-.loom[data-woven="ready"] .warp {
-  animation: warpTension 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--woven-delay, 0ms) both;
+/* auto: --weave を CSS 側で 0→1 へ運ぶ（React は locked で 1 を渡すだけ） */
+.loom[data-woven="ready"] {
+  animation: weaveAuto 1180ms cubic-bezier(0.4, 0, 0.2, 1) calc(var(--woven-delay, 0ms) + 120ms) forwards;
 }
 
-.loom[data-woven="ready"] .weft {
-  animation: weftPass 1180ms cubic-bezier(0.4, 0, 0.2, 1) calc(var(--woven-delay, 0ms) + 380ms) both;
-}
-
-.loom[data-woven="ready"] .cloth {
-  animation: clothForm 1180ms cubic-bezier(0.4, 0, 0.2, 1) calc(var(--woven-delay, 0ms) + 380ms) both;
-}
-
-/* 織り終わったら糸は消える。以降は完全に静止した文字だけが残る */
-@keyframes warpTension {
+@keyframes weaveAuto {
   from {
-    opacity: 0;
-    scale: 1 0;
+    --weave: 0;
   }
-
-  45% {
-    opacity: 0.85;
-    scale: 1 1;
-  }
-
-  100% {
-    opacity: 0.32;
-    scale: 1 1;
-  }
-}
-
-@keyframes weftPass {
-  from {
-    opacity: 0;
-    left: 0;
-  }
-
-  12% {
-    opacity: 1;
-  }
-
-  88% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    left: 100%;
-  }
-}
-
-@keyframes clothForm {
-  from {
-    clip-path: inset(0 100% 0 0);
-  }
-
   to {
-    clip-path: inset(0 0 0 0);
+    --weave: 1;
   }
 }
 
-/* 織り終わり: 縦糸も静かに消す */
+/* pull: 手繰り量がそのまま --weave。値の飛びをなめらかに追従させる */
+.loom[data-woven="pull"] .cloth,
+.loom[data-woven="pull"] .warp,
+.loom[data-woven="pull"] .weft {
+  transition: clip-path 90ms linear, opacity 90ms linear, left 90ms linear;
+}
+
+/* 織り終わり: 糸は静かに消え、文字だけが残る */
+.loom[data-woven="done"] {
+  --weave: 1;
+}
+
 .loom[data-woven="done"] .warp,
 .loom[data-woven="done"] .weft {
   opacity: 0;
@@ -131,9 +99,14 @@
 
 .loom[data-woven="done"] .cloth {
   clip-path: inset(0 0 0 0);
+  transition: clip-path 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 動きを減らす設定では織らない。最初から布がある */
+.loom[data-woven="static"] {
+  --weave: 1;
+}
+
 .loom[data-woven="static"] .cloth {
   clip-path: inset(0 0 0 0);
   animation: none;
@@ -145,13 +118,24 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .loom {
+    animation: none !important;
+  }
+
   .cloth {
     clip-path: inset(0 0 0 0) !important;
-    animation: none !important;
   }
 
   .warp,
   .weft {
     display: none !important;
   }
+}
+
+/* --weave を型付きカスタムプロパティにして、キーフレーム補間を効かせる
+   （未対応ブラウザは step 補間になるが、視覚上は許容範囲） */
+@property --weave {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
 }

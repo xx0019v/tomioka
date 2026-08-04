@@ -561,8 +561,10 @@
   background: #ab4330;
 }
 
-/* 街が組み上がる間合い。文字を置かないぶんだけ、演出が読める */
+/* 街が組み上がる間合い。文字を置かないぶんだけ、演出が読める。
+   余韻の断片（LingerNotes）を散らすため相対配置にする */
 .routeFormation {
+  position: relative;
   height: 62vh;
 }
 

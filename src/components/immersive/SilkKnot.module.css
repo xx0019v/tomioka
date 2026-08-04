@@ -1,0 +1,104 @@
+/* ---------------------------------------------------------------------------
+ * 「あなたの糸を残す」痕跡。個人情報なし・端末内のみ。
+ * ------------------------------------------------------------------------- */
+
+.offer {
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.tieButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--touch-target, 56px);
+  padding: 12px 24px;
+  border: 1px solid var(--kit-brass, #9b7a3f);
+  border-radius: 2px;
+  background: transparent;
+  color: #f4ecd8;
+  font-family: var(--font-serif, serif);
+  font-size: var(--text-body, 1rem);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 200ms ease, transform 160ms ease;
+}
+
+.tieButton:hover {
+  background: rgba(201, 170, 104, 0.14);
+}
+
+.tieButton:active {
+  transform: translateY(1px);
+}
+
+.tieButton:focus-visible {
+  outline: 3px solid var(--color-seal, #a33b2b);
+  outline-offset: 3px;
+}
+
+/* 結び目のしるし（小さな輪） */
+.knotMark {
+  width: 14px;
+  height: 14px;
+  border: 1.6px solid var(--kit-brass-soft, #c9aa68);
+  border-radius: 50% 50% 46% 54% / 54% 46% 54% 46%;
+}
+
+.done {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #d9cbb0;
+  font-family: var(--font-serif, serif);
+  font-size: var(--text-body, 1rem);
+  letter-spacing: 0.04em;
+}
+
+/* 灯り。淡く点る。発光させすぎない */
+.light {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, #fff3cf, #d9a94a 62%, transparent 74%);
+  box-shadow: 0 0 12px rgba(245, 215, 155, 0.55);
+  animation: knotGlow 4.6s ease-in-out infinite;
+}
+
+@keyframes knotGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* 街歩きマップ側の灯り */
+.echo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 640;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 9px;
+  border: 1px solid var(--color-hairline, rgba(101, 82, 50, 0.22));
+  border-radius: 999px;
+  background: rgba(251, 247, 236, 0.92);
+  box-shadow: 0 6px 16px rgba(22, 30, 22, 0.16);
+  pointer-events: none;
+}
+
+.echoLabel {
+  color: var(--kit-brown-deep, #5a462c);
+  font-family: var(--font-serif, serif);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light {
+    animation: none;
+    opacity: 0.85;
+  }
+}

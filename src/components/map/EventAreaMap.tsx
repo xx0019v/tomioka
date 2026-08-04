@@ -10,6 +10,7 @@ import type { EventSpot } from "@/data/spots";
 import { AnalyticsEvent, trackEvent } from "@/lib/analytics";
 import { withBasePath } from "@/lib/base-path";
 import { NEAR_THRESHOLD_METERS, distanceInMeters } from "@/lib/geo";
+import { SilkKnot } from "@/components/immersive/SilkKnot";
 import styles from "./EventAreaMap.module.css";
 
 type GeoState = "idle" | "locating" | "granted" | "denied" | "unavailable";
@@ -535,6 +536,8 @@ export function EventAreaMap({ spots }: EventAreaMapProps) {
           data-map-visible={mapVisible}
           data-map-interaction={mapInteractionEnabled ? "active" : "view"}
         >
+          {/* 物語の結びで糸を結んでいれば、地図に自分だけの灯りが静かに添う */}
+          <SilkKnot variant="echo" />
           <Image
             className={styles.mapFallback}
             src={withBasePath("/images/route-thread.webp")}

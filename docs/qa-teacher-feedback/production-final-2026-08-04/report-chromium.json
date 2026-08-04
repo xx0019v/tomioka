@@ -1,0 +1,1209 @@
+[
+  {
+    "viewport": "320x568",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 600.546875,
+      "stageHeight": 360,
+      "panelHeight": 238.546875,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "375x667",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 642.125,
+      "stageHeight": 360,
+      "panelHeight": 280.125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "390x844",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 770.875,
+      "stageHeight": 438.875,
+      "panelHeight": 330,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "430x932",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 50.5,
+          "right": 69.5,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 816.625,
+      "stageHeight": 484.625,
+      "panelHeight": 330,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "768x1024",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 66.109375,
+          "right": 88.109375,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 66.109375,
+          "right": 88.109375,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 66.109375,
+          "right": 88.109375,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {},
+    "map": {
+      "overflow": 0,
+      "shellHeight": 832,
+      "stageHeight": 500,
+      "panelHeight": 330,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1024x768",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 74.8125,
+          "right": 96.8125,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 74.8125,
+          "right": 96.8125,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 74.8125,
+          "right": 96.8125,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 814.453125,
+      "stageHeight": 812.453125,
+      "panelHeight": 812.453125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1280x800",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 168,
+          "right": 190,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 168,
+          "right": 190,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 168,
+          "right": 190,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 818.15625,
+      "stageHeight": 816.15625,
+      "panelHeight": 816.15625,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1440x900",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 248,
+          "right": 270,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 248,
+          "right": 270,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 248,
+          "right": 270,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 823.125,
+      "stageHeight": 821.125,
+      "panelHeight": 821.125,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  },
+  {
+    "viewport": "1920x1080",
+    "home": {
+      "overflow": 0,
+      "stepNumberLineOverlaps": [
+        {
+          "text": "壱",
+          "left": 488,
+          "right": 510,
+          "overlapsLine": false
+        },
+        {
+          "text": "弐",
+          "left": 488,
+          "right": 510,
+          "overlapsLine": false
+        },
+        {
+          "text": "参",
+          "left": 488,
+          "right": 510,
+          "overlapsLine": false
+        }
+      ],
+      "routeLineIntersections": [
+        false,
+        false,
+        false
+      ],
+      "japaneseUnits": [
+        {
+          "unit": "歩きながら、",
+          "text": "歩きながら、",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "永山 繭",
+          "text": "永山 繭",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "探し出してほしい。",
+          "text": "探し出してほしい。",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家",
+          "text": "お富ちゃん家",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お富ちゃん家へ",
+          "text": "お富ちゃん家へ",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "お越しください",
+          "text": "お越しください",
+          "lineCount": 1,
+          "insideViewport": true
+        },
+        {
+          "unit": "街歩き型の物語",
+          "text": "街歩き型の物語",
+          "lineCount": 1,
+          "insideViewport": true
+        }
+      ],
+      "canonical": "https://mayu-no-chizu.cid-ac.com/",
+      "openGraphUrl": "https://mayu-no-chizu.cid-ac.com/",
+      "footerUrl": "https://mayu-no-chizu.cid-ac.com/"
+    },
+    "facilityLines": {
+      "お富ちゃん家": 1,
+      "アトリエ": 1,
+      "岡重": 1,
+      "銀座まちなか交流館": 1,
+      "キリンヤ": 1,
+      "カフェドローム": 1
+    },
+    "map": {
+      "overflow": 0,
+      "shellHeight": 828.09375,
+      "stageHeight": 826.09375,
+      "panelHeight": 826.09375,
+      "trailingGap": 1,
+      "panelPosition": "relative",
+      "markers": [
+        {
+          "label": "お富ちゃん家の案内を開く",
+          "latitude": 36.2561208,
+          "longitude": 138.8914794,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "アトリエの案内を開く",
+          "latitude": 36.256855,
+          "longitude": 138.890991,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "岡重の案内を開く",
+          "latitude": 36.2572204,
+          "longitude": 138.8909415,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "銀座まちなか交流館の案内を開く",
+          "latitude": 36.256874,
+          "longitude": 138.889328,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "キリンヤの案内を開く",
+          "latitude": 36.25773372,
+          "longitude": 138.88893693,
+          "width": 56,
+          "height": 62
+        },
+        {
+          "label": "カフェドロームの案内を開く",
+          "latitude": 36.255608,
+          "longitude": 138.889552,
+          "width": 56,
+          "height": 62
+        }
+      ]
+    }
+  }
+]

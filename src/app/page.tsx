@@ -6,11 +6,13 @@ import { ArchiveTrace } from "@/components/immersive/ArchiveTrace";
 import { ArchiveObject } from "@/components/immersive/ArchiveObjects";
 import { ArtifactField } from "@/components/immersive/ArtifactField";
 import { FieldMapPlate } from "@/components/immersive/FieldMapPlate";
+import { LingerNotes } from "@/components/immersive/LingerNotes";
 import { SilkCityScene } from "@/components/immersive/SilkCityScene";
 import { ThreadProgress } from "@/components/immersive/ThreadProgress";
 import { TypographyReveal } from "@/components/immersive/TypographyReveal";
 import { HeroExperience } from "@/components/immersive/HeroExperience";
 import { SilkTrail } from "@/components/immersive/SilkTrail";
+import { SilkKnot } from "@/components/immersive/SilkKnot";
 import { ShareActions } from "@/components/site/ShareActions";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -171,9 +173,11 @@ export default function Home() {
             <h2 id="route-heading" data-line-reveal="waiting"><span>街を歩く道は</span><span>ひとつの地図に</span></h2>
             <p>受付、街歩きの目印、休憩地点。当日たどる{eventSpots.length}か所は、街歩きマップにまとめています。</p>
           </header>
-          {/* 街が組み上がるあいだの距離。ここには情報を置かない。
-              読み終えたころに、下の索引と CTA へ到達する */}
-          <div className={styles.routeFormation} aria-hidden="true" />
+          {/* 街が組み上がるあいだの距離。ここには"読ませる"情報は置かない。
+              ただし、ゆっくり読み進める人にだけ路地名や余韻が静かに浮かぶ */}
+          <div className={styles.routeFormation} aria-hidden="true">
+            <LingerNotes />
+          </div>
           <ol className={styles.routeIndex}>
             {eventSpots.map((spot) => (
               <li key={spot.id}>
@@ -198,6 +202,8 @@ export default function Home() {
             <p className={styles.eyebrow}>誘いの一筆</p>
             <h2 id="share-heading" data-line-reveal="waiting"><span>この物語を</span><span>誰と歩く？</span></h2>
             <p>一緒に街を歩く人へ、イベント情報を共有できます。</p>
+            {/* 見て終わりにしない。物語に自分の糸を一結び残せる（端末内のみ） */}
+            <SilkKnot />
           </div>
           <ShareActions
             text={`富岡まち歩き謎解き「${siteConfig.title}」 ${siteConfig.eventDate}開催`}
