@@ -13,14 +13,14 @@
 ## 提出バージョン
 
 - 採用ブランチ: `main`
-- 採用commit: `24ded911bce6f6d14471cadb97cae9126f8ea754`
-- 採用commit日時: 2026-08-04 07:56:40 +0900
-- 提出資料作成日時: 2026-08-04 08:22:06 +0900
+- 採用commit: `11a3f52bca133dc92265e6707fff65ca03ea7abf`
+- 採用commit日時: 2026-08-04 09:29:59 +0900
+- 提出資料更新日時: 2026-08-04 09:33:57 +0900
 - 検証Node.js: `v26.4.0`（Next.jsの要件は`>=20.9.0`）
 - 検証npm: `11.17.0`
 - パッケージ管理: npm / `package-lock.json`
 
-提出ブランチ`docs/teacher-source-handoff`では、採用実装を変更せず、クリーンインストールに必要なlockfile・Three.js型定義と先生向け資料だけを追加・整備しています。
+提出ブランチ`docs/teacher-source-handoff`では、上mainの採用実装に加え、クリーンインストールに必要なlockfile・Three.js型定義と先生向け資料を追加・整備しています。
 
 ## 使用技術
 
