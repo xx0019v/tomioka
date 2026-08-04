@@ -9,7 +9,7 @@ export const siteConfig = {
   siteUrl: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? officialSiteUrl).toString(),
   eventState: "scheduled" as EventState,
   eventDate: "2026年8月8日（土）",
-  reception: "9:00〜15:00",
+  reception: "10:00〜15:00",
   finish: "16:00",
   duration: "約60〜90分",
   location: "富岡製糸場周辺商店街",

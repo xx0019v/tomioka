@@ -254,6 +254,21 @@ test("specified viewport matrix passes the six teacher-feedback gates", async ({
   );
 });
 
+test("Kirinya uses its storefront photo and reception starts at 10:00", async ({ page }) => {
+  await page.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
+  await settle(page);
+  await expect(page.getByText("10:00〜15:00", { exact: true })).toBeVisible();
+  await expect(page.getByText("9:00〜15:00", { exact: true })).toHaveCount(0);
+
+  await page.goto(`${baseUrl}/map/`, { waitUntil: "domcontentloaded" });
+  await expect(page.locator(".leaflet-container")).toBeVisible();
+  await page.locator('[aria-label="キリンヤの案内を開く"]').click();
+
+  const storefront = page.getByAltText("店先にお土産と洋品が並ぶキリンヤ洋品店の外観");
+  await expect(storefront).toBeVisible();
+  await expect(storefront).toHaveAttribute("src", /\/spots\/photos\/kirinya\.webp$/);
+});
+
 test("map marker tips remain on their geographic anchor throughout normal motion", async ({ browser }, testInfo) => {
   const results = [];
   for (const viewport of [

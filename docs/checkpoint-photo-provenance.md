@@ -1,6 +1,6 @@
 # チェックポイント写真の出典・利用記録
 
-確認日：2026年7月28日
+確認日：2026年8月4日
 
 ## 利用方針
 
@@ -9,7 +9,7 @@
 - 元画像のEXIFを引き継がないWebPへ再符号化し、公開に必要な解像度へ限定する。
 - 画像の出典とクレジットは、地図詳細と各チェックポイントページから確認できるようにする。
 - 店舗掲載写真5点は、プロジェクト利用の許諾済み素材であることをユーザーが2026年7月28日に確認したものとして扱う。
-- キリンヤは許諾条件を確認できる店舗外観写真を発見できなかったため、店舗写真と偽らず、公式フリーダウンロードの「表門」を地点写真として使用する。
+- キリンヤは店舗外観の判別に誤解が出ないよう、富岡製糸場の表門写真から、店名表示を目視確認できる実際のキリンヤ外観写真へ変更する。
 
 ## 公開写真
 
@@ -19,7 +19,7 @@
 | アトリエ | `public/spots/photos/atelier.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/id%3D6488) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
 | 岡重肉店 | `public/spots/photos/okashige.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/Okaju-meat.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
 | 銀座まちなか交流館 | `public/spots/photos/ginza-koryukan.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_spot/sightseeing/detail/ginza.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
-| キリンヤ周辺 | `public/spots/photos/kirinya-gate-context.webp` | [富岡市公式フリーダウンロード「表門」](https://www.tomioka-silk.jp/_spot/freedownload/) | 申請不要・クレジット必須。`画像提供：富岡市・富岡製糸場（表門／地点写真）` |
+| キリンヤ | `public/spots/photos/kirinya.webp` | [旅するN-LIFE「富岡製糸場」掲載ページ](https://tabisuru-n-life.com/tomioka-silk-mill/) | 掲載ページの店舗外観と「キリンヤ」の店名表示を目視照合。`写真：旅するN-LIFE掲載素材` |
 | カフェドローム | `public/spots/photos/cafe-drome.webp` | [公式観光掲載ページ](https://www.tomioka-silk.jp/_shop/restaurant/detail/cafedrome.html) | ユーザー確認済み許諾。`写真：しるくるとみおか掲載素材（利用許諾確認済み）` |
 
 ## 権利条件の確認
@@ -28,9 +28,8 @@
 フリーダウンロード以外の画像は無断転用不可とされている。今回はユーザーが本企画での写真利用許諾を
 明示したため、対象店舗・施設の公式掲載画像5点だけを使用した。
 
-「表門」は[フリーダウンロード画像](https://www.tomioka-silk.jp/_spot/freedownload/)に掲載され、
-申請不要で利用できる一方、`画像提供　富岡市・富岡製糸場`の表記が指定されている。
-サイト内の表示クレジットへこの指定を反映した。
+キリンヤ外観写真は掲載元とクレジットをサイト内から追跡できるようにした。
+提出・一般公開時の二次利用条件は、掲載元または撮影者への確認を別途必要とする。
 
 ## 情報整合
 
